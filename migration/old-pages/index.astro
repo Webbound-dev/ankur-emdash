@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../../ui-components/components/Hero';
+import QuoteSection from '../../ui-components/components/QuoteSection';
+import ProductsTeaser from '../../ui-components/components/ProductsTeaser';
+import CertificationsStrip from '../../ui-components/components/CertificationsStrip';
+import DistributionMap from '../../ui-components/components/DistributionMap';
+import FactoryVideo from '../../ui-components/components/FactoryVideo';
+import BlogTeaser from '../../ui-components/components/BlogTeaser';
+import content from '../../content/pages/home.json';
+import distributors from '../../content/collections/distributors.json';
+---
+<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image}>
+  <Hero client:load content={content.hero} />
+  <QuoteSection client:visible content={content.quote} />
+  <ProductsTeaser client:visible content={content.productsTeaser} />
+  <CertificationsStrip client:visible content={content.certificationsStrip} />
+  <DistributionMap client:visible content={content.distributionMap} distributors={distributors} />
+  <FactoryVideo client:visible content={content.factoryVideo} />
+  <BlogTeaser client:visible content={content.blogTeaser} />
+</BaseLayout>

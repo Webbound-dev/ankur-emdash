@@ -1,0 +1,300 @@
+{
+  "seo": {
+    "title": "हमारे बारे में | Ankur",
+    "description": "30+ वर्षों का Ankur Salt: हमारी कहानी, यात्रा, नेतृत्व और ब्रांड के पीछे का समूह।",
+    "image": "/images/about/hero.jpg"
+  },
+  "hero": {
+    "title": "हमारे बारे में",
+    "intro": "गुजरात के एक छोटे से तटीय शहर से विश्व की मेजों तक, Ankur Salt पिछले 30 वर्षों से एक शांत लेकिन दृढ़ संकल्पित यात्रा पर है। हम सिर्फ नमक नहीं बनाते। हम नमक को सही तरीके से बनाते हैं।",
+    "images": [
+      {
+        "src": "/images/about/story.jpg",
+        "alt": "अंकुर केमफूड नेतृत्व भारतीय उद्योग रत्न पुरस्कार प्राप्त करते हुए"
+      }
+    ]
+  },
+  "story": {
+    "sectionLabel": "हमारी कहानी",
+    "heading": "यह सब कैसे शुरू हुआ",
+    "paragraphs": [
+      "1994 में, Gandhidham, Kutch में, Champalal Group को एक छिपी हुई अवसर दिख गई।",
+      "भारत के पास दुनिया की सबसे समृद्ध प्राकृतिक नमक पेटियों में से एक था। लेकिन भारतीय घरों तक पहुंचने वाला नमक शुद्धता, पोषण और गुणवत्ता के मामले में परिवारों के योग्य नहीं था। Ankur Chemfood Limited को ठीक इसी समस्या को हल करने के लिए शुरू किया गया था।",
+      "हमने गुजरात के तट पर स्थापना की, भारत के सबसे उत्पादक समुद्री नमक क्षेत्र के करीब और देश के दो सबसे बड़े बंदरगाहों के पहुंच के भीतर। पहले दिन से ही, हमने सही तरीके से काम करने का चुनाव किया। स्विस तकनीक। स्वचालित मशीनरी। तीन गुना परिशोधन। कोई छोटा रास्ता नहीं।"
+    ],
+    "image": {
+      "src": "/images/about/story.jpg",
+      "alt": "गुजरात के तट पर नमक के खेत"
+    }
+  },
+  "timeline": {
+    "heading": "वर्षों में हमारी यात्रा",
+    "items": [
+      {
+        "year": "1994",
+        "caption": "स्थापना, Champalal Group",
+        "description": "Ankur Chemfood Limited ने Gandhidham, Gujarat में संचालन शुरू किया। पूरी तरह से स्वचालित स्विस तकनीक का उपयोग करके विनिर्माण शुरू किया, जिससे हम शुरुआत से ही भारत के सबसे उन्नत नमक निर्माताओं में से एक बन गए।",
+        "image": {
+          "src": "/images/about/timeline-placeholder.svg",
+          "alt": "1994: स्थापना, Champalal Group"
+        }
+      },
+      {
+        "year": "Late 1990s",
+        "caption": "पहला ISO प्रमाणित नमक निर्माता",
+        "description": "Ankur Salt भारत का पहला ISO प्रमाणित परिशोधित नमक निर्माता बना। एक ऐसा मील का पत्थर जिसने पूरे उद्योग के लिए मानदंड स्थापित किया।",
+        "image": {
+          "src": "/images/about/timeline-placeholder.svg",
+          "alt": "Late 1990s: पहला ISO प्रमाणित नमक निर्माता"
+        }
+      },
+      {
+        "year": "Early 2000s",
+        "caption": "पाँच संयंत्र, NH 8A",
+        "description": "हम National Highway 8A पर पाँच विनिर्माण संयंत्रों का विस्तार करते हैं, Deendayal Port Trust (Kandla) और Adani Port (Mundra) के पास। हमारी क्षमता बढ़ती है। हमारी निर्यात पहुंच भी इसके साथ बढ़ती है।",
+        "image": {
+          "src": "/images/about/timeline-placeholder.svg",
+          "alt": "Early 2000s: पाँच संयंत्र, NH 8A"
+        }
+      },
+      {
+        "year": "2004 to 2006",
+        "caption": "Dr. Salt & DFS IQ+ लॉन्च किए गए",
+        "description": "वर्षों के अनुसंधान और विकास के परिणामस्वरूप दो नए उत्पाद लॉन्च किए गए। हमने Dr. Salt लॉन्च किया, एक कम सोडियम नमक जो उन लोगों के लिए बनाया गया है जो अपने सोडियम सेवन पर ध्यान देना चाहते हैं। हमने DFS IQ+ Salt भी पेश किया, एक दोहरे समृद्ध नमक जो लोहा और आयोडीन दोनों ले जाता है। ये रुझान नहीं थे। ये भारतीय घरों की वास्तविक स्वास्थ्य आवश्यकताओं के लिए वास्तविक प्रतिक्रियाएं थीं।",
+        "image": {
+          "src": "/images/about/timeline-placeholder.svg",
+          "alt": "2004 to 2006: Dr. Salt और DFS IQ+ लॉन्च किए गए"
+        }
+      },
+      {
+        "year": "2008",
+        "caption": "ICCIDD अनुमोदन",
+        "description": "Ankur Salt भारत में पहला नमक ब्रांड बना जिसे ICCIDD, यानी International Council for Control of Iodine Deficiency Disorders से अनुमोदन मिला। एक वैश्विक स्वास्थ्य स्वीकृति जो किसी अन्य भारतीय नमक ब्रांड को हासिल नहीं हुई थी।",
+        "image": {
+          "src": "/images/about/timeline-placeholder.svg",
+          "alt": "2008: ICCIDD अनुमोदन"
+        }
+      },
+      {
+        "year": "2010",
+        "caption": "Emerging India Award नामांकन",
+        "description": "Ankur Chemfood Limited को ICICI Bank, CRISIL और CNBC द्वारा Emerging India Award के लिए भारत में शीर्ष तीन कंपनियों में नामांकित किया गया। पुरस्कार समारोह Macau, Hong Kong में आयोजित किया गया।",
+        "image": {
+          "src": "/images/about/timeline-placeholder.svg",
+          "alt": "2010: Emerging India Award नामांकन"
+        }
+      },
+      {
+        "year": "Today",
+        "caption": "1,000+ विश्वव्यापी ग्राहक",
+        "description": "हम शुरुआत के 30 से अधिक वर्षों के बाद, Ankur Salt के पास विश्व भर में 1,000 से अधिक कॉर्पोरेट ग्राहक, डीलर और वितरक हैं। हमारे पाँच संयंत्र प्रति वर्ष 10 लाख टन की संयुक्त क्षमता पर चलते हैं। हम Bharatiya Udyog Ratna Award रखते हैं और ISO 9001:2015 और FSSC 22000 के तहत प्रमाणित रहते हैं, जो खाद्य सुरक्षा का सर्वोच्च मानदंड है।",
+        "image": {
+          "src": "/images/about/timeline-placeholder.svg",
+          "alt": "Today: 1,000+ विश्वव्यापी ग्राहक"
+        }
+      }
+    ]
+  },
+  "features": {
+    "heading": "हमें क्या अलग बनाता है",
+    "items": [
+      {
+        "title": "स्विस तकनीक विनिर्माण",
+        "description": "हमारे संयंत्र स्विस तकनीक पर आधारित पूरी तरह से स्वचालित मशीनरी का उपयोग करते हैं, ट्रिपल रिफाइंड फ्री फ्लो आयोडीकृत नमक का उत्पादन करते हैं जिसमें 99.28% NaCl शुद्धता और 35 ppm आयोडीन सामग्री है।"
+      },
+      {
+        "title": "पाँच संयंत्र, एक मानदंड",
+        "description": "हमारे सभी पाँच विनिर्माण संयंत्र National Highway 8A पर Village Chopadava और Varsana में स्थित हैं, भारत की सबसे उत्तम समुद्री नमक पेटी पर।"
+      },
+      {
+        "title": "वैश्विक पहुंच के लिए बंदरगाह पहुंच",
+        "description": "Kandla Port और Mundra Port के पास हमारा स्थान हमें अंतर्राष्ट्रीय खरीदारों को कुशलतापूर्वक और विश्वसनीय रूप से सेवा प्रदान करने का मतलब है।"
+      },
+      {
+        "title": "विश्व के प्रमुख आयोडीन स्वास्थ्य प्राधिकार द्वारा अनुमोदित",
+        "description": "हम एकमात्र भारतीय नमक ब्रांड हैं जिसे ICCIDD द्वारा अनुमोदित किया गया है, जो हमारे स्वास्थ्य उत्पादों को एक विश्वसनीयता देता है जो विपणन से परे जाता है।"
+      },
+      {
+        "title": "हर आवश्यकता के लिए एक उत्पाद",
+        "description": "रोज़मर्रा के आयोडीकृत नमक से लेकर कम सोडियम और दोहरे समृद्ध वेरिएंट तक, हम जो हर उत्पाद बनाते हैं वह आपके परिवार के स्वास्थ्य के चारों ओर बनाया गया है।"
+      }
+    ]
+  },
+  "quality": {
+    "heading": "हमारी गुणवत्ता नियंत्रण प्रयोगशाला",
+    "subheading": "Ankur Salt का हर बैच हमारे संयंत्रों से निकलने से पहले परीक्षण और सत्यापित किया जाता है। गुणवत्ता की जांच की जाती है, मान लिया नहीं जाता।",
+    "stats": [
+      {
+        "value": "12+",
+        "label": "प्रति बैच परीक्षण"
+      },
+      {
+        "value": "In House",
+        "label": "प्रमाणित QC प्रयोगशाला"
+      },
+      {
+        "value": "Qualified",
+        "label": "प्रशिक्षित प्रयोगशाला कर्मचारी"
+      }
+    ],
+    "cta": {
+      "label": "पूर्ण गुणवत्ता रिपोर्ट देखें",
+      "href": "/quality-certificates/"
+    }
+  },
+  "group": {
+    "heading": "ब्रांड के पीछे का समूह",
+    "paragraphs": [
+      "Ankur Salt, Ankur Chemfood Limited का प्रमुख ब्रांड है, जो कंपनी Champalal Group of Companies का हिस्सा है।",
+      "Champalal Group एक विविध व्यावसायिक समूह है जिसका संयुक्त वार्षिक कारोबार 1,000 करोड़ रुपये (US$ 200 मिलियन) से अधिक है। समूह के गुणवत्ता, सत्यनिष्ठा और दीर्घकालीन सोच के मूल्य Ankur Salt जो कुछ भी करता है उसमें चलते हैं।"
+    ],
+    "image": {
+      "src": "/images/factory/fbd-dryer-unit.jpeg",
+      "alt": "Ankur Chemfood विनिर्माण सुविधा"
+    },
+    "cta": {
+      "label": "Champalal Group के बारे में और जानें",
+      "href": "/champalal-group/"
+    },
+    "companiesHeading": "समूह की अन्य कंपनियां",
+    "companies": [
+      {
+        "name": "Oswal Lumbers",
+        "industry": "लकड़ी और विनियर",
+        "description": "प्लाईवुड, फर्नीचर और निर्माण उद्योगों के लिए कोर विनियर, कटे हुए लकड़ी (सॉन टिम्बर) और गोल लट्ठों का निर्माता, आयातक और निर्यातक।",
+        "website": "https://www.oswallumbers.in/"
+      },
+      {
+        "name": "Oswal Extrusion",
+        "industry": "फ्लेक्सिबल पैकेजिंग",
+        "description": "Oswal Extrusion Limited में, हम फ्लेक्सिबल पैकेजिंग को आधुनिक पैकेजिंग समाधानों की आधारशिला मानते हैं। पैकेजिंग उद्योग के सबसे गतिशील क्षेत्रों में से एक के रूप में, फ्लेक्सिबल पैकेजिंग नवाचार और कार्यक्षमता का मिश्रण है, जो बेहतर उत्पाद सुरक्षा, सुविधा और स्थिरता को सक्षम बनाता है। खाद्य, फार्मा, व्यक्तिगत देखभाल और औद्योगिक क्षेत्रों में बढ़ती वैश्विक मांग के साथ, फ्लेक्सिबल पैकेजिंग अब केवल एक सामग्री समाधान से कहीं अधिक है — यह ब्रांड विभेदीकरण और पर्यावरणीय जिम्मेदारी के लिए एक रणनीतिक उपकरण है। यह उद्योग रिपोर्ट फ्लेक्सिबल पैकेजिंग के प्रमुख रुझानों, सामग्रियों, अनुप्रयोगों और बाजार दृष्टिकोण को उजागर करती है, साथ ही बदलती बाजार आवश्यकताओं को पूरा करने के लिए उच्च-गुणवत्ता, विश्वसनीय और टिकाऊ समाधान प्रदान करने की Oswal Extrusion Limited की प्रतिबद्धता को भी।",
+        "website": "https://oswalextrusion.com/"
+      },
+      {
+        "name": "Abhinav Green Fuels",
+        "industry": "हरित ईंधन",
+        "description": "कृषि अपशिष्ट से टिकाऊ बायोफ्यूल का उत्पादक, जो सल्फर और PAH सामग्री के लिए सख्त EU मानकों को पूरा करने वाले डीजल और LPG के विकल्प प्रदान करता है।",
+        "website": "https://abhinavgreenfuels.com/"
+      },
+      {
+        "name": "Plastene India Limited",
+        "industry": "FIBC और बल्क पैकेजिंग",
+        "description": "FIBC, बल्क बैग्स और फ्लेक्सिबल पैकेजिंग का भारत का अग्रणी निर्माता और निर्यातक, जो HCP Plastene Bulkpack Limited (HPBL) के रूप में संचालित है।",
+        "website": "https://hpbl.in/"
+      }
+    ]
+  },
+  "leadership": {
+    "heading": "नेतृत्व दल",
+    "people": [
+      {
+        "name": "Champalal Gakchandji Parekh",
+        "title": "संस्थापक और निदेशक",
+        "bio": "श्री Champalal Parekh ने Champalal Group की स्थापना की और उन मूल्यों की नींव रखी जिन पर Ankur Salt आज भी खड़ा है।",
+        "photo": {
+          "src": "/images/about/leader-1.jpg",
+          "alt": "Champalal Gakchandji Parekh"
+        }
+      },
+      {
+        "name": "Ashokkumar Champalal Parekh",
+        "title": "प्रबंध निदेशक",
+        "bio": "श्री Ashok Parekh ने Ankur Chemfood Limited का नेतृत्व शुरुआती दिनों से ही किया है, कंपनी को Gandhidham के पहले संयंत्र से विश्व के सबसे बड़े नमक परिशोधकों में से एक बनाया है।",
+        "photo": {
+          "src": "/images/about/leader-2.jpg",
+          "alt": "Ashokkumar Champalal Parekh"
+        }
+      },
+      {
+        "name": "Surendra Kumar Sharma",
+        "title": "निदेशक",
+        "bio": "श्री Sharma नवंबर 2022 से Ankur Chemfood के बोर्ड में सेवा दे रहे हैं और कंपनी की शासन और परिचालन दिशा में योगदान देते हैं।",
+        "photo": {
+          "src": "/images/about/leader-3.jpg",
+          "alt": "Surendra Kumar Sharma"
+        }
+      },
+      {
+        "name": "Aditya Khatuwala",
+        "title": "निदेशक",
+        "bio": "श्री Khatuwala जुलाई 2024 में बोर्ड में शामिल हुए और Ankur Salt के विकास के अगले चरण का नेतृत्व करने वाली नेतृत्व दल का हिस्सा हैं।",
+        "photo": {
+          "src": "/images/about/leader-4.jpg",
+          "alt": "Aditya Khatuwala"
+        }
+      },
+      {
+        "name": "Deep Hamirbhai Virda",
+        "title": "निदेशक",
+        "bio": "श्री Virda अक्टूबर 2024 से Ankur Chemfood Limited के बोर्ड में सेवा दे रहे हैं और कंपनी के रणनीतिक निर्णयों में योगदान देते हैं।",
+        "photo": {
+          "src": "/images/about/leader-5.jpg",
+          "alt": "Deep Hamirbhai Virda"
+        }
+      },
+      {
+        "name": "Aditya Parekh",
+        "title": "एग्जीक्यूटिव डायरेक्टर",
+        "bio": "श्री Aditya Parekh एग्जीक्यूटिव डायरेक्टर के रूप में Ankur Chemfood Limited की रणनीति और परिचालन पर नेतृत्व दल के साथ मिलकर काम करते हैं।",
+        "photo": {
+          "src": "/images/about/avatar-placeholder.svg",
+          "alt": "Aditya Parekh"
+        }
+      },
+      {
+        "name": "Hitesh Patel",
+        "title": "मार्केटिंग - हेड",
+        "bio": "श्री Hitesh Patel Ankur Chemfood Limited में मार्केटिंग फ़ंक्शन का नेतृत्व करते हैं।",
+        "photo": {
+          "src": "/images/about/avatar-placeholder.svg",
+          "alt": "Hitesh Patel"
+        }
+      },
+      {
+        "name": "Mishal Jain",
+        "title": "फाइनेंस",
+        "bio": "श्री Mishal Jain Ankur Chemfood Limited में फाइनेंस फ़ंक्शन का नेतृत्व करते हैं।",
+        "photo": {
+          "src": "/images/about/avatar-placeholder.svg",
+          "alt": "Mishal Jain"
+        }
+      },
+      {
+        "name": "Maneklal Gour",
+        "title": "अकाउंट्स",
+        "bio": "श्री Maneklal Gour Ankur Chemfood Limited में अकाउंट्स फ़ंक्शन की देखरेख करते हैं।",
+        "photo": {
+          "src": "/images/about/avatar-placeholder.svg",
+          "alt": "Maneklal Gour"
+        }
+      },
+      {
+        "name": "Dilip Nimavat",
+        "title": "मार्केटिंग",
+        "bio": "श्री Dilip Nimavat Ankur Chemfood Limited की मार्केटिंग टीम का हिस्सा हैं।",
+        "photo": {
+          "src": "/images/about/avatar-placeholder.svg",
+          "alt": "Dilip Nimavat"
+        }
+      },
+      {
+        "name": "Harsiddh Soni",
+        "title": "एक्सपोर्ट",
+        "bio": "श्री Harsiddh Soni Ankur Chemfood Limited में एक्सपोर्ट परिचालन का नेतृत्व करते हैं।",
+        "photo": {
+          "src": "/images/about/avatar-placeholder.svg",
+          "alt": "Harsiddh Soni"
+        }
+      },
+      {
+        "name": "Sandeep M. Jain",
+        "title": "मार्केटिंग एवं सरकारी टेंडर",
+        "bio": "श्री Sandeep M. Jain Ankur Chemfood Limited में मार्केटिंग और सरकारी टेंडर का काम संभालते हैं।",
+        "photo": {
+          "src": "/images/about/avatar-placeholder.svg",
+          "alt": "Sandeep M. Jain"
+        }
+      }
+    ]
+  }
+}

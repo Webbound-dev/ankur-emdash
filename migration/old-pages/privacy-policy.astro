@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LegalPage from '../../ui-components/components/LegalPage.astro';
+import content from '../../content/pages/privacy-policy.json';
+---
+<BaseLayout title={content.seo.title} description={content.seo.description}>
+  <LegalPage content={content} />
+</BaseLayout>

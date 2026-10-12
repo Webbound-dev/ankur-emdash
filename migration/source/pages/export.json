@@ -1,0 +1,101 @@
+{
+  "seo": {
+    "title": "Salt Exporter from India: Global Supply | Ankur Chemfood Ltd.",
+    "description": "Ankur Chemfood Ltd. exports triple refined, certified salt from India to international buyers. Global markets, export certifications, port access and bulk export enquiries."
+  },
+  "hero": {
+    "title": "Salt Exporter from India Global Supply",
+    "intro": "Triple refined, Swiss technology salt manufactured on India's marine salt belt in Gujarat, supplied to international buyers with the certifications and port access that global trade demands."
+  },
+  "globalMarkets": {
+    "heading": "Global Markets We Serve",
+    "subheading": "Our export network, grouped by region and updated as new markets come online.",
+    "stat": { "countries": 17, "regions": 4 },
+    "regions": [
+      { "name": "Middle East", "countries": ["United Arab Emirates", "Oman", "Kuwait", "Saudi Arabia"] },
+      { "name": "Africa", "countries": ["Sierra Leone", "Tanzania", "Djibouti", "Ethiopia", "Mauritius", "Réunion"] },
+      { "name": "South Asia", "countries": ["Nepal", "Bangladesh", "Sri Lanka"] },
+      { "name": "Far East & Pacific", "countries": ["Malaysia", "Philippines", "Singapore", "Papua New Guinea"] }
+    ]
+  },
+  "certifications": {
+    "heading": "Export Certifications",
+    "subheading": "The compliance documentation international buyers ask for first: not a logo wall, the real standards behind it.",
+    "items": [
+      {
+        "name": "FSSAI",
+        "issuer": "Food Safety and Standards Authority of India",
+        "description": "Our FSSAI license means we are registered, inspected and authorised to manufacture and export food grade salt from India.",
+        "logo": { "src": "/images/certifications/fssai.svg", "alt": "FSSAI certified" }
+      },
+      {
+        "name": "Halal Certified",
+        "issuer": "Halal Certification Body",
+        "description": "Confirms our manufacturing process meets Islamic dietary requirements, verified by an accredited certifying body. It's a requirement for many of our Middle East and Africa buyers.",
+        "logo": { "src": "/images/certifications/halal.svg", "alt": "Halal certified" }
+      },
+      {
+        "name": "FSSC 22000",
+        "issuer": "Food Safety System Certification",
+        "description": "One of the most widely recognised food safety certifications globally, accepted by retailers and food businesses across every market we ship to.",
+        "logo": { "src": "/images/certifications/fssc-22000.svg", "alt": "FSSC 22000 certified" }
+      },
+      {
+        "name": "ISO 9001:2015",
+        "issuer": "Quality Management System",
+        "description": "Confirms our processes, from sourcing to packaging, are consistently managed and audited to an international quality standard, not checked just once.",
+        "logo": { "src": "/images/certifications/iso-9001.svg", "alt": "ISO 9001:2015 certified" }
+      }
+    ]
+  },
+  "logistics": {
+    "heading": "Port & Logistics Advantage",
+    "subheading": "Built on India's busiest export corridor: not a courier route, direct access from plant to port.",
+    "ports": [
+      {
+        "name": "Kandla Port",
+        "authority": "Deendayal Port Trust",
+        "description": "One of India's largest cargo ports by volume, sitting minutes from our manufacturing plants on National Highway 8A. Built for high volume bulk export."
+      },
+      {
+        "name": "Mundra Port",
+        "authority": "Adani Port",
+        "description": "India's largest private port and container terminal, giving us direct access to major global shipping lines for containerised export."
+      }
+    ],
+    "advantages": [
+      { "value": "5", "label": "Plants on NH 8A" },
+      { "value": "2", "label": "Major ports nearby" },
+      { "value": "FCL / LCL", "label": "Both shipment types" }
+    ]
+  },
+  "inquiry": {
+    "eyebrow": "Export Enquiry",
+    "heading": "Export Inquiry",
+    "intro": "Tell us your requirement, and our export team will follow up with a quote and lead time.",
+    "benefits": [
+      "Triple refined salt manufactured on Gujarat's marine salt belt",
+      "FSSAI, Halal, FSSC 22000 and ISO 9001:2015 certified",
+      "Direct access to Kandla and Mundra ports for FCL and LCL shipments"
+    ],
+    "fields": {
+      "companyName": "Company / Firm Name",
+      "contactName": "Contact Person",
+      "country": "Destination Country",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "message": "Tell us about your requirement"
+    },
+    "placeholders": {
+      "companyName": "e.g. Al Fahim Trading LLC",
+      "contactName": "Your full name",
+      "country": "e.g. United Arab Emirates",
+      "phone": "+91 98765 43210",
+      "email": "you@company.com",
+      "message": "Product, quantity, container type, and Incoterm preference."
+    },
+    "submitLabel": "Submit Enquiry",
+    "successHeading": "Enquiry received.",
+    "successMessage": "Thanks for your interest. Our export team will follow up with a quote and lead time within 1 to 2 business days."
+  }
+}

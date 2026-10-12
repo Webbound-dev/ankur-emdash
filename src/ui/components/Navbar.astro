@@ -1,0 +1,22 @@
+---
+import NavbarIsland, { type NavbarContent } from './NavbarIsland';
+
+interface Props {
+  content: NavbarContent;
+  locale?: 'en' | 'hi';
+  alternateLocale?: 'en' | 'hi';
+  alternateHref?: string;
+}
+
+const { content, locale, alternateLocale, alternateHref } = Astro.props;
+const pathname = Astro.url.pathname;
+---
+
+<NavbarIsland
+  pathname={pathname}
+  content={content}
+  locale={locale}
+  alternateLocale={alternateLocale}
+  alternateHref={alternateHref}
+  client:load
+/>

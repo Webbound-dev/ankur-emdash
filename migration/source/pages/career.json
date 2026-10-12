@@ -1,0 +1,135 @@
+{
+  "seo": {
+    "title": "Careers | Ankur",
+    "description": "Join Ankur Salt: three decades of quality-first thinking, five plants on the Gujarat coast, and a team that's still growing.",
+    "image": "/images/about/hero.jpg"
+  },
+  "hero": {
+    "title": "Careers at Ankur Salt",
+    "intro": "Join a family legacy spanning three decades that's still growing, from Gandhidham's coast to tables across the world."
+  },
+  "why": {
+    "heading": "Why Join Ankur Salt",
+    "subheading": "Three decades of putting quality first, built by the Champalal Group and backed by the certifications to prove it.",
+    "items": [
+      {
+        "number": "30",
+        "suffix": "+",
+        "unit": "Years",
+        "description": "Ankur Chemfood Limited has been operating from Gandhidham, Gujarat since 1994. It's part of the Champalal Group, a diversified business with a combined turnover exceeding Rs. 1,000 Crore."
+      },
+      {
+        "number": "5",
+        "suffix": "",
+        "unit": "Plants",
+        "description": "Five manufacturing plants on National Highway 8A, running at a combined capacity of 10 lakh tons per year."
+      },
+      {
+        "number": "1000",
+        "suffix": "+",
+        "unit": "Clients Worldwide",
+        "description": "Corporate clients, dealers and distributors trust Ankur Salt, with export access through Kandla and Mundra ports."
+      },
+      {
+        "number": "12",
+        "suffix": "+",
+        "unit": "QC Tests Per Batch",
+        "description": "Every batch is tested in house against ISO 9001:2015 and FSSC 22000 standards before it ever leaves our plants."
+      }
+    ]
+  },
+  "teams": {
+    "heading": "Where You Could Work",
+    "subheading": "Ankur Salt runs on a few core teams. Here's where the work actually happens.",
+    "items": [
+      {
+        "name": "Plant Operations & Production",
+        "description": "Running and maintaining our Swiss technology manufacturing lines across five plants on the Gujarat coast."
+      },
+      {
+        "name": "Quality Assurance & Food Safety",
+        "description": "Testing every batch in house against ISO 9001:2015 and FSSC 22000 standards before it ever leaves our plants."
+      },
+      {
+        "name": "Sales & Distribution",
+        "description": "Managing relationships with our 1,000+ corporate clients, dealers and distributors worldwide."
+      },
+      {
+        "name": "Export & Logistics",
+        "description": "Coordinating shipments through Kandla and Mundra ports to international buyers."
+      },
+      {
+        "name": "Corporate & Administration",
+        "description": "Supporting the business functions that keep a Champalal Group company running smoothly."
+      }
+    ]
+  },
+  "openRoles": {
+    "heading": "Open Roles",
+    "subheading": "Current openings across our plants and corporate team. Apply directly below, or use the form to reach out about a team that isn't listed.",
+    "items": [
+      {
+        "title": "Production Supervisor",
+        "department": "Plant Operations & Production",
+        "location": "Gandhidham, Gujarat",
+        "type": "Full time",
+        "description": "Oversee daily production runs and ensure manufacturing lines across our plants stay to specification."
+      },
+      {
+        "title": "Quality Control Analyst",
+        "department": "Quality Assurance & Food Safety",
+        "location": "Gandhidham, Gujarat",
+        "type": "Full time",
+        "description": "Run in house batch testing against ISO 9001:2015 and FSSC 22000 standards before product leaves the plant."
+      },
+      {
+        "title": "Export Documentation Executive",
+        "department": "Export & Logistics",
+        "location": "Gandhidham, Gujarat",
+        "type": "Full time",
+        "description": "Coordinate shipping documentation and customs clearance through Kandla and Mundra ports."
+      },
+      {
+        "title": "Regional Sales Manager",
+        "department": "Sales & Distribution",
+        "location": "Gandhidham, Gujarat",
+        "type": "Full time",
+        "description": "Manage and grow relationships with corporate clients, dealers and distributors."
+      },
+      {
+        "title": "Accounts Executive",
+        "department": "Corporate & Administration",
+        "location": "Gandhidham, Gujarat",
+        "type": "Full time",
+        "description": "Support everyday finance and administrative operations for the business."
+      }
+    ],
+    "fallbackLabel": "Don't see the right fit? Apply anyway"
+  },
+  "values": {
+    "heading": "What We Value",
+    "quote": "Bharose ki shuruaat: the beginning of trust.",
+    "attribution": "Ankur Salt, since 1994",
+    "text": "We're a family business first: three decades of the same commitment to quality that started with Swiss technology and no shortcuts. If you'd rather build something that lasts than chase a trend, you'll fit in here."
+  },
+  "form": {
+    "heading": "Apply to Join Us",
+    "subheading": "Tell us a bit about yourself and which team interests you. We review every application personally.",
+    "card": {
+      "ref": "Ref. Career",
+      "title": "Join the Team",
+      "body": "Tell us who you are and what you're looking for. We review every application ourselves.",
+      "note": "We typically respond within 1 to 2 weeks."
+    },
+    "fields": {
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone (optional)",
+      "team": "Team of Interest",
+      "message": "Tell Us About Yourself"
+    },
+    "teamOptions": ["Plant Operations & Production", "Quality Assurance & Food Safety", "Sales & Distribution", "Export & Logistics", "Corporate & Administration", "Other"],
+    "submitLabel": "Submit Application",
+    "successMessage": "Thanks for applying. Our team reviews every application personally and will reach out if there's a fit."
+  }
+}

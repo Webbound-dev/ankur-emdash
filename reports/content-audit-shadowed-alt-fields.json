@@ -1,0 +1,110 @@
+[
+  {
+    "spec": "specs.pages.about.parts.hero.spec.fields.2.item",
+    "mediaField": "src",
+    "legacyAltField": "alt",
+    "path": "alt"
+  },
+  {
+    "spec": "specs.pages.about.parts.story.spec",
+    "mediaField": "image_src",
+    "legacyAltField": "image_alt",
+    "path": "image.alt"
+  },
+  {
+    "spec": "specs.pages.about.parts.timeline.spec.fields.1.item",
+    "mediaField": "image_src",
+    "legacyAltField": "image_alt",
+    "path": "image.alt"
+  },
+  {
+    "spec": "specs.pages.about.parts.group.spec",
+    "mediaField": "image_src",
+    "legacyAltField": "image_alt",
+    "path": "image.alt"
+  },
+  {
+    "spec": "specs.pages.about.parts.leadership.spec.fields.1.item",
+    "mediaField": "photo_src",
+    "legacyAltField": "photo_alt",
+    "path": "photo.alt"
+  },
+  {
+    "spec": "specs.pages.export.parts.certifications.spec.fields.2.item",
+    "mediaField": "logo_src",
+    "legacyAltField": "logo_alt",
+    "path": "logo.alt"
+  },
+  {
+    "spec": "specs.pages.footer.parts.brand.spec",
+    "mediaField": "logo_src",
+    "legacyAltField": "logo_alt",
+    "path": "logo.alt"
+  },
+  {
+    "spec": "specs.pages.gallery.parts.instagram.spec.fields.3.item",
+    "mediaField": "src",
+    "legacyAltField": "alt",
+    "path": "alt"
+  },
+  {
+    "spec": "specs.pages.home.parts.quote.spec",
+    "mediaField": "image_src",
+    "legacyAltField": "image_alt",
+    "path": "image.alt"
+  },
+  {
+    "spec": "specs.pages.home.parts.productsTeaser.spec.fields.4.item",
+    "mediaField": "image_src",
+    "legacyAltField": "image_alt",
+    "path": "image.alt"
+  },
+  {
+    "spec": "specs.pages.home.parts.certificationsStrip.lists.0.spec",
+    "mediaField": "logo_src",
+    "legacyAltField": "logo_alt",
+    "path": "logo.alt"
+  },
+  {
+    "spec": "specs.pages.home.parts.blogTeaser.spec.fields.4.item",
+    "mediaField": "image_src",
+    "legacyAltField": "image_alt",
+    "path": "image.alt"
+  },
+  {
+    "spec": "specs.pages.navbar.parts.logo.spec",
+    "mediaField": "src",
+    "legacyAltField": "alt",
+    "path": "alt"
+  },
+  {
+    "spec": "specs.pages.quality-certificates.parts.certifications.lists.0.spec",
+    "mediaField": "logo_src",
+    "legacyAltField": "logo_alt",
+    "path": "logo.alt"
+  },
+  {
+    "spec": "specs.pages.quality-certificates.parts.awards.spec.fields.1.item",
+    "mediaField": "image_src",
+    "legacyAltField": "image_alt",
+    "path": "image.alt"
+  },
+  {
+    "spec": "specs.collections.products.spec",
+    "mediaField": "image_src",
+    "legacyAltField": "image_alt",
+    "path": "image.alt"
+  },
+  {
+    "spec": "specs.collections.products.spec",
+    "mediaField": "hero_image_src",
+    "legacyAltField": "hero_image_alt",
+    "path": "heroImage.alt"
+  },
+  {
+    "spec": "specs.collections.blogs.spec",
+    "mediaField": "image",
+    "legacyAltField": "image_alt",
+    "path": "imageAlt"
+  }
+]

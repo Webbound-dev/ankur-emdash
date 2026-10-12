@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <pattern id="stripes2" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="8" height="16" fill="#ffffff" fill-opacity="0.06"/>
+    </pattern>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="#7A1F1F"/>
+  <circle cx="100" cy="100" r="100" fill="url(#stripes2)"/>
+  <circle cx="100" cy="82" r="38" fill="#FDF3E7" fill-opacity="0.95"/>
+  <path d="M100 128c-44 0-70 26-70 62v10h140v-10c0-36-26-62-70-62Z" fill="#FDF3E7" fill-opacity="0.95"/>
+</svg>

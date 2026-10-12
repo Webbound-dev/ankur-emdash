@@ -1,0 +1,14 @@
+---
+import { getDistributors, getPage } from '../lib/content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DistributorNetwork from '../ui/components/DistributorNetwork';
+import DistributorFormsTabs from '../ui/components/DistributorFormsTabs.astro';
+const content = await getPage('network');
+const distributors = await getDistributors();
+---
+<BaseLayout title={content.seo.title} description={content.seo.description}>
+  <main>
+    <DistributorNetwork client:load content={content} distributors={distributors} />
+    <DistributorFormsTabs content={content} />
+  </main>
+</BaseLayout>

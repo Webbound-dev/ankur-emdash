@@ -1,0 +1,145 @@
+---
+import BecomeDistributorForm from './BecomeDistributorForm';
+import ConnectWithDistributorForm from './ConnectWithDistributorForm';
+import type { BecomeDistributorContent } from './BecomeDistributorForm';
+import type { ConnectWithDistributorContent } from './ConnectWithDistributorForm';
+
+interface Props {
+  content: {
+    becomeDistributor: BecomeDistributorContent;
+    connectWithDistributor: ConnectWithDistributorContent;
+    distributorFormsTabs: { eyebrow: string; heading: string; becomeLabel: string; connectLabel: string };
+  };
+}
+
+const { content } = Astro.props;
+const { becomeDistributor, connectWithDistributor, distributorFormsTabs } = content;
+
+// Same icon convention as ContactUs.astro's roleIcons — network dots for the
+// business/partner form, a speech bubble for the general enquiry form.
+const TAB_ICONS = {
+  become: 'M7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M17 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M12 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M7 8l4.2 9M17 8l-4.2 9',
+  connect: 'M8 10h.01M12 10h.01M16 10h.01 M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 0 1-4-.8L3 20l1.3-3.9A7.9 7.9 0 0 1 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8Z',
+};
+---
+
+<div class="relative overflow-hidden bg-silent-white border-t border-indian-red/10">
+  <!-- Faint line texture — same signature used on dark sections elsewhere on the site. -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.04]"
+    style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+    aria-hidden="true"
+  />
+
+  <!-- Tabs — switches which form is shown below -->
+  <div class="relative max-w-[1100px] mx-auto px-6 lg:px-10 pt-8 lg:pt-10 pb-10 lg:pb-12 text-center">
+    <span class="font-sans text-[11px] font-semibold uppercase tracking-[0.3em] text-indian-red/60" data-cms-field="distributorFormsTabs.eyebrow">
+      {distributorFormsTabs.eyebrow}
+    </span>
+    <h2 class="mt-2 font-display font-medium text-2xl lg:text-3xl text-indian-red [text-wrap:balance]" data-cms-field="distributorFormsTabs.heading">
+      {distributorFormsTabs.heading}
+    </h2>
+
+    <div role="tablist" class="relative inline-flex flex-wrap justify-center gap-1 mt-8 p-1.5 rounded-full bg-white/70 backdrop-blur-sm ring-1 ring-indian-red/10 shadow-sm">
+      <button
+        type="button"
+        id="dft-tab-become"
+        role="tab"
+        aria-selected="true"
+        aria-controls="dft-panel-become"
+        data-dft-tab="become"
+        class="dft-tab active flex items-center gap-2 rounded-full px-5 py-2.5 font-sans text-sm font-semibold transition-all duration-200"
+      >
+        <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0"><path d={TAB_ICONS.become} fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        <span data-cms-field="distributorFormsTabs.becomeLabel">{distributorFormsTabs.becomeLabel}</span>
+      </button>
+      <button
+        type="button"
+        id="dft-tab-connect"
+        role="tab"
+        aria-selected="false"
+        aria-controls="dft-panel-connect"
+        data-dft-tab="connect"
+        class="dft-tab flex items-center gap-2 rounded-full px-5 py-2.5 font-sans text-sm font-semibold transition-all duration-200"
+      >
+        <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0"><path d={TAB_ICONS.connect} fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        <span data-cms-field="distributorFormsTabs.connectLabel">{distributorFormsTabs.connectLabel}</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="dft-panel-become" role="tabpanel" aria-labelledby="dft-tab-become" data-dft-panel="become" class="dft-panel active">
+    <BecomeDistributorForm client:load content={becomeDistributor} skipEntranceAnimation />
+  </div>
+  <div id="dft-panel-connect" role="tabpanel" aria-labelledby="dft-tab-connect" data-dft-panel="connect" class="dft-panel">
+    <ConnectWithDistributorForm client:load content={connectWithDistributor} skipEntranceAnimation />
+  </div>
+</div>
+
+<style>
+  .dft-tab {
+    color: rgba(168, 33, 33, 0.55);
+    background: transparent;
+  }
+  .dft-tab:hover:not(.active) {
+    color: #a82121;
+    background: rgba(168, 33, 33, 0.08);
+  }
+  .dft-tab.active {
+    color: #fff6eb;
+    background: #a82121;
+    box-shadow: 0 6px 16px -4px rgba(168, 33, 33, 0.45);
+  }
+  .dft-panel {
+    display: none;
+  }
+  .dft-panel.active {
+    display: block;
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+
+  // Runs on `astro:page-load` (initial load + every client-side transition),
+  // not as plain top-level code — this <script> is a module, and modules
+  // only execute once per browser session, so a plain top-level run would
+  // leave tab-switching dead on any revisit later in the same session.
+  function initDistributorTabs(): void {
+    const tabs = document.querySelectorAll<HTMLButtonElement>('[data-dft-tab]');
+    const panels = document.querySelectorAll<HTMLElement>('[data-dft-panel]');
+    if (!tabs.length || !panels.length) return;
+
+    function activate(id: string): void {
+      const next = document.querySelector<HTMLElement>(`[data-dft-panel="${id}"]`);
+      const current = document.querySelector<HTMLElement>('.dft-panel.active');
+      if (!next || current === next) return;
+
+      tabs.forEach((tab) => {
+        const isActive = tab.dataset.dftTab === id;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      current?.classList.remove('active');
+      next.classList.add('active');
+      gsap.fromTo(next, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+
+      // The just-revealed form's own ScrollTrigger (see its
+      // skipEntranceAnimation guard) is skipped entirely, so there's
+      // nothing else to re-fire here — refresh just keeps ScrollTrigger's
+      // other registered triggers on the page correctly positioned now that
+      // this panel's layout has changed.
+      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => ScrollTrigger.refresh());
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const id = tab.dataset.dftTab;
+        if (id) activate(id);
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initDistributorTabs);
+</script>

@@ -1,0 +1,32 @@
+{
+  "seo": {
+    "title": "Blog | Ankur Chemfood Ltd.",
+    "description": "Health, manufacturing, exports and company stories from Ankur Chemfood Ltd., India's second largest packaged salt brand."
+  },
+  "hero": {
+    "kicker": "Ankur Salt · Insights",
+    "title": "Stories from the Salt Belt",
+    "intro": "Health, manufacturing, exports and everything else behind India's second largest packaged salt brand, written by the people who make it."
+  },
+  "labels": {
+    "allCategory": "All",
+    "featured": "Featured",
+    "latestArticles": "Latest Articles",
+    "readArticle": "Read Article",
+    "moreArticles": "More From the Blog",
+    "backToAllArticles": "Back to All Articles",
+    "breadcrumbHome": "Home",
+    "breadcrumbBlog": "Blog",
+    "homeHref": "/",
+    "blogHref": "/blog/",
+    "minReadSuffix": "min read"
+  },
+  "categoryColors": {
+    "Health & Nutrition": "#0C6B3D",
+    "Manufacturing & Quality": "#1B4F72",
+    "Export & Trade": "#A82121",
+    "Company News": "#8A5A00",
+    "Recipes": "#B5651D"
+  },
+  "defaultCategoryColor": "#A82121"
+}

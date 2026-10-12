@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DistributorNetwork from '../../ui-components/components/DistributorNetwork';
+import DistributorFormsTabs from '../../ui-components/components/DistributorFormsTabs.astro';
+import content from '../../content/pages/network.json';
+import distributors from '../../content/collections/distributors.json';
+---
+<BaseLayout title={content.seo.title} description={content.seo.description}>
+  <main>
+    <DistributorNetwork client:load content={content} distributors={distributors} />
+    <DistributorFormsTabs content={content} />
+  </main>
+</BaseLayout>

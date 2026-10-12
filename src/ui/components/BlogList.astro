@@ -1,0 +1,358 @@
+---
+import type { PortableTextBlock } from 'emdash';
+export interface BlogSection {
+  type: 'lead' | 'h2' | 'h3' | 'p' | 'ul' | 'quote' | 'statrow';
+  text?: string;
+  items?: string[];
+  stats?: { value: string; label: string }[];
+}
+export interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  readTime: number;
+  publishedAt: string;
+  image: string;
+  imageAlt: string;
+  content: PortableTextBlock[];
+}
+export interface BlogContent {
+  hero: { kicker: string; title: string; intro: string };
+  labels: {
+    allCategory: string;
+    featured: string;
+    latestArticles: string;
+    readArticle: string;
+    minReadSuffix: string;
+    blogHref: string;
+    [key: string]: string;
+  };
+  categoryColors: Record<string, string>;
+  defaultCategoryColor: string;
+}
+
+interface Props {
+  content: BlogContent;
+  posts: BlogPost[];
+}
+
+const { content, posts } = Astro.props;
+const { hero, labels, categoryColors, defaultCategoryColor } = content;
+const categories = [...new Set(posts.map((p) => p.category))];
+const [featured, ...rest] = posts;
+---
+
+<main class="bg-silent-white">
+  <!-- Hero — deep red, pinstripe texture, wavy divider into the featured story -->
+  <section class="relative overflow-hidden bg-indian-red pt-16 lg:pt-24 pb-24 lg:pb-32 text-center">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative max-w-[800px] mx-auto px-6 lg:px-10">
+      <span class="reveal inline-block font-sans text-[11px] font-semibold uppercase tracking-[0.3em] text-silent-white/60" data-cms-field="hero.kicker">
+        {hero.kicker}
+      </span>
+      <h1 class="reveal mt-4 font-display font-medium text-4xl lg:text-6xl text-silent-white leading-tight" style="transition-delay: 60ms" data-cms-field="hero.title">
+        {hero.title}
+      </h1>
+      <p class="reveal mt-6 text-base lg:text-lg leading-relaxed text-silent-white/75 max-w-[560px] mx-auto" style="transition-delay: 120ms" data-cms-field="hero.intro">
+        {hero.intro}
+      </p>
+    </div>
+
+    <svg class="absolute bottom-0 inset-x-0 z-10 w-full h-12 sm:h-16 lg:h-20 text-silent-white" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        d="M0,50 C120,90 240,10 360,50 C480,90 600,10 720,50 C840,90 960,10 1080,50 C1200,90 1320,10 1440,50 L1440,120 L0,120 Z"
+        fill="currentColor"
+      />
+    </svg>
+  </section>
+
+  <!-- Featured story — the lead article gets a distinct banner treatment, not another grid card -->
+  {featured && (
+    <section class="relative max-w-[1100px] mx-auto px-6 lg:px-10 -mt-10 lg:-mt-14 pb-14 lg:pb-20">
+      <span class="reveal block mb-4 text-[10px] font-semibold uppercase tracking-widest text-indian-red/40" data-cms-field="labels.featured">
+        {labels.featured}
+      </span>
+      <a
+        href={`${labels.blogHref}${featured.slug}/`}
+        class="reveal group grid md:grid-cols-2 overflow-hidden rounded-2xl bg-white shadow-lg shadow-indian-red/10 ring-1 ring-indian-red/[0.08] transition-shadow duration-300 hover:shadow-xl hover:shadow-indian-red/15"
+        style="transition-delay: 60ms"
+      >
+        <div class="relative aspect-[16/10] md:aspect-auto overflow-hidden" data-cms-image="[0].image">
+          <img
+            src={featured.image}
+            alt={featured.imageAlt}
+            class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+          />
+        </div>
+        <div class="flex flex-col justify-center p-8 lg:p-12">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="h-2 w-2 shrink-0 rounded-full" style={`background: ${categoryColors[featured.category] ?? defaultCategoryColor}`} aria-hidden="true" />
+            <span
+              class="text-[11px] font-semibold uppercase tracking-[0.16em]"
+              style={`color: ${categoryColors[featured.category] ?? defaultCategoryColor}`}
+              data-cms-field="[0].category"
+            >
+              {featured.category}
+            </span>
+          </div>
+          <h2 class="font-display font-medium text-2xl lg:text-[2rem] leading-tight text-indian-red mb-4" data-cms-field="[0].title">
+            {featured.title}
+          </h2>
+          <p class="text-indian-red/65 leading-relaxed mb-7 line-clamp-3" data-cms-field="[0].excerpt">
+            {featured.excerpt}
+          </p>
+          <div class="flex items-center gap-4">
+            <span class="inline-flex items-center gap-2 rounded-full bg-indian-red px-5 py-2.5 text-sm font-medium text-silent-white transition-transform duration-200 group-hover:scale-[1.03]">
+              <span data-cms-field="labels.readArticle">{labels.readArticle}</span>
+              <span aria-hidden="true">&rarr;</span>
+            </span>
+            <span class="text-xs text-indian-red/45">
+              <span data-cms-field="[0].publishedAt">{featured.publishedAt}</span>
+              {' · '}
+              <span data-cms-field="[0].readTime">{featured.readTime}</span> <span data-cms-field="labels.minReadSuffix">{labels.minReadSuffix}</span>
+            </span>
+          </div>
+        </div>
+      </a>
+    </section>
+  )}
+
+  <!-- Latest Articles — editorial index list, not a repeat of the grid pattern above -->
+  <section class="relative max-w-[900px] mx-auto px-6 lg:px-10 pb-20 lg:pb-28">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05] [mask-image:linear-gradient(to_bottom,black,transparent)]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+
+    <div class="relative">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+        <span class="reveal block text-[10px] font-semibold uppercase tracking-widest text-indian-red/40" data-cms-field="labels.latestArticles">
+          {labels.latestArticles}
+        </span>
+        <div class="reveal flex flex-wrap gap-2" id="blog-filters">
+          <button type="button" class="blog-filter-pill rounded-full px-3.5 py-1 text-xs font-medium transition-colors duration-150 bg-indian-red text-silent-white" data-filter="all">
+            <span data-cms-field="labels.allCategory">{labels.allCategory}</span>
+          </button>
+          {categories.map((cat) => (
+            <button
+              type="button"
+              class="blog-filter-pill rounded-full px-3.5 py-1 text-xs font-medium transition-colors duration-150 bg-indian-red/[0.06] text-indian-red/70 hover:bg-indian-red/[0.12]"
+              data-filter={cat}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div id="blog-list">
+        {rest.map((post, ri) => {
+          const pi = ri + 1;
+          return (
+            <a
+              href={`${labels.blogHref}${post.slug}/`}
+              class="blog-row reveal group flex items-start gap-5 sm:gap-8 border-b border-indian-red/10 py-8 first:pt-0 last:border-b-0"
+              data-category={post.category}
+              style={`transition-delay: ${ri * 50}ms`}
+            >
+              <span class="hidden sm:block w-12 shrink-0 pt-1 font-display font-medium text-4xl leading-none text-indian-red/10">
+                {String(ri + 1).padStart(2, '0')}
+              </span>
+              <div class="h-24 w-24 sm:h-32 sm:w-32 shrink-0 overflow-hidden rounded-xl" data-cms-image={`[${pi}].image`}>
+                <img
+                  src={post.image}
+                  alt={post.imageAlt}
+                  class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+                  loading="lazy"
+                />
+              </div>
+              <div class="min-w-0 flex-1">
+                <div class="mb-2 flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <span class="h-1.5 w-1.5 shrink-0 rounded-full" style={`background: ${categoryColors[post.category] ?? defaultCategoryColor}`} aria-hidden="true" />
+                  <span
+                    class="text-[10px] font-semibold uppercase tracking-[0.14em]"
+                    style={`color: ${categoryColors[post.category] ?? defaultCategoryColor}`}
+                    data-cms-field={`[${pi}].category`}
+                  >
+                    {post.category}
+                  </span>
+                  <span class="text-indian-red/20">&middot;</span>
+                  <span class="text-[11px] text-indian-red/45" data-cms-field={`[${pi}].publishedAt`}>{post.publishedAt}</span>
+                  <span class="text-indian-red/20">&middot;</span>
+                  <span class="text-[11px] text-indian-red/45">
+                    <span data-cms-field={`[${pi}].readTime`}>{post.readTime}</span> <span data-cms-field="labels.minReadSuffix">{labels.minReadSuffix}</span>
+                  </span>
+                </div>
+                <h3
+                  class="inline-block font-display font-medium text-lg lg:text-xl leading-snug text-indian-red mb-1.5 bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-[length:0%_1.5px] bg-[position:0_100%] transition-[background-size] duration-300 group-hover:bg-[length:100%_1.5px]"
+                  data-cms-field={`[${pi}].title`}
+                >
+                  {post.title}
+                </h3>
+                <p class="text-sm leading-relaxed text-indian-red/60 line-clamp-2" data-cms-field={`[${pi}].excerpt`}>
+                  {post.excerpt}
+                </p>
+              </div>
+              <span class="hidden sm:flex shrink-0 self-center text-indian-red/30 transition-all duration-200 group-hover:translate-x-1 group-hover:text-indian-red" aria-hidden="true">
+                &rarr;
+              </span>
+            </a>
+          );
+        })}
+      </div>
+
+      <!-- Pagination — 10 rows per page; hidden automatically while everything fits on one page -->
+      <nav id="blog-pagination" class="mt-10 hidden items-center justify-center gap-4" aria-label="Blog pagination">
+        <button
+          type="button"
+          id="blog-prev"
+          class="inline-flex items-center gap-1.5 rounded-full bg-indian-red/[0.06] px-4 py-2 text-sm font-medium text-indian-red transition-colors duration-150 hover:bg-indian-red/[0.12] disabled:opacity-30 disabled:hover:bg-indian-red/[0.06] disabled:cursor-not-allowed"
+        >
+          <span aria-hidden="true">&larr;</span> Prev
+        </button>
+        <span id="blog-page-indicator" class="text-sm text-indian-red/50 tabular-nums">Page 1 of 1</span>
+        <button
+          type="button"
+          id="blog-next"
+          class="inline-flex items-center gap-1.5 rounded-full bg-indian-red/[0.06] px-4 py-2 text-sm font-medium text-indian-red transition-colors duration-150 hover:bg-indian-red/[0.12] disabled:opacity-30 disabled:hover:bg-indian-red/[0.06] disabled:cursor-not-allowed"
+        >
+          Next <span aria-hidden="true">&rarr;</span>
+        </button>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<style>
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  // initBlogList runs on `astro:page-load` (fires on initial load AND every
+  // client-side transition) rather than as plain top-level code — this
+  // <script> is a JS module, and modules only ever execute once per browser
+  // session, so a plain top-level run left every `.reveal` element
+  // permanently invisible (and the filter/pagination controls never wired
+  // up) on any revisit later in the same session. revealObserver is
+  // disconnected at the top of each run so a revisit replaces it instead of
+  // layering a second observer on top; the filter/pagination listeners
+  // don't need the same treatment since Astro's transition replaces those
+  // DOM nodes outright, so stale listeners on the old, now-detached
+  // elements are just garbage collected.
+  let revealObserver: IntersectionObserver | null = null;
+
+  function initBlogList(): void {
+    revealObserver?.disconnect();
+
+    const targets = document.querySelectorAll<HTMLElement>('.reveal');
+    if (targets.length) {
+      revealObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              revealObserver?.unobserve(entry.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+      );
+      targets.forEach((el) => revealObserver?.observe(el));
+    }
+
+    // Category filter + pagination over the editorial list — 10 rows per
+    // page. The featured story above stays put regardless of filter/page.
+    const PAGE_SIZE = 10;
+    const pills = document.querySelectorAll<HTMLButtonElement>('.blog-filter-pill');
+    const rows = Array.from(document.querySelectorAll<HTMLElement>('.blog-row'));
+    const list = document.getElementById('blog-list');
+    const paginationNav = document.getElementById('blog-pagination');
+    const prevBtn = document.getElementById('blog-prev') as HTMLButtonElement | null;
+    const nextBtn = document.getElementById('blog-next') as HTMLButtonElement | null;
+    const pageIndicator = document.getElementById('blog-page-indicator');
+
+    let currentFilter = 'all';
+    let currentPage = 1;
+
+    function render() {
+      const matching = rows.filter((row) => currentFilter === 'all' || row.dataset.category === currentFilter);
+      const totalPages = Math.max(1, Math.ceil(matching.length / PAGE_SIZE));
+      currentPage = Math.min(currentPage, totalPages);
+      const start = (currentPage - 1) * PAGE_SIZE;
+      const pageRows = new Set(matching.slice(start, start + PAGE_SIZE));
+
+      rows.forEach((row) => row.classList.toggle('hidden', !pageRows.has(row)));
+
+      if (pageIndicator) pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+      if (prevBtn) prevBtn.disabled = currentPage <= 1;
+      if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
+      paginationNav?.classList.toggle('hidden', totalPages <= 1);
+      paginationNav?.classList.toggle('flex', totalPages > 1);
+    }
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        currentFilter = pill.dataset.filter ?? 'all';
+        currentPage = 1;
+        pills.forEach((p) => {
+          if (p === pill) {
+            p.classList.add('bg-indian-red', 'text-silent-white');
+            p.classList.remove('bg-indian-red/[0.06]', 'text-indian-red/70');
+          } else {
+            p.classList.remove('bg-indian-red', 'text-silent-white');
+            p.classList.add('bg-indian-red/[0.06]', 'text-indian-red/70');
+          }
+        });
+        render();
+      });
+    });
+
+    prevBtn?.addEventListener('click', () => {
+      currentPage -= 1;
+      render();
+      list?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    nextBtn?.addEventListener('click', () => {
+      currentPage += 1;
+      render();
+      list?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    render();
+  }
+
+  document.addEventListener('astro:page-load', initBlogList);
+</script>

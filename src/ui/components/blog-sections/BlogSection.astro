@@ -1,0 +1,35 @@
+---
+interface Stat { value: string; label: string }
+interface Section {
+  type: 'lead' | 'h2' | 'h3' | 'p' | 'ul' | 'quote' | 'statrow';
+  text?: string;
+  items?: string[];
+  stats?: Stat[];
+}
+interface Props {
+  section: Section;
+  si: number;
+  postIdx: number;
+}
+const { section, si, postIdx } = Astro.props;
+const base = `[${postIdx}].content[${si}]`;
+---
+{section.type === 'lead' && (
+  <p class="font-sans text-lg lg:text-xl font-normal leading-[1.6] text-indian-red/90 mb-8" data-cms-field={`${base}.text`}>{section.text}</p>
+)}{section.type === 'h2' && (
+  <h2 class="font-display font-medium text-2xl lg:text-3xl text-indian-red mt-12 mb-5" data-cms-field={`${base}.text`}>{section.text}</h2>
+)}{section.type === 'h3' && (
+  <h3 class="text-sm font-semibold uppercase tracking-wide text-indian-red/70 mt-8 mb-3" data-cms-field={`${base}.text`}>{section.text}</h3>
+)}{section.type === 'p' && (
+  <p class="text-indian-red/80 leading-[1.75] mb-5 text-[1.0625rem]" data-cms-field={`${base}.text`}>{section.text}</p>
+)}{section.type === 'ul' && (
+  <ul class="space-y-2.5 mb-6">{section.items?.map((item, ii) => (
+      <li class="flex items-start gap-3 text-indian-red/80 text-[1.0625rem] leading-relaxed"><span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-indian-red/50" aria-hidden="true" /><span data-cms-field={`${base}.items[${ii}]`}>{item}</span></li>
+    ))}</ul>
+)}{section.type === 'quote' && (
+  <blockquote class="my-10 text-center"><svg viewBox="0 0 32 24" class="mx-auto h-6 w-6 text-indian-red/25" aria-hidden="true"><path d="M0 24V13.5Q0 6 4 3T12 0V5Q8 6 6 9T4 14H10V24H0ZM18 24V13.5Q18 6 22 3T30 0V5Q26 6 24 9T22 14H28V24H18Z" fill="currentColor" /></svg><p class="mt-4 font-display font-medium text-xl lg:text-2xl leading-snug text-indian-red [text-wrap:balance]" data-cms-field={`${base}.text`}>{section.text}</p></blockquote>
+)}{section.type === 'statrow' && (
+  <div class="my-10 grid grid-cols-1 sm:grid-cols-3 gap-4 rounded-2xl bg-indian-red/[0.04] p-6 ring-1 ring-indian-red/[0.08]">{section.stats?.map((stat, sti) => (
+      <div class="text-center sm:text-left sm:border-l sm:first:border-l-0 sm:border-indian-red/10 sm:pl-6 sm:first:pl-0"><p class="font-display font-semibold text-2xl lg:text-3xl text-indian-red" data-cms-field={`${base}.stats[${sti}].value`}>{stat.value}</p><p class="mt-1 text-xs font-medium uppercase tracking-wide text-indian-red/50" data-cms-field={`${base}.stats[${sti}].label`}>{stat.label}</p></div>
+    ))}</div>
+)}

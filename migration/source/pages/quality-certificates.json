@@ -1,0 +1,113 @@
+{
+  "seo": {
+    "title": "Quality & Certificates | Ankur",
+    "description": "Ankur Salt's certifications, in-house quality control process, and industry recognition."
+  },
+  "hero": {
+    "title": "Quality & Certificates",
+    "intro": "Every batch of Ankur Salt is tested and verified before it leaves our plants. Here's exactly how we refine it, and what each of our certifications actually means."
+  },
+  "process": {
+    "heading": "Manufacturing Process",
+    "subheading": "From raw salt to your table: six steps, the same way every time.",
+    "steps": [
+      {
+        "title": "Sourcing",
+        "description": "Raw salt is sourced from our own fields on India's marine salt belt in Gandhidham, Gujarat, near Kandla and Mundra ports."
+      },
+      {
+        "title": "Washing & Crushing",
+        "description": "Raw crystals are picked clean of foreign particles, washed with magnetic separation to remove metal fragments, and centrifuged to separate pure brine before crushing brings every crystal to a uniform size."
+      },
+      {
+        "title": "Refining",
+        "description": "Fully automated machinery based on Swiss technology refines the salt, drying it in a fluidised bed drier at a controlled 170°C to 260°C to reach purity greater than 98% NaCl."
+      },
+      {
+        "title": "Iodisation",
+        "description": "Iodine is added and mixed to a controlled 20 ppm to 30 ppm content, monitored continuously so every batch stays within range."
+      },
+      {
+        "title": "Quality Testing",
+        "description": "Before packaging, salt passes through a final screening stage where an 8mm screen and magnetic separator catch any oversized or metallic particles, then our in house QC lab runs more than 12 additional tests on every batch."
+      },
+      {
+        "title": "Packaging & Dispatch",
+        "description": "Once cleared, the salt is sealed, stacked and loaded for dispatch to distributors, retailers and export markets around the world."
+      }
+    ]
+  },
+  "certifications": {
+    "heading": "Certifications Explained",
+    "subheading": "What each certification actually means, not just a logo on a page.",
+    "items": [
+      {
+        "name": "ISO 22000-2018",
+        "issuer": "Quality Management System",
+        "description": "Means our processes, from sourcing to packaging, are consistently managed and audited to meet an international quality standard, not checked just once.",
+        "logo": { "src": "/images/certifications/iso-9001.svg", "alt": "ISO 22000-2018 logo" },
+        "certificateUrl": "/documents/certificates/fssc-22000.pdf"
+      },
+      {
+        "name": "FSSC 22000",
+        "issuer": "Food Safety System Certification",
+        "description": "One of the most widely recognised food safety certifications globally. It confirms our food safety practices meet standards accepted by retailers and food businesses worldwide.",
+        "logo": { "src": "/images/certifications/fssc-22000.svg", "alt": "FSSC 22000 logo" },
+        "certificateUrl": "/documents/certificates/fssc-22000.pdf"
+      },
+      {
+        "name": "BIS IS:7224",
+        "issuer": "Bureau of Indian Standards",
+        "description": "The Indian government's official specification for edible common salt. Meeting it means our salt meets India's defined standards for purity and safety.",
+        "logo": { "src": "/images/certifications/bis.svg", "alt": "Bureau of Indian Standards logo" },
+        "certificateUrl": "/documents/certificates/bis-is-7224.pdf"
+      },
+      {
+        "name": "FSSAI",
+        "issuer": "Food Safety and Standards Authority of India",
+        "description": "India's food safety regulator. Our FSSAI license means we are registered, inspected and authorised to manufacture and sell food grade salt in India.",
+        "logo": { "src": "/images/certifications/fssai.svg", "alt": "FSSAI logo" },
+        "certificateUrl": "/documents/certificates/fssai.pdf"
+      },
+      {
+        "name": "Halal Certified",
+        "issuer": "Halal Certification Body",
+        "description": "Confirms our manufacturing process meets Islamic dietary requirements, verified by an accredited certifying body, important for many of our export markets.",
+        "logo": { "src": "/images/certifications/halal.svg", "alt": "Halal certification logo" },
+        "certificateUrl": "/documents/certificates/halal.pdf"
+      }
+    ]
+  },
+  "awards": {
+    "heading": "Awards & Recognition",
+    "items": [
+      {
+        "title": "Bharatiya Udyog Ratna Award",
+        "year": "2000",
+        "description": "Presented to Ashok Parakh, Managing Director, Ankur Chemfood Products (Guj.) Ltd, by Shri Suresh P. Prabhu, Union Minister for Chemicals & Fertilizers, at the 17th National Seminar on \"Prominent Achievers of the Millennium\" in New Delhi.",
+        "image": {
+          "src": "/images/certifications/bharatiya-udyog-ratna-award.jpeg",
+          "alt": "Bharatiya Udyog Ratna Award trophy"
+        }
+      },
+      {
+        "title": "Fastest Growing Indian Company Excellence Award",
+        "year": "",
+        "description": "Presented to Ashok C. Parekh, Managing Director, Ankur Chemfood Ltd, at the 4th International Achievers Summit in Bangkok, Thailand.",
+        "image": {
+          "src": "/images/certifications/certificate-01.jpeg",
+          "alt": "Fastest Growing Indian Company Excellence Award"
+        }
+      },
+      {
+        "title": "Scaling Up Food Fortification",
+        "year": "2019",
+        "description": "Recognised at a seminar on scaling up food fortification in Lucknow, organised by CII, the Food Fortification Resource Centre (FFRC) and GAIN.",
+        "image": {
+          "src": "/images/certifications/certificate-02.jpeg",
+          "alt": "Scaling Up Food Fortification recognition, CII-FFRC-GAIN"
+        }
+      }
+    ]
+  }
+}

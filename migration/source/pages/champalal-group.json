@@ -1,0 +1,96 @@
+{
+  "seo": {
+    "title": "Champalal Group | The Group Behind Ankur Salt",
+    "description": "Ankur Salt is part of the Champalal Group, a diversified business group spanning salt manufacturing, textiles, real estate, logistics and agro processing.",
+    "image": "/images/about/group.jpg"
+  },
+  "hero": {
+    "eyebrow": "The Wider Group",
+    "heading": "Champalal Group",
+    "intro": "Ankur Salt is the flagship brand of Ankur Chemfood Limited, one company within the diversified Champalal Group of Companies."
+  },
+  "story": {
+    "heading": "Built on Long Term Thinking",
+    "paragraphs": [
+      "The Champalal Group was founded on a simple belief: build things that last, and build them properly. That belief carried through into Ankur Chemfood Limited in 1994, and continues across every business the Group runs today.",
+      "The Champalal Group is a diversified business group with a combined annual turnover exceeding Rs. 1,000 Crore (US$ 200 Million). The Group's values of quality, integrity and long term thinking run through everything each of its companies does."
+    ],
+    "stats": [
+      {
+        "value": "1994",
+        "label": "Group founded"
+      },
+      {
+        "value": "Rs. 1,000 Cr+",
+        "label": "Combined annual turnover"
+      },
+      {
+        "value": "4",
+        "label": "Companies in the Group"
+      }
+    ]
+  },
+  "companies": {
+    "heading": "Companies in the Group",
+    "items": [
+      {
+        "name": "Oswal Lumbers",
+        "industry": "Timber & Veneer",
+        "description": "Manufacturer, importer and exporter of core veneer, sawn timber and round logs for the plywood, furniture and construction industries, sourcing timber from markets around the world.",
+        "founded": "1988",
+        "headquarters": "Gandhidham, Kutch, Gujarat",
+        "highlights": [
+          "Core veneer, sawn timber and round logs sourced globally",
+          "Imports from New Zealand, Australia, South Africa and more; exports to UAE, Saudi Arabia, Oman and Qatar",
+          "Trusted supplier to major plywood manufacturers including Century Ply and Greenpanel Industries"
+        ],
+        "website": "https://www.oswallumbers.in/"
+      },
+      {
+        "name": "Oswal Extrusion",
+        "industry": "Flexible Packaging",
+        "description": "At Oswal Extrusion Limited, we recognize flexible packaging as a cornerstone of modern packaging solutions. As one of the most dynamic segments in the packaging industry, flexible packaging blends innovation with functionality, enabling superior product protection, convenience, and sustainability. With increasing global demand across food, pharma, personal care, and industrial sectors, flexible packaging is now more than a material solution — it is a strategic tool for brand differentiation and environmental responsibility. This industry report highlights the key trends, materials, applications, and market outlook for flexible packaging, along with Oswal Extrusion Limited's commitment to delivering high-quality, reliable, and sustainable solutions to meet evolving market needs.",
+        "founded": "2005",
+        "headquarters": "Gandhidham, Kutch, Gujarat",
+        "highlights": [
+          "PP woven sacks, tarpaulins and BOPP woven bags",
+          "Exports to the USA, UK, South Africa, Australia and more",
+          "In-house film lamination up to 10 colours and printing"
+        ],
+        "website": "https://oswalextrusion.com/"
+      },
+      {
+        "name": "Abhinav Green Fuels",
+        "industry": "Green Fuels",
+        "description": "Producer of sustainable biofuels from agricultural waste, offering diesel and LPG alternatives that meet stringent EU specifications for sulphur and PAH content.",
+        "founded": "2018",
+        "headquarters": "Gandhidham, Gujarat",
+        "highlights": [
+          "Abhinav Liquid Fuel: a diesel alternative meeting stringent EU specifications for sulphur and PAH content",
+          "Abhinav Gaseous Fuel: an LPG alternative made from agro-industrial waste",
+          "Abhinav Biochars: a soil amendment byproduct of the fuel process"
+        ],
+        "website": "https://abhinavgreenfuels.com/"
+      },
+      {
+        "name": "Plastene India Limited",
+        "industry": "FIBC & Bulk Packaging",
+        "description": "India's leading manufacturer and exporter of FIBCs (Flexible Intermediate Bulk Containers), bulk bags and flexible packaging, operating as HCP Plastene Bulkpack Limited (HPBL).",
+        "founded": "",
+        "headquarters": "Ahmedabad, Gujarat",
+        "highlights": [
+          "Around 1 million FIBCs produced a month, serving 100+ customers across 50+ countries",
+          "8 manufacturing locations across Gujarat plus one in Uruguay; ~95% of sales from international customers",
+          "Certified ISO 9001:2015, ISO 14001:2015 and BRCGS (food grade); member of FIBCA and IFIBCA"
+        ],
+        "website": "https://hpbl.in/"
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Want to know more?",
+    "body": "Reach out to our team for partnership, media or investor inquiries.",
+    "label": "Contact Us",
+    "href": "/contact/"
+  }
+}

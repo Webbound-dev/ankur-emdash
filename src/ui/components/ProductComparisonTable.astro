@@ -1,0 +1,134 @@
+---
+interface ComparisonProduct {
+  slug: string;
+  name: string;
+  tag: string;
+  comparison: {
+    iodineContent: string;
+    sodiumLevel: string;
+    ironContent: string;
+    bestFor: string;
+    packFormats: string;
+  };
+}
+
+interface Props {
+  heading: string;
+  subheading: string;
+  columns: { iodine: string; sodium: string; iron: string; bestFor: string; packFormats: string };
+  products: ComparisonProduct[];
+}
+
+const { heading, subheading, columns, products } = Astro.props;
+
+// Small header icons, same hand-drawn inline-SVG convention as the rest of
+// the site (AboutUs.astro's certification marks, FindYourSalt's prompt
+// icons) rather than a new icon dependency for five glyphs.
+const COLUMN_ICONS: Record<string, string> = {
+  iodine: 'M12 2c4 5 6 8.5 6 11.5a6 6 0 1 1-12 0C6 10.5 8 7 12 2Z',
+  sodium: 'M12 3v6m0 0-3.5 3.5a5 5 0 1 0 7 0L12 9Z',
+  iron: 'm4 12 4-8 4 4 4-6 4 10M4 16h16v4H4z',
+  bestFor: 'M12 3v3m0 12v3m9-9h-3M6 12H3m13.5-6.5-2 2M8.5 15.5l-2 2m0-11 2 2m9 9-2-2',
+  packFormats: 'M4 8 12 4l8 4-8 4-8-4Zm0 0v8l8 4m0-12v12m8-12v8l-8 4',
+};
+
+// Plain colored text instead of a pill background: baseline values ("Standard",
+// "Not fortified"...) recede in muted text; anything that makes a product
+// distinct at a glance (a fortified/low-sodium claim) is bold and full-color.
+// Text reflows naturally inside a table cell with no fixed shape to
+// overflow — unlike a rounded pill background, which fights fixed-width
+// columns as soon as a value is longer than usual.
+const valueClass = (value: string) => {
+  const v = value.toLowerCase();
+  if (v === 'standard' || v.startsWith('not ')) {
+    return 'text-indian-red/45';
+  }
+  return 'font-semibold text-indian-red';
+};
+---
+
+<section id="compare" class="pt-24 lg:pt-36 pb-24 lg:pb-36 scroll-mt-24">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
+    <span class="reveal block text-[10px] font-semibold uppercase tracking-widest text-indian-red/40" data-cms-field="comparisonTable.heading">
+      {heading}
+    </span>
+    <h2 class="reveal mt-2 font-display font-medium text-2xl lg:text-3xl text-indian-red" style="transition-delay: 70ms" data-cms-field="comparisonTable.subheading">
+      {subheading}
+    </h2>
+
+    <!-- overflow-x-auto + min-w only ever engage on narrow screens: the
+         container is ~1350px on desktop, comfortably wider than the
+         table's 760px floor, so table-layout:fixed's percentage columns
+         just fill 100% width there with no scrollbar. On mobile the
+         container is far narrower than 760px, so the table can't be
+         squeezed into unreadable slivers — it scrolls instead. -->
+    <div class="reveal mt-8 overflow-x-auto rounded-lg ring-1 ring-indian-red/[0.08] bg-white shadow-sm" style="transition-delay: 140ms">
+      <table class="w-full min-w-[760px] border-collapse text-left [table-layout:fixed]">
+        <colgroup>
+          <col class="w-[16%]" />
+          <col class="w-[13%]" />
+          <col class="w-[15%]" />
+          <col class="w-[13%]" />
+          <col class="w-[19%]" />
+          <col class="w-[15%]" />
+          <col class="w-[9%]" />
+        </colgroup>
+        <thead>
+          <tr class="border-b border-indian-red/10">
+            <th class="px-6 py-6 text-[11px] font-semibold uppercase tracking-wide text-indian-red/45">
+              Product
+            </th>
+            {(['iodine', 'sodium', 'iron', 'bestFor', 'packFormats'] as const).map((key) => (
+              <th class="px-4 py-6 text-[11px] font-semibold uppercase tracking-wide text-indian-red/45" data-cms-field={`comparisonTable.columns.${key}`}>
+                <span class="flex items-center gap-2">
+                  <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 shrink-0 text-indian-red/35" fill="none">
+                    <path d={COLUMN_ICONS[key]} stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  {columns[key]}
+                </span>
+              </th>
+            ))}
+            <th class="px-6 py-6" aria-hidden="true" />
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((product, pi) => (
+            <tr class={`group border-b border-indian-red/[0.06] last:border-0 transition-colors duration-200 hover:bg-indian-red/[0.045] ${pi % 2 === 1 ? 'bg-indian-red/[0.02]' : ''}`}>
+              <td class="px-6 py-6 align-middle">
+                <div class="flex items-center gap-3 min-w-0">
+                  <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-indian-red/50 transition-colors duration-200 group-hover:bg-indian-red" />
+                  <span class="min-w-0 truncate font-display font-medium text-base text-indian-red" data-cms-field={`products[${pi}].name`}>
+                    {product.name}
+                  </span>
+                </div>
+              </td>
+              <td class={`px-4 py-6 align-middle text-sm leading-snug break-words ${valueClass(product.comparison.iodineContent)}`} data-cms-field={`products[${pi}].comparison.iodineContent`}>
+                {product.comparison.iodineContent}
+              </td>
+              <td class={`px-4 py-6 align-middle text-sm leading-snug break-words ${valueClass(product.comparison.sodiumLevel)}`} data-cms-field={`products[${pi}].comparison.sodiumLevel`}>
+                {product.comparison.sodiumLevel}
+              </td>
+              <td class={`px-4 py-6 align-middle text-sm leading-snug break-words ${valueClass(product.comparison.ironContent)}`} data-cms-field={`products[${pi}].comparison.ironContent`}>
+                {product.comparison.ironContent}
+              </td>
+              <td class="px-4 py-6 align-middle text-sm leading-relaxed text-indian-red/75 break-words" data-cms-field={`products[${pi}].comparison.bestFor`}>
+                {product.comparison.bestFor}
+              </td>
+              <td class="px-4 py-6 align-middle text-sm leading-relaxed text-indian-red/75 break-words" data-cms-field={`products[${pi}].comparison.packFormats`}>
+                {product.comparison.packFormats}
+              </td>
+              <td class="px-6 py-6 align-middle text-right">
+                <a
+                  href={`/products/${product.slug}/`}
+                  class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-md bg-indian-red text-silent-white text-xs font-medium shadow-sm transition-all duration-200 hover:opacity-90 hover:shadow-md hover:shadow-indian-red/20 hover:-translate-y-0.5 whitespace-nowrap"
+                >
+                  View <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

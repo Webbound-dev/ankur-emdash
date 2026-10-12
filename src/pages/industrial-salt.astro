@@ -1,0 +1,9 @@
+---
+import { getPage } from '../lib/content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import IndustrialSalt from '../ui/components/IndustrialSalt.astro';
+const content = await getPage('industrial-salt');
+---
+<BaseLayout title={content.seo.title} description={content.seo.description}>
+  <IndustrialSalt content={content} />
+</BaseLayout>

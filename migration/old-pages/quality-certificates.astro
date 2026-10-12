@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import QualityCertificates from '../../ui-components/components/QualityCertificates.astro';
+import content from '../../content/pages/quality-certificates.json';
+---
+<BaseLayout title={content.seo.title} description={content.seo.description}>
+  <QualityCertificates content={content} />
+</BaseLayout>

@@ -1,0 +1,184 @@
+{
+  "seo": {
+    "title": "Contact Us | Ankur",
+    "description": "Get in touch with Ankur Salt: general questions, bulk and industrial orders, distributor and export inquiries."
+  },
+  "hero": {
+    "title": "Contact Us",
+    "intro": "Questions about our products, bulk orders, or anything else. We're based in Gandhidham, Gujarat, and we read every message ourselves."
+  },
+  "info": {
+    "heading": "Reach Us Directly",
+    "items": [
+      {
+        "label": "Email",
+        "value": "info@ankurgroup.in",
+        "description": "For general questions, product information, or anything else, this reaches our team directly.",
+        "href": "mailto:info@ankurgroup.in"
+      },
+      {
+        "label": "Head Office",
+        "value": "349P+GWP, Ward 12B, Gandhidham, Gujarat 370201",
+        "description": "Our registered and administrative office in Gandhidham, Kutch.",
+        "href": "https://maps.app.goo.gl/6imQNPP9GKfVbkdR6"
+      },
+      {
+        "label": "Factory Address",
+        "value": "Survey No. 369, N.H. 8A, Village Chopadva, Chirai Moti, Gujarat 370140",
+        "description": "Our manufacturing base sits on National Highway 8A, near Kandla and Mundra ports, on India's finest marine salt belt.",
+        "href": "https://maps.app.goo.gl/veuU9eNu8R2rvfCu5"
+      }
+    ]
+  },
+  "nav": {
+    "items": [
+      { "id": "general", "label": "General Inquiry" },
+      { "id": "industrial", "label": "Bulk & Industrial" },
+      { "id": "distributor", "label": "Become a Distributor" },
+      { "id": "connect-distributor", "label": "Connect with a Distributor" },
+      { "id": "export", "label": "Export" }
+    ]
+  },
+  "productOptions": {
+    "industries": ["Pulp and Paper", "Textiles", "Water Treatment", "Petroleum Additives", "Dyes and Intermediates", "Pharmaceuticals"],
+    "grades": ["Free Flow", "Medium Grade", "Low Hardness 200 PPM", "Low Hardness 150 PPM", "Low Hardness 120 PPM", "Low Hardness 80 PPM", "Low Hardness 50 PPM", "Super Fine Powder"]
+  },
+  "general": {
+    "heading": "General Inquiry",
+    "subheading": "Product availability, a complaint, or anything else as a retail customer. A real person reads every message that comes through here, not an inbox no one checks.",
+    "card": {
+      "ref": "Ref. General",
+      "title": "Retail & General Questions",
+      "body": "For product availability, complaints, or anything else as a consumer, send it over and we'll get back to you.",
+      "note": "We typically respond within 1 to 2 business days."
+    },
+    "fields": {
+      "name": "Full Name",
+      "email": "Email",
+      "city": "City",
+      "state": "State",
+      "subject": "Subject",
+      "message": "Message"
+    },
+    "subjectOptions": ["Product Availability", "Product Question", "Complaint", "Careers", "Press & Media", "Other"],
+    "submitLabel": "Send Message",
+    "successMessage": "Thanks for reaching out. We'll get back to you shortly."
+  },
+  "industrial": {
+    "heading": "Bulk & Industrial Inquiry",
+    "subheading": "Ordering at volume for a manufacturing or processing use case? Tell us your grade, quantity and delivery location, and our team will follow up directly with a quote.",
+    "linkLabel": "Prefer the dedicated form? Visit the Industrial Salt page",
+    "linkHref": "/industrial-salt/#rfq",
+    "card": {
+      "ref": "Ref. Industrial",
+      "title": "Bulk Enquiry Form",
+      "body": "Tell us your grade, quantity and delivery location, and our team will follow up directly with a quote.",
+      "note": "We typically respond within 1 to 2 business days."
+    },
+    "fields": {
+      "company": "01 · Company Name",
+      "industry": "02 · Industry",
+      "grade": "03 · Grade Required",
+      "quantity": "04 · Quantity",
+      "location": "05 · Delivery Location",
+      "email": "06 · Email",
+      "message": "08 · Message (Optional)"
+    },
+    "submitLabel": "Submit Request",
+    "successMessage": "Thanks, your request has been recorded. Our team will get back to you shortly."
+  },
+  "becomeDistributor": {
+    "eyebrow": "Partner With Us",
+    "heading": "Become a distributor.",
+    "intro": "Interested in stocking Ankur products in your region? Tell us about your business, and our team will get in touch.",
+    "benefits": [
+      "A brand trusted in Indian kitchens since 1994",
+      "Dedicated logistics & marketing support",
+      "Fast onboarding with straightforward terms"
+    ],
+    "fields": {
+      "businessName": "Business / Firm Name",
+      "contactName": "Contact Person",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "city": "City",
+      "state": "State",
+      "message": "Tell us about your business"
+    },
+    "placeholders": {
+      "businessName": "e.g. Shreeji Trading Co.",
+      "contactName": "Your full name",
+      "phone": "+91 98765 43210",
+      "email": "you@business.com",
+      "city": "e.g. Ahmedabad",
+      "state": "e.g. Gujarat",
+      "message": "Tell us about your business and current distribution reach."
+    },
+    "submitLabel": "Submit Application",
+    "successHeading": "Application received.",
+    "successMessage": "Thanks for your interest. Our team will reach out within 2 to 3 business days."
+  },
+  "connectWithDistributor": {
+    "eyebrow": "Distributor Enquiry",
+    "heading": "Connect with distributors",
+    "intro": "Have a question for one of our distributors — stock availability, order status, or anything else? Send us a message and we'll help connect you.",
+    "benefits": [
+      "A real person reads every message that comes through here",
+      "Connected with the right distributor for your city",
+      "Quick response, usually within 1 to 2 business days"
+    ],
+    "fields": {
+      "name": "Your Name",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "city": "City",
+      "state": "State",
+      "message": "Your Message"
+    },
+    "placeholders": {
+      "name": "Your full name",
+      "phone": "+91 98765 43210",
+      "email": "you@example.com",
+      "city": "e.g. Ahmedabad",
+      "state": "e.g. Gujarat",
+      "message": "e.g. Does Shreeji Trading Co. stock Ankur Gold Salt?"
+    },
+    "submitLabel": "Send Enquiry",
+    "successHeading": "Message received.",
+    "successMessage": "Thanks for reaching out. Our team will get back to you shortly."
+  },
+  "exportInquiry": {
+    "eyebrow": "Export Enquiry",
+    "heading": "Export Inquiry",
+    "intro": "Tell us your requirement, and our export team will follow up with a quote and lead time.",
+    "benefits": [
+      "Triple refined salt manufactured on Gujarat's marine salt belt",
+      "FSSAI, Halal, FSSC 22000 and ISO 9001:2015 certified",
+      "Direct access to Kandla and Mundra ports for FCL and LCL shipments"
+    ],
+    "fields": {
+      "companyName": "Company / Firm Name",
+      "contactName": "Contact Person",
+      "country": "Destination Country",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "message": "Tell us about your requirement"
+    },
+    "placeholders": {
+      "companyName": "e.g. Al Fahim Trading LLC",
+      "contactName": "Your full name",
+      "country": "e.g. United Arab Emirates",
+      "phone": "+91 98765 43210",
+      "email": "you@company.com",
+      "message": "Product, quantity, container type, and Incoterm preference."
+    },
+    "submitLabel": "Submit Enquiry",
+    "successHeading": "Enquiry received.",
+    "successMessage": "Thanks for your interest. Our export team will follow up with a quote and lead time within 1 to 2 business days."
+  },
+  "visit": {
+    "heading": "Find Us",
+    "text": "Our plants sit on the coast of Gujarat, in Gandhidham, Kutch, close to Kandla and Mundra ports, on India's finest marine salt belt.",
+    "since": "1994"
+  }
+}

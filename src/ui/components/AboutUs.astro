@@ -1,0 +1,739 @@
+---
+import GroupCompanies, { type GroupCompany } from './GroupCompanies.astro';
+
+interface TimelineItem { year: string; caption: string; description: string; image: { src: string; alt: string } }
+interface FeatureItem { title: string; description: string }
+interface Stat { value: string; label: string }
+interface Person { name: string; title: string; bio: string }
+
+interface Props {
+  content: {
+    hero: { title: string; intro: string; images: { src: string; alt: string }[] };
+    story: { sectionLabel: string; heading: string; paragraphs: string[]; image: { src: string; alt: string } };
+    timeline: { heading: string; items: TimelineItem[] };
+    features: { heading: string; items: FeatureItem[] };
+    quality: { heading: string; subheading: string; stats: Stat[]; cta: { label: string; href: string } };
+    group: {
+      heading: string;
+      paragraphs: string[];
+      image: { src: string; alt: string };
+      cta: { label: string; href: string };
+      companiesHeading: string;
+      companies: GroupCompany[];
+    };
+    leadership: { heading: string; people: Person[] };
+  };
+}
+
+const { content } = Astro.props;
+const { hero, story, timeline, features, quality, group, leadership } = content;
+
+function initials(name: string): string {
+  const parts = name.trim().split(/\s+/);
+  return parts.length === 1
+    ? parts[0][0].toUpperCase()
+    : (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+---
+
+<main class="bg-silent-white">
+  <!-- Hero — full-bleed, homepage-style: dark brand wash, text overlay, wave -->
+  <section class="about-hero pre-anim-hidden relative overflow-hidden min-h-[calc(100vh-81px)] bg-indian-red">
+    <!-- Background slides — all mounted, crossfaded by opacity -->
+    {hero.images.map((image, hi) => (
+      <div
+        class={`hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out ${hi === 0 ? 'opacity-100' : 'opacity-0'}`}
+        data-cms-image={`hero.images[${hi}].src`}
+      >
+        <img src={image.src} alt={image.alt} class="w-full h-full object-cover" />
+      </div>
+    ))}
+
+    <!-- Brand-tinted scrim -->
+    <div class="absolute inset-0 bg-gradient-to-t from-indian-red/95 via-indian-red/40 to-black/35" />
+    <div class="absolute top-0 inset-x-0 h-48 bg-gradient-to-b from-black/45 to-transparent" />
+    <!-- Film grain: the original `style` here used \" escapes, which HTML does not support;
+         the live site rendered it as an ignored/invalid style, so this overlay has always been invisible. -->
+    <div
+      class="absolute inset-0 opacity-[0.06] mix-blend-overlay"
+      aria-hidden="true"
+    />
+
+    <!-- Heritage seal -->
+    <div class="about-hero-badge absolute top-28 right-6 lg:top-32 lg:right-10 z-10 w-20 h-20 lg:w-24 lg:h-24 rotate-[8deg] rounded-full bg-silent-white/10 backdrop-blur-sm border-[1.5px] border-dashed border-silent-white/60 shadow-lg flex flex-col items-center justify-center">
+      <span class="font-display text-[9px] lg:text-[10px] font-semibold uppercase tracking-[0.15em] text-silent-white">Est.</span>
+      <span class="font-display text-lg lg:text-xl font-semibold text-silent-white">1994</span>
+    </div>
+
+    <!-- Text overlay — vertically centered, same layout as homepage Hero -->
+    <div class="absolute inset-0 z-10 flex items-center">
+      <div class="w-full max-w-[1280px] mx-auto px-6 lg:px-10">
+        <div class="max-w-2xl">
+          <div class="mb-6">
+            <span class="about-hero-eyebrow-text font-sans text-[11px] font-semibold uppercase tracking-[0.3em] text-silent-white/85">
+              {story.sectionLabel}
+            </span>
+          </div>
+          <h1
+            data-cms-field="hero.title"
+            class="about-hero-title font-display font-medium text-silent-white text-5xl sm:text-6xl lg:text-7xl leading-[1.05] mb-6 [text-wrap:balance]"
+          >
+            {hero.title}
+          </h1>
+          <p
+            data-cms-field="hero.intro"
+            class="about-hero-intro font-sans text-silent-white text-base lg:text-lg leading-relaxed max-w-md"
+          >
+            {hero.intro}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom wave — silent-white to flow into the light content below -->
+    <svg
+      class="about-hero-wave absolute bottom-0 inset-x-0 z-20 w-full h-24 sm:h-32 lg:h-44 text-silent-white"
+      viewBox="0 0 1440 200"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path d="M0,120 C480,220 960,-40 1440,40 L1440,200 L0,200 Z" fill="currentColor" />
+    </svg>
+
+    <!-- Slide dots — bottom right, silent-white style matching homepage -->
+    {hero.images.length > 1 && (
+      <div class="absolute bottom-4 sm:bottom-6 lg:bottom-8 right-6 sm:right-10 lg:right-16 z-30 flex gap-2.5">
+        {hero.images.map((_, hi) => (
+          <button
+            type="button"
+            class={`hero-slider-dot about-hero-dot h-2.5 w-2.5 rounded-full border border-silent-white/50 transition-colors ${hi === 0 ? 'bg-silent-white' : 'bg-transparent hover:bg-silent-white/20'}`}
+            data-slide-index={hi}
+            aria-label={`Show slide ${hi + 1}`}
+          />
+        ))}
+      </div>
+    )}
+  </section>
+
+  <!-- Story -->
+  <section class="max-w-[1100px] mx-auto px-6 lg:px-10 py-10 lg:py-14">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div class="reveal">
+        <span class="text-[10px] font-semibold uppercase tracking-widest text-indian-red/40" data-cms-field="story.sectionLabel">
+          {story.sectionLabel}
+        </span>
+        <h2 class="mt-3 font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="story.heading">
+          {story.heading}
+        </h2>
+        <div class="mt-5 space-y-4">
+          {story.paragraphs.map((p, pi) => (
+            <p class="text-sm leading-relaxed text-indian-red/75" data-cms-field={`story.paragraphs[${pi}]`}>
+              {p}
+            </p>
+          ))}
+        </div>
+      </div>
+      <div class="reveal rounded-2xl overflow-hidden aspect-[4/3] bg-indian-red/5" style="transition-delay: 120ms" data-cms-image="story.image.src">
+        <img src={story.image.src} alt={story.image.alt} class="w-full h-full object-cover" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline — horizontal milestone track + click-to-reveal detail panel -->
+  <section class="relative bg-indian-red pt-16 lg:pt-20 pb-16 lg:pb-20 overflow-hidden">
+    <!-- Same faint vertical-stripe texture as the footer CTA band -->
+    <div
+      class="absolute inset-0 z-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative z-[1] max-w-[1100px] mx-auto px-6 lg:px-10">
+      <span class="reveal text-[10px] font-semibold uppercase tracking-widest text-silent-white/50" data-cms-field="story.sectionLabel">
+        {story.sectionLabel}
+      </span>
+      <h2 class="reveal mt-2 font-display font-medium text-2xl lg:text-3xl text-silent-white mb-10 lg:mb-14" data-cms-field="timeline.heading">
+        {timeline.heading}
+      </h2>
+
+      <!-- Dot track -->
+      <div class="relative mb-8 lg:mb-10">
+        <!-- Connecting line — desktop only; top offset matches dot center within pt-3 track -->
+        <div class="hidden lg:block absolute left-0 right-0 top-[19px] h-px bg-silent-white/20 pointer-events-none" />
+
+        <!-- pt-3 gives the 1.35× scaled dot (≈19 px) room so it doesn't clip at the top -->
+        <div class="relative flex overflow-x-auto gap-x-4 lg:gap-x-0 lg:justify-between pt-3 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {timeline.items.map((item, ti) => (
+            <button
+              type="button"
+              class="timeline-btn group flex flex-col items-center gap-2.5 shrink-0 px-4 lg:px-1 text-center"
+              data-tl-index={ti}
+            >
+              <span class={`tl-dot w-3.5 h-3.5 rounded-full border-2 border-silent-white ${ti === 0 ? 'bg-silent-white' : 'bg-transparent'}`} />
+              <span class="font-display text-xs sm:text-sm font-medium text-silent-white whitespace-nowrap" data-cms-field={`timeline.items[${ti}].year`}>
+                {item.year}
+              </span>
+              <span class="hidden lg:block text-[10px] text-silent-white/45 text-center max-w-[96px] leading-snug" data-cms-field={`timeline.items[${ti}].caption`}>
+                {item.caption}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Detail panels — only the active one is visible -->
+      <div>
+        {timeline.items.map((item, ti) => (
+          <div
+            class={`timeline-panel rounded-2xl bg-silent-white overflow-hidden ${ti === 0 ? '' : 'hidden'}`}
+            data-tl-panel={ti}
+          >
+            <div class="relative px-8 py-10 lg:px-10 lg:py-12">
+              <!-- Watermark year — right-anchored; JS scales it to fit after display:block -->
+              <div class="absolute right-0 top-0 bottom-0 flex items-center pointer-events-none select-none" aria-hidden="true">
+                <span class="tl-watermark font-display font-bold text-[9rem] lg:text-[12rem] leading-none text-indian-red/[0.055] pr-8 whitespace-nowrap">
+                  {item.year}
+                </span>
+              </div>
+
+              <div class="relative flex flex-col lg:flex-row lg:items-end gap-8 lg:gap-12 min-h-[160px]">
+                <div class="flex-1 min-w-0">
+                  <p class="font-sans text-[10px] font-bold uppercase tracking-[0.25em] text-indian-red/35 mb-3">
+                    <span data-cms-field={`timeline.items[${ti}].year`}>{item.year}</span>
+                    <span class="mx-2">·</span>
+                    <span data-cms-field={`timeline.items[${ti}].caption`}>{item.caption}</span>
+                  </p>
+                  <p class="font-sans text-sm lg:text-base leading-relaxed text-indian-red/70 max-w-[580px]" data-cms-field={`timeline.items[${ti}].description`}>
+                    {item.description}
+                  </p>
+                </div>
+
+                <!-- Prev / counter / next -->
+                <div class="flex items-center gap-3 shrink-0">
+                  <button
+                    type="button"
+                    class={`tl-prev w-10 h-10 rounded-full border border-indian-red/20 text-indian-red flex items-center justify-center hover:bg-indian-red hover:text-silent-white transition-colors duration-200 text-base ${ti === 0 ? 'opacity-25 pointer-events-none' : ''}`}
+                    aria-label="Previous milestone"
+                  >←</button>
+                  <span class="font-sans text-xs text-indian-red/30 tabular-nums whitespace-nowrap">
+                    {ti + 1} / {timeline.items.length}
+                  </span>
+                  <button
+                    type="button"
+                    class={`tl-next w-10 h-10 rounded-full border border-indian-red/20 text-indian-red flex items-center justify-center hover:bg-indian-red hover:text-silent-white transition-colors duration-200 text-base ${ti === timeline.items.length - 1 ? 'opacity-25 pointer-events-none' : ''}`}
+                    aria-label="Next milestone"
+                  >→</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="relative overflow-hidden bg-indian-red/[0.035] py-14 lg:py-20">
+    <!-- Faint pinstripe texture + soft glows, same restrained treatment used
+         on the site's other light sections (see Gallery.astro) — gives this
+         section some depth instead of a flat, undecorated background. -->
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="pointer-events-none absolute -top-16 -left-24 h-72 w-72 rounded-full bg-indian-red/[0.05] blur-3xl" aria-hidden="true" />
+    <div class="pointer-events-none absolute -bottom-20 -right-16 h-80 w-80 rounded-full bg-indian-red/[0.05] blur-3xl" aria-hidden="true" />
+
+    <div class="relative max-w-[1100px] mx-auto px-6 lg:px-10">
+      <h2 class="reveal font-display font-medium text-2xl lg:text-3xl text-indian-red mb-8" data-cms-field="features.heading">
+        {features.heading}
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {features.items.map((item, fi) => (
+          <div
+            class={`reveal feature-card group rounded-2xl bg-white ring-1 ring-indian-red/[0.08] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-indian-red/10 hover:ring-indian-red/20 ${
+              fi === 0 ? 'md:col-span-2 p-8' : 'p-6'
+            }`}
+            style={`transition-delay: ${fi * 70}ms`}
+          >
+            <h3
+              class={`font-display font-medium text-indian-red transition-transform duration-300 group-hover:-translate-y-0.5 ${fi === 0 ? 'text-xl' : 'text-base'}`}
+              data-cms-field={`features.items[${fi}].title`}
+            >
+              {item.title}
+            </h3>
+            <p
+              class={`text-sm leading-relaxed text-indian-red/70 ${fi === 0 ? 'mt-3 max-w-[420px]' : 'mt-2'}`}
+              data-cms-field={`features.items[${fi}].description`}
+            >
+              {item.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quality Control -->
+  <section class="bg-indian-red/[0.035] py-16 lg:py-20">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-10 text-center">
+      <h2 class="reveal font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="quality.heading">
+        {quality.heading}
+      </h2>
+      <p class="reveal mt-3 text-sm text-indian-red/60 max-w-[480px] mx-auto" style="transition-delay: 60ms" data-cms-field="quality.subheading">
+        {quality.subheading}
+      </p>
+
+      <div class="mt-12 flex flex-wrap justify-center divide-x divide-indian-red/15">
+        {quality.stats.map((stat, si) => (
+          <div class="reveal px-8 lg:px-12 first:pl-0 last:pr-0" style={`transition-delay: ${120 + si * 80}ms`}>
+            <div class="font-display font-medium text-3xl lg:text-4xl text-indian-red" data-cms-field={`quality.stats[${si}].value`}>
+              {stat.value}
+            </div>
+            <div class="mt-1.5 text-sm text-indian-red/60" data-cms-field={`quality.stats[${si}].label`}>
+              {stat.label}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <a
+        href={quality.cta.href}
+        data-cms-link="quality.cta.href"
+        class="reveal group mt-12 inline-flex items-center gap-2 rounded-full bg-indian-red px-6 py-3 text-sm font-medium text-silent-white transition-opacity duration-200 hover:opacity-90"
+        style="transition-delay: 380ms"
+      >
+        <span data-cms-field="quality.cta.label">{quality.cta.label}</span>
+        <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Group behind the brand -->
+  <section class="max-w-[1100px] mx-auto px-6 lg:px-10 py-10 lg:py-14">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div class="reveal rounded-2xl overflow-hidden aspect-[4/3] bg-indian-red/5 lg:order-2" data-cms-image="group.image.src">
+        <img src={group.image.src} alt={group.image.alt} class="w-full h-full object-cover" />
+      </div>
+      <div class="lg:order-1">
+        <h2 class="reveal font-display font-medium text-3xl lg:text-4xl text-indian-red mb-6" data-cms-field="group.heading">
+          {group.heading}
+        </h2>
+        <div class="reveal space-y-5" style="transition-delay: 80ms">
+          {group.paragraphs.map((p, gi) => (
+            <p class="text-base lg:text-lg leading-relaxed text-indian-red/75" data-cms-field={`group.paragraphs[${gi}]`}>
+              {p}
+            </p>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <GroupCompanies
+    heading={group.companiesHeading}
+    companies={group.companies}
+    headingField="group.companiesHeading"
+    companiesField="group.companies"
+    cta={group.cta}
+    ctaField="group.cta"
+  />
+
+  <!-- Leadership -->
+  <section class="relative overflow-hidden bg-indian-red/[0.035] py-10 lg:py-20">
+    <!-- Same faint pinstripe texture + soft glows as the Features section
+         above — this section was previously flat/undecorated, out of step
+         with the rest of the page's light sections. -->
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="pointer-events-none absolute -top-16 -right-24 h-72 w-72 rounded-full bg-indian-red/[0.05] blur-3xl" aria-hidden="true" />
+    <div class="pointer-events-none absolute -bottom-20 -left-16 h-80 w-80 rounded-full bg-indian-red/[0.05] blur-3xl" aria-hidden="true" />
+
+    <div class="relative max-w-[1100px] mx-auto px-6 lg:px-10">
+    <h2 class="reveal font-display font-medium text-2xl lg:text-3xl text-indian-red mb-8" data-cms-field="leadership.heading">
+      {leadership.heading}
+    </h2>
+    <!-- Founder + Managing Director get a featured treatment, in their own
+         fixed 2-up row — always exactly 2 people, so this row can never
+         have a leftover. The rest of the team is a separate flex-wrap
+         group below, each card a fixed fraction width matching its
+         siblings; a partial last row (however many land on it) just sits
+         left-aligned at the same card size, by design. -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {leadership.people.slice(0, 2).map((person, pi) => (
+        <div
+          class="reveal group rounded-2xl bg-indian-red p-8 transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-indian-red/30"
+          style={`transition-delay: ${pi * 70}ms`}
+        >
+          <div class="flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-silent-white/15 ring-2 ring-silent-white/25 transition-shadow duration-300 select-none group-hover:ring-silent-white/45">
+            <span class="font-display text-2xl font-semibold tracking-wide text-silent-white">{initials(person.name)}</span>
+          </div>
+          <p class="mt-5 font-display text-xl font-medium text-silent-white" data-cms-field={`leadership.people[${pi}].name`}>
+            {person.name}
+          </p>
+          <p class="mt-0.5 text-xs font-semibold uppercase tracking-wide text-silent-white/60" data-cms-field={`leadership.people[${pi}].title`}>
+            {person.title}
+          </p>
+          <p class="mt-3 max-w-[420px] text-sm leading-relaxed text-silent-white/75" data-cms-field={`leadership.people[${pi}].bio`}>
+            {person.bio}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    {leadership.people.length > 2 && (
+      <div class="mt-4 flex flex-wrap gap-4">
+        {leadership.people.slice(2).map((person, i) => {
+          const pi = i + 2;
+          return (
+            <div
+              class="reveal group w-full rounded-2xl bg-white/70 p-6 ring-1 ring-indian-red/[0.08] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:bg-white hover:shadow-xl hover:shadow-indian-red/10 hover:ring-indian-red/20 sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)]"
+              style={`transition-delay: ${pi * 70}ms`}
+            >
+              <div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-indian-red/10 ring-2 ring-indian-red/10 transition-shadow duration-300 select-none group-hover:ring-indian-red/25">
+                <span class="font-display text-xl font-semibold tracking-wide text-indian-red">{initials(person.name)}</span>
+              </div>
+              <p class="mt-5 font-display font-medium text-base text-indian-red" data-cms-field={`leadership.people[${pi}].name`}>
+                {person.name}
+              </p>
+              <p class="mt-0.5 text-xs font-semibold uppercase tracking-wide text-indian-red/45" data-cms-field={`leadership.people[${pi}].title`}>
+                {person.title}
+              </p>
+              <p class="mt-3 text-sm leading-relaxed text-indian-red/70" data-cms-field={`leadership.people[${pi}].bio`}>
+                {person.bio}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    )}
+    </div>
+  </section>
+</main>
+
+<style>
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+<!-- Hero on-load entrance pre-hide (.pre-anim-hidden .about-hero-*) and its
+     no-JS fallback live in global.css / BaseLayout.astro, not here — this
+     site uses Astro's <ClientRouter />, and a per-page/component <style>
+     block isn't guaranteed loaded at the instant this page's HTML gets
+     swapped in during a soft navigation. global.css is loaded once and
+     stays resident for the whole session, so those rules are guaranteed
+     active regardless of which page loads first or how a visitor navigates
+     in. See AboutUs.astro's <script> below for the GSAP timeline itself. -->
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Everything below runs inside initAboutPage(), invoked on the
+  // `astro:page-load` event rather than at the top level. This site uses
+  // Astro's <ClientRouter /> (view transitions) for in-app navigation, and
+  // this <script> is a JS module — modules only ever execute ONCE per
+  // browser session (the browser caches the module by URL and never
+  // re-evaluates it), even though Astro swaps in a fresh copy of this
+  // page's HTML on every visit. Top-level code here only ever ran on
+  // whichever visit happened to load this module first; every later visit
+  // in the same session got fresh, CSS-pre-hidden markup with nothing left
+  // to reveal it — the GSAP timeline, IntersectionObserver, and
+  // ScrollTrigger batches never re-ran, so the hero (and every `.reveal`
+  // section) stayed invisible forever. `astro:page-load` fires after the
+  // initial load *and* after every subsequent transition, which is the
+  // correct, documented hook for logic that needs to re-run on every visit.
+  //
+  // Because it now re-runs on every visit, each of the four
+  // subsystems below (hero entrance, section reveal, timeline track, hero
+  // slider) tracks its own previous instance and tears it down at the top
+  // of the next run — otherwise a second visit would layer a new
+  // IntersectionObserver/ScrollTrigger/interval on top of the first
+  // instead of replacing it.
+  let heroTl: gsap.core.Timeline | null = null;
+  let revealObserver: IntersectionObserver | null = null;
+  let timelineTriggers: ScrollTrigger[] = [];
+  let heroSliderTimer: ReturnType<typeof setInterval> | undefined;
+
+  function initAboutPage(): void {
+    heroTl?.kill();
+    revealObserver?.disconnect();
+    timelineTriggers.forEach((t) => t.kill());
+    timelineTriggers = [];
+    clearInterval(heroSliderTimer);
+
+    initHeroEntrance();
+    initSectionReveal();
+    initTimelineTrack();
+    initHeroSlider();
+    initReadMore();
+  }
+
+  // ── Hero on-load entrance ─────────────────────────────────────────────────
+  // Same fade + rise language as the rest of the site, run on mount instead
+  // of a ScrollTrigger since this section is on screen immediately. Skipped
+  // entirely for reduced-motion users — the global pre-hide rules (see
+  // global.css) already show everything at full opacity for them, so
+  // there's nothing to animate.
+  //
+  // fromTo (not .from) — the CSS pre-hide rule (in global.css, not a scoped
+  // <style> here — see the note above the closing </style> tag) already
+  // sets these elements to opacity:0 / scaleX:0 before this script runs. A
+  // plain .from() would read that same value as the element's current
+  // computed style and treat it as the implicit target too, animating
+  // 0 -> 0 (a no-op) while everything else still moved — the exact bug this
+  // shipped with elsewhere on the site the first time. Explicit "to" values
+  // avoid that. No clearProps: nothing else on this page fights these
+  // elements for opacity/transform/filter, so GSAP's final inline values are
+  // safe to leave in place permanently.
+  function initHeroEntrance(): void {
+    const heroHiddenEl = document.querySelector<HTMLElement>('.about-hero.pre-anim-hidden');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!heroHiddenEl || prefersReducedMotion) return;
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    heroTl = tl;
+    tl.fromTo('.about-hero-eyebrow-text', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5 })
+      .fromTo(
+        '.about-hero-title',
+        { opacity: 0, y: 30, filter: 'blur(10px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.9 },
+        '<0.15',
+      )
+      .fromTo('.about-hero-intro', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, '<0.3')
+      .fromTo(
+        '.about-hero-badge',
+        { opacity: 0, y: -20, scale: 0.6 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.7)' },
+        '<0.5',
+      )
+      .fromTo('.about-hero-wave', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '<0.2')
+      .fromTo(
+        '.about-hero-dot',
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.06 },
+        '<0.1',
+      );
+  }
+
+  // ── Section reveal (IntersectionObserver for .reveal elements) ───────────────
+  function initSectionReveal(): void {
+    const targets = document.querySelectorAll<HTMLElement>('.reveal');
+    if (!targets.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+    );
+    targets.forEach((el) => observer.observe(el));
+    revealObserver = observer;
+  }
+
+  // ── Group company cards — clamp long descriptions to 3 lines, only
+  // showing "Read more" for cards where that clamp actually cuts text off
+  // (checked via scrollHeight vs. clientHeight), so short descriptions
+  // never get a dangling, do-nothing button. Cards come from
+  // GroupCompanies.astro, whose own <style> is scoped and can't reach this
+  // page's script, so the behavior lives here instead — same split as the
+  // .reveal fade-in above.
+  function initReadMore(): void {
+    document.querySelectorAll<HTMLParagraphElement>('[data-company-description]:not([data-read-more-init])').forEach((description) => {
+      description.dataset.readMoreInit = 'true';
+      const button = description.nextElementSibling;
+      if (!(button instanceof HTMLButtonElement) || !button.classList.contains('read-more-toggle')) return;
+
+      if (description.scrollHeight <= description.clientHeight + 1) return;
+      button.classList.remove('hidden');
+      button.addEventListener('click', () => {
+        const expanded = description.classList.toggle('line-clamp-none');
+        description.classList.toggle('line-clamp-3', !expanded);
+        button.textContent = expanded ? 'Read less' : 'Read more';
+      });
+    });
+  }
+
+  // ── Timeline dot track — scroll-triggered staggered entrance ─────────────────
+  function initTimelineTrack(): void {
+  const tlBtns  = Array.from(document.querySelectorAll<HTMLButtonElement>('.timeline-btn'));
+  const tlPanels = Array.from(document.querySelectorAll<HTMLElement>('[data-tl-panel]'));
+  if (!tlBtns.length || !tlPanels.length) return;
+
+  // Scale watermark text to fit the panel width.
+  // Must be called AFTER the panel is display:block so scrollWidth is measurable.
+  function fitWatermark(panel: HTMLElement): void {
+    const wm = panel.querySelector<HTMLElement>('.tl-watermark');
+    if (!wm) return;
+    const available = panel.clientWidth - 64;
+    const natural   = wm.scrollWidth;
+    if (natural > 0 && natural > available) {
+      gsap.set(wm, { scaleX: available / natural, transformOrigin: 'right center' });
+    }
+  }
+  // Panel 0 is visible on load — fit it immediately.
+  fitWatermark(tlPanels[0]);
+
+  // Set initial GSAP state: first dot scaled up, all others dimmed
+  gsap.set(tlBtns, { opacity: 0.4 });
+  gsap.set(tlBtns[0], { opacity: 1 });
+  gsap.set(tlBtns[0]?.querySelector('.tl-dot'), { scale: 1.35 });
+
+  // Entrance: dots and labels rise in with stagger once the track enters view
+  timelineTriggers = ScrollTrigger.batch('.timeline-btn', {
+    start: 'top 88%',
+    once: true,
+    onEnter: (els) =>
+      gsap.from(els, {
+        y: 28,
+        opacity: 0,
+        duration: 0.65,
+        ease: 'power3.out',
+        stagger: 0.07,
+        clearProps: 'y',        // let GSAP keep its own opacity values
+      }),
+  });
+
+  // ── Timeline panel switching — GSAP animated ─────────────────────────────────
+  let tlCurrent = 0;
+  let tlBusy = false;
+
+  function tlShow(index: number): void {
+    if (index === tlCurrent || tlBusy) return;
+    tlBusy = true;
+
+    // Positive = going forward along the timeline, negative = going back.
+    // This makes the content slide in the same direction as the navigation gesture.
+    const dir = index > tlCurrent ? 1 : -1;
+
+    const prevBtn   = tlBtns[tlCurrent];
+    const prevDot   = prevBtn?.querySelector<HTMLElement>('.tl-dot');
+    const prevPanel = tlPanels[tlCurrent];
+
+    const nextBtn       = tlBtns[index];
+    const nextDot       = nextBtn?.querySelector<HTMLElement>('.tl-dot');
+    const nextPanel     = tlPanels[index];
+    const nextWatermark = nextPanel?.querySelector<HTMLElement>('.tl-watermark');
+
+    // Deactivate outgoing dot
+    prevDot?.classList.replace('bg-silent-white', 'bg-transparent');
+    gsap.to(prevDot, { scale: 1,     duration: 0.3, ease: 'power2.out' });
+    gsap.to(prevBtn, { opacity: 0.4, duration: 0.3, ease: 'power2.out' });
+
+    // Exit: current panel drifts in the navigation direction and fades out
+    gsap.to(prevPanel, {
+      opacity: 0,
+      x: dir * -28,
+      duration: 0.2,
+      ease: 'power2.in',
+      onComplete: () => {
+        gsap.set(prevPanel, { display: 'none', x: 0 });
+
+        // Enter: new panel arrives from the opposite side
+        gsap.set(nextPanel, { display: 'block', opacity: 0, x: dir * 32 });
+        // Fit watermark now that the panel is display:block and measurable
+        fitWatermark(nextPanel);
+        gsap.to(nextPanel, { opacity: 1, x: 0, duration: 0.38, ease: 'power3.out' });
+
+        // Watermark fades + rises in after panel settles
+        if (nextWatermark) {
+          gsap.fromTo(
+            nextWatermark,
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out' },
+          );
+        }
+
+        tlCurrent = index;
+        tlBusy    = false;
+      },
+    });
+
+    // Activate incoming dot — elastic bounce is the signature feel
+    nextDot?.classList.replace('bg-transparent', 'bg-silent-white');
+    gsap.fromTo(nextDot,
+      { scale: 1 },
+      { scale: 1.35, duration: 0.55, ease: 'elastic.out(1, 0.4)' }
+    );
+    gsap.to(nextBtn, { opacity: 1, duration: 0.3, ease: 'power2.out' });
+
+    nextBtn?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+
+  tlBtns.forEach((btn, i) => btn.addEventListener('click', () => tlShow(i)));
+  document.querySelectorAll<HTMLButtonElement>('.tl-prev').forEach((btn) => {
+    btn.addEventListener('click', () => { if (tlCurrent > 0) tlShow(tlCurrent - 1); });
+  });
+  document.querySelectorAll<HTMLButtonElement>('.tl-next').forEach((btn) => {
+    btn.addEventListener('click', () => { if (tlCurrent < tlPanels.length - 1) tlShow(tlCurrent + 1); });
+  });
+  }
+
+  // Hero slider: crossfades through the images automatically, with dots to jump directly.
+  function initHeroSlider(): void {
+    const heroSection = document.querySelector<HTMLElement>('.about-hero');
+    if (!heroSection) return;
+
+    const slides = Array.from(heroSection.querySelectorAll<HTMLElement>('.hero-slide'));
+    const dots = Array.from(heroSection.querySelectorAll<HTMLButtonElement>('.hero-slider-dot'));
+    let current = 0;
+
+    const show = (index: number) => {
+      slides[current].classList.replace('opacity-100', 'opacity-0');
+      dots[current]?.classList.replace('bg-silent-white', 'bg-transparent');
+
+      current = index;
+
+      slides[current].classList.replace('opacity-0', 'opacity-100');
+      dots[current]?.classList.replace('bg-transparent', 'bg-silent-white');
+    };
+
+    const start = () => {
+      clearInterval(heroSliderTimer);
+      if (slides.length > 1) {
+        heroSliderTimer = setInterval(() => show((current + 1) % slides.length), 5000);
+      }
+    };
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        if (i === current) return;
+        show(i);
+        start();
+      });
+    });
+
+    start();
+  }
+
+  document.addEventListener('astro:page-load', initAboutPage);
+</script>

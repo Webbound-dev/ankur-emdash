@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import IndustrialSalt from '../../ui-components/components/IndustrialSalt.astro';
+import content from '../../content/pages/industrial-salt.json';
+---
+<BaseLayout title={content.seo.title} description={content.seo.description}>
+  <IndustrialSalt content={content} />
+</BaseLayout>

@@ -1,0 +1,145 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+import Navbar from '../ui/components/Navbar.astro';
+import Footer from '../ui/components/Footer';
+import AudioPlayer from '../ui/components/AudioPlayer';
+import type { NavbarContent } from '../ui/components/NavbarIsland';
+import { getPage } from '../lib/content';
+import { buildOrganizationSchema } from '../lib/structuredData';
+
+const registerCacheHint = (hint: any) => { if (Astro.cache?.enabled) Astro.cache.set(hint); };
+const [navbarContent, footerContent] = await Promise.all([
+  getPage<NavbarContent>('navbar', registerCacheHint),
+  getPage('footer', registerCacheHint),
+]);
+
+interface Props {
+  title: string;
+  description: string;
+  /** Site-relative path (e.g. "/images/foo.jpg") — falls back to the favicon
+   * when a page/post has no dedicated social-share image of its own. */
+  image?: string;
+  type?: 'website' | 'article';
+}
+
+const { title, description, image = '/images/favicon.png', type = 'website' } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(image, Astro.site);
+
+const organizationSchema = buildOrganizationSchema(footerContent.columns, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content="Ankur Chemfood Ltd." />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:url" content={canonicalURL} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+    <script defer src="https://umami.ashq.dev/recorder.js" data-website-id="741d014d-bd69-4893-8ceb-5eab10b928e7"></script>
+    <script defer src="https://umami.ashq.dev/script.js" data-performance="true" data-website-id="741d014d-bd69-4893-8ceb-5eab10b928e7"></script>
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <ClientRouter />
+    <!-- No-JS fallback for the GSAP entrance pre-hide rules in global.css —
+         without this, `.pre-anim-hidden` content (opacity:0 in the CSS)
+         would stay invisible forever for visitors with JS disabled, since
+         nothing would ever run the GSAP timeline that reveals it. -->
+    <noscript>
+      <style>
+        .pre-anim-hidden .hero-eyebrow-rule,
+        .pre-anim-hidden .qs-eyebrow-rule,
+        .pre-anim-hidden .pt-rule,
+        .pre-anim-hidden .dm-rule,
+        .pre-anim-hidden .fv-rule,
+        .pre-anim-hidden .bt-rule,
+        .pre-anim-hidden .about-hero-eyebrow-rule,
+        .pre-anim-hidden .bdf-eyebrow-rule {
+          transform: none !important;
+        }
+        .pre-anim-hidden .hero-eyebrow-text,
+        .pre-anim-hidden .hero-title,
+        .pre-anim-hidden .hero-body,
+        .pre-anim-hidden .hero-cta,
+        .pre-anim-hidden .qs-eyebrow-text,
+        .pre-anim-hidden .qs-line,
+        .pre-anim-hidden .qs-translation,
+        .pre-anim-hidden .qs-attribution,
+        .pre-anim-hidden .qs-cta,
+        .pre-anim-hidden .pt-heading > *,
+        .pre-anim-hidden .product-card,
+        .pre-anim-hidden .dm-heading > *,
+        .pre-anim-hidden .dm-pin,
+        .pre-anim-hidden .fv-heading > *,
+        .pre-anim-hidden .fv-frame,
+        .pre-anim-hidden .bt-heading > *,
+        .pre-anim-hidden .bt-card,
+        .pre-anim-hidden .ft-reveal,
+        .pre-anim-hidden .ft-card-reveal,
+        .pre-anim-hidden .about-hero-eyebrow-text,
+        .pre-anim-hidden .about-hero-title,
+        .pre-anim-hidden .about-hero-intro,
+        .pre-anim-hidden .about-hero-badge,
+        .pre-anim-hidden .about-hero-wave,
+        .pre-anim-hidden .about-hero-dot,
+        .pre-anim-hidden .dn-heading > *,
+        .pre-anim-hidden .dn-row,
+        .pre-anim-hidden .bdf-eyebrow-text,
+        .pre-anim-hidden .bdf-heading,
+        .pre-anim-hidden .bdf-intro,
+        .pre-anim-hidden .bdf-benefit,
+        .pre-anim-hidden .bdf-form-panel,
+        .pre-anim-hidden .wm-pin,
+        .pre-anim-hidden .gm-heading,
+        .pre-anim-hidden .gm-subheading,
+        .pre-anim-hidden .gm-stat,
+        .pre-anim-hidden .gm-tabs,
+        .pre-anim-hidden .gm-map-wrap,
+        .pre-anim-hidden .gt-heading,
+        .pre-anim-hidden .gt-subheading,
+        .pre-anim-hidden .gt-table,
+        .pre-anim-hidden .gt-cards {
+          opacity: 1 !important;
+        }
+        .pre-anim-hidden .cert-badge {
+          opacity: 0.5 !important;
+        }
+      </style>
+    </noscript>
+  </head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TCMBKPZ0P0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TCMBKPZ0P0');
+</script>
+  <body>
+    <div class="min-h-screen flex flex-col">
+      <Navbar content={navbarContent} />
+      <div class="flex-grow">
+        <slot />
+      </div>
+      <Footer content={footerContent} client:visible />
+      <AudioPlayer client:load transition:persist />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,293 @@
+---
+interface Stat { value: string; label: string }
+interface CompanyProfile {
+  name: string;
+  industry: string;
+  description: string;
+  founded: string;
+  headquarters: string;
+  highlights: string[];
+  website: string;
+}
+
+interface Props {
+  content: {
+    hero: { eyebrow: string; heading: string; intro: string };
+    story: { heading: string; paragraphs: string[]; stats: Stat[] };
+    companies: { heading: string; items: CompanyProfile[] };
+    cta: { heading: string; body: string; label: string; href: string };
+  };
+}
+
+const { content } = Astro.props;
+const { hero, story, companies, cta } = content;
+
+// Same wave silhouette used for the dark/light band handoffs on the product
+// detail page (see ProductDetail.astro's WAVE_PATH) — reused verbatim so
+// every wavy divider on the site reads as one consistent language.
+const WAVE_PATH = 'M0,20 C180,90 360,0 540,50 C720,100 900,10 1080,55 C1260,100 1350,40 1440,60 L1440,120 L0,120 Z';
+---
+
+<main class="bg-silent-white">
+  <!-- Hero — deep red, same faint pinstripe texture as Export/Industrial Salt, no
+       image. Wavy bottom edge hands off into the light "story" section below,
+       same technique as the dark company bands further down this page —
+       texture lives in its own clipped layer, separate from the section
+       itself, so the wave (which deliberately renders outside the section's
+       own box) isn't clipped along with it. -->
+  <section class="relative bg-indian-red py-16 lg:py-24 text-center">
+    <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
+      <div
+        class="absolute inset-0 opacity-[0.05]"
+        style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+      />
+    </div>
+    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none translate-y-[calc(100%-2px)] rotate-180" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" class="block w-full h-[48px] lg:h-[90px]" preserveAspectRatio="none">
+        <path d={WAVE_PATH} fill="#A82121" />
+      </svg>
+    </div>
+    <div class="relative max-w-[900px] mx-auto px-6 lg:px-10">
+      <span class="reveal block font-sans text-[11px] font-semibold uppercase tracking-[0.3em] text-silent-white/60" data-cms-field="hero.eyebrow">
+        {hero.eyebrow}
+      </span>
+      <h1 class="reveal mt-4 font-display font-medium text-4xl lg:text-6xl text-silent-white leading-tight" data-cms-field="hero.heading">
+        {hero.heading}
+      </h1>
+      <p
+        class="reveal mt-6 text-base lg:text-lg leading-relaxed text-silent-white/75 max-w-[680px] mx-auto"
+        style="transition-delay: 80ms"
+        data-cms-field="hero.intro"
+      >
+        {hero.intro}
+      </p>
+    </div>
+  </section>
+
+  <!-- Story + stats — extra top padding (vs. the usual py-14 lg:py-20) gives
+       the hero's wave, which bleeds down into this section, room to
+       breathe instead of crowding the heading right below it. -->
+  <section class="max-w-[900px] mx-auto px-6 lg:px-10 pt-20 lg:pt-28 pb-14 lg:pb-20 text-center">
+    <h2 class="reveal font-display font-medium text-2xl lg:text-3xl text-indian-red mb-6" data-cms-field="story.heading">
+      {story.heading}
+    </h2>
+    <div class="reveal space-y-5" style="transition-delay: 80ms">
+      {story.paragraphs.map((p, pi) => (
+        <p class="text-base lg:text-lg leading-relaxed text-indian-red/75" data-cms-field={`story.paragraphs[${pi}]`}>
+          {p}
+        </p>
+      ))}
+    </div>
+
+    {story.stats.length > 0 && (
+      <div class="reveal mt-12 flex flex-wrap justify-center divide-x divide-indian-red/15" style="transition-delay: 160ms">
+        {story.stats.map((stat, si) => (
+          <div class="px-8 lg:px-12 first:pl-0 last:pr-0">
+            <div class="font-display font-medium text-3xl lg:text-4xl text-indian-red" data-cms-field={`story.stats[${si}].value`}>
+              {stat.value}
+            </div>
+            <div class="mt-1.5 text-sm text-indian-red/60" data-cms-field={`story.stats[${si}].label`}>
+              {stat.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </section>
+
+  <!-- Companies in the Group — a grid of self-contained profile cards, one
+       per company, on the same restrained pinstripe+glow background used on
+       Features/Gallery. Was previously an alternating full-width row per
+       company (image left/right of text) — with a 4th company added and no
+       photography to lead each row with (these are sister companies under
+       the group, not Ankur's own facilities; every row previously pointed
+       at the same placeholder image), a grid of complete cards scans far
+       better than a long alternating list. Each card carries founded-year,
+       headquarters and highlights — data the schema already had but never
+       rendered before — instead of a stock photo that wouldn't represent
+       the actual company anyway. -->
+  <section class="relative overflow-hidden bg-indian-red/[0.035] py-14 lg:py-20">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="pointer-events-none absolute -top-16 -right-24 h-72 w-72 rounded-full bg-indian-red/[0.05] blur-3xl" aria-hidden="true" />
+    <div class="pointer-events-none absolute -bottom-20 -left-16 h-80 w-80 rounded-full bg-indian-red/[0.05] blur-3xl" aria-hidden="true" />
+
+    <div class="relative pb-14 lg:pb-20 text-center">
+      <h2
+        class="reveal font-display font-semibold text-3xl lg:text-5xl text-indian-red"
+        data-cms-field="companies.heading"
+      >
+        {companies.heading}
+      </h2>
+    </div>
+
+    <div class="relative max-w-[1100px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 px-6 lg:px-10">
+      {companies.items.map((company, ci) => (
+        <div
+          class="reveal group flex h-full flex-col rounded-2xl bg-white ring-1 ring-indian-red/10 p-6 lg:p-8 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-indian-red/10 hover:ring-indian-red/20"
+          style={`transition-delay: ${ci * 60}ms`}
+        >
+          <span
+            class="inline-block self-start rounded-full bg-indian-red/[0.06] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-indian-red/60"
+            data-cms-field={`companies.items[${ci}].industry`}
+          >
+            {company.industry}
+          </span>
+          <p class="mt-3 font-display font-medium text-xl lg:text-2xl text-indian-red" data-cms-field={`companies.items[${ci}].name`}>
+            {company.name}
+          </p>
+          <p
+            class="mt-2.5 line-clamp-3 text-sm leading-relaxed text-indian-red/75"
+            data-cms-field={`companies.items[${ci}].description`}
+            data-company-description
+          >
+            {company.description}
+          </p>
+          <button type="button" class="read-more-toggle mt-1.5 hidden self-start text-xs font-semibold text-indian-red/70 hover:text-indian-red">
+            Read more
+          </button>
+
+          {(company.founded || company.headquarters) && (
+            <div class="mt-5 flex flex-wrap gap-x-8 gap-y-3 border-y border-indian-red/10 py-4">
+              {company.founded && (
+                <div>
+                  <p class="text-[10px] font-semibold uppercase tracking-wide text-indian-red/40">Founded</p>
+                  <p class="mt-0.5 font-display font-medium text-indian-red" data-cms-field={`companies.items[${ci}].founded`}>
+                    {company.founded}
+                  </p>
+                </div>
+              )}
+              {company.headquarters && (
+                <div>
+                  <p class="text-[10px] font-semibold uppercase tracking-wide text-indian-red/40">Headquarters</p>
+                  <p class="mt-0.5 font-display font-medium text-indian-red" data-cms-field={`companies.items[${ci}].headquarters`}>
+                    {company.headquarters}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          <ul class="mt-5 space-y-3">
+            {company.highlights.map((highlight, hi) => (
+              <li class="flex items-start gap-2.5 text-sm leading-relaxed text-indian-red/75">
+                <svg viewBox="0 0 16 16" class="mt-0.5 h-4 w-4 shrink-0 text-indian-red/50" aria-hidden="true">
+                  <path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span data-cms-field={`companies.items[${ci}].highlights[${hi}]`}>{highlight}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href={company.website}
+            data-cms-link={`companies.items[${ci}].website`}
+            {...company.website.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+            class="group/link mt-auto pt-6 inline-flex w-fit items-center gap-1.5 self-start text-sm font-semibold text-indian-red hover:underline"
+          >
+            Visit Website
+            <svg viewBox="0 0 16 16" class="h-3.5 w-3.5 shrink-0 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">
+              <path d="M4 12 12 4M6 4h6v6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-[700px] mx-auto px-6 lg:px-10 py-14 lg:py-20 text-center">
+    <div class="reveal mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indian-red/10">
+      <svg viewBox="0 0 24 24" class="h-5 w-5 text-indian-red" fill="none">
+        <path
+          d="M4 6h16v12H4z M4 6l8 7 8-7"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <h2 class="reveal mt-5 font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="cta.heading">
+      {cta.heading}
+    </h2>
+    <p class="reveal mt-3 text-sm text-indian-red/60" style="transition-delay: 60ms" data-cms-field="cta.body">
+      {cta.body}
+    </p>
+    <a
+      href={cta.href}
+      data-cms-link="cta.href"
+      class="reveal group mt-8 inline-flex items-center gap-2 rounded-full bg-indian-red px-6 py-3 text-sm font-medium text-silent-white transition-opacity duration-200 hover:opacity-90"
+      style="transition-delay: 120ms"
+    >
+      <span data-cms-field="cta.label">{cta.label}</span>
+      <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+    </a>
+  </section>
+</main>
+
+<script>
+  // Same plain-CSS reveal-on-scroll used by simpler pages like Export.astro
+  // and the /products index — no GSAP needed for a page this size.
+  function initReveal() {
+    const targets = document.querySelectorAll<HTMLElement>('.reveal:not(.in-view)');
+    if (!targets.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+    );
+    targets.forEach((el) => observer.observe(el));
+  }
+  initReveal();
+  document.addEventListener('astro:page-load', initReveal);
+
+  // Company card descriptions clamp to 3 lines; only show "Read more" for
+  // cards where that clamp is actually cutting text off, so short
+  // descriptions (most companies) never get a dangling, do-nothing button.
+  function initReadMore() {
+    document.querySelectorAll<HTMLParagraphElement>('[data-company-description]:not([data-read-more-init])').forEach((description) => {
+      description.dataset.readMoreInit = 'true';
+      const button = description.nextElementSibling;
+      if (!(button instanceof HTMLButtonElement) || !button.classList.contains('read-more-toggle')) return;
+
+      if (description.scrollHeight <= description.clientHeight + 1) return;
+      button.classList.remove('hidden');
+      button.addEventListener('click', () => {
+        const expanded = description.classList.toggle('line-clamp-none');
+        description.classList.toggle('line-clamp-3', !expanded);
+        button.textContent = expanded ? 'Read less' : 'Read more';
+      });
+    });
+  }
+  initReadMore();
+  document.addEventListener('astro:page-load', initReadMore);
+</script>
+
+<style is:global>
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>

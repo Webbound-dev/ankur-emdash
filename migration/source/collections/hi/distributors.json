@@ -1,0 +1,353 @@
+[
+  {
+    "id": "d01",
+    "name": "Shreeji Trading Co.",
+    "region": "West",
+    "state": "Gujarat",
+    "city": "Ahmedabad",
+    "address": "12 Ashram Road, Navrangpura",
+    "phone": "+91 79 4012 3456"
+  },
+  {
+    "id": "d02",
+    "name": "Diamond City Provisions",
+    "region": "West",
+    "state": "Gujarat",
+    "city": "Surat",
+    "address": "44 Ring Road, Katargam",
+    "phone": "+91 261 401 7788"
+  },
+  {
+    "id": "d03",
+    "name": "Saurashtra Wholesale Traders",
+    "region": "West",
+    "state": "Gujarat",
+    "city": "Rajkot",
+    "address": "9 Kalawad Road",
+    "phone": "+91 281 402 9911"
+  },
+  {
+    "id": "d04",
+    "name": "Konkan Grocers & Co.",
+    "region": "West",
+    "state": "Maharashtra",
+    "city": "Mumbai",
+    "address": "221 Linking Road, Bandra West",
+    "phone": "+91 22 6701 2345"
+  },
+  {
+    "id": "d05",
+    "name": "Deccan Distributors",
+    "region": "West",
+    "state": "Maharashtra",
+    "city": "Pune",
+    "address": "56 FC Road, Shivajinagar",
+    "phone": "+91 20 6702 8899"
+  },
+  {
+    "id": "d06",
+    "name": "Vidarbha Agencies",
+    "region": "West",
+    "state": "Maharashtra",
+    "city": "Nagpur",
+    "address": "18 Wardha Road",
+    "phone": "+91 712 670 4433"
+  },
+  {
+    "id": "d07",
+    "name": "Goa Coastal Traders",
+    "region": "West",
+    "state": "Goa",
+    "city": "Panaji",
+    "address": "7 Dayanand Bandodkar Marg",
+    "phone": "+91 832 671 5566"
+  },
+  {
+    "id": "d08",
+    "name": "Pink City Provisions",
+    "region": "North",
+    "state": "Rajasthan",
+    "city": "Jaipur",
+    "address": "33 MI Road",
+    "phone": "+91 141 411 2233"
+  },
+  {
+    "id": "d09",
+    "name": "Marwar Traders",
+    "region": "North",
+    "state": "Rajasthan",
+    "city": "Jodhpur",
+    "address": "15 Ratanada Road",
+    "phone": "+91 291 412 6677"
+  },
+  {
+    "id": "d10",
+    "name": "Capital Foods Distributors",
+    "region": "North",
+    "state": "Delhi",
+    "city": "New Delhi",
+    "address": "88 Karol Bagh",
+    "phone": "+91 11 4913 4455"
+  },
+  {
+    "id": "d11",
+    "name": "Punjab Grain & Grocery Co.",
+    "region": "North",
+    "state": "Punjab",
+    "city": "Ludhiana",
+    "address": "24 Ferozepur Road",
+    "phone": "+91 161 421 3344"
+  },
+  {
+    "id": "d12",
+    "name": "Aravalli Mart Distributors",
+    "region": "North",
+    "state": "Haryana",
+    "city": "Gurugram",
+    "address": "5 MG Road",
+    "phone": "+91 124 422 5588"
+  },
+  {
+    "id": "d13",
+    "name": "Awadh Wholesale Traders",
+    "region": "North",
+    "state": "Uttar Pradesh",
+    "city": "Lucknow",
+    "address": "61 Hazratganj",
+    "phone": "+91 522 423 7799"
+  },
+  {
+    "id": "d14",
+    "name": "Ganga Provisions",
+    "region": "North",
+    "state": "Uttar Pradesh",
+    "city": "Kanpur",
+    "address": "19 Mall Road",
+    "phone": "+91 512 424 8811"
+  },
+  {
+    "id": "d15",
+    "name": "Tricity Distributors",
+    "region": "North",
+    "state": "Chandigarh",
+    "city": "Chandigarh",
+    "address": "Booth 3, Sector 17",
+    "phone": "+91 172 425 9922"
+  },
+  {
+    "id": "d16",
+    "name": "Malwa Traders",
+    "region": "Central",
+    "state": "Madhya Pradesh",
+    "city": "Indore",
+    "address": "27 AB Road",
+    "phone": "+91 731 431 1122"
+  },
+  {
+    "id": "d17",
+    "name": "Narmada Distributors",
+    "region": "Central",
+    "state": "Madhya Pradesh",
+    "city": "Bhopal",
+    "address": "10 MP Nagar",
+    "phone": "+91 755 432 2233"
+  },
+  {
+    "id": "d18",
+    "name": "Chhattisgarh Agencies",
+    "region": "Central",
+    "state": "Chhattisgarh",
+    "city": "Raipur",
+    "address": "42 Shankar Nagar",
+    "phone": "+91 771 433 3344"
+  },
+  {
+    "id": "d19",
+    "name": "Namma Bengaluru Traders",
+    "region": "South",
+    "state": "Karnataka",
+    "city": "Bengaluru",
+    "address": "77 MG Road",
+    "phone": "+91 80 4141 5566"
+  },
+  {
+    "id": "d20",
+    "name": "Marina Provisions Pvt. Ltd.",
+    "region": "South",
+    "state": "Tamil Nadu",
+    "city": "Chennai",
+    "address": "31 Anna Salai",
+    "phone": "+91 44 4142 6677"
+  },
+  {
+    "id": "d21",
+    "name": "Kovai Wholesale Mart",
+    "region": "South",
+    "state": "Tamil Nadu",
+    "city": "Coimbatore",
+    "address": "8 Trichy Road",
+    "phone": "+91 422 414 7788"
+  },
+  {
+    "id": "d22",
+    "name": "Nizam Trading Co.",
+    "region": "South",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "address": "63 Banjara Hills",
+    "phone": "+91 40 4143 8899"
+  },
+  {
+    "id": "d23",
+    "name": "Malabar Coast Traders",
+    "region": "South",
+    "state": "Kerala",
+    "city": "Kochi",
+    "address": "14 MG Road",
+    "phone": "+91 484 414 9900"
+  },
+  {
+    "id": "d24",
+    "name": "Krishna Delta Distributors",
+    "region": "South",
+    "state": "Andhra Pradesh",
+    "city": "Vijayawada",
+    "address": "22 Governorpet",
+    "phone": "+91 866 415 1122"
+  },
+  {
+    "id": "d25",
+    "name": "Howrah Wholesale Traders",
+    "region": "East",
+    "state": "West Bengal",
+    "city": "Kolkata",
+    "address": "5 Park Street",
+    "phone": "+91 33 4515 2233"
+  },
+  {
+    "id": "d26",
+    "name": "Utkal Provisions",
+    "region": "East",
+    "state": "Odisha",
+    "city": "Bhubaneswar",
+    "address": "39 Janpath",
+    "phone": "+91 674 452 3344"
+  },
+  {
+    "id": "d27",
+    "name": "Ganga Ghat Traders",
+    "region": "East",
+    "state": "Bihar",
+    "city": "Patna",
+    "address": "16 Boring Road",
+    "phone": "+91 612 453 4455"
+  },
+  {
+    "id": "d28",
+    "name": "Chotanagpur Distributors",
+    "region": "East",
+    "state": "Jharkhand",
+    "city": "Ranchi",
+    "address": "28 Main Road",
+    "phone": "+91 651 454 5566"
+  },
+  {
+    "id": "d29",
+    "name": "Brahmaputra Traders",
+    "region": "North East",
+    "state": "Assam",
+    "city": "Guwahati",
+    "address": "11 GS Road",
+    "phone": "+91 361 461 6677"
+  },
+  {
+    "id": "d30",
+    "name": "Kashmir Valley Traders",
+    "region": "North",
+    "state": "Jammu and Kashmir",
+    "city": "Srinagar",
+    "address": "18 Residency Road, Lal Chowk",
+    "phone": "+91 194 245 6677"
+  },
+  {
+    "id": "d31",
+    "name": "Shivalik Foods & Provisions",
+    "region": "North",
+    "state": "Himachal Pradesh",
+    "city": "Shimla",
+    "address": "7 The Mall Road",
+    "phone": "+91 177 265 1122"
+  },
+  {
+    "id": "d32",
+    "name": "Doon Valley Grocers",
+    "region": "North",
+    "state": "Uttarakhand",
+    "city": "Dehradun",
+    "address": "23 Rajpur Road",
+    "phone": "+91 135 265 3344"
+  },
+  {
+    "id": "d33",
+    "name": "Itanagar Wholesale Mart",
+    "region": "North East",
+    "state": "Arunachal Pradesh",
+    "city": "Itanagar",
+    "address": "5 Naharlagun Road",
+    "phone": "+91 360 221 5566"
+  },
+  {
+    "id": "d34",
+    "name": "Imphal Valley Traders",
+    "region": "North East",
+    "state": "Manipur",
+    "city": "Imphal",
+    "address": "14 Thangal Bazar",
+    "phone": "+91 385 244 7788"
+  },
+  {
+    "id": "d35",
+    "name": "Shillong Hill Provisions",
+    "region": "North East",
+    "state": "Meghalaya",
+    "city": "Shillong",
+    "address": "9 Police Bazar",
+    "phone": "+91 364 250 9900"
+  },
+  {
+    "id": "d36",
+    "name": "Aizawl Trading Co.",
+    "region": "North East",
+    "state": "Mizoram",
+    "city": "Aizawl",
+    "address": "3 Zarkawt Road",
+    "phone": "+91 389 233 1122"
+  },
+  {
+    "id": "d37",
+    "name": "Kohima Wholesale Traders",
+    "region": "North East",
+    "state": "Nagaland",
+    "city": "Kohima",
+    "address": "11 Officers Hill",
+    "phone": "+91 370 224 3344"
+  },
+  {
+    "id": "d38",
+    "name": "Agartala Foods & Provisions",
+    "region": "North East",
+    "state": "Tripura",
+    "city": "Agartala",
+    "address": "6 HGB Road",
+    "phone": "+91 381 232 5566"
+  },
+  {
+    "id": "d39",
+    "name": "Kanchenjunga Traders",
+    "region": "North East",
+    "state": "Sikkim",
+    "city": "Gangtok",
+    "address": "4 MG Marg",
+    "phone": "+91 3592 220 1122"
+  }
+]

@@ -1,0 +1,50 @@
+---
+interface Stat { value: string; label: string }
+interface Props {
+  section: { heading: string; paragraphs: string[]; stats?: Stat[] };
+  si: number;
+  dark?: boolean;
+}
+const { section, si, dark = false } = Astro.props;
+---
+
+<!-- Side-by-side on larger screens when there are stats (paragraphs left,
+     stat card(s) right, both top-aligned) rather than stacking the stat(s)
+     in a full-width row below — a lone stat in a 2-col row left a large
+     empty cell next to it; sizing the columns to content (1.6fr/1fr) and
+     placing stats beside the text instead reads as an intentional layout
+     regardless of how many stats there are.
+
+     Extra bottom padding only on light (non-dark) sections: a dark section
+     already carries its own wave divider bleeding past its bottom edge, so
+     its own py-16/py-24 section padding is enough on its own. A light
+     section has no wave of its own — its neighbors' waves bleed in from
+     above/below instead — so without extra clearance its content sits
+     right up against the next (dark) section's top wave. -->
+<div class={`${!dark ? 'pb-6 lg:pb-10' : ''} ${section.stats && section.stats.length > 0 ? 'lg:grid lg:grid-cols-[1.6fr_1fr] lg:gap-10 lg:items-start' : ''}`}>
+  <div class="reveal space-y-3 max-w-[680px]">
+    {section.paragraphs.map((p, pi) => (
+      <p class={`text-sm lg:text-base leading-relaxed ${dark ? 'text-silent-white/80' : 'text-indian-red/75'}`} data-cms-field={`detail.sections[${si}].paragraphs[${pi}]`}>
+        {p}
+      </p>
+    ))}
+  </div>
+
+  {section.stats && section.stats.length > 0 && (
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 pt-8 lg:pt-0">
+      {section.stats.map((stat, sti) => (
+        <div
+          class={`reveal rounded-lg p-5 lg:p-6 ${dark ? 'bg-silent-white ring-1 ring-black/5' : 'bg-indian-red/[0.04] ring-1 ring-indian-red/[0.08]'}`}
+          style={`transition-delay: ${80 + sti * 70}ms`}
+        >
+          <p class="font-display font-medium text-3xl lg:text-4xl text-indian-red" data-cms-field={`detail.sections[${si}].stats[${sti}].value`}>
+            {stat.value}
+          </p>
+          <p class="mt-1.5 text-xs lg:text-sm leading-snug text-indian-red/60" data-cms-field={`detail.sections[${si}].stats[${sti}].label`}>
+            {stat.label}
+          </p>
+        </div>
+      ))}
+    </div>
+  )}
+</div>

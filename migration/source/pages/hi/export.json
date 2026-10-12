@@ -1,0 +1,138 @@
+{
+  "seo": {
+    "title": "भारत से नमक निर्यातक: वैश्विक आपूर्ति | Ankur Chemfood Ltd.",
+    "description": "Ankur Chemfood Ltd. भारत से अंतर्राष्ट्रीय खरीदारों को ट्रिपल रिफाइंड, प्रमाणित नमक निर्यात करता है। वैश्विक बाजार, निर्यात प्रमाणपत्र, बंदरगाह सुविधा और बल्क निर्यात पूछताछ।"
+  },
+  "hero": {
+    "title": "भारत से नमक निर्यातक: वैश्विक आपूर्ति",
+    "intro": "गुजरात में भारत की समुद्री नमक पेटी पर स्विस प्रौद्योगिकी से निर्मित ट्रिपल रिफाइंड नमक, अंतर्राष्ट्रीय खरीदारों को आपूर्ति किया जाता है जिसमें वैश्विक व्यापार के लिए आवश्यक प्रमाणपत्र और बंदरगाह सुविधा शामिल है।"
+  },
+  "globalMarkets": {
+    "heading": "वैश्विक बाजार जहां हम सेवा देते हैं",
+    "subheading": "हमारा निर्यात नेटवर्क, क्षेत्र के अनुसार समूहीकृत और जब नए बाजार आनलाइन आते हैं तो अपडेट किया जाता है।",
+    "stat": {
+      "countries": 17,
+      "regions": 4
+    },
+    "regions": [
+      {
+        "name": "Middle East",
+        "countries": [
+          "United Arab Emirates",
+          "Oman",
+          "Kuwait",
+          "Saudi Arabia"
+        ]
+      },
+      {
+        "name": "Africa",
+        "countries": [
+          "Sierra Leone",
+          "Tanzania",
+          "Djibouti",
+          "Ethiopia",
+          "Mauritius",
+          "Réunion"
+        ]
+      },
+      {
+        "name": "South Asia",
+        "countries": [
+          "Nepal",
+          "Bangladesh",
+          "Sri Lanka"
+        ]
+      },
+      {
+        "name": "Far East & Pacific",
+        "countries": [
+          "Malaysia",
+          "Philippines",
+          "Singapore",
+          "Papua New Guinea"
+        ]
+      }
+    ]
+  },
+  "certifications": {
+    "heading": "निर्यात प्रमाणपत्र",
+    "subheading": "अनुपालन दस्तावेज़ जो अंतर्राष्ट्रीय खरीदार पहले मांगते हैं: केवल एक लोगो दीवार नहीं, बल्कि इसके पीछे की वास्तविक मानक।",
+    "items": [
+      {
+        "name": "FSSAI",
+        "issuer": "Food Safety and Standards Authority of India",
+        "description": "हमारा FSSAI लाइसेंस यह सुनिश्चित करता है कि हम भारत से खाद्य-श्रेणी का नमक निर्मित और निर्यात करने के लिए पंजीकृत, निरीक्षित और अधिकृत हैं।",
+        "logo": {
+          "src": "/images/certifications/fssai.svg",
+          "alt": "FSSAI certified"
+        }
+      },
+      {
+        "name": "Halal Certified",
+        "issuer": "Halal Certification Body",
+        "description": "हमारी विनिर्माण प्रक्रिया इस्लामिक आहार आवश्यकताओं को पूरा करती है, जिसकी सत्यापन एक स्वीकृत प्रमाणीकरण निकाय द्वारा की गई है। यह हमारे कई मध्य पूर्व और अफ्रीका खरीदारों के लिए आवश्यक है।",
+        "logo": {
+          "src": "/images/certifications/halal.svg",
+          "alt": "Halal certified"
+        }
+      },
+      {
+        "name": "FSSC 22000",
+        "issuer": "Food Safety System Certification",
+        "description": "वैश्विक स्तर पर सबसे व्यापक रूप से मान्यता प्राप्त खाद्य सुरक्षा प्रमाणपत्रों में से एक, खुदरा विक्रेताओं और खाद्य व्यवसायों द्वारा स्वीकृत जहां हम भी शिप करते हैं।",
+        "logo": {
+          "src": "/images/certifications/fssc-22000.svg",
+          "alt": "FSSC 22000 certified"
+        }
+      },
+      {
+        "name": "ISO 9001:2015",
+        "issuer": "Quality Management System",
+        "description": "हमारी प्रक्रियाओं को सुनिश्चित करता है, स्रोत से पैकेजिंग तक, सतत रूप से प्रबंधित और एक अंतर्राष्ट्रीय गुणवत्ता मानक के अनुसार, केवल एक बार की जांच के बजाय नियमित रूप से, ऑडिट किए जाते हैं।",
+        "logo": {
+          "src": "/images/certifications/iso-9001.svg",
+          "alt": "ISO 9001:2015 certified"
+        }
+      }
+    ]
+  },
+  "logistics": {
+    "heading": "बंदरगाह और लॉजिस्टिक्स सुविधा",
+    "subheading": "भारत के सबसे व्यस्त निर्यात गलियारे पर निर्मित: केवल एक कूरियर मार्ग नहीं, संयंत्र से बंदरगाह तक प्रत्यक्ष पहुंच।",
+    "ports": [
+      {
+        "name": "Kandla Port",
+        "authority": "Deendayal Port Trust",
+        "description": "भारत के सबसे बड़े कार्गो बंदरगाहों में से एक, राष्ट्रीय राजमार्ग 8A पर हमारे विनिर्माण संयंत्रों से मिनटों की दूरी पर स्थित। उच्च मात्रा वाले बल्क निर्यात के लिए निर्मित।"
+      },
+      {
+        "name": "Mundra Port",
+        "authority": "Adani Port",
+        "description": "भारत का सबसे बड़ा निजी बंदरगाह और कंटेनर टर्मिनल, जो हमें कंटेनरीकृत निर्यात के लिए प्रमुख वैश्विक शिपिंग लाइनों तक प्रत्यक्ष पहुंच देता है।"
+      }
+    ],
+    "advantages": [
+      {
+        "value": "5",
+        "label": "NH 8A पर संयंत्र"
+      },
+      {
+        "value": "2",
+        "label": "पास के प्रमुख बंदरगाह"
+      },
+      {
+        "value": "FCL / LCL",
+        "label": "दोनों शिपमेंट प्रकार"
+      }
+    ]
+  },
+  "inquiry": {
+    "heading": "निर्यात पूछताछ",
+    "subheading": "हमें अपनी आवश्यकता बताएं, और हमारी निर्यात टीम एक उद्धरण और डिलीवरी समय के साथ अनुसरण करेगी।",
+    "note": "देश, उत्पाद, कंटेनर मात्रा, Incoterm वरीयता: जो भी आपके पास है। हम आमतौर पर 1 से 2 कार्यदिवसों के भीतर जवाब देते हैं।",
+    "cta": {
+      "label": "Contact Us पर जाएं",
+      "href": "/contact/#export"
+    }
+  }
+}

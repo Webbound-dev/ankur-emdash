@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductDetail from '../../../ui-components/components/ProductDetail.astro';
+import type { Product } from '../../../ui-components/components/ProductDetail.astro';
+import productsData from '../../../content/collections/products.json';
+import { buildProductSchema } from '../../lib/structuredData';
+
+// getStaticPaths runs in an isolated scope with access only to top-level
+// imports, not other module-scope consts — so the Product[] cast has to
+// happen inside the function, using the import directly.
+export function getStaticPaths() {
+  const products = productsData as Product[];
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props as { product: Product };
+
+const productSchema = buildProductSchema(product, Astro.site);
+---
+
+<BaseLayout title={product.pageTitle} description={product.metaDescription} image={product.image?.src}>
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+  <ProductDetail product={product} />
+</BaseLayout>

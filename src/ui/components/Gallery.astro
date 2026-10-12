@@ -1,0 +1,1122 @@
+---
+interface CategoryItem { id: string; label: string }
+interface ImageItem { category: string; src: string; caption: string }
+interface VideoItem { title: string; url: string }
+interface InstagramPost { src: string; alt: string; permalink?: string }
+
+interface Props {
+  content: {
+    hero: { title: string; intro: string };
+    categories: { items: CategoryItem[] };
+    images: { items: ImageItem[] };
+    videos: { heading: string; subheading: string; items: VideoItem[] };
+    quote: { text: string; attribution: string };
+    instagram: { heading: string; handle: string; url: string; posts: InstagramPost[] };
+  };
+}
+
+const { content } = Astro.props;
+const { hero, categories, images, videos, quote, instagram } = content;
+
+// Bento rhythm — a repeating pattern of tile spans so the grid reads as an
+// edited layout instead of a uniform sheet of same-size squares. Repeats
+// every 6 tiles; CSS grid's dense packing keeps it looking intentional even
+// when the category filter hides some tiles.
+const BENTO_PATTERN = [
+  'col-span-2 row-span-2',
+  'col-span-1 row-span-1',
+  'col-span-1 row-span-1',
+  'col-span-1 row-span-2',
+  'col-span-1 row-span-1',
+  'col-span-2 row-span-1',
+];
+function bentoSpan(i: number) {
+  return BENTO_PATTERN[i % BENTO_PATTERN.length];
+}
+
+// Same scalloped-seal motif used across the site's other business pages — a
+// traditional "wax seal" reads consistently as this site's mark of trust.
+const petals = Array.from({ length: 12 }, (_, i) => {
+  const angle = (i / 12) * Math.PI * 2;
+  return { cx: 32 + Math.cos(angle) * 21, cy: 32 + Math.sin(angle) * 21 };
+});
+
+// YouTube's public thumbnail CDN — no API key needed, works for any public
+// video ID pulled straight out of the watch URL.
+function youtubeId(url: string): string {
+  try {
+    return new URL(url).searchParams.get('v') ?? '';
+  } catch {
+    return '';
+  }
+}
+function youtubeThumb(url: string): string {
+  const id = youtubeId(url);
+  return id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : '';
+}
+---
+
+<main data-gallery-page class="bg-silent-white">
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-indian-red py-16 lg:py-24 text-center">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative max-w-[900px] mx-auto px-6 lg:px-10">
+      <svg viewBox="0 0 64 64" class="reveal mx-auto h-12 w-12 text-silent-white">
+        {petals.map((p) => <circle cx={p.cx} cy={p.cy} r="8" fill="currentColor" opacity="0.85" />)}
+        <circle cx="32" cy="32" r="16" fill="currentColor" />
+        <path
+          d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z M16 13a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"
+          fill="none"
+          stroke="#A82121"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          transform="scale(1.3) translate(12.6, 12.6)"
+        />
+      </svg>
+      <h1 class="reveal mt-4 font-display font-medium text-4xl lg:text-6xl text-silent-white leading-tight" style="transition-delay: 60ms" data-cms-field="hero.title">
+        {hero.title}
+      </h1>
+      <p class="reveal mt-6 text-base lg:text-lg leading-relaxed text-silent-white/75 max-w-[680px] mx-auto" style="transition-delay: 100ms" data-cms-field="hero.intro">
+        {hero.intro}
+      </p>
+    </div>
+
+    <svg class="absolute bottom-0 inset-x-0 z-10 w-full h-14 sm:h-20 lg:h-28 text-silent-white" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        d="M0,130 C120,70 240,190 360,130 C480,70 600,190 720,130 C840,70 960,190 1080,130 C1200,70 1320,190 1440,130 L1440,200 L0,200 Z"
+        fill="currentColor"
+      />
+    </svg>
+
+    <!-- Same pinstripe pattern as the Watch section below, masked to the
+         wave's own shape (same path, same viewBox scaling) so the lines run
+         continuously from inside the curve straight into the section below
+         — instead of the wave being a solid, pattern-less gap before the
+         texture starts underneath it. -->
+    <div
+      class="absolute bottom-0 inset-x-0 z-10 w-full h-14 sm:h-20 lg:h-28 pointer-events-none"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px); opacity: 0.05; -webkit-mask-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 200' preserveAspectRatio='none'%3E%3Cpath d='M0,130 C120,70 240,190 360,130 C480,70 600,190 720,130 C840,70 960,190 1080,130 C1200,70 1320,190 1440,130 L1440,200 L0,200 Z' fill='white'/%3E%3C/svg%3E&quot;); mask-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 200' preserveAspectRatio='none'%3E%3Cpath d='M0,130 C120,70 240,190 360,130 C480,70 600,190 720,130 C840,70 960,190 1080,130 C1200,70 1320,190 1440,130 L1440,200 L0,200 Z' fill='white'/%3E%3C/svg%3E&quot;); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;"
+      aria-hidden="true"
+    />
+  </section>
+
+  <!-- Watch — a film-strip reel, deliberately distinct from the photo grid so
+       video reads as its own kind of media, not another square in the mix. -->
+  <section class="relative overflow-hidden pt-6 lg:pt-8 pb-14 lg:pb-20">
+    <!-- Faint pinstripe texture + soft glows, same restrained treatment
+         used on the site's other light sections — gives this section some
+         depth instead of a flat, undecorated background. -->
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="pointer-events-none absolute -top-16 -left-24 h-72 w-72 rounded-full bg-indian-red/[0.05] blur-3xl" aria-hidden="true" />
+    <div class="pointer-events-none absolute -bottom-20 -right-16 h-80 w-80 rounded-full bg-indian-red/[0.05] blur-3xl" aria-hidden="true" />
+    <div
+      class="pointer-events-none absolute bottom-0 inset-x-0 h-3.5"
+      style="background-image: radial-gradient(circle, #A82121 2.5px, transparent 2.5px); background-size: 34px 100%; background-position: 17px center; background-repeat: repeat-x; opacity: 0.25;"
+      aria-hidden="true"
+    />
+
+    <div class="relative max-w-[1200px] mx-auto px-6 lg:px-10">
+      <div class="reveal flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2 class="font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="videos.heading">
+            {videos.heading}
+          </h2>
+          <p class="mt-2 text-sm leading-relaxed text-indian-red/70" data-cms-field="videos.subheading">
+            {videos.subheading}
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="hidden sm:flex gap-2">
+            <button type="button" id="carousel-prev" aria-label="Previous video" class="flex h-10 w-10 items-center justify-center rounded-full bg-indian-red/5 text-indian-red ring-1 ring-indian-red/15 transition-colors hover:bg-indian-red/10">
+              <svg viewBox="0 0 24 24" class="h-4 w-4"><path d="M15 6 9 12l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </button>
+            <button type="button" id="carousel-next" aria-label="Next video" class="flex h-10 w-10 items-center justify-center rounded-full bg-indian-red/5 text-indian-red ring-1 ring-indian-red/15 transition-colors hover:bg-indian-red/10">
+              <svg viewBox="0 0 24 24" class="h-4 w-4"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </button>
+          </div>
+          <button
+            type="button"
+            id="add-video-btn"
+            class="video-add-btn items-center gap-1.5 rounded-full border border-indian-red/25 px-4 py-2 text-sm font-medium text-indian-red hover:bg-indian-red/5"
+          >
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+            Add Video
+          </button>
+        </div>
+      </div>
+
+      <!-- Spotlight carousel — the active video sits large and elevated in the
+           center; its neighbors are smaller, dimmed, and pushed down, peeking
+           in from either edge. Click a side card to bring it to center, or
+           click the center card to actually open it. -->
+      <div id="carousel-wrap" class="carousel-fade relative mt-10 h-[380px] sm:h-[440px] lg:h-[520px] overflow-hidden">
+        <div id="video-carousel" class="absolute inset-0">
+          {videos.items.map((video, vi) => (
+            <div
+              class="video-slide absolute left-1/2 top-1/2 w-[360px] sm:w-[440px] lg:w-[520px] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-indian-red/10"
+              role="button"
+              tabindex="0"
+              data-index={vi}
+              data-url={video.url}
+              aria-label={video.title}
+            >
+              <div class="aspect-video bg-black/20">
+                <img src={youtubeThumb(video.url)} alt={video.title} loading="lazy" class="h-full w-full object-cover" />
+              </div>
+              <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
+                <div class="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-silent-white/90 shadow-lg">
+                  <svg viewBox="0 0 24 24" class="h-7 w-7 sm:h-8 sm:w-8 translate-x-0.5 text-indian-red"><path d="M8 5v14l11-7Z" fill="currentColor" /></svg>
+                </div>
+              </div>
+              <div class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent px-5 pb-4 pt-12">
+                <p class="truncate text-base sm:text-lg font-medium text-silent-white" data-cms-field={`videos.items[${vi}].title`}>
+                  {video.title}
+                </p>
+                <p class="video-url-field mt-1 truncate text-[11px] text-silent-white/70" data-cms-field={`videos.items[${vi}].url`}>
+                  {video.url}
+                </p>
+              </div>
+              <button
+                type="button"
+                class="video-delete-btn absolute right-2 top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-black/60 text-silent-white hover:bg-black/80"
+                aria-label={`Remove ${video.title}`}
+              >
+                <svg viewBox="0 0 24 24" class="h-3.5 w-3.5"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <input type="hidden" data-cms-list-changed="videos.items" value="0" />
+    </div>
+  </section>
+
+  <!-- Filter + grid -->
+  <section class="relative overflow-hidden bg-indian-red py-12 lg:py-16">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05] [mask-image:linear-gradient(to_bottom,black,transparent)]"
+      style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative max-w-[1200px] mx-auto px-6 lg:px-10">
+      <div id="gallery-filters" class="reveal flex flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap gap-2">
+          {categories.items.map((cat, ci) => (
+            <button
+              type="button"
+              data-filter={cat.id}
+              aria-pressed={ci === 0 ? 'true' : 'false'}
+              class="filter-pill rounded-full px-4 py-2 text-sm font-medium"
+            >
+              <span data-cms-field={`categories.items[${ci}].label`}>{cat.label}</span>
+            </button>
+          ))}
+        </div>
+        <button
+          type="button"
+          id="add-photo-btn"
+          class="gallery-add-btn items-center gap-1.5 rounded-full border border-silent-white/25 px-4 py-2 text-sm font-medium text-silent-white hover:bg-silent-white/10"
+        >
+          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+          Add Photo
+        </button>
+      </div>
+
+      <input type="hidden" data-cms-list-changed="images.items" value="0" />
+
+      <div id="gallery-grid" class="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 [grid-auto-flow:dense] auto-rows-[130px] sm:auto-rows-[150px] lg:auto-rows-[170px] gap-3 lg:gap-4">
+        {images.items.map((img, ii) => (
+          <div
+            class={`gallery-item gallery-tile group relative overflow-hidden rounded-xl bg-silent-white/10 ring-1 ring-silent-white/15 ${bentoSpan(ii)}`}
+            role="button"
+            tabindex="0"
+            data-category={img.category}
+            data-index={ii}
+          >
+            <img
+              src={img.src}
+              alt={img.caption}
+              data-cms-image={`images.items[${ii}].src`}
+              loading="lazy"
+              onerror="this.style.visibility='hidden'"
+              class="gallery-img h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+            />
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-indian-red/80 via-indian-red/0 to-indian-red/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div class="pointer-events-none absolute inset-x-0 bottom-0 translate-y-3 p-3 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+              <p class="text-left text-xs font-medium leading-snug text-silent-white line-clamp-2" data-cms-field={`images.items[${ii}].caption`}>
+                {img.caption}
+              </p>
+            </div>
+            <div class="pointer-events-none absolute right-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-silent-white/90 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 text-indian-red"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <button
+              type="button"
+              class="gallery-delete-btn absolute left-2 top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-black/60 text-silent-white hover:bg-black/80"
+              aria-label={`Remove ${img.caption}`}
+            >
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <div id="gallery-pagination" class="pagination-bar hidden mt-8 flex items-center justify-center gap-4">
+        <button
+          type="button"
+          id="gallery-page-prev"
+          aria-label="Previous page"
+          class="gallery-page-arrow flex h-9 w-9 items-center justify-center rounded-full disabled:opacity-30 disabled:pointer-events-none"
+        >
+          <svg viewBox="0 0 24 24" class="h-4 w-4"><path d="M15 6 9 12l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </button>
+        <span id="gallery-page-label" class="text-sm font-medium text-silent-white/70 [font-variant-numeric:tabular-nums]">1 / 1</span>
+        <button
+          type="button"
+          id="gallery-page-next"
+          aria-label="Next page"
+          class="gallery-page-arrow flex h-9 w-9 items-center justify-center rounded-full disabled:opacity-30 disabled:pointer-events-none"
+        >
+          <svg viewBox="0 0 24 24" class="h-4 w-4"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand statement — plain cream with a faint woven linen cross-hatch
+       (two overlapping fine diagonal grids) instead of a flat fill or a
+       heavy watermark -->
+  <section class="relative overflow-hidden bg-silent-white py-24 lg:py-32">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(45deg, #A82121 0, #A82121 1px, transparent 1px, transparent 6px), repeating-linear-gradient(-45deg, #A82121 0, #A82121 1px, transparent 1px, transparent 6px);"
+      aria-hidden="true"
+    />
+    <div class="reveal relative max-w-[640px] mx-auto px-6 text-center">
+      <span class="font-display text-6xl leading-none text-indian-red/20" aria-hidden="true">&ldquo;</span>
+      <p
+        class="mt-2 font-display font-medium text-xl lg:text-2xl text-indian-red leading-snug [text-wrap:balance]"
+        data-cms-field="quote.text"
+      >
+        {quote.text}
+      </p>
+      <p class="mt-4 text-xs font-semibold uppercase tracking-widest text-indian-red/40" data-cms-field="quote.attribution">
+        {quote.attribution}
+      </p>
+    </div>
+  </section>
+
+  <!-- Instagram — a static feed preview, not a live embed (no API/oEmbed
+       call). Every tile is a plain link straight out to the profile, same
+       destination regardless of which post is clicked, since there's no
+       per-post URL data to link to individually. -->
+  <section class="relative overflow-hidden py-16 lg:py-24">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative max-w-[1200px] mx-auto px-6 lg:px-10 text-center">
+      <svg viewBox="0 0 24 24" class="reveal mx-auto h-9 w-9 text-indian-red" fill="none">
+        <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6" />
+        <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6" />
+        <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" />
+      </svg>
+      <h2 class="reveal mt-4 font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="instagram.heading">
+        {instagram.heading}
+      </h2>
+      <a
+        href={instagram.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-cms-link="instagram.url"
+        class="reveal mt-2 inline-block text-sm font-medium text-indian-red/70 hover:text-indian-red transition-colors"
+        style="transition-delay: 60ms"
+      >
+        <span data-cms-field="instagram.handle">{instagram.handle}</span>
+      </a>
+
+      <!-- Scattered polaroids, not a grid — each card tilted at its own
+           angle and overlapping its neighbors, like snapshots fanned out on
+           a table. Straightens, lifts, and scales up on hover so the one
+           you're pointing at reads as "picked up" from the pile. Distinct
+           on purpose from the rectilinear grids/bento used everywhere else
+           on this page, since this section's whole point is "look, real
+           people posting real photos," not another catalog shelf. -->
+      <div class="mt-14 lg:mt-16 flex flex-wrap items-center justify-center">
+        {instagram.posts.map((post, pi) => {
+          const rotations = ['-rotate-6', 'rotate-5', '-rotate-3', 'rotate-6', '-rotate-4', 'rotate-3'];
+          const rotate = rotations[pi % rotations.length];
+          return (
+            <a
+              href={post.permalink || instagram.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`reveal group relative -mx-3 sm:-mx-4 mb-6 shrink-0 rounded-md bg-silent-white p-2 pb-5 shadow-xl ring-1 ring-indian-red/10 transition-all duration-300 ease-out hover:z-20 hover:-translate-y-2 hover:scale-110 hover:rotate-0 hover:shadow-2xl ${rotate}`}
+              style={`transition-delay: ${100 + pi * 60}ms; z-index: ${pi + 1}`}
+              aria-label={`${post.alt} — view on Instagram`}
+            >
+              <span class="relative block h-28 w-28 sm:h-32 sm:w-32 lg:h-36 lg:w-36 overflow-hidden rounded-sm">
+                <img
+                  src={post.src}
+                  alt={post.alt}
+                  data-cms-image={`instagram.posts[${pi}].src`}
+                  loading="lazy"
+                  class="h-full w-full object-cover"
+                />
+                <span class="pointer-events-none absolute inset-0 flex items-center justify-center bg-indian-red/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <svg viewBox="0 0 24 24" class="h-6 w-6 text-silent-white" fill="none">
+                    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6" />
+                    <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6" />
+                    <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" />
+                  </svg>
+                </span>
+              </span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox — hidden by default, opened only by clicking a tile -->
+  <div id="lightbox" class="fixed inset-0 z-[100] hidden">
+    <div id="lightbox-backdrop" class="absolute inset-0 bg-black/85" />
+    <div class="relative flex h-full items-center justify-center px-4 py-10">
+      <button
+        type="button"
+        id="lightbox-close"
+        aria-label="Close"
+        class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-silent-white/10 text-silent-white transition-colors hover:bg-silent-white/20"
+      >
+        <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+      </button>
+      <button
+        type="button"
+        id="lightbox-prev"
+        aria-label="Previous image"
+        class="absolute left-2 sm:left-6 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-silent-white/10 text-silent-white transition-colors hover:bg-silent-white/20"
+      >
+        <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M15 6 9 12l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </button>
+      <button
+        type="button"
+        id="lightbox-next"
+        aria-label="Next image"
+        class="absolute right-2 sm:right-6 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-silent-white/10 text-silent-white transition-colors hover:bg-silent-white/20"
+      >
+        <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </button>
+
+      <div id="lightbox-panel" class="max-w-[90vw] max-h-[85vh] text-center">
+        <img id="lightbox-image" src="" alt="" class="max-h-[75vh] max-w-[90vw] rounded-lg object-contain" />
+        <p id="lightbox-caption" class="mt-4 text-sm text-silent-white/80"></p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<style>
+  .filter-pill {
+    color: #fff6eb;
+    background: rgb(255 246 235 / 10%);
+    border: 1px solid rgb(255 246 235 / 35%);
+    transition: background-color 180ms ease, color 180ms ease;
+  }
+  .filter-pill:hover { background: rgb(255 246 235 / 20%); }
+  .filter-pill[aria-pressed="true"] { color: #a82121; background: #fff6eb; border-color: #fff6eb; }
+  .gallery-page-arrow { color: #a82121; background: #fff6eb; transition: background-color 180ms ease; }
+  .gallery-page-arrow:hover { background: #eadbcc; }
+  .filter-pill:focus-visible, .gallery-page-arrow:focus-visible { outline: 2px solid #fff6eb; outline-offset: 3px; }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  main[data-gallery-ready] .reveal:not(.in-view) { opacity: 0; transform: translateY(24px); }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* :global — also applied to tiles/slides an editor adds at runtime, which
+     never receive Astro's compile-time scoping attribute. */
+  :global(.line-clamp-2) {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .carousel-fade {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+  .carousel-fade {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  main[data-gallery-ready] .carousel-fade:not(.in-view) { opacity: 0; transform: translateY(20px); }
+  .carousel-fade.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  :global(.video-slide) {
+    /* Brightness lives in a custom property (set by the carousel's own JS)
+       so :hover can cleanly override just that one value via normal cascade,
+       instead of fighting an inline style with !important. */
+    filter: brightness(var(--brightness, 1));
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, filter 0.3s ease;
+  }
+  :global(.video-slide:hover) {
+    filter: brightness(1.08);
+  }
+
+  /* Hover zoom stays on the image; filtering animates the containing tile.
+     Photos remain visible while loading and when JavaScript is unavailable. */
+  :global(.gallery-img) {
+    opacity: 1;
+    filter: none;
+    transition: transform 0.35s ease;
+  }
+  :global(.gallery-img.loaded) {
+    opacity: 1;
+    filter: blur(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(.gallery-img) {
+      opacity: 1;
+      filter: none;
+      transition: none;
+    }
+  }
+
+  /* CMS add/remove controls — hidden on the public site by default (body
+     never gets .edit-mode there); shown only inside the admin's edit mode.
+     :global() because the "Add" buttons render inline here, but every
+     admin-added tile/slide/delete-button is created client-side via JS and
+     never receives Astro's own scoping attribute. */
+  :global(.gallery-delete-btn),
+  :global(.video-delete-btn),
+  :global(.gallery-add-btn),
+  :global(.video-add-btn),
+  :global(.video-url-field) {
+    display: none;
+  }
+  :global(body.edit-mode .gallery-delete-btn),
+  :global(body.edit-mode .video-delete-btn) {
+    display: flex;
+  }
+  :global(body.edit-mode .gallery-add-btn),
+  :global(body.edit-mode .video-add-btn) {
+    display: inline-flex;
+  }
+  :global(body.edit-mode .video-url-field) {
+    display: block;
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  // initGalleryPage runs on `astro:page-load` (fires on initial load AND
+  // every client-side transition) rather than as plain top-level code —
+  // this <script> is a JS module, and modules only ever execute once per
+  // browser session, so a plain top-level run left every `.reveal` element
+  // permanently invisible (and the filters/lightbox/carousel never wired
+  // up) on any revisit later in the same session. revealObserver and the
+  // gallery-tile ScrollTrigger batch are disconnected/killed at the top of
+  // each run so a revisit replaces them instead of layering a second
+  // instance on top. Most element listeners (filters, delete buttons,
+  // lightbox controls) don't need the same treatment — Astro's transition
+  // replaces those DOM nodes outright, so stale listeners on the old,
+  // now-detached elements are just garbage collected. Two things here ARE
+  // real exceptions, because they're tied to things that outlive the DOM
+  // swap: `autoplayTimer` (a setInterval that keeps ticking and mutating
+  // now-detached slides if never cleared) and the `document`-level keydown
+  // listener for the lightbox (document itself is never replaced, so
+  // re-adding a fresh closure each visit without removing the previous one
+  // would accumulate a duplicate handler per visit). Both are hoisted to
+  // module scope and explicitly cleared/removed before being recreated.
+  let revealObserver: IntersectionObserver | null = null;
+  let galleryTileTriggers: ScrollTrigger[] = [];
+  let galleryTransition: gsap.core.Timeline | null = null;
+  let autoplayTimer: ReturnType<typeof setInterval> | null = null;
+  let lightboxKeydownHandler: ((e: KeyboardEvent) => void) | null = null;
+
+  function initGalleryPage(): void {
+    revealObserver?.disconnect();
+    galleryTileTriggers.forEach((t) => t.kill());
+    galleryTileTriggers = [];
+    galleryTransition?.kill();
+    galleryTransition = null;
+    if (autoplayTimer) clearInterval(autoplayTimer);
+    autoplayTimer = null;
+    if (lightboxKeydownHandler) document.removeEventListener('keydown', lightboxKeydownHandler);
+    const galleryPage = document.querySelector<HTMLElement>('[data-gallery-page]');
+    if (!galleryPage) return;
+
+    const targets = galleryPage.querySelectorAll<HTMLElement>('.reveal, .carousel-fade');
+    if (targets.length) {
+      revealObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              revealObserver?.unobserve(entry.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+      );
+      targets.forEach((el) => revealObserver?.observe(el));
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) galleryPage.dataset.galleryReady = '';
+    }
+
+  // ── Photo grid: category filter, lightbox, and CMS add/remove ───────────
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-pill');
+  const galleryGrid = document.getElementById('gallery-grid');
+  const imagesListMarker = document.querySelector('[data-cms-list-changed="images.items"]') as HTMLInputElement | null;
+
+  // Blur-up: an image starts soft/invisible and eases to sharp once it's
+  // actually finished loading (cached images resolve immediately), instead
+  // of just popping in whenever the browser happens to paint it.
+  function wireImageLoad(img: HTMLImageElement | null) {
+    if (!img) return;
+    if (img.complete && img.naturalWidth > 0) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+      img.addEventListener('error', () => img.classList.add('loaded'), { once: true });
+    }
+  }
+  document.querySelectorAll<HTMLImageElement>('.gallery-img').forEach(wireImageLoad);
+
+  const BENTO_PATTERN = [
+    'col-span-2 row-span-2',
+    'col-span-1 row-span-1',
+    'col-span-1 row-span-1',
+    'col-span-1 row-span-2',
+    'col-span-1 row-span-1',
+    'col-span-2 row-span-1',
+  ];
+  function bentoSpan(i: number) {
+    return BENTO_PATTERN[i % BENTO_PATTERN.length];
+  }
+
+  // Indices for admin-added tiles/slides continue past whatever the page
+  // shipped with, so they never collide with an existing item's index.
+  let nextImageIndex = document.querySelectorAll('.gallery-tile').length;
+
+  function createTile(index: number): HTMLElement {
+    const placeholderSrc = document.querySelector('.gallery-tile img')?.getAttribute('src') ?? '';
+    const tile = document.createElement('div');
+    tile.className = `gallery-item gallery-tile group relative overflow-hidden rounded-xl bg-silent-white/10 ring-1 ring-silent-white/15 ${bentoSpan(index)}`;
+    tile.dataset.category = 'plants';
+    tile.dataset.index = String(index);
+    tile.setAttribute('role', 'button');
+    tile.tabIndex = 0;
+    tile.innerHTML = `
+      <img src="${placeholderSrc}" alt="New photo, click to edit" data-cms-image="images.items[${index}].src" loading="lazy" onerror="this.style.visibility='hidden'" class="gallery-img h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110" />
+      <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-indian-red/80 via-indian-red/0 to-indian-red/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+      <div class="pointer-events-none absolute inset-x-0 bottom-0 translate-y-3 p-3 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+        <p class="text-left text-xs font-medium leading-snug text-silent-white line-clamp-2" data-cms-field="images.items[${index}].caption">New photo, click to edit</p>
+      </div>
+      <div class="pointer-events-none absolute right-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-silent-white/90 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 text-indian-red"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </div>
+      <button type="button" class="gallery-delete-btn absolute left-2 top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-black/60 text-silent-white hover:bg-black/80" aria-label="Remove photo">
+        <svg viewBox="0 0 24 24" class="h-3.5 w-3.5"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+      </button>
+    `;
+    return tile;
+  }
+
+  function addPhoto() {
+    if (!galleryGrid) return;
+    const tile = createTile(nextImageIndex++);
+    galleryGrid.appendChild(tile);
+    wireImageLoad(tile.querySelector<HTMLImageElement>('.gallery-img'));
+    if (imagesListMarker) imagesListMarker.value = '1';
+    // A brand-new tile should be visible right away rather than silently
+    // landing on a page the editor isn't looking at.
+    currentPage = Infinity;
+    applyGridVisibility(false);
+  }
+
+  function removeTile(tile: Element | null | undefined) {
+    if (!tile) return;
+    tile.remove();
+    if (imagesListMarker) imagesListMarker.value = '1';
+    applyGridVisibility(false);
+  }
+
+  document.getElementById('add-photo-btn')?.addEventListener('click', addPhoto);
+
+  // ── Pagination — 6 tiles per page (one full bento-pattern cycle), scoped
+  // to whichever category filter is active. Recomputed (not just toggled)
+  // on every filter change and after any CRUD add/remove.
+  const PAGE_SIZE = 6;
+  let activeFilter = 'all';
+  let currentPage = 1;
+
+  const paginationBar = document.getElementById('gallery-pagination');
+  const pageLabel = document.getElementById('gallery-page-label');
+  const pagePrevBtn = document.getElementById('gallery-page-prev') as HTMLButtonElement | null;
+  const pageNextBtn = document.getElementById('gallery-page-next') as HTMLButtonElement | null;
+
+  // Unique span tokens the bento pattern ever produces — cleared before
+  // reassigning so a tile that moves between a full and partial page never
+  // keeps a stale span from its previous page.
+  const BENTO_SPAN_CLASSES = ['col-span-1', 'col-span-2', 'row-span-1', 'row-span-2'];
+
+  function applyGridVisibility(animate = true) {
+    const allItems = Array.from(document.querySelectorAll<HTMLElement>('.gallery-item'));
+    const matching = allItems.filter((item) => activeFilter === 'all' || item.dataset.category === activeFilter);
+    const totalPages = Math.max(1, Math.ceil(matching.length / PAGE_SIZE));
+    if (currentPage > totalPages) currentPage = totalPages;
+    if (currentPage < 1) currentPage = 1;
+
+    const start = (currentPage - 1) * PAGE_SIZE;
+    const pageItems = matching.slice(start, start + PAGE_SIZE);
+    const shown = new Set(pageItems);
+    const outgoing = allItems.filter((item) => !item.classList.contains('hidden'));
+    const previousHeight = galleryGrid?.getBoundingClientRect().height ?? 0;
+    const motion = animate && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // One timeline owns the entire change. Replacing it cancels old layout
+    // callbacks before they can hide tiles belonging to a newer selection.
+    galleryTransition?.kill();
+    galleryTransition = null;
+    if (animate) {
+      galleryTileTriggers.forEach((trigger) => trigger.kill());
+      galleryTileTriggers = [];
+    }
+    gsap.killTweensOf(allItems);
+    if (galleryGrid) gsap.killTweensOf(galleryGrid);
+    gsap.set(allItems, { clearProps: 'opacity,transform' });
+
+    let nextHeight = 0;
+    function commitLayout() {
+      if (galleryGrid) gsap.set(galleryGrid, { clearProps: 'height,overflow' });
+
+      // The bento rhythm (2x2 / 1x1 / 1x1 / 1x2 / 1x1 / 2x1) only tiles a
+      // 4-column grid without holes across a full 6-tile cycle. A partial page
+      // — the last page of a filtered/paginated view, whenever the remaining
+      // count isn't a full PAGE_SIZE — falls back to a uniform 1x1 grid, which
+      // always tiles cleanly regardless of count. Recomputed on every call (not
+      // just once at render) so a tile that lands on a partial page after a
+      // filter change or CMS add/remove always gets the right span, not
+      // whatever it was assigned when it happened to sit on a full page.
+      const useBento = pageItems.length === PAGE_SIZE;
+      pageItems.forEach((item, i) => {
+        item.classList.remove(...BENTO_SPAN_CLASSES);
+        const span = useBento ? bentoSpan(i) : 'col-span-1 row-span-1';
+        item.classList.add(...span.split(' '));
+      });
+
+      allItems.forEach((item) => {
+        item.classList.toggle('hidden', !shown.has(item));
+        item.setAttribute('aria-hidden', shown.has(item) ? 'false' : 'true');
+        item.tabIndex = shown.has(item) ? 0 : -1;
+      });
+      if (galleryGrid) {
+        nextHeight = galleryGrid.getBoundingClientRect().height;
+        if (motion) gsap.set(galleryGrid, { height: previousHeight, overflow: 'hidden' });
+      }
+    }
+
+    if (motion) {
+      galleryTransition = gsap.timeline();
+      if (outgoing.length) galleryTransition.to(outgoing, {
+        opacity: 0, y: -6, duration: 0.15, ease: 'power1.in',
+      });
+      galleryTransition.add(commitLayout);
+      if (galleryGrid) galleryTransition.to(galleryGrid, {
+        height: () => nextHeight, duration: 0.45, ease: 'power2.inOut',
+        clearProps: 'height,overflow',
+      });
+      if (pageItems.length) galleryTransition.fromTo(pageItems,
+        { opacity: 0, y: 14, scale: 0.985 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.42,
+          stagger: 0.035, ease: 'power2.out', immediateRender: false, clearProps: 'opacity,transform' },
+        '<',
+      );
+    } else {
+      commitLayout();
+    }
+
+    if (paginationBar) paginationBar.classList.toggle('hidden', totalPages <= 1);
+    if (pageLabel) pageLabel.textContent = `${currentPage} / ${totalPages}`;
+    if (pagePrevBtn) pagePrevBtn.disabled = currentPage <= 1;
+    if (pageNextBtn) pageNextBtn.disabled = currentPage >= totalPages;
+  }
+  applyGridVisibility(false);
+
+  // Staggered pop-in as the grid scrolls into view — snappier and more
+  // "gallery-like" than the generic .reveal fade used elsewhere on the page.
+  // Scoped to whichever tiles are visible on page 1 at load; tiles revealed
+  // later by pagination/filtering already get their own crossfade from
+  // applyGridVisibility above.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gsap.set('.gallery-tile', { opacity: 1, scale: 1, y: 0 });
+  } else {
+    galleryTileTriggers = ScrollTrigger.batch('.gallery-tile:not(.hidden)', {
+      start: 'top 90%',
+      once: true,
+      onEnter: (els) =>
+        gsap.from(els, {
+          y: 28,
+          opacity: 0,
+          scale: 0.95,
+          duration: 0.9,
+          ease: 'expo.out',
+          stagger: 0.08,
+          clearProps: 'transform,opacity',
+        }),
+    });
+  }
+
+  pagePrevBtn?.addEventListener('click', () => {
+    currentPage -= 1;
+    applyGridVisibility();
+  });
+  pageNextBtn?.addEventListener('click', () => {
+    currentPage += 1;
+    applyGridVisibility();
+  });
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      activeFilter = btn.dataset.filter ?? 'all';
+      currentPage = 1;
+      filterButtons.forEach((b) => {
+        const isActive = b === btn;
+        b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+      applyGridVisibility();
+    });
+  });
+
+  // Lightbox — only ever opened by clicking a photo tile, never by a scroll
+  // trigger. Tile data is read fresh each time so admin-added/removed tiles
+  // stay in sync without needing to rebuild a cached list.
+  function getTileData() {
+    return Array.from(document.querySelectorAll<HTMLElement>('.gallery-tile')).map((tile) => ({
+      src: tile.querySelector('img')?.getAttribute('src') ?? '',
+      caption: tile.querySelector('img')?.getAttribute('alt') ?? '',
+    }));
+  }
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+  const lightboxPanel = document.getElementById('lightbox-panel');
+  const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement | null;
+  const lightboxCaption = document.getElementById('lightbox-caption');
+
+  let currentIndex = 0;
+
+  function showImage(index: number) {
+    const list = getTileData();
+    const total = list.length;
+    if (!total) return;
+    currentIndex = (index + total) % total;
+    const item = list[currentIndex];
+    if (!item || !lightboxImage || !lightboxCaption) return;
+    lightboxImage.src = item.src;
+    lightboxImage.alt = item.caption;
+    lightboxCaption.textContent = item.caption;
+    gsap.fromTo(lightboxPanel, { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.25, ease: 'power2.out' });
+  }
+
+  function openLightbox(index: number) {
+    if (!lightbox || !lightboxBackdrop || !lightboxPanel) return;
+    lightbox.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    gsap.fromTo(lightboxBackdrop, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'power2.out' });
+    showImage(index);
+  }
+
+  function closeLightbox() {
+    if (!lightbox || !lightboxBackdrop) return;
+    gsap.to(lightboxBackdrop, {
+      opacity: 0,
+      duration: 0.2,
+      ease: 'power1.in',
+      onComplete: () => {
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = '';
+      },
+    });
+  }
+
+  // Delegated (not per-tile) so tiles added later are already wired up.
+  galleryGrid?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const deleteBtn = target.closest('.gallery-delete-btn');
+    if (deleteBtn) {
+      e.stopPropagation();
+      removeTile(deleteBtn.closest('.gallery-tile'));
+      return;
+    }
+    // Let clicks land in an editable caption instead of hijacking them to
+    // open the lightbox.
+    if (target.closest('[data-cms-field]')) return;
+    const tile = target.closest('.gallery-tile') as HTMLElement | null;
+    if (!tile) return;
+    const allTiles = Array.from(document.querySelectorAll<HTMLElement>('.gallery-tile'));
+    openLightbox(allTiles.indexOf(tile));
+  });
+
+  galleryGrid?.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const target = e.target as HTMLElement;
+    if (target.closest('.gallery-delete-btn') || target.closest('[data-cms-field]')) return;
+    const tile = target.closest('.gallery-tile') as HTMLElement | null;
+    if (!tile) return;
+    e.preventDefault();
+    const allTiles = Array.from(document.querySelectorAll<HTMLElement>('.gallery-tile'));
+    openLightbox(allTiles.indexOf(tile));
+  });
+
+  document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+  lightboxBackdrop?.addEventListener('click', closeLightbox);
+  document.getElementById('lightbox-prev')?.addEventListener('click', () => showImage(currentIndex - 1));
+  document.getElementById('lightbox-next')?.addEventListener('click', () => showImage(currentIndex + 1));
+
+  // ── Spotlight video carousel: nav, autoplay, and CMS add/remove ─────────
+  const videoCarousel = document.getElementById('video-carousel');
+  const videosListMarker = document.querySelector('[data-cms-list-changed="videos.items"]') as HTMLInputElement | null;
+  // 1x1 transparent GIF — placeholder thumbnail for a brand-new video before
+  // an editor has pasted in a real URL, so it reads as empty rather than a
+  // broken image icon.
+  const TRANSPARENT_PIXEL = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ycQABBAAAOw==';
+
+  function youtubeId(url: string): string {
+    try {
+      return new URL(url).searchParams.get('v') ?? '';
+    } catch {
+      return '';
+    }
+  }
+  function youtubeThumbClient(url: string): string {
+    const id = youtubeId(url);
+    return id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : TRANSPARENT_PIXEL;
+  }
+
+  let nextVideoIndex = document.querySelectorAll('.video-slide').length;
+
+  function createSlide(index: number): HTMLElement {
+    const slide = document.createElement('div');
+    slide.className = 'video-slide absolute left-1/2 top-1/2 w-[360px] sm:w-[440px] lg:w-[520px] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-silent-white/20';
+    slide.dataset.index = String(index);
+    slide.dataset.url = '';
+    slide.setAttribute('role', 'button');
+    slide.tabIndex = 0;
+    slide.setAttribute('aria-label', 'New video');
+    slide.innerHTML = `
+      <div class="aspect-video bg-black/20">
+        <img src="${TRANSPARENT_PIXEL}" alt="New video" loading="lazy" class="h-full w-full object-cover" />
+      </div>
+      <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
+        <div class="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-silent-white/90 shadow-lg">
+          <svg viewBox="0 0 24 24" class="h-7 w-7 sm:h-8 sm:w-8 translate-x-0.5 text-indian-red"><path d="M8 5v14l11-7Z" fill="currentColor" /></svg>
+        </div>
+      </div>
+      <div class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent px-5 pb-4 pt-12">
+        <p class="truncate text-base sm:text-lg font-medium text-silent-white" data-cms-field="videos.items[${index}].title">New video</p>
+        <p class="video-url-field mt-1 truncate text-[11px] text-silent-white/70" data-cms-field="videos.items[${index}].url"></p>
+      </div>
+      <button type="button" class="video-delete-btn absolute right-2 top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-black/60 text-silent-white hover:bg-black/80" aria-label="Remove video">
+        <svg viewBox="0 0 24 24" class="h-3.5 w-3.5"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+      </button>
+    `;
+    return slide;
+  }
+
+  function addVideo() {
+    if (!videoCarousel) return;
+    videoCarousel.appendChild(createSlide(nextVideoIndex++));
+    if (videosListMarker) videosListMarker.value = '1';
+    refreshSlides();
+  }
+
+  function removeSlide(slide: Element | null | undefined) {
+    if (!slide) return;
+    slide.remove();
+    if (videosListMarker) videosListMarker.value = '1';
+    refreshSlides();
+  }
+
+  document.getElementById('add-video-btn')?.addEventListener('click', addVideo);
+
+  let slides = Array.from(document.querySelectorAll<HTMLElement>('.video-slide'));
+  let slideCount = slides.length;
+  let activeSlide = 0;
+
+  function renderCarousel() {
+    slides.forEach((slide, i) => {
+      let offset = i - activeSlide;
+      if (offset > slideCount / 2) offset -= slideCount;
+      if (offset < -slideCount / 2) offset += slideCount;
+
+      let x = 0;
+      let y = 0;
+      let scale = 0.6;
+      let opacity = 0;
+      let z = 10;
+      let dim = false;
+
+      if (offset === 0) {
+        scale = 1.15;
+        opacity = 1;
+        z = 30;
+      } else if (offset === -1 || offset === 1) {
+        x = offset * 360;
+        y = 28;
+        scale = 0.75;
+        opacity = 0.55;
+        z = 20;
+        dim = true;
+      }
+
+      slide.style.transform = `translate(-50%, -50%) translateX(${x}px) translateY(${y}px) scale(${scale})`;
+      slide.style.opacity = String(opacity);
+      slide.style.zIndex = String(z);
+      slide.style.setProperty('--brightness', dim ? '0.6' : '1');
+      slide.style.pointerEvents = opacity > 0 ? 'auto' : 'none';
+    });
+  }
+  renderCarousel();
+
+  // Auto-advance every few seconds, like a living showcase rather than a
+  // static row — pauses as soon as the visitor hovers or steps in manually,
+  // and picks back up a moment after they let go. autoplayTimer is the
+  // module-scoped variable declared above (not redeclared here), so the
+  // top-of-init cleanup can always find and clear whichever visit's timer
+  // is currently running.
+  function startAutoplay() {
+    stopAutoplay();
+    if (slideCount < 2) return;
+    autoplayTimer = setInterval(() => {
+      activeSlide = (activeSlide + 1) % slideCount;
+      renderCarousel();
+    }, 4500);
+  }
+  function stopAutoplay() {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+    autoplayTimer = null;
+  }
+  function goTo(index: number) {
+    activeSlide = index;
+    renderCarousel();
+    startAutoplay();
+  }
+
+  // Re-reads the live slide list after an add/remove and clamps the active
+  // index so a delete near the end of the list can't leave it out of range.
+  function refreshSlides() {
+    slides = Array.from(document.querySelectorAll<HTMLElement>('.video-slide'));
+    slideCount = slides.length;
+    if (activeSlide > slideCount - 1) activeSlide = Math.max(0, slideCount - 1);
+    renderCarousel();
+    startAutoplay();
+  }
+
+  videoCarousel?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const deleteBtn = target.closest('.video-delete-btn');
+    if (deleteBtn) {
+      e.stopPropagation();
+      removeSlide(deleteBtn.closest('.video-slide'));
+      return;
+    }
+    if (target.closest('[data-cms-field]')) return;
+    const slideEl = target.closest('.video-slide') as HTMLElement | null;
+    if (!slideEl) return;
+    const i = slides.indexOf(slideEl);
+    if (i === activeSlide) {
+      const url = slideEl.dataset.url;
+      if (url) window.open(url, '_blank', 'noopener,noreferrer');
+    } else if (i >= 0) {
+      goTo(i);
+    }
+  });
+
+  videoCarousel?.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const target = e.target as HTMLElement;
+    if (target.closest('.video-delete-btn') || target.closest('[data-cms-field]')) return;
+    const slideEl = target.closest('.video-slide') as HTMLElement | null;
+    if (!slideEl) return;
+    e.preventDefault();
+    const i = slides.indexOf(slideEl);
+    if (i === activeSlide) {
+      const url = slideEl.dataset.url;
+      if (url) window.open(url, '_blank', 'noopener,noreferrer');
+    } else if (i >= 0) {
+      goTo(i);
+    }
+  });
+
+  // Keep the thumbnail and aria-label in sync when an editor changes a
+  // slide's URL or title — both live in contenteditable fields whose change
+  // is only readable once the field blurs (focusout, since blur itself
+  // doesn't bubble).
+  videoCarousel?.addEventListener('focusout', (e) => {
+    const target = e.target as HTMLElement;
+    const slide = target.closest('.video-slide') as HTMLElement | null;
+    if (!slide) return;
+    if (target.matches('[data-cms-field$=".url"]')) {
+      const url = target.textContent?.trim() ?? '';
+      slide.dataset.url = url;
+      const img = slide.querySelector('img');
+      if (img) img.setAttribute('src', youtubeThumbClient(url));
+    }
+    if (target.matches('[data-cms-field$=".title"]') || target.matches('[data-cms-field$=".url"]')) {
+      const title = slide.querySelector('[data-cms-field$=".title"]')?.textContent?.trim() ?? '';
+      slide.setAttribute('aria-label', title || 'Video');
+    }
+  });
+
+  document.getElementById('carousel-prev')?.addEventListener('click', () => {
+    goTo((activeSlide - 1 + slideCount) % slideCount);
+  });
+  document.getElementById('carousel-next')?.addEventListener('click', () => {
+    goTo((activeSlide + 1) % slideCount);
+  });
+
+  const carouselWrap = document.getElementById('carousel-wrap');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion) {
+    carouselWrap?.addEventListener('mouseenter', stopAutoplay);
+    carouselWrap?.addEventListener('mouseleave', startAutoplay);
+    startAutoplay();
+  }
+
+  lightboxKeydownHandler = (e: KeyboardEvent) => {
+    if (!lightbox || lightbox.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
+    if (e.key === 'ArrowRight') showImage(currentIndex + 1);
+  };
+  document.addEventListener('keydown', lightboxKeydownHandler);
+  }
+
+  document.addEventListener('astro:page-load', initGalleryPage);
+</script>

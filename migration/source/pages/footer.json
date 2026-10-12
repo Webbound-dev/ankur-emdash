@@ -1,0 +1,23 @@
+{
+  "cta": {
+    "title": "Real salt, real updates.",
+    "body": "Recipes, health tips, and news from India's second largest packaged salt brand, straight to your inbox.",
+    "placeholder": "Enter your email...",
+    "buttonLabel": "Sign Up"
+  },
+  "brand": {
+    "logo": {
+      "src": "/images/logo.png",
+      "alt": "Ankur Salt"
+    },
+    "tagline": "Real salt. Nothing hidden.",
+    "email": "info@ankurgroup.in",
+    "address": "349P+GWP, Ward 12B, Gandhidham, Gujarat 370201",
+    "addressMapUrl": "https://maps.app.goo.gl/6imQNPP9GKfVbkdR6",
+    "cta": {
+      "label": "Get In Touch",
+      "href": "/contact/"
+    }
+  },
+  "copyrightName": "Ankur Chemfood Ltd. All rights reserved."
+}

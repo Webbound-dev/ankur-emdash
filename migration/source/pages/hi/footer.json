@@ -1,0 +1,116 @@
+{
+  "cta": {
+    "title": "असली नमक, असली अपडेट।",
+    "body": "भारत के दूसरे सबसे बड़े पैकेज्ड नमक ब्रांड से रेसिपी, स्वास्थ्य सुझाव और समाचार सीधे आपके इनबॉक्स में।",
+    "placeholder": "अपना ईमेल दर्ज करें...",
+    "buttonLabel": "साइन अप करें"
+  },
+  "brand": {
+    "logo": {
+      "src": "/images/logo.png",
+      "alt": "Ankur Salt"
+    },
+    "tagline": "असली नमक। कुछ भी छिपा नहीं।",
+    "cta": {
+      "label": "संपर्क करें",
+      "href": "/contact/"
+    }
+  },
+  "columns": [
+    {
+      "title": "उत्पाद",
+      "links": [
+        {
+          "label": "सभी उत्पाद",
+          "href": "/products/"
+        },
+        {
+          "label": "Ankur Salt",
+          "href": "/products/ankur-salt/"
+        },
+        {
+          "label": "Ankur Gold",
+          "href": "/products/ankur-gold/"
+        },
+        {
+          "label": "Dr. Salt",
+          "href": "/products/dr-salt/"
+        },
+        {
+          "label": "Salt Plus",
+          "href": "/products/salt-plus/"
+        }
+      ]
+    },
+    {
+      "title": "व्यवसाय",
+      "links": [
+        {
+          "label": "औद्योगिक नमक",
+          "href": "/industrial-salt/"
+        },
+        {
+          "label": "निर्यात",
+          "href": "/export/"
+        },
+        {
+          "label": "वितरक नेटवर्क",
+          "href": "/network/"
+        },
+        {
+          "label": "गुणवत्ता और प्रमाणपत्र",
+          "href": "/quality-certificates/"
+        }
+      ]
+    },
+    {
+      "title": "कंपनी",
+      "links": [
+        {
+          "label": "हमारे बारे में",
+          "href": "/about/"
+        },
+        {
+          "label": "ब्लॉग",
+          "href": "/blog/"
+        },
+        {
+          "label": "गैलरी",
+          "href": "/gallery/"
+        },
+        {
+          "label": "करियर",
+          "href": "/career/"
+        },
+        {
+          "label": "हमसे संपर्क करें",
+          "href": "/contact/"
+        }
+      ]
+    },
+    {
+      "title": "जुड़ें",
+      "links": [
+        {
+          "label": "Instagram",
+          "href": "https://www.instagram.com/ankursaltindia/"
+        },
+        {
+          "label": "Facebook",
+          "href": "https://www.facebook.com/ankurgroup.in/"
+        }
+      ]
+    }
+  ],
+  "legalLinks": [
+    {
+      "label": "गोपनीयता नीति",
+      "href": "/privacy-policy/"
+    },
+    {
+      "label": "सेवा की शर्तें",
+      "href": "/terms-of-service/"
+    }
+  ],
+  "copyrightName": "Ankur Chemfood Ltd. सर्वाधिकार सुरक्षित।"
+}

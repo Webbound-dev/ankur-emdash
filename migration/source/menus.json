@@ -1,0 +1,247 @@
+[
+  {
+    "name": "navbar_left",
+    "label": "Header — left",
+    "items": [
+      {
+        "type": "custom",
+        "label": "About Us",
+        "url": "/about/"
+      },
+      {
+        "type": "custom",
+        "label": "Consumable Salt",
+        "url": "/products/"
+      },
+      {
+        "type": "custom",
+        "label": "Industrial Salt",
+        "url": "/industrial-salt/"
+      },
+      {
+        "type": "custom",
+        "label": "Gallery",
+        "url": "/gallery/"
+      }
+    ]
+  },
+  {
+    "name": "navbar_right",
+    "label": "Header — right",
+    "items": [
+      {
+        "type": "custom",
+        "label": "Distributor Networks",
+        "url": "/network/"
+      },
+      {
+        "type": "custom",
+        "label": "Quality & Certificates",
+        "url": "/quality-certificates/"
+      },
+      {
+        "type": "custom",
+        "label": "Export",
+        "url": "/export/"
+      },
+      {
+        "type": "custom",
+        "label": "Contact Us",
+        "url": "/contact/"
+      }
+    ]
+  },
+  {
+    "name": "navbar_products",
+    "label": "Header — products",
+    "items": [
+      {
+        "type": "custom",
+        "label": "Ankur Salt",
+        "url": "/products/ankur-salt/"
+      },
+      {
+        "type": "custom",
+        "label": "Ankur Gold",
+        "url": "/products/ankur-gold/"
+      },
+      {
+        "type": "custom",
+        "label": "Dr. Salt",
+        "url": "/products/dr-salt/"
+      },
+      {
+        "type": "custom",
+        "label": "DFS Salt",
+        "url": "/products/salt-plus/"
+      },
+      {
+        "type": "custom",
+        "label": "Ankur Rock Salt",
+        "url": "/products/rock-salt/"
+      },
+      {
+        "type": "custom",
+        "label": "Crystal Salt",
+        "url": "/products/crystal-salt/"
+      }
+    ]
+  },
+  {
+    "name": "navbar_left_parked",
+    "label": "Header — parked left links (not displayed)",
+    "items": [
+      {
+        "type": "custom",
+        "label": "Home",
+        "url": "/"
+      },
+      {
+        "type": "custom",
+        "label": "Blog",
+        "url": "/blog/"
+      }
+    ]
+  },
+  {
+    "name": "navbar_right_parked",
+    "label": "Header — parked right links (not displayed)",
+    "items": [
+      {
+        "type": "custom",
+        "label": "Career",
+        "url": "/career/"
+      }
+    ]
+  },
+  {
+    "name": "footer_navigation",
+    "label": "Footer — columns",
+    "items": [
+      {
+        "type": "custom",
+        "label": "Products",
+        "url": "#",
+        "children": [
+          {
+            "type": "custom",
+            "label": "All Products",
+            "url": "/products/"
+          },
+          {
+            "type": "custom",
+            "label": "Ankur Salt",
+            "url": "/products/ankur-salt/"
+          },
+          {
+            "type": "custom",
+            "label": "Ankur Gold",
+            "url": "/products/ankur-gold/"
+          },
+          {
+            "type": "custom",
+            "label": "Dr. Salt",
+            "url": "/products/dr-salt/"
+          },
+          {
+            "type": "custom",
+            "label": "DFS Salt",
+            "url": "/products/salt-plus/"
+          }
+        ]
+      },
+      {
+        "type": "custom",
+        "label": "Business",
+        "url": "#",
+        "children": [
+          {
+            "type": "custom",
+            "label": "Industrial Salt",
+            "url": "/industrial-salt/"
+          },
+          {
+            "type": "custom",
+            "label": "Export",
+            "url": "/export/"
+          },
+          {
+            "type": "custom",
+            "label": "Distributor Network",
+            "url": "/network/"
+          },
+          {
+            "type": "custom",
+            "label": "Quality & Certifications",
+            "url": "/quality-certificates/"
+          }
+        ]
+      },
+      {
+        "type": "custom",
+        "label": "Company",
+        "url": "#",
+        "children": [
+          {
+            "type": "custom",
+            "label": "About Us",
+            "url": "/about/"
+          },
+          {
+            "type": "custom",
+            "label": "Blog",
+            "url": "/blog/"
+          },
+          {
+            "type": "custom",
+            "label": "Gallery",
+            "url": "/gallery/"
+          },
+          {
+            "type": "custom",
+            "label": "Careers",
+            "url": "/career/"
+          },
+          {
+            "type": "custom",
+            "label": "Contact Us",
+            "url": "/contact/"
+          }
+        ]
+      },
+      {
+        "type": "custom",
+        "label": "Connect",
+        "url": "#",
+        "children": [
+          {
+            "type": "custom",
+            "label": "Instagram",
+            "url": "https://www.instagram.com/ankursaltindia/"
+          },
+          {
+            "type": "custom",
+            "label": "Facebook",
+            "url": "https://www.facebook.com/ankurgroup.in/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "footer_legal",
+    "label": "Footer — legal",
+    "items": [
+      {
+        "type": "custom",
+        "label": "Privacy Policy",
+        "url": "/privacy-policy/"
+      },
+      {
+        "type": "custom",
+        "label": "Terms of Service",
+        "url": "/terms-of-service/"
+      }
+    ]
+  }
+]

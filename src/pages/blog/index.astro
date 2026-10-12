@@ -1,0 +1,13 @@
+---
+import { getBlogs, getPage } from '../../lib/content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogList from '../../ui/components/BlogList.astro';
+import type { BlogPost } from '../../ui/components/BlogList.astro';
+const content = await getPage('blog');
+const postsData = await getBlogs();
+
+const posts = postsData as BlogPost[];
+---
+<BaseLayout title={content.seo.title} description={content.seo.description}>
+  <BlogList content={content} posts={posts} />
+</BaseLayout>

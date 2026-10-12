@@ -1,0 +1,43 @@
+---
+interface UseCaseItem { title: string; description: string }
+interface UseCaseGroup { heading: string; items: UseCaseItem[] }
+interface Props {
+  section: { heading: string; groups: UseCaseGroup[] };
+  si: number;
+}
+const { section, si } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {section.groups.map((group, gi) => (
+    <div
+      class="reveal rounded-lg bg-white ring-1 ring-indian-red/[0.08] p-5 lg:p-6"
+      style={`transition-delay: ${gi * 80}ms`}
+    >
+      <span
+        class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-indian-red/45 mb-4"
+        data-cms-field={`detail.sections[${si}].groups[${gi}].heading`}
+      >
+        {group.heading}
+      </span>
+      <div class="space-y-4">
+        {group.items.map((item, ii) => (
+          <div>
+            <p
+              class="font-display font-medium text-sm lg:text-base text-indian-red"
+              data-cms-field={`detail.sections[${si}].groups[${gi}].items[${ii}].title`}
+            >
+              {item.title}
+            </p>
+            <p
+              class="mt-1 text-sm leading-relaxed text-indian-red/70"
+              data-cms-field={`detail.sections[${si}].groups[${gi}].items[${ii}].description`}
+            >
+              {item.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>

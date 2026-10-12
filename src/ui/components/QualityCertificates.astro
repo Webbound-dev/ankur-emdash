@@ -1,0 +1,244 @@
+---
+interface ProcessStep { title: string; description: string }
+interface CertItem {
+  name: string;
+  issuer: string;
+  description: string;
+  logo?: { src: string; alt: string };
+  certificateUrl?: string;
+}
+interface AwardItem { title: string; year: string; description: string; image?: { src: string; alt: string } }
+
+interface Props {
+  content: {
+    hero: { title: string; intro: string };
+    process: { heading: string; subheading: string; steps: ProcessStep[] };
+    certifications: { heading: string; subheading: string; items: CertItem[] };
+    awards: { heading: string; items: AwardItem[] };
+  };
+}
+
+const { content } = Astro.props;
+const { hero, process, certifications, awards } = content;
+
+// Petal positions for the seal/medallion icon's scalloped rosette border.
+const petals = Array.from({ length: 12 }, (_, i) => {
+  const angle = (i / 12) * Math.PI * 2;
+  return { cx: 32 + Math.cos(angle) * 21, cy: 32 + Math.sin(angle) * 21 };
+});
+---
+
+<main class="bg-silent-white">
+  <!-- Hero -->
+  <section class="max-w-[900px] mx-auto px-6 lg:px-10 pt-16 lg:pt-24 pb-10 lg:pb-14 text-center">
+    <h1 class="reveal font-display font-medium text-4xl lg:text-6xl text-indian-red leading-tight" data-cms-field="hero.title">
+      {hero.title}
+    </h1>
+    <p class="reveal mt-6 text-base lg:text-lg leading-relaxed text-indian-red/75 max-w-[680px] mx-auto" style="transition-delay: 80ms" data-cms-field="hero.intro">
+      {hero.intro}
+    </p>
+  </section>
+
+  <!-- Manufacturing Process — step by step, not a single line -->
+  <section id="manufacturing-process" class="max-w-[900px] mx-auto px-6 lg:px-10 py-10 lg:py-16 scroll-mt-24">
+    <span class="reveal text-[10px] font-semibold uppercase tracking-widest text-indian-red/40" data-cms-field="process.heading">
+      {process.heading}
+    </span>
+    <h2 class="reveal mt-2 font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="process.subheading">
+      {process.subheading}
+    </h2>
+
+    <div class="relative mt-10">
+      <div class="absolute left-[19px] top-2 bottom-2 w-px bg-indian-red/15" />
+      <div class="space-y-8">
+        {process.steps.map((step, si) => (
+          <div class="reveal relative flex gap-5" style={`transition-delay: ${si * 70}ms`}>
+            <div class="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indian-red font-display text-sm font-medium text-silent-white">
+              {si + 1}
+            </div>
+            <div class="pt-1.5">
+              <p class="font-display font-medium text-lg text-indian-red" data-cms-field={`process.steps[${si}].title`}>
+                {step.title}
+              </p>
+              <p class="mt-1.5 text-sm leading-relaxed text-indian-red/70" data-cms-field={`process.steps[${si}].description`}>
+                {step.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Explained — plain-language explanations, not just logos -->
+  <section id="certifications" class="bg-indian-red/[0.035] py-10 lg:py-16 scroll-mt-24">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-10">
+      <span class="reveal text-[10px] font-semibold uppercase tracking-widest text-indian-red/40" data-cms-field="certifications.heading">
+        {certifications.heading}
+      </span>
+      <h2 class="reveal mt-2 font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="certifications.subheading">
+        {certifications.subheading}
+      </h2>
+
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+        {certifications.items.map((cert, ci) => (
+          <div
+            class={`reveal group rounded-2xl bg-white p-6 lg:p-7 flex gap-5 ring-1 ring-indian-red/[0.08] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-indian-red/10 hover:ring-indian-red/20 ${
+              certifications.items.length % 2 === 1 && ci === certifications.items.length - 1 ? 'md:col-span-2' : ''
+            }`}
+            style={`transition-delay: ${ci * 60}ms`}
+          >
+            {cert.logo ? (
+              // h-14 with w-auto (not a fixed h-14 w-14 square) — several of
+              // these logos are wide "icon + wordmark" lockups (200x80) next
+              // to near-square marks (ISO, BIS). Forcing every logo into the
+              // same square box shrank the wide ones down to a thin sliver
+              // to preserve their aspect ratio; a fixed height with free
+              // width (capped so no logo dominates the card) keeps all of
+              // them the same visual weight instead.
+              <img
+                src={cert.logo.src}
+                alt={cert.logo.alt}
+                data-cms-image={`certifications.items[${ci}].logo.src`}
+                class="h-14 w-auto max-w-[96px] shrink-0 object-contain"
+              />
+            ) : (
+              <svg viewBox="0 0 64 88" class="h-14 w-14 shrink-0 text-indian-red">
+                <path d="M22 46 L14 84 L32 74 L32 46 Z" fill="currentColor" opacity="0.85" />
+                <path d="M42 46 L50 84 L32 74 L32 46 Z" fill="currentColor" opacity="0.65" />
+                {petals.map((p) => (
+                  <circle cx={p.cx} cy={p.cy} r="9" fill="currentColor" opacity="0.9" />
+                ))}
+                <circle cx="32" cy="32" r="18" fill="currentColor" />
+                <path d="M24 32 L29 38 L40 25" fill="none" stroke="#FFF6EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            )}
+            <div>
+              <p class="font-display font-medium text-lg text-indian-red" data-cms-field={`certifications.items[${ci}].name`}>
+                {cert.name}
+              </p>
+              <p class="mt-0.5 text-[11px] font-semibold uppercase tracking-wide text-indian-red/40" data-cms-field={`certifications.items[${ci}].issuer`}>
+                {cert.issuer}
+              </p>
+              <p class="mt-2.5 text-sm leading-relaxed text-indian-red/70" data-cms-field={`certifications.items[${ci}].description`}>
+                {cert.description}
+              </p>
+              {cert.certificateUrl && (
+                <a
+                  href={cert.certificateUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cms-link={`certifications.items[${ci}].certificateUrl`}
+                  class="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-indian-red hover:opacity-75 transition-opacity"
+                >
+                  View Certificate
+                  <span aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Awards and Recognition -->
+  <section id="awards" class="max-w-[1100px] mx-auto px-6 lg:px-10 py-10 lg:py-20 scroll-mt-24">
+    <h2 class="reveal font-display font-medium text-2xl lg:text-3xl text-indian-red mb-8" data-cms-field="awards.heading">
+      {awards.heading}
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {awards.items.map((award, ai) => (
+        <div
+          class="reveal group rounded-2xl bg-white/70 ring-1 ring-indian-red/[0.08] overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1.5 hover:bg-white hover:shadow-xl hover:shadow-indian-red/10 hover:ring-indian-red/20"
+          style={`transition-delay: ${ai * 70}ms`}
+        >
+          <div class="aspect-[4/3] flex items-center justify-center bg-indian-red/[0.04] p-4">
+            {award.image ? (
+              <img
+                src={award.image.src}
+                alt={award.image.alt}
+                data-cms-image={`awards.items[${ai}].image.src`}
+                class="max-h-full max-w-full object-contain rounded-md shadow-sm ring-1 ring-black/5"
+              />
+            ) : (
+              <svg viewBox="0 0 64 64" class="h-14 w-14 text-indian-red">
+                <path
+                  d="M32 6c-9 4-16 4-16 4 0 16 4 26 16 32 12-6 16-16 16-32 0 0-7 0-16-4Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linejoin="round"
+                />
+                <path d="M24 25 L29 31 L40 17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            )}
+          </div>
+          <div class="p-6 lg:p-7">
+            <p class="font-display font-medium text-lg text-indian-red" data-cms-field={`awards.items[${ai}].title`}>
+              {award.title}
+            </p>
+            {award.year && (
+              <p class="mt-0.5 text-[11px] font-semibold uppercase tracking-wide text-indian-red/40" data-cms-field={`awards.items[${ai}].year`}>
+                {award.year}
+              </p>
+            )}
+            <p class="mt-2 text-sm leading-relaxed text-indian-red/70" data-cms-field={`awards.items[${ai}].description`}>
+              {award.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</main>
+
+<style>
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // initReveal runs on `astro:page-load` (fires on initial load AND every
+  // client-side transition) rather than as plain top-level code — this
+  // <script> is a JS module, and modules only ever execute once per browser
+  // session, so a plain top-level run left every `.reveal` element on this
+  // page permanently invisible on any revisit later in the same session.
+  // revealObserver is disconnected at the top of each run so a revisit
+  // replaces it instead of layering a second observer on top.
+  let revealObserver: IntersectionObserver | null = null;
+
+  function initReveal(): void {
+    revealObserver?.disconnect();
+    const targets = document.querySelectorAll<HTMLElement>('.reveal');
+    if (!targets.length) return;
+    revealObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            revealObserver?.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+    );
+    targets.forEach((el) => revealObserver?.observe(el));
+  }
+
+  document.addEventListener('astro:page-load', initReveal);
+</script>

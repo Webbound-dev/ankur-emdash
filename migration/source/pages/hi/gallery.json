@@ -1,0 +1,122 @@
+{
+  "seo": {
+    "title": "गैलरी | Ankur",
+    "description": "Ankur Salt के अंदर झलक लें — गुजरात के तट पर हमारी सुविधाएं और उनसे हर दिन निकलने वाले उत्पाद।",
+    "image": "/images/about/hero.jpg"
+  },
+  "hero": {
+    "title": "गैलरी",
+    "intro": "Ankur Salt के अंदर झलक लें: गुजरात के तट पर हमारी सुविधाएं और उनसे हर दिन निकलने वाले उत्पाद।"
+  },
+  "categories": {
+    "items": [
+      {
+        "id": "all",
+        "label": "सभी"
+      },
+      {
+        "id": "plants",
+        "label": "कारखाना और संयंत्र"
+      },
+      {
+        "id": "products",
+        "label": "उत्पाद फोटोग्राफी"
+      }
+    ]
+  },
+  "images": {
+    "items": [
+      {
+        "category": "plants",
+        "src": "/images/factory/salt-dispatch-loading.jpeg",
+        "caption": "प्रेषण के लिए परिशोधित नमक की लोडिंग, Ankur Chemfood Ltd"
+      },
+      {
+        "category": "plants",
+        "src": "/images/factory/warehouse-stacked-bags.jpeg",
+        "caption": "प्रेषण के लिए तैयार पैक किए गए नमक के बैग"
+      },
+      {
+        "category": "plants",
+        "src": "/images/factory/fbd-dryer-unit.jpeg",
+        "caption": "उत्पादन लाइन पर फ्लुइडाइज्ड बेड ड्रायर"
+      },
+      {
+        "category": "plants",
+        "src": "/images/factory/packing-line.jpeg",
+        "caption": "नमक प्रसंस्करण और पैकिंग लाइन, Gandhidham संयंत्र"
+      },
+      {
+        "category": "plants",
+        "src": "/images/factory/blower-systems.jpeg",
+        "caption": "ब्लोअर और धूल संग्रहण प्रणाली, प्रसंस्करण संयंत्र"
+      },
+      {
+        "category": "plants",
+        "src": "/images/factory/cyclone-separator.jpeg",
+        "caption": "साइक्लोन सेपरेटर यूनिट, नमक परिशोधन संयंत्र"
+      },
+      {
+        "category": "products",
+        "src": "/images/products/free-flow-iodised.webp",
+        "caption": "Ankur Salt: परिशोधित मुक्त प्रवाह आयोडीकृत नमक"
+      },
+      {
+        "category": "products",
+        "src": "/images/products/gold-salt.webp",
+        "caption": "Ankur Gold: प्रीमियम परिशोधित आयोडीकृत नमक"
+      },
+      {
+        "category": "products",
+        "src": "/images/products/classic-salt.webp",
+        "caption": "Ankur Classic: प्रीमियम परिशोधित आयोडीकृत नमक स्पाउट पैक में"
+      },
+      {
+        "category": "products",
+        "src": "/images/products/dr-salt.webp",
+        "caption": "Dr. Salt: 15% कम सोडियम नमक"
+      },
+      {
+        "category": "products",
+        "src": "/images/products/dfs.webp",
+        "caption": "Salt Plus: आयरन और आयोडीन के साथ दोहरा गढ़ा हुआ नमक"
+      },
+      {
+        "category": "products",
+        "src": "/images/products/rock-salt-pack.webp",
+        "caption": "Ankur Rock Salt: प्राकृतिक हिमालयन गुलाबी नमक"
+      },
+      {
+        "category": "products",
+        "src": "/images/products/crystal-salt.webp",
+        "caption": "Crystal Salt: परिशोधित आयोडीकृत क्रिस्टल नमक"
+      }
+    ]
+  },
+  "videos": {
+    "heading": "सेलिब्रिटी द्वारा अनुमोदित, भारत द्वारा विश्वसनीय",
+    "subheading": "करीना कपूर खान और शिल्पा शेट्टी के साथ: देखें कि भारत जिन नामों पर विश्वास करता है, वे Ankur Salt पर क्यों विश्वास करते हैं।",
+    "items": [
+      {
+        "title": "Ankur Namak.. Asli Namak",
+        "url": "https://www.youtube.com/watch?v=bXmBjWVy420"
+      },
+      {
+        "title": "Ankur Salt TVC featuring Kareena Kapoor Khan",
+        "url": "https://www.youtube.com/watch?v=AXJtvH5agl8"
+      },
+      {
+        "title": "Ankur Namak with Shilpa Shetty",
+        "url": "https://www.youtube.com/watch?v=h6cOOsEMcVo"
+      },
+      {
+        "title": "Ankur Salt",
+        "url": "https://www.youtube.com/watch?v=Q0Lu_AtjkPM"
+      }
+    ]
+  },
+  "quote": {
+    "text": "हम सिर्फ नमक नहीं बनाते। हम नमक को सही तरीके से बनाते हैं।",
+    "attribution": "Ankur Salt"
+  }
+}

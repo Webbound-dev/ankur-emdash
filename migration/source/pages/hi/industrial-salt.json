@@ -1,0 +1,115 @@
+{
+  "seo": {
+    "title": "औद्योगिक नमक | Ankur",
+    "description": "Ankur Chemfood से औद्योगिक-ग्रेड नमक: ग्रेड, विशिष्टताएँ, सेवित उद्योग, और बल्क ऑर्डर पूछताछ।"
+  },
+  "hero": {
+    "title": "औद्योगिक नमक",
+    "intro": "खुदरा दुकान के बाहर, Ankur Salt निर्माताओं को औद्योगिक-ग्रेड नमक की आपूर्ति करता है जिन्हें सुसंगत शुद्धता और नियंत्रित कठोरता की आवश्यकता होती है, बैच के बाद बैच, Free Flow से लेकर हमारे सर्वोत्तम Low Hardness ग्रेड तक।"
+  },
+  "trustedBy": {
+    "heading": "हमारे पर विश्वास करने वाले",
+    "items": [
+      {
+        "name": "Balaji",
+        "logo": "/images/clients/balaji.svg"
+      },
+      {
+        "name": "Lay's",
+        "logo": "/images/clients/lays.svg"
+      },
+      {
+        "name": "Nestle",
+        "logo": "/images/clients/nestle.svg"
+      }
+    ]
+  },
+  "grades": {
+    "heading": "ग्रेड और विशिष्टताएँ",
+    "subheading": "प्रत्येक ग्रेड को एक ही विशिष्टता के विरुद्ध परीक्षण किया जाता है, प्रत्येक बैच।",
+    "columns": {
+      "grade": "ग्रेड",
+      "nacl": "NaCl शुद्धता",
+      "hardness": "कठोरता",
+      "moisture": "नमी"
+    },
+    "items": [
+      { "tier": "Standard", "name": "Free Flow", "nacl": "≥ 99%", "hardness": "Standard", "moisture": "≤ 0.5%" },
+      { "tier": "Standard", "name": "30 Mesh (500 Micron)", "nacl": "≥ 99%", "hardness": "Standard", "moisture": "≤ 0.5%" },
+      { "tier": "Standard", "name": "40 Mesh (425 Micron)", "nacl": "≥ 99%", "hardness": "Standard", "moisture": "≤ 0.5%" },
+      { "tier": "Standard", "name": "Medium 1st", "nacl": "≥ 99%", "hardness": "Standard", "moisture": "≤ 1%" },
+      { "tier": "Standard", "name": "Medium 2nd", "nacl": "≥ 98%", "hardness": "Standard", "moisture": "≤ 1%" },
+      { "tier": "Low Hardness Series", "name": "Low Hardness 200 PPM", "nacl": "≥ 99.4%", "hardness": "≤ 200 ppm", "moisture": "≤ 0.5%" },
+      { "tier": "Low Hardness Series", "name": "Low Hardness 150 PPM", "nacl": "≥ 99.5%", "hardness": "≤ 150 ppm", "moisture": "≤ 0.3%" },
+      { "tier": "Low Hardness Series", "name": "Low Hardness 120 PPM", "nacl": "≥ 99.55%", "hardness": "≤ 120 ppm", "moisture": "≤ 0.25%" },
+      { "tier": "Low Hardness Series", "name": "Low Hardness 80 PPM", "nacl": "≥ 99.6%", "hardness": "≤ 80 ppm", "moisture": "≤ 0.25%" },
+      { "tier": "Low Hardness Series", "name": "Low Hardness 50 PPM", "nacl": "≥ 99.65%", "hardness": "≤ 50 ppm", "moisture": "≤ 0.25%" },
+      { "tier": "Specialty", "name": "Super Fine Salt", "nacl": "≥ 98.5%", "hardness": "Standard", "moisture": "≤ 0.8%" },
+      { "tier": "Specialty", "name": "Microfine Salt", "nacl": "≥ 98%", "hardness": "Standard", "moisture": "≤ 0.7%" }
+    ]
+  },
+  "industries": {
+    "heading": "सेवित उद्योग",
+    "items": [
+      {
+        "name": "एफएमसीजी",
+        "useCase": "खाद्य प्रसंस्करण, व्यक्तिगत देखभाल, और घरेलू उत्पाद निर्माण में उपयोग किया जाता है, जहां शुद्धता और घुलनशीलता की निरंतरता मायने रखती है।"
+      },
+      {
+        "name": "वस्त्र और रंग",
+        "useCase": "कपड़े की रंगाई, छपाई और फिनिशिंग के दौरान रंगों को स्थिर करता है और रंग आउटपुट को स्थिर करता है।"
+      },
+      {
+        "name": "जल उपचार",
+        "useCase": "नरम करने के पौधों और अपशिष्ट जल उपचार में आयन विनिमय राल को पुनर्जन्म देता है।"
+      },
+      {
+        "name": "पेट्रोलियम योज्य",
+        "useCase": "ड्रिलिंग तरल पदार्थ और पेट्रोलियम योज्य योगों में एक आधार इनपुट के रूप में उपयोग किया जाता है।"
+      },
+      {
+        "name": "रसायन और मध्यवर्ती",
+        "useCase": "क्लोर-क्षार और अन्य रासायनिक निर्माण प्रक्रियाओं के लिए एक प्रमुख कच्चा माल, जिसमें कास्टिक सोडा, क्लोरीन, और सोडा ऐश उत्पादन शामिल है।"
+      },
+      {
+        "name": "दवा",
+        "useCase": "फार्मास्यूटिकल-ग्रेड फॉर्मूलेशन की उच्च शुद्धता, कम कठोरता आवश्यकताओं को पूरा करता है।"
+      }
+    ]
+  },
+  "rfq": {
+    "heading": "बल्क कोट के लिए अनुरोध करें",
+    "subheading": "औद्योगिक और B2B ऑर्डर के लिए, हमें अपनी आवश्यकता बताएं, और हमारी टीम आपको एक कोट के साथ वापस आएगी। सामान्य प्रश्नों के लिए, इसके बजाय हमारे संपर्क पृष्ठ का उपयोग करें।"
+  },
+  "dataSheets": {
+    "heading": "तकनीकी डेटा शीट",
+    "subheading": "एक दस्तावेज़, हर ग्रेड।",
+    "title": "औद्योगिक नमक विशिष्टता पत्रक",
+    "description": "हमारे द्वारा निर्मित हर ग्रेड के लिए NaCl शुद्धता, कठोरता और नमी की विशिष्टताएँ, Free Flow से Super Fine Salt तक, एक ही PDF में।",
+    "file": "/documents/spec-sheets/5a0533fd9008aa1325b9dbe15cfd3841.pdf",
+    "ctaLabel": "स्पेक शीट डाउनलोड करें",
+    "gate": {
+      "heading": "डाउनलोड करने के लिए सत्यापित करें",
+      "subheading": "नीचे अपना विवरण दर्ज करें — डाउनलोड शुरू होने से पहले हम आपको एक सत्यापन कोड ईमेल करेंगे।",
+      "fields": {
+        "name": "पूरा नाम",
+        "company": "कंपनी का नाम",
+        "email": "कार्य ईमेल"
+      },
+      "placeholders": {
+        "name": "आपका नाम",
+        "company": "आपकी कंपनी",
+        "email": "you@company.com"
+      },
+      "sendOtpLabel": "कोड भेजें",
+      "resendLabel": "पुनः भेजें",
+      "verifyLabel": "सत्यापित करें",
+      "submitLabel": "सत्यापित करें और डाउनलोड करें",
+      "successMessage": "सत्यापित — आपका डाउनलोड स्वचालित रूप से शुरू हो जाएगा।"
+    }
+  },
+  "quote": {
+    "text": "Bharose ki shuruaat: the beginning of trust.",
+    "attribution": "Ankur Salt, since 1994"
+  }
+}

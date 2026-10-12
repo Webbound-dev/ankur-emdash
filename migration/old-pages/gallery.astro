@@ -1,0 +1,22 @@
+---
+import { existsSync, readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Gallery from '../../ui-components/components/Gallery.astro';
+import content from '../../content/pages/gallery.json';
+
+// Live Instagram posts (written by scripts/fetch-instagram.mjs during
+// predev/prebuild) override the CMS-authored static posts below when
+// present — read via fs (not a static import) since this file only exists
+// when INSTAGRAM_ACCESS_TOKEN/INSTAGRAM_BUSINESS_ACCOUNT_ID were configured
+// for the build. Falls back to the static posts otherwise.
+const feedPath = fileURLToPath(new URL('../../content/instagram-feed.json', import.meta.url));
+const liveInstagramPosts = existsSync(feedPath) ? JSON.parse(readFileSync(feedPath, 'utf-8')).posts : null;
+
+const galleryContent = liveInstagramPosts?.length
+  ? { ...content, instagram: { ...content.instagram, posts: liveInstagramPosts } }
+  : content;
+---
+<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image}>
+  <Gallery content={galleryContent} />
+</BaseLayout>

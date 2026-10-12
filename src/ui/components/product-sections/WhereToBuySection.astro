@@ -1,0 +1,31 @@
+---
+interface Props {
+  section: { heading: string; body: string; cta: { label: string; href: string } };
+  si: number;
+}
+const { section, si } = Astro.props;
+---
+
+<!-- Dark accent card on the light page — same faint texture treatment as
+     the homepage's dark bands, kept as a single contained card (not a
+     full-bleed section) so it never collides with the Footer's own
+     bg-indian-red newsletter band directly below it. -->
+<div class="reveal relative overflow-hidden rounded-lg bg-indian-red p-6 lg:p-8 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 justify-between" style="transition-delay: 70ms">
+  <div
+    class="absolute inset-0 opacity-[0.06]"
+    style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+    aria-hidden="true"
+  />
+
+  <p class="relative text-sm lg:text-base leading-relaxed text-silent-white/85 max-w-[480px]" data-cms-field={`detail.sections[${si}].body`}>
+    {section.body}
+  </p>
+  <a
+    href={section.cta.href}
+    data-cms-link={`detail.sections[${si}].cta.href`}
+    class="relative shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md bg-silent-white text-indian-red font-sans text-sm font-medium transition-all duration-200 hover:opacity-90 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-0.5"
+  >
+    <span data-cms-field={`detail.sections[${si}].cta.label`}>{section.cta.label}</span>
+    <span aria-hidden="true">&rarr;</span>
+  </a>
+</div>

@@ -1,0 +1,242 @@
+---
+import GlobalMarkets from './GlobalMarkets';
+import ExportInquiryForm from './ExportInquiryForm';
+import type { ExportInquiryContent } from './ExportInquiryForm';
+
+interface Region { name: string; countries: string[] }
+interface Certification { name: string; issuer: string; description: string; logo: { src: string; alt: string } }
+interface Port { name: string; authority: string; description: string }
+interface Advantage { value: string; label: string }
+
+interface Props {
+  content: {
+    hero: { title: string; intro: string };
+    globalMarkets: { heading: string; subheading: string; stat: { countries: number; regions: number }; regions: Region[] };
+    certifications: { heading: string; subheading: string; items: Certification[] };
+    logistics: { heading: string; subheading: string; ports: Port[]; advantages: Advantage[] };
+    inquiry: ExportInquiryContent;
+  };
+}
+
+const { content } = Astro.props;
+const { hero, globalMarkets, certifications, logistics, inquiry } = content;
+
+const portIcons: Record<string, string> = {
+  'Kandla Port': 'M32 6v28 M20 20h24 M10 58c6 4 12 4 18 0s12-4 18 0s12 4 18 0 M14 34l18 8 18-8v14l-18 8-18-8Z',
+  'Mundra Port': 'M14 30h36l-4 20H18Z M32 30V10 M24 16h16 M8 58c6 4 12 4 18 0s12-4 18 0s12 4 18 0',
+};
+---
+
+<main class="bg-silent-white">
+  <!-- Hero — deep red, same faint pinstripe texture as Industrial Salt, no image -->
+  <section class="relative overflow-hidden bg-indian-red py-16 lg:py-24 text-center">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative max-w-[900px] mx-auto px-6 lg:px-10">
+      <h1 class="reveal font-display font-medium text-4xl lg:text-6xl text-silent-white leading-tight" data-cms-field="hero.title">
+        {hero.title}
+      </h1>
+      <p class="reveal mt-6 text-base lg:text-lg leading-relaxed text-silent-white/75 max-w-[680px] mx-auto" style="transition-delay: 80ms" data-cms-field="hero.intro">
+        {hero.intro}
+      </p>
+    </div>
+  </section>
+
+  <!-- Global Markets — region-tabbed directory, its own React island (needs
+       tab state); light band, same pinstripe treatment as the rest of the
+       page lives inside the component itself. -->
+  <GlobalMarkets client:load content={globalMarkets} />
+
+  <!-- Export Certifications — dark red + texture, wavy top/bottom, white cards on top -->
+  <section id="export-certifications" class="relative overflow-hidden bg-indian-red pb-16 pt-16 lg:pb-20 lg:pt-20 scroll-mt-24">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+
+    <svg class="absolute top-0 inset-x-0 z-10 w-full h-14 sm:h-20 lg:h-28 text-silent-white" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        d="M0,70 C120,130 240,10 360,70 C480,130 600,10 720,70 C840,130 960,10 1080,70 C1200,130 1320,10 1440,70 L1440,0 L0,0 Z"
+        fill="currentColor"
+      />
+    </svg>
+
+    <div class="relative max-w-[1100px] mx-auto px-6 lg:px-10">
+      <h2 class="reveal font-display font-medium text-2xl lg:text-3xl text-silent-white" data-cms-field="certifications.heading">
+        {certifications.heading}
+      </h2>
+      <p class="reveal mt-2 text-sm leading-relaxed text-silent-white/70 max-w-[600px]" style="transition-delay: 60ms" data-cms-field="certifications.subheading">
+        {certifications.subheading}
+      </p>
+
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {certifications.items.map((cert, ci) => (
+          <div
+            class="cert-card reveal group relative overflow-hidden rounded-2xl bg-white p-6 ring-1 ring-indian-red/[0.08] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-indian-red/10 hover:ring-indian-red/20"
+            style={`transition-delay: ${ci * 60}ms`}
+          >
+            <div class="cert-logo relative flex h-12 w-auto max-w-[160px] items-center" data-cms-image={`certifications.items[${ci}].logo.src`}>
+              <img src={cert.logo.src} alt={cert.logo.alt} class="h-full w-auto object-contain object-left" />
+            </div>
+            <p class="relative mt-4 font-display font-medium text-lg text-indian-red" data-cms-field={`certifications.items[${ci}].name`}>
+              {cert.name}
+            </p>
+            <p class="relative mt-0.5 text-xs font-semibold uppercase tracking-wide text-indian-red/40" data-cms-field={`certifications.items[${ci}].issuer`}>
+              {cert.issuer}
+            </p>
+            <p class="relative mt-2 text-sm leading-relaxed text-indian-red/70" data-cms-field={`certifications.items[${ci}].description`}>
+              {cert.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <svg class="absolute bottom-0 inset-x-0 z-10 w-full h-14 sm:h-20 lg:h-28 text-silent-white" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        d="M0,130 C120,70 240,190 360,130 C480,70 600,190 720,130 C840,70 960,190 1080,130 C1200,70 1320,190 1440,130 L1440,200 L0,200 Z"
+        fill="currentColor"
+      />
+    </svg>
+  </section>
+
+  <!-- Port & Logistics Advantage — light band, same pinstripe treatment as Global Markets -->
+  <section id="logistics" class="relative max-w-[1100px] mx-auto px-6 lg:px-10 py-14 lg:py-20 scroll-mt-24">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05] [mask-image:linear-gradient(to_bottom,black,transparent)]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative">
+      <div class="max-w-[640px]">
+        <h2 class="reveal font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="logistics.heading">
+          {logistics.heading}
+        </h2>
+        <p class="reveal mt-2 text-sm leading-relaxed text-indian-red/70" style="transition-delay: 60ms" data-cms-field="logistics.subheading">
+          {logistics.subheading}
+        </p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {logistics.ports.map((port, pi) => (
+          <div
+            class="port-card reveal group relative overflow-hidden rounded-2xl bg-white p-6 ring-1 ring-indian-red/[0.08] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg hover:shadow-indian-red/10 hover:ring-indian-red/20"
+            style={`transition-delay: ${pi * 70}ms`}
+          >
+            <svg viewBox="0 0 64 64" class="port-icon relative h-9 w-9 text-indian-red">
+              <path d={portIcons[port.name] ?? ''} fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <p class="relative mt-4 font-display font-medium text-lg text-indian-red" data-cms-field={`logistics.ports[${pi}].name`}>
+              {port.name}
+            </p>
+            <p class="relative mt-0.5 text-xs font-semibold uppercase tracking-wide text-indian-red/40" data-cms-field={`logistics.ports[${pi}].authority`}>
+              {port.authority}
+            </p>
+            <p class="relative mt-2 text-sm leading-relaxed text-indian-red/70" data-cms-field={`logistics.ports[${pi}].description`}>
+              {port.description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div class="reveal mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 rounded-2xl bg-indian-red/[0.04] p-6 ring-1 ring-indian-red/[0.08]" style="transition-delay: 160ms">
+        {logistics.advantages.map((adv, ai) => (
+          <div class="text-center sm:text-left sm:border-l sm:first:border-l-0 sm:border-indian-red/10 sm:pl-6 sm:first:pl-0">
+            <p class="font-display font-semibold text-2xl text-indian-red" data-cms-field={`logistics.advantages[${ai}].value`}>
+              {adv.value}
+            </p>
+            <p class="mt-0.5 text-xs font-medium uppercase tracking-wide text-indian-red/50" data-cms-field={`logistics.advantages[${ai}].label`}>
+              {adv.label}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Export Inquiry — real embedded form, same pattern (radiant-free light
+       section, sticky benefits column + form card) as BecomeDistributorForm/
+       ConnectWithDistributorForm on the network page, including OTP-verified
+       email before submission is allowed. -->
+  <ExportInquiryForm client:load content={inquiry} />
+</main>
+
+<style>
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+
+  // initExportPage runs on `astro:page-load` (fires on initial load AND
+  // every client-side transition) rather than as plain top-level code —
+  // this <script> is a JS module, and modules only ever execute once per
+  // browser session, so a plain top-level run left every `.reveal` element
+  // permanently invisible (and the icon hover effects never wired up) on
+  // any revisit later in the same session. revealObserver is disconnected
+  // at the top of each run so a revisit replaces it instead of layering a
+  // second observer on top; hover listeners don't need the same treatment
+  // since Astro's transition replaces those DOM nodes outright, so stale
+  // listeners on the old, now-detached cards are just garbage collected.
+  let revealObserver: IntersectionObserver | null = null;
+
+  function initExportPage(): void {
+    revealObserver?.disconnect();
+
+    const targets = document.querySelectorAll<HTMLElement>('.reveal');
+    if (targets.length) {
+      revealObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              revealObserver?.unobserve(entry.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+      );
+      targets.forEach((el) => revealObserver?.observe(el));
+    }
+
+    // Port card icons give a little bounce-and-tilt on hover, same idiom as
+    // Industrial Salt — works well for a simple line-drawn glyph. Certification
+    // logos are real wordmarks/images, and tilting those read as broken rather
+    // than playful, so those cards only get the plain lift + shadow already on
+    // .cert-card.
+    function wireIconHover(cardSelector: string, iconSelector: string) {
+      document.querySelectorAll<HTMLElement>(cardSelector).forEach((card) => {
+        const icon = card.querySelector<HTMLElement>(iconSelector);
+        if (!icon) return;
+        card.addEventListener('mouseenter', () => {
+          gsap.to(icon, { rotate: -8, scale: 1.15, duration: 0.35, ease: 'back.out(2.5)' });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(icon, { rotate: 0, scale: 1, duration: 0.3, ease: 'power2.out' });
+        });
+      });
+    }
+    wireIconHover('.port-card', '.port-icon');
+  }
+
+  document.addEventListener('astro:page-load', initExportPage);
+</script>

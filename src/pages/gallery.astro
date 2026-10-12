@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Gallery from '../ui/components/Gallery.astro';
+import { getPage } from '../lib/content';
+
+const content = await getPage('gallery');
+// Live Instagram posts used to be baked in at build time (fetch-instagram.mjs).
+// Until that moves to a runtime fetch, the CMS-authored static posts render.
+---
+<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image}>
+  <Gallery content={content} />
+</BaseLayout>

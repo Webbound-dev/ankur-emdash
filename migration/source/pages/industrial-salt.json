@@ -1,0 +1,139 @@
+{
+  "seo": {
+    "title": "Industrial Salt | Ankur",
+    "description": "Industrial-grade salt from Ankur Chemfood: grades, specifications, industries served, and bulk order enquiries."
+  },
+  "hero": {
+    "title": "Industrial Salt",
+    "intro": "Beyond the retail shelf, Ankur Salt supplies industrial grade salt to manufacturers who need consistent purity and controlled hardness, batch after batch, from Free Flow through our finest Low Hardness grades."
+  },
+  "grades": {
+    "heading": "Grades and Specifications",
+    "subheading": "Every grade is tested against the same specification, every batch.",
+    "items": [
+      {
+        "tier": "Standard",
+        "name": "Free Flow",
+        "hardness": "Standard"
+      },
+      {
+        "tier": "Standard",
+        "name": "30 Mesh (500 Micron)",
+        "hardness": "Standard"
+      },
+      {
+        "tier": "Standard",
+        "name": "40 Mesh (425 Micron)",
+        "hardness": "Standard"
+      },
+      {
+        "tier": "Standard",
+        "name": "Medium 1st",
+        "hardness": "Standard"
+      },
+      {
+        "tier": "Standard",
+        "name": "Medium 2nd",
+        "hardness": "Standard"
+      },
+      {
+        "tier": "Low Hardness Series",
+        "name": "Low Hardness 200 PPM",
+        "hardness": "≤ 200 ppm"
+      },
+      {
+        "tier": "Low Hardness Series",
+        "name": "Low Hardness 150 PPM",
+        "hardness": "≤ 150 ppm"
+      },
+      {
+        "tier": "Low Hardness Series",
+        "name": "Low Hardness 120 PPM",
+        "hardness": "≤ 120 ppm"
+      },
+      {
+        "tier": "Low Hardness Series",
+        "name": "Low Hardness 80 PPM",
+        "hardness": "≤ 80 ppm"
+      },
+      {
+        "tier": "Low Hardness Series",
+        "name": "Low Hardness 50 PPM",
+        "hardness": "≤ 50 ppm"
+      },
+      {
+        "tier": "Specialty",
+        "name": "Super Fine Salt",
+        "hardness": "Standard"
+      },
+      {
+        "tier": "Specialty",
+        "name": "Microfine Salt",
+        "hardness": "Standard"
+      }
+    ]
+  },
+  "industries": {
+    "heading": "Industries Served",
+    "items": [
+      {
+        "name": "FMCG",
+        "useCase": "Used across food processing, personal care, and household product manufacturing where consistent purity and solubility matter."
+      },
+      {
+        "name": "Textiles and Dyes",
+        "useCase": "Fixes dyes and stabilises colour output during fabric dyeing, printing, and finishing."
+      },
+      {
+        "name": "Water Treatment",
+        "useCase": "Regenerates ion exchange resins in softening plants and effluent treatment."
+      },
+      {
+        "name": "Petroleum Additives",
+        "useCase": "Used as a base input in drilling fluid and petroleum additive formulations."
+      },
+      {
+        "name": "Chemicals and Intermediates",
+        "useCase": "A key raw material in chlor-alkali and other chemical manufacturing processes, including caustic soda, chlorine, and soda ash production."
+      },
+      {
+        "name": "Pharmaceuticals",
+        "useCase": "Meets the high purity, low hardness requirements of pharmaceutical grade formulations."
+      }
+    ]
+  },
+  "rfq": {
+    "heading": "Request a Bulk Quote",
+    "subheading": "For industrial and B2B orders, tell us your requirement, and our team will get back to you with a quote. For general questions, use our Contact page instead."
+  },
+  "dataSheets": {
+    "heading": "Technical Data Sheet",
+    "subheading": "One document, every grade.",
+    "title": "Industrial Salt Specification Sheet",
+    "description": "NaCl purity, hardness and moisture specs for every grade we manufacture, Free Flow through Super Fine Salt, in a single PDF.",
+    "file": "/documents/spec-sheets/5a0533fd9008aa1325b9dbe15cfd3841.pdf",
+    "ctaLabel": "Download Spec Sheet",
+    "gate": {
+      "heading": "Verify to Download",
+      "subheading": "Enter your details below — we'll email you a verification code before the download starts.",
+      "fields": {
+        "name": "Full Name",
+        "company": "Company Name",
+        "email": "Work Email"
+      },
+      "placeholders": {
+        "name": "Your name",
+        "company": "Your company",
+        "email": "you@company.com"
+      },
+      "sendOtpLabel": "Send Code",
+      "verifyLabel": "Verify",
+      "submitLabel": "Verify & Download",
+      "successMessage": "Verified — your download will start automatically."
+    }
+  },
+  "quote": {
+    "text": "Bharose ki shuruaat: the beginning of trust.",
+    "attribution": "Ankur Salt, since 1994"
+  }
+}

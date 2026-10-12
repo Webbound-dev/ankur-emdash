@@ -1,0 +1,6 @@
+# Legacy URLs from the old site — 301 to their equivalent new route so
+# Google reclassifies them as "Page with redirect" instead of leaving them
+# stuck as "Crawled - currently not indexed".
+/aboutus.html /about/ 301
+/contact.html /contact/ 301
+/products.html /products/ 301

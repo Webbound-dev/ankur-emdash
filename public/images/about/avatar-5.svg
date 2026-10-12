@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <pattern id="chevron5" width="24" height="12" patternUnits="userSpaceOnUse">
+      <path d="M0 12 12 0 24 12" fill="none" stroke="#ffffff" stroke-opacity="0.1" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="#B5726B"/>
+  <circle cx="100" cy="100" r="100" fill="url(#chevron5)"/>
+  <circle cx="100" cy="82" r="38" fill="#FDF0EA" fill-opacity="0.93"/>
+  <path d="M100 128c-44 0-70 26-70 62v10h140v-10c0-36-26-62-70-62Z" fill="#FDF0EA" fill-opacity="0.93"/>
+</svg>

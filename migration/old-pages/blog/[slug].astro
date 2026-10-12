@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogDetail from '../../../ui-components/components/BlogDetail.astro';
+import type { BlogPost } from '../../../ui-components/components/BlogList.astro';
+import content from '../../../content/pages/blog.json';
+import postsData from '../../../content/collections/blogs.json';
+import { buildArticleSchema } from '../../lib/structuredData';
+
+const posts = postsData as BlogPost[];
+
+export function getStaticPaths() {
+  const posts = postsData as BlogPost[];
+  return posts.map((post) => ({ params: { slug: post.slug } }));
+}
+
+const { slug } = Astro.params;
+const post = posts.find((p) => p.slug === slug);
+
+const title = post ? `${post.title} | Ankur Chemfood Ltd.` : 'Article Not Found | Ankur Chemfood Ltd.';
+const description = post?.excerpt ?? 'The requested article could not be found.';
+
+const articleSchema = post ? buildArticleSchema(post, Astro.site) : null;
+---
+<BaseLayout title={title} description={description} image={post?.image} type="article">
+  {articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}
+  <BlogDetail content={content} posts={posts} slug={slug!} />
+</BaseLayout>

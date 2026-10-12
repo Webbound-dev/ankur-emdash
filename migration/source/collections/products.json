@@ -1,0 +1,613 @@
+[
+  {
+    "slug": "ankur-salt",
+    "name": "Ankur Salt",
+    "pageTitle": "Ankur Salt | Refined Free Flow Iodised Salt",
+    "metaDescription": "Ankur Salt is India's trusted everyday iodised salt: refined, flows freely, and never clumps. Available in 1kg and 500g packs.",
+    "tag": "Iodised",
+    "image": {
+      "src": "/images/products/free-flow-iodised.webp",
+      "alt": "Ankur Salt, Refined Free Flow Iodised Salt"
+    },
+    "heroImage": {
+      "src": "/images/products/hero/ankur-salt-banner.webp",
+      "alt": "Ankur Salt pack, refined free-flow iodised salt"
+    },
+    "comparison": {
+      "iodineContent": "30 ppm (min)",
+      "sodiumLevel": "Standard",
+      "ironContent": "Not fortified",
+      "bestFor": "Everyday cooking",
+      "packFormats": "1kg, 500g"
+    },
+    "grid": {
+      "description": "Everyday iodised salt that stays fine and flows freely, never clumps.",
+      "ctaLabel": "View Details"
+    },
+    "detail": {
+      "heroTagline": "The everyday salt trusted in Indian kitchens since 1994.",
+      "heroCta": {
+        "label": "Find a Distributor",
+        "href": "#where-to-buy"
+      },
+      "heroCtaSecondary": {
+        "label": "View Specifications",
+        "href": "#specifications"
+      },
+      "sections": [
+        {
+          "id": "benefits",
+          "type": "checklist",
+          "heading": "Benefits",
+          "items": [
+            {
+              "title": "Flows Freely, Always",
+              "description": "A process that stops clumping keeps every grain loose, even in humid weather."
+            },
+            {
+              "title": "Iodised for Everyday Health",
+              "description": "Fortified with iodine to support healthy thyroid function."
+            },
+            {
+              "title": "Vacuum Evaporated Purity",
+              "description": "Refined using a vacuum evaporation process for a cleaner grain."
+            },
+            {
+              "title": "FSSAI Compliant",
+              "description": "Meets food safety standards for iodised salt sold in India."
+            }
+          ]
+        },
+        {
+          "id": "specifications",
+          "type": "specTable",
+          "heading": "Specifications",
+          "rows": [
+            {
+              "label": "Sieve (850 Micron)",
+              "value": "98% (min) passing"
+            },
+            {
+              "label": "Sodium Chloride",
+              "value": "99% (min)"
+            },
+            {
+              "label": "Moisture",
+              "value": "0.5% (max)"
+            },
+            {
+              "label": "Water Insoluble",
+              "value": "0.5% (max)"
+            },
+            {
+              "label": "Iodine Content",
+              "value": "20 ppm (min at production, or as per party requirement)"
+            }
+          ]
+        },
+        {
+          "id": "where-to-buy",
+          "type": "whereToBuy",
+          "heading": "Where to Buy",
+          "body": "Available at kirana stores, supermarkets, and leading online grocers across India.",
+          "cta": {
+            "label": "Find a Distributor",
+            "href": "/network/"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "slug": "ankur-gold",
+    "name": "Ankur Gold",
+    "pageTitle": "Ankur Gold | Premium Refined Iodised Salt",
+    "metaDescription": "Ankur Gold is a premium, extra refined grade of iodised salt for kitchens that expect more. Available in 1kg and 500g packs.",
+    "tag": "Premium",
+    "image": {
+      "src": "/images/products/gold-salt.webp",
+      "alt": "Ankur Gold, Premium Refined Iodised Salt"
+    },
+    "heroImage": {
+      "src": "/images/products/hero/gold-salt.webp",
+      "alt": "Ankur Gold pack, premium refined iodised salt"
+    },
+    "comparison": {
+      "iodineContent": "30 ppm (min)",
+      "sodiumLevel": "Standard",
+      "ironContent": "Not fortified",
+      "bestFor": "Premium everyday cooking",
+      "packFormats": "1kg"
+    },
+    "grid": {
+      "description": "A refined, premium grade of salt for the modern kitchen.",
+      "ctaLabel": "View Details"
+    },
+    "detail": {
+      "heroTagline": "A finer grade of purity, for kitchens that expect more.",
+      "heroCta": {
+        "label": "Find a Distributor",
+        "href": "#where-to-buy"
+      },
+      "heroCtaSecondary": {
+        "label": "View Specifications",
+        "href": "#specifications"
+      },
+      "sections": [
+        {
+          "id": "benefits",
+          "type": "checklist",
+          "heading": "Benefits",
+          "items": [
+            {
+              "title": "Extra Refined Grain",
+              "description": "A finer, whiter crystal for a more refined finish on every dish."
+            },
+            {
+              "title": "Iodised for Everyday Health",
+              "description": "Fortified with iodine to support healthy thyroid function."
+            },
+            {
+              "title": "Consistent Quality",
+              "description": "Every batch tested for uniform grain size and purity."
+            },
+            {
+              "title": "Locks In Freshness",
+              "description": "Sealed pouches keep the salt flowing freely from the first pinch to the last."
+            }
+          ]
+        },
+        {
+          "id": "specifications",
+          "type": "specTable",
+          "heading": "Specifications",
+          "rows": [
+            {
+              "label": "Sieve (106 Micron)",
+              "value": "100% passing"
+            },
+            {
+              "label": "Sodium Chloride",
+              "value": "98% (min)"
+            },
+            {
+              "label": "Moisture",
+              "value": "0.7% (max)"
+            },
+            {
+              "label": "Water Insoluble",
+              "value": "0.8% (max)"
+            },
+            {
+              "label": "Iodine Content",
+              "value": "20 ppm (min at production)"
+            }
+          ]
+        },
+        {
+          "id": "where-to-buy",
+          "type": "whereToBuy",
+          "heading": "Where to Buy",
+          "body": "Available at kirana stores, supermarkets, and leading online grocers across India.",
+          "cta": {
+            "label": "Find a Distributor",
+            "href": "/network/"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "slug": "dr-salt",
+    "name": "Dr. Salt",
+    "pageTitle": "Dr. Salt | 15% Low Sodium Salt for Better Heart Health",
+    "metaDescription": "Dr. Salt is Ankur's 15% low sodium range, for households who want to eat mindfully without giving up the taste of real salt.",
+    "tag": "Low Sodium",
+    "image": {
+      "src": "/images/products/dr-salt.webp",
+      "alt": "Dr. Salt, 15% Low Sodium Salt"
+    },
+    "heroImage": {
+      "src": "/images/products/hero/dr-salt.webp",
+      "alt": "Dr. Salt pack, 15% low sodium salt"
+    },
+    "comparison": {
+      "iodineContent": "30 ppm (min)",
+      "sodiumLevel": "15% Low",
+      "ironContent": "Not fortified",
+      "bestFor": "Healthier everyday cooking",
+      "packFormats": "1kg"
+    },
+    "grid": {
+      "description": "Low sodium salt for mindful eating that's kind to your heart.",
+      "ctaLabel": "View Details"
+    },
+    "detail": {
+      "heroTagline": "Made for Healthier Everyday Cooking",
+      "heroCta": {
+        "label": "Find a Distributor",
+        "href": "#where-to-buy"
+      },
+      "heroCtaSecondary": {
+        "label": "View Specifications",
+        "href": "#specifications"
+      },
+      "sections": [
+        {
+          "id": "health-benefits",
+          "type": "checklist",
+          "heading": "Health Benefits",
+          "items": [
+            {
+              "title": "15% Less Sodium",
+              "description": "A blend that reduces sodium intake without asking you to compromise on taste."
+            },
+            {
+              "title": "Supports Healthy Blood Pressure",
+              "description": "Formulated for households managing hypertension or heart health."
+            },
+            {
+              "title": "Same Real Salt Taste",
+              "description": "None of the bitter aftertaste often associated with sodium substitutes."
+            },
+            {
+              "title": "Doctor Recommended Choice",
+              "description": "Suited for anyone advised to moderate their everyday sodium intake."
+            }
+          ]
+        },
+        {
+          "id": "how-it-works",
+          "type": "narrative",
+          "heading": "How It Works",
+          "paragraphs": [
+            "Dr. Salt replaces a portion of sodium chloride with a mineral salt blend that tastes close to regular salt, so you use it exactly the way you'd use any table salt.",
+            "The result is a salt that measurably lowers your sodium intake per pinch, without changing how you cook or season your food."
+          ],
+          "stats": [
+            {
+              "value": "15%",
+              "label": "Less sodium than regular iodised salt"
+            }
+          ]
+        },
+        {
+          "id": "specifications",
+          "type": "specTable",
+          "heading": "Specifications",
+          "rows": [
+            {
+              "label": "Sodium Reduction",
+              "value": "15% lower than standard iodised salt"
+            },
+            {
+              "label": "Iodine Content",
+              "value": "30 ppm (min)"
+            }
+          ]
+        },
+        {
+          "id": "where-to-buy",
+          "type": "whereToBuy",
+          "heading": "Where to Buy",
+          "body": "Available at pharmacies, supermarkets, and leading online grocers across India.",
+          "cta": {
+            "label": "Find a Distributor",
+            "href": "/network/"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "slug": "salt-plus",
+    "name": "DFS Salt",
+    "pageTitle": "DFS Salt | Double Fortified Salt with Iron & Iodine",
+    "metaDescription": "DFS Salt is Ankur's Double Fortified Salt, fortified with both iron and iodine to help address anaemia and iodine deficiency in one everyday ingredient.",
+    "tag": "Double Fortified",
+    "image": {
+      "src": "/images/products/dfs.webp",
+      "alt": "DFS Salt, Double Fortified Salt with Iron and Iodine"
+    },
+    "heroImage": {
+      "src": "/images/products/hero/dfs.webp",
+      "alt": "DFS Salt pack, double fortified with iron and iodine"
+    },
+    "comparison": {
+      "iodineContent": "30 ppm (min)",
+      "sodiumLevel": "Standard",
+      "ironContent": "Fortified (DFS)",
+      "bestFor": "Everyday goodness for the whole family",
+      "packFormats": "1kg"
+    },
+    "grid": {
+      "description": "Double fortified salt with iron and iodine, one everyday step toward fighting anaemia.",
+      "ctaLabel": "View Details"
+    },
+    "detail": {
+      "heroTagline": "Everyday Goodness for the Whole Family. Double Fortified with Iron & Iodine. Supports Normal Haemoglobin Formation and anaemia friendly diets.",
+      "heroCta": {
+        "label": "Find a Distributor",
+        "href": "#where-to-buy"
+      },
+      "heroCtaSecondary": {
+        "label": "View Specifications",
+        "href": "#specifications"
+      },
+      "sections": [
+        {
+          "id": "why-fortified",
+          "type": "narrative",
+          "heading": "Why Fortified Salt",
+          "paragraphs": [
+            "Salt is one of the few ingredients almost every household already uses every day, which makes it an effective, low cost carrier for essential micronutrients.",
+            "DFS Salt is double fortified: alongside iodine for thyroid health, it carries iron to help address one of India's most widespread nutrition gaps."
+          ],
+          "stats": [
+            {
+              "value": "2",
+              "label": "Essential nutrients fortified in every pinch: iron and iodine"
+            }
+          ]
+        },
+        {
+          "id": "anaemia-awareness",
+          "type": "narrative",
+          "heading": "Anaemia Awareness",
+          "paragraphs": [
+            "Iron deficiency anaemia remains widespread across India, often silently, showing up as fatigue, reduced immunity, and impaired growth in children.",
+            "Double Fortified Salt (DFS) is recommended by public health researchers as a scalable way to improve everyday iron intake through an ingredient already present in every kitchen.",
+            "Figures below are illustrative placeholders. They will be replaced with verified national survey data before publishing."
+          ],
+          "stats": [
+            {
+              "value": "1 in 2",
+              "label": "Indian women estimated to be affected by anaemia (placeholder, needs verification)"
+            }
+          ]
+        },
+        {
+          "id": "specifications",
+          "type": "specTable",
+          "heading": "Specifications",
+          "rows": [
+            {
+              "label": "Iodine Content",
+              "value": "30 ppm (min)"
+            },
+            {
+              "label": "Iron Content",
+              "value": "Fortified (as per DFS guidelines)"
+            },
+            {
+              "label": "Sodium Chloride",
+              "value": "96% (min)"
+            }
+          ]
+        },
+        {
+          "id": "where-to-buy",
+          "type": "whereToBuy",
+          "heading": "Where to Buy",
+          "body": "Available at select retailers, and through Ankur's institutional and public distribution network.",
+          "cta": {
+            "label": "Find a Distributor",
+            "href": "/network/"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "slug": "rock-salt",
+    "name": "Ankur Rock Salt",
+    "pageTitle": "Ankur Rock Salt | Natural Himalayan Pink Salt",
+    "metaDescription": "Ankur Rock Salt is a natural, unrefined Sendha Namak, the traditional choice for fasting, rituals, and cooking rich in minerals.",
+    "tag": "Traditional",
+    "image": {
+      "src": "/images/products/rock-salt-pack.webp",
+      "alt": "Ankur Himalayan Rock Salt pack"
+    },
+    "heroImage": {
+      "src": "/images/products/hero/rock-salt-pack.webp",
+      "alt": "Ankur Rock Salt pack, natural Sendha Namak rock salt"
+    },
+    "comparison": {
+      "iodineContent": "Not iodised",
+      "sodiumLevel": "Natural (unrefined)",
+      "ironContent": "Trace minerals",
+      "bestFor": "Everyday cooking & fasting rituals",
+      "packFormats": "1kg"
+    },
+    "grid": {
+      "description": "Natural, unrefined Sendha Namak for fasting and traditional cooking.",
+      "ctaLabel": "View Details"
+    },
+    "detail": {
+      "heroTagline": "Rock salt- natural everyday cooking and fasting rituals",
+      "heroCta": {
+        "label": "Find a Distributor",
+        "href": "#where-to-buy"
+      },
+      "heroCtaSecondary": {
+        "label": "View Specifications",
+        "href": "#mineral-content"
+      },
+      "sections": [
+        {
+          "id": "uses",
+          "type": "checklist",
+          "heading": "Uses",
+          "items": [
+            {
+              "title": "Fasting & Vrat Cooking",
+              "description": "The traditional choice for Navratri, Ekadashi, and other fasting occasions."
+            },
+            {
+              "title": "Rituals & Prasad",
+              "description": "Used in religious offerings and traditional ceremonies for generations."
+            },
+            {
+              "title": "Natural Cooking",
+              "description": "A milder alternative for everyday recipes, rich in minerals."
+            },
+            {
+              "title": "Ayurvedic Kitchens",
+              "description": "Valued in Ayurvedic practice for its natural, unrefined form."
+            }
+          ]
+        },
+        {
+          "id": "mineral-content",
+          "type": "specTable",
+          "heading": "Mineral Content",
+          "rows": [
+            {
+              "label": "Sodium Chloride",
+              "value": "~85 to 90%"
+            },
+            {
+              "label": "Trace Minerals",
+              "value": "iron, potassium, magnesium (naturally occurring)"
+            },
+            {
+              "label": "Iodine",
+              "value": "None added"
+            },
+            {
+              "label": "Origin",
+              "value": "Natural rock salt deposits"
+            }
+          ]
+        },
+        {
+          "id": "where-to-buy",
+          "type": "whereToBuy",
+          "heading": "Where to Buy",
+          "body": "Available at kirana stores, supermarkets, and leading online grocers across India.",
+          "cta": {
+            "label": "Find a Distributor",
+            "href": "/network/"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "slug": "crystal-salt",
+    "name": "Crystal Salt",
+    "pageTitle": "Crystal Salt | Refined Iodised Crystal Salt",
+    "metaDescription": "Crystal Salt is Ankur's refined iodised salt in a coarse crystal grain, suited to both industrial applications and edible use.",
+    "tag": "Crystal",
+    "image": {
+      "src": "/images/products/crystal-salt.webp",
+      "alt": "Crystal Salt, Refined Iodised Crystal Salt"
+    },
+    "heroImage": {
+      "src": "/images/products/hero/crystal-salt.webp",
+      "alt": "Crystal Salt pack, coarse refined iodised crystal salt"
+    },
+    "comparison": {
+      "iodineContent": "30 ppm (min)",
+      "sodiumLevel": "Standard",
+      "ironContent": "Not fortified",
+      "bestFor": "Everyday cooking (coarse grain)",
+      "packFormats": "1kg"
+    },
+    "grid": {
+      "description": "Refined iodised salt in a coarse crystal grain, for kitchens and industry alike.",
+      "ctaLabel": "View Details"
+    },
+    "detail": {
+      "heroTagline": "Iodized natural solar evaporated salt for everyday cooking",
+      "heroCta": {
+        "label": "Find a Distributor",
+        "href": "#where-to-buy"
+      },
+      "heroCtaSecondary": {
+        "label": "View Specifications",
+        "href": "#specifications"
+      },
+      "sections": [
+        {
+          "id": "use-cases",
+          "type": "useCasesGrouped",
+          "heading": "Use Cases",
+          "groups": [
+            {
+              "heading": "Industrial",
+              "items": [
+                {
+                  "title": "Food Processing",
+                  "description": "A consistent, coarse grain suited to bulk food manufacturing."
+                },
+                {
+                  "title": "Water Treatment",
+                  "description": "Used in softening and treatment processes across industries."
+                },
+                {
+                  "title": "Textile & Leather",
+                  "description": "A traditional input in textile dyeing and leather processing."
+                }
+              ]
+            },
+            {
+              "heading": "Edible",
+              "items": [
+                {
+                  "title": "Coarse Grain Cooking",
+                  "description": "Ideal for pickling, curing, and recipes that call for a coarser crystal."
+                },
+                {
+                  "title": "Table Use",
+                  "description": "A crunchier, crystal alternative to fine table salt."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "specifications",
+          "type": "specTable",
+          "heading": "Specifications",
+          "rows": [
+            {
+              "label": "Sieve (500 Micron)",
+              "value": "99% (min) passing"
+            },
+            {
+              "label": "Sodium Chloride",
+              "value": "99% (min)"
+            },
+            {
+              "label": "Moisture",
+              "value": "0.5% (max)"
+            },
+            {
+              "label": "Water Insoluble",
+              "value": "0.5% (max)"
+            },
+            {
+              "label": "Iodine Content",
+              "value": "20 ppm (min at production)"
+            },
+            {
+              "label": "Pack Formats",
+              "value": "Industrial & retail"
+            }
+          ]
+        },
+        {
+          "id": "where-to-buy",
+          "type": "whereToBuy",
+          "heading": "Where to Buy",
+          "body": "Available for both industrial bulk orders and retail purchase through our distributor network.",
+          "cta": {
+            "label": "Find a Distributor",
+            "href": "/network/"
+          }
+        }
+      ]
+    }
+  }
+]

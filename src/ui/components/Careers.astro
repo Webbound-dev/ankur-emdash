@@ -1,0 +1,516 @@
+---
+import CustomSelect from './CustomSelect';
+import OpenRoles from './OpenRoles';
+
+interface StatItem { number: string; suffix: string; unit: string; description: string }
+interface TeamItem { name: string; description: string }
+interface RoleItem { title: string; department: string; location: string; type: string; description: string }
+interface FormCard { ref: string; title: string; body: string; note: string }
+
+interface Props {
+  content: {
+    hero: { title: string; intro: string };
+    why: { heading: string; subheading: string; items: StatItem[] };
+    teams: { heading: string; subheading: string; items: TeamItem[] };
+    openRoles: { heading: string; subheading: string; items: RoleItem[]; fallbackLabel: string };
+    values: { heading: string; quote: string; attribution: string; text: string };
+    form: {
+      heading: string;
+      subheading: string;
+      card: FormCard;
+      fields: { name: string; email: string; phone: string; team: string; message: string };
+      teamOptions: string[];
+      submitLabel: string;
+      successMessage: string;
+    };
+  };
+}
+
+const { content } = Astro.props;
+const { hero, why, teams, openRoles, values, form } = content;
+
+// Same scalloped-seal motif used across the site's other business pages — a
+// traditional "wax seal" reads consistently as this site's mark of trust.
+const petals = Array.from({ length: 12 }, (_, i) => {
+  const angle = (i / 12) * Math.PI * 2;
+  return { cx: 32 + Math.cos(angle) * 21, cy: 32 + Math.sin(angle) * 21 };
+});
+
+const statIcons = [
+  'M12 6v6l4 2 M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z', // years — clock
+  'M3 21V10l5 3V10l5 3V6l7 4v11H3Z', // plants — factory
+  'M7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M17 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M12 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M7 8l4.2 9M17 8l-4.2 9', // clients — network
+  'M9 12l2 2 4-4 M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z', // QC tests — check-circle
+];
+
+const teamIcons = [
+  'M3 21V10l5 3V10l5 3V6l7 4v11H3Z', // plant ops — factory
+  'M12 2 4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5l-8-3Z M9 12l2 2 4-4', // QA — shield+check
+  'M7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M17 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M12 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M7 8l4.2 9M17 8l-4.2 9', // sales — network
+  'M3 17h18l-2 4H5l-2-4Z M6 17V9l6-4 6 4v8 M10 17v-5h4v5', // export — ship
+  'M4 8h16v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8Z M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2 M4 13h16', // corporate — briefcase
+];
+---
+
+<main class="bg-silent-white">
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-indian-red py-16 lg:py-24 text-center">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative max-w-[900px] mx-auto px-6 lg:px-10">
+      <h1 class="reveal font-display font-medium text-4xl lg:text-6xl text-silent-white leading-tight" data-cms-field="hero.title">
+        {hero.title}
+      </h1>
+      <p class="reveal mt-6 text-base lg:text-lg leading-relaxed text-silent-white/75 max-w-[680px] mx-auto" style="transition-delay: 80ms" data-cms-field="hero.intro">
+        {hero.intro}
+      </p>
+    </div>
+
+    <svg class="absolute bottom-0 inset-x-0 z-10 w-full h-14 sm:h-20 lg:h-28 text-silent-white" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        d="M0,130 C120,70 240,190 360,130 C480,70 600,190 720,130 C840,70 960,190 1080,130 C1200,70 1320,190 1440,130 L1440,200 L0,200 Z"
+        fill="currentColor"
+      />
+    </svg>
+  </section>
+
+  <!-- Why Join Ankur Salt — seal-badge stat cards with a count-up animation -->
+  <section class="relative max-w-[1200px] mx-auto px-6 lg:px-10 py-14 lg:py-20">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05] [mask-image:linear-gradient(to_bottom,black,transparent)]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative">
+      <h2 class="reveal font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="why.heading">
+        {why.heading}
+      </h2>
+      <p class="reveal mt-2 text-sm leading-relaxed text-indian-red/70 max-w-[600px]" style="transition-delay: 60ms" data-cms-field="why.subheading">
+        {why.subheading}
+      </p>
+
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {why.items.map((item, ii) => (
+          <div
+            class="stat-card reveal group rounded-2xl bg-white p-6 ring-1 ring-indian-red/[0.08] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-indian-red/10 hover:ring-indian-red/20"
+            style={`transition-delay: ${ii * 70}ms`}
+          >
+            <svg viewBox="0 0 64 64" class="stat-icon h-11 w-11 text-indian-red">
+              {petals.map((p) => <circle cx={p.cx} cy={p.cy} r="8" fill="currentColor" opacity="0.85" />)}
+              <circle cx="32" cy="32" r="16" fill="currentColor" />
+              <path
+                d={statIcons[ii] ?? ''}
+                fill="none"
+                stroke="#FFF6EB"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                transform="scale(1.3) translate(12.6, 12.6)"
+              />
+            </svg>
+            <p class="mt-4 font-display font-medium text-3xl text-indian-red">
+              <span class="stat-number" data-target={item.number} data-cms-field={`why.items[${ii}].number`}>{item.number}</span><span data-cms-field={`why.items[${ii}].suffix`}>{item.suffix}</span>
+            </p>
+            <p class="mt-1 text-[11px] font-semibold uppercase tracking-widest text-indian-red/50" data-cms-field={`why.items[${ii}].unit`}>
+              {item.unit}
+            </p>
+            <p class="mt-3 text-sm leading-relaxed text-indian-red/70" data-cms-field={`why.items[${ii}].description`}>
+              {item.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Where You Could Work — dark, wave top+bottom, team cards with hover bounce icons -->
+  <section class="relative overflow-hidden bg-indian-red py-14 lg:py-20">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <svg class="absolute top-0 inset-x-0 z-10 w-full h-14 sm:h-20 lg:h-28 text-white" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,10 C120,70 240,130 360,70 C480,10 600,70 720,130 C840,70 960,10 1080,70 C1200,130 1320,70 1440,10 L1440,0 L0,0 Z" fill="currentColor" />
+    </svg>
+
+    <div class="relative max-w-[1200px] mx-auto px-6 lg:px-10 mt-10 lg:mt-14">
+      <h2 class="reveal font-display font-medium text-2xl lg:text-3xl text-silent-white" data-cms-field="teams.heading">
+        {teams.heading}
+      </h2>
+      <p class="reveal mt-2 text-sm leading-relaxed text-silent-white/75 max-w-[600px]" style="transition-delay: 60ms" data-cms-field="teams.subheading">
+        {teams.subheading}
+      </p>
+
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {teams.items.map((team, ti) => (
+          <div
+            class="team-card reveal rounded-2xl bg-silent-white/10 border border-silent-white/15 p-6 transition-colors duration-300 hover:bg-silent-white/[0.14]"
+            style={`transition-delay: ${ti * 60}ms`}
+          >
+            <svg viewBox="0 0 24 24" class="team-icon h-8 w-8 text-silent-white">
+              <path d={teamIcons[ti] ?? ''} fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <h3 class="mt-4 font-display font-medium text-lg text-silent-white" data-cms-field={`teams.items[${ti}].name`}>
+              {team.name}
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-silent-white/70" data-cms-field={`teams.items[${ti}].description`}>
+              {team.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <svg class="absolute bottom-0 inset-x-0 z-10 w-full h-14 sm:h-20 lg:h-28 text-white" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,130 C120,70 240,190 360,130 C480,70 600,190 720,130 C840,70 960,190 1080,130 C1200,70 1320,190 1440,130 L1440,200 L0,200 Z" fill="currentColor" />
+    </svg>
+  </section>
+
+  <!-- Open Roles — light section, red cards. A manufacturer at this scale
+       should visibly show openings, so this list is CRUD-editable. -->
+  <section class="relative py-14 lg:py-20">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05] [mask-image:linear-gradient(to_bottom,black,transparent)]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative max-w-[1000px] mx-auto px-6 lg:px-10">
+      <OpenRoles client:visible content={openRoles} />
+      <button
+        type="button"
+        id="apply-anyway-btn"
+        class="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-indian-red underline decoration-indian-red/30 underline-offset-4 transition-colors hover:decoration-indian-red"
+      >
+        <span data-cms-field="openRoles.fallbackLabel">{openRoles.fallbackLabel}</span>
+        <svg viewBox="0 0 24 24" class="h-3.5 w-3.5"><path d="M5 12h14m0 0-5-5m5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- What We Value — hard break, own pinstripe texture, matching the "brand statement" pattern used elsewhere -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-silent-white to-white py-16 lg:py-20">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative max-w-[720px] mx-auto px-6 text-center">
+      <svg viewBox="0 0 64 64" class="reveal mx-auto h-14 w-14 text-indian-red">
+        {petals.map((p) => <circle cx={p.cx} cy={p.cy} r="8" fill="currentColor" opacity="0.85" />)}
+        <circle cx="32" cy="32" r="16" fill="currentColor" />
+        <path d="M9 12l2 2 4-4 M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" fill="none" stroke="#FFF6EB" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="scale(1.3) translate(12.6, 12.6)" />
+      </svg>
+      <h2 class="reveal mt-4 font-display font-medium text-xl lg:text-2xl text-indian-red" style="transition-delay: 60ms" data-cms-field="values.heading">
+        {values.heading}
+      </h2>
+      <p class="reveal mt-6 font-display font-medium text-2xl lg:text-3xl text-indian-red leading-snug" style="transition-delay: 100ms" data-cms-field="values.quote">
+        &ldquo;{values.quote}&rdquo;
+      </p>
+      <p class="reveal mt-3 text-sm font-semibold uppercase tracking-widest text-indian-red/50" style="transition-delay: 140ms" data-cms-field="values.attribution">
+        {values.attribution}
+      </p>
+      <p class="reveal mt-6 text-sm leading-relaxed text-indian-red/70" style="transition-delay: 180ms" data-cms-field="values.text">
+        {values.text}
+      </p>
+    </div>
+  </section>
+
+  <!-- Apply modal — hidden by default, opened via "Apply" on a role or the
+       "Apply anyway" fallback link. Not gated behind any scroll animation:
+       default state is display:none set only by this class, so if JS never
+       runs the modal simply never opens rather than showing broken. -->
+  <div id="apply-modal" class="fixed inset-0 z-[100] hidden">
+    <div id="apply-modal-backdrop" class="absolute inset-0 bg-indian-red/40 backdrop-blur-sm" />
+    <div class="relative flex h-full items-start justify-center overflow-y-auto px-4 py-10 sm:py-16">
+      <div id="apply-modal-panel" class="relative w-full max-w-[900px]">
+        <button
+          type="button"
+          id="apply-modal-close"
+          aria-label="Close application form"
+          class="absolute -top-3 -right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white text-indian-red shadow-lg ring-1 ring-indian-red/10 transition-colors hover:bg-indian-red hover:text-silent-white"
+        >
+          <svg viewBox="0 0 24 24" class="h-4 w-4"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+        </button>
+
+        <div class="rounded-2xl bg-silent-white p-6 sm:p-8">
+          <h2 class="font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="form.heading">
+            {form.heading}
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-indian-red/70 max-w-[600px]" data-cms-field="form.subheading">
+            {form.subheading}
+          </p>
+
+          <form id="career-form" class="mt-8 overflow-hidden rounded-2xl bg-white shadow-lg shadow-indian-red/10 ring-1 ring-indian-red/[0.08] lg:grid lg:grid-cols-[260px_1fr]">
+            <div class="relative overflow-hidden bg-indian-red p-6 lg:p-8 flex flex-col justify-between">
+              <div class="pointer-events-none absolute inset-0 opacity-[0.06]" style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);" aria-hidden="true" />
+              <div class="relative">
+                <span class="font-display text-[10px] font-medium uppercase tracking-widest text-silent-white/50" data-cms-field="form.card.ref">{form.card.ref}</span>
+                <h3 class="mt-2 font-display font-medium text-xl text-silent-white" data-cms-field="form.card.title">{form.card.title}</h3>
+                <p class="mt-3 text-sm leading-relaxed text-silent-white/70" data-cms-field="form.card.body">
+                  {form.card.body}
+                </p>
+              </div>
+              <p class="relative mt-8 text-xs text-silent-white/50" data-cms-field="form.card.note">{form.card.note}</p>
+            </div>
+
+            <div class="p-6 lg:p-8">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <label class="block">
+                  <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="form.fields.name">{form.fields.name}</span>
+                  <div class="relative mt-1.5">
+                    <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                    <input type="text" name="name" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="Your name" />
+                  </div>
+                </label>
+                <label class="block">
+                  <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="form.fields.email">{form.fields.email}</span>
+                  <div class="relative mt-1.5">
+                    <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M3 5h18v14H3V5Z M3 5l9 8 9-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+                    <input type="email" name="email" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="you@example.com" />
+                  </div>
+                </label>
+                <label class="block">
+                  <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="form.fields.phone">{form.fields.phone}</span>
+                  <div class="relative mt-1.5">
+                    <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+                    <input type="tel" name="phone" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="+91" />
+                  </div>
+                </label>
+                <label class="block">
+                  <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="form.fields.team">{form.fields.team}</span>
+                  <div class="relative mt-1.5">
+                    <CustomSelect
+                      client:load
+                      name="team"
+                      placeholder="Select a team"
+                      options={form.teamOptions}
+                      icon="M17 20h5v-2a4 4 0 0 0-3-3.87M9 20H4v-2a4 4 0 0 1 3-3.87m5-4.13a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm6 4a4 4 0 0 0-3-3.87m-9 0A4 4 0 0 0 3 16"
+                      listPath="form.teamOptions"
+                      required
+                    />
+                  </div>
+                </label>
+                <label class="block sm:col-span-2">
+                  <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="form.fields.message">{form.fields.message}</span>
+                  <textarea name="message" required rows="4" class="mt-1.5 w-full rounded-lg border border-indian-red/15 bg-white px-3.5 py-2.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="A little about your background and why you're interested"></textarea>
+                </label>
+              </div>
+
+              <button type="submit" class="mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-indian-red px-6 py-3 text-sm font-medium text-silent-white transition-transform duration-200 hover:scale-[1.03]">
+                <span data-cms-field="form.submitLabel">{form.submitLabel}</span>
+                <svg viewBox="0 0 24 24" class="h-4 w-4"><path d="M5 12h14m0 0-5-5m5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+
+              <p id="career-success" role="status" class="mt-4 hidden text-sm font-medium text-indian-red" data-cms-field="form.successMessage">{form.successMessage}</p>
+              <p id="career-error" role="alert" class="mt-4 hidden text-sm font-medium text-indian-red"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<style>
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { isEditModeActive } from '../lib/editMode';
+  import { getRecaptchaToken } from '../lib/recaptcha';
+
+  // initCareersPage runs on `astro:page-load` (fires on initial load AND
+  // every client-side transition) rather than as plain top-level code —
+  // this <script> is a JS module, and modules only ever execute once per
+  // browser session, so a plain top-level run left every `.reveal` element
+  // permanently invisible (and the form/modal never wired up) on any
+  // revisit later in the same session. revealObserver/counterObserver are
+  // disconnected at the top of each run so a revisit replaces them instead
+  // of layering a second observer on top. Element listeners (hover, form,
+  // modal buttons) don't need the same treatment — Astro's transition
+  // replaces those DOM nodes outright, so stale listeners on the old,
+  // now-detached elements are just garbage collected. The `window`/
+  // `document`-level listeners below are the one real exception: `window`
+  // and `document` themselves are never replaced, so re-adding a fresh
+  // closure on every visit without removing the previous one would
+  // accumulate a duplicate handler per visit (each firing the modal
+  // open/close logic once more than the last). Both are tracked and removed
+  // before being re-added.
+  let revealObserver: IntersectionObserver | null = null;
+  let counterObserver: IntersectionObserver | null = null;
+  let openModalHandler: (() => void) | null = null;
+  let keydownHandler: ((e: KeyboardEvent) => void) | null = null;
+
+  function initCareersPage(): void {
+    revealObserver?.disconnect();
+    counterObserver?.disconnect();
+    if (openModalHandler) window.removeEventListener('careers:open-apply-modal', openModalHandler);
+    if (keydownHandler) document.removeEventListener('keydown', keydownHandler);
+
+    const targets = document.querySelectorAll<HTMLElement>('.reveal');
+    if (targets.length) {
+      revealObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              revealObserver?.unobserve(entry.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+      );
+      targets.forEach((el) => revealObserver?.observe(el));
+    }
+
+    // Stat seal icons bounce-and-tilt on hover, same pattern used on the
+    // Contact page's info cards and Industrial Salt's industry cards.
+    document.querySelectorAll<HTMLElement>('.stat-card').forEach((card) => {
+      const icon = card.querySelector<HTMLElement>('.stat-icon');
+      if (!icon) return;
+      card.addEventListener('mouseenter', () => {
+        gsap.to(icon, { rotate: -8, scale: 1.15, duration: 0.35, ease: 'back.out(2.5)' });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(icon, { rotate: 0, scale: 1, duration: 0.3, ease: 'power2.out' });
+      });
+    });
+
+    document.querySelectorAll<HTMLElement>('.team-card').forEach((card) => {
+      const icon = card.querySelector<HTMLElement>('.team-icon');
+      if (!icon) return;
+      card.addEventListener('mouseenter', () => {
+        gsap.to(icon, { y: -3, scale: 1.1, duration: 0.3, ease: 'back.out(2)' });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(icon, { y: 0, scale: 1, duration: 0.25, ease: 'power2.out' });
+      });
+    });
+
+    // Stat numbers count up from 0 once their card scrolls into view. Skipped
+    // in edit mode — the field is contenteditable there, and an editor typing
+    // into it shouldn't fight a GSAP tween still overwriting the same text.
+    const counters = document.querySelectorAll<HTMLElement>('.stat-number');
+    if (counters.length && !isEditModeActive()) {
+      counterObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            const el = entry.target as HTMLElement;
+            const target = Number(el.dataset.target ?? '0');
+            const counter = { val: 0 };
+            gsap.to(counter, {
+              val: target,
+              duration: 1.4,
+              ease: 'power2.out',
+              onUpdate: () => {
+                el.textContent = Math.round(counter.val).toLocaleString('en-IN');
+              },
+            });
+            counterObserver?.unobserve(el);
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.3 }
+      );
+      counters.forEach((el) => counterObserver?.observe(el));
+    }
+
+    // Show success only after the email API accepts the application.
+    const form = document.getElementById('career-form') as HTMLFormElement | null;
+    const success = document.getElementById('career-success');
+    const error = document.getElementById('career-error');
+    const submit = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (submit?.disabled) return;
+      success?.classList.add('hidden');
+      error?.classList.add('hidden');
+      if (submit) submit.disabled = true;
+      try {
+        const recaptchaToken = await getRecaptchaToken('career_application');
+        const apiBase = import.meta.env.PUBLIC_OTP_API_BASE_URL ?? '';
+        const res = await fetch(`${apiBase}/api/submit-career-application`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...Object.fromEntries(new FormData(form).entries()), recaptchaToken }),
+        });
+        const data = await res.json() as { ok?: boolean; error?: string };
+        if (!res.ok || !data.ok) throw new Error(data.error || 'Failed to submit your application');
+        if (success) {
+          success.classList.remove('hidden');
+          gsap.fromTo(success, { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+        }
+        form.reset();
+      } catch (err) {
+        if (error) {
+          error.textContent = err instanceof Error ? err.message : 'Failed to submit your application';
+          error.classList.remove('hidden');
+        }
+      } finally {
+        if (submit) submit.disabled = false;
+      }
+    });
+
+    // Apply modal — only ever opened by explicit user action (a role's Apply
+    // button, or the "Apply anyway" fallback), never by a scroll trigger.
+    const modal = document.getElementById('apply-modal');
+    const modalBackdrop = document.getElementById('apply-modal-backdrop');
+    const modalPanel = document.getElementById('apply-modal-panel');
+    const modalClose = document.getElementById('apply-modal-close');
+    const applyAnywayBtn = document.getElementById('apply-anyway-btn');
+
+    function openApplyModal() {
+      if (!modal || !modalBackdrop || !modalPanel) return;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      gsap.fromTo(modalBackdrop, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: 'power2.out' });
+      gsap.fromTo(modalPanel, { opacity: 0, y: 20, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: 'power2.out' });
+    }
+
+    function closeApplyModal() {
+      if (!modal || !modalBackdrop || !modalPanel) return;
+      gsap.to(modalPanel, { opacity: 0, y: 10, scale: 0.97, duration: 0.2, ease: 'power1.in' });
+      gsap.to(modalBackdrop, {
+        opacity: 0,
+        duration: 0.2,
+        ease: 'power1.in',
+        onComplete: () => {
+          modal.classList.add('hidden');
+          document.body.style.overflow = '';
+        },
+      });
+    }
+
+    openModalHandler = openApplyModal;
+    keydownHandler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !modal?.classList.contains('hidden')) closeApplyModal();
+    };
+
+    window.addEventListener('careers:open-apply-modal', openModalHandler);
+    modalClose?.addEventListener('click', closeApplyModal);
+    modalBackdrop?.addEventListener('click', closeApplyModal);
+    applyAnywayBtn?.addEventListener('click', openApplyModal);
+    document.addEventListener('keydown', keydownHandler);
+  }
+
+  document.addEventListener('astro:page-load', initCareersPage);
+</script>

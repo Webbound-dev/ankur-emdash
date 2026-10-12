@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+@import "tailwindcss";
+
+@source "../ui";
+
+/* ─── ANKUR BRAND KIT ─────────────────────────────────────────────────────────
+   Source: brand kit reference (salt heritage brand, est. 1994 — "Bharose ki
+   shuruaat..."). Update these two tokens if the kit changes; every component
+   should reference them (via Tailwind's generated utilities — bg-indian-red,
+   text-silent-white, font-display, font-sans — never hardcode the hex/font
+   values directly). Full brand notes live in /CLAUDE.md at the ankur project
+   root. */
+@theme {
+  --font-display: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-silent-white: #FFF6EB;
+  --color-indian-red: #A82121;
+}
+
+@layer base {
+  body {
+    @apply bg-silent-white text-indian-red font-sans antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500; /* Nunito Medium */
+  }
+}
+
+/* ─── GSAP entrance pre-hide ──────────────────────────────────────────────────
+   Every section with a GSAP on-load/on-scroll entrance marks its own root
+   with `.pre-anim-hidden` and hides its animated children via the rules
+   below — present in the server-rendered HTML from the very first paint, so
+   content is hidden before any JS runs rather than flashing fully visible
+   for a moment first. GSAP's fromTo() tweens then animate from this same
+   state (see each component for the "why fromTo, not .from" note).
+
+   Deliberately global, not scoped per-component/per-page: this site uses
+   Astro's <ClientRouter /> (view transitions) for in-app navigation, and a
+   per-page <style> block isn't guaranteed to have finished loading at the
+   exact instant that page's HTML gets swapped in during a soft transition.
+   global.css is imported once in BaseLayout and stays resident for the
+   whole session, so these rules are guaranteed active regardless of which
+   page you're on or how you navigated to it. */
+.pre-anim-hidden .hero-eyebrow-rule,
+.pre-anim-hidden .qs-eyebrow-rule,
+.pre-anim-hidden .pt-rule,
+.pre-anim-hidden .dm-rule,
+.pre-anim-hidden .fv-rule,
+.pre-anim-hidden .bt-rule,
+.pre-anim-hidden .about-hero-eyebrow-rule,
+.pre-anim-hidden .bdf-eyebrow-rule {
+  transform: scaleX(0);
+}
+
+.pre-anim-hidden .hero-eyebrow-text,
+.pre-anim-hidden .hero-title,
+.pre-anim-hidden .hero-body,
+.pre-anim-hidden .hero-cta,
+.pre-anim-hidden .qs-eyebrow-text,
+.pre-anim-hidden .qs-line,
+.pre-anim-hidden .qs-translation,
+.pre-anim-hidden .qs-attribution,
+.pre-anim-hidden .qs-cta,
+.pre-anim-hidden .pt-heading > *,
+.pre-anim-hidden .product-card,
+.pre-anim-hidden .dm-heading > *,
+.pre-anim-hidden .dm-pin,
+.pre-anim-hidden .fv-heading > *,
+.pre-anim-hidden .fv-frame,
+.pre-anim-hidden .bt-heading > *,
+.pre-anim-hidden .bt-card,
+.pre-anim-hidden .ft-reveal,
+.pre-anim-hidden .ft-card-reveal,
+.pre-anim-hidden .about-hero-eyebrow-text,
+.pre-anim-hidden .about-hero-title,
+.pre-anim-hidden .about-hero-intro,
+.pre-anim-hidden .about-hero-badge,
+.pre-anim-hidden .about-hero-wave,
+.pre-anim-hidden .about-hero-dot,
+.pre-anim-hidden .dn-heading > *,
+.pre-anim-hidden .dn-row,
+.pre-anim-hidden .bdf-eyebrow-text,
+.pre-anim-hidden .bdf-heading,
+.pre-anim-hidden .bdf-intro,
+.pre-anim-hidden .bdf-benefit,
+.pre-anim-hidden .bdf-form-panel,
+.pre-anim-hidden .wm-pin,
+.pre-anim-hidden .gm-heading,
+.pre-anim-hidden .gm-subheading,
+.pre-anim-hidden .gm-stat,
+.pre-anim-hidden .gm-tabs,
+.pre-anim-hidden .gm-map-wrap,
+.pre-anim-hidden .gt-heading,
+.pre-anim-hidden .gt-subheading,
+.pre-anim-hidden .gt-table,
+.pre-anim-hidden .gt-cards {
+  opacity: 0;
+}
+
+/* Certification badges rest at 50% opacity (muted until hovered), not full
+   opacity — see CertificationsStrip.tsx. */
+.pre-anim-hidden .cert-badge {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pre-anim-hidden .hero-eyebrow-rule,
+  .pre-anim-hidden .qs-eyebrow-rule,
+  .pre-anim-hidden .pt-rule,
+  .pre-anim-hidden .dm-rule,
+  .pre-anim-hidden .fv-rule,
+  .pre-anim-hidden .bt-rule,
+  .pre-anim-hidden .about-hero-eyebrow-rule,
+  .pre-anim-hidden .bdf-eyebrow-rule {
+    transform: none;
+  }
+  .pre-anim-hidden .hero-eyebrow-text,
+  .pre-anim-hidden .hero-title,
+  .pre-anim-hidden .hero-body,
+  .pre-anim-hidden .hero-cta,
+  .pre-anim-hidden .qs-eyebrow-text,
+  .pre-anim-hidden .qs-line,
+  .pre-anim-hidden .qs-translation,
+  .pre-anim-hidden .qs-attribution,
+  .pre-anim-hidden .qs-cta,
+  .pre-anim-hidden .pt-heading > *,
+  .pre-anim-hidden .product-card,
+  .pre-anim-hidden .dm-heading > *,
+  .pre-anim-hidden .dm-pin,
+  .pre-anim-hidden .fv-heading > *,
+  .pre-anim-hidden .fv-frame,
+  .pre-anim-hidden .bt-heading > *,
+  .pre-anim-hidden .bt-card,
+  .pre-anim-hidden .ft-reveal,
+  .pre-anim-hidden .ft-card-reveal,
+  .pre-anim-hidden .about-hero-eyebrow-text,
+  .pre-anim-hidden .about-hero-title,
+  .pre-anim-hidden .about-hero-intro,
+  .pre-anim-hidden .about-hero-badge,
+  .pre-anim-hidden .about-hero-wave,
+  .pre-anim-hidden .about-hero-dot,
+  .pre-anim-hidden .dn-heading > *,
+  .pre-anim-hidden .dn-row,
+  .pre-anim-hidden .bdf-eyebrow-text,
+  .pre-anim-hidden .bdf-heading,
+  .pre-anim-hidden .bdf-intro,
+  .pre-anim-hidden .bdf-benefit,
+  .pre-anim-hidden .bdf-form-panel,
+  .pre-anim-hidden .wm-pin,
+  .pre-anim-hidden .gm-heading,
+  .pre-anim-hidden .gm-subheading,
+  .pre-anim-hidden .gm-stat,
+  .pre-anim-hidden .gm-tabs,
+  .pre-anim-hidden .gm-map-wrap,
+  .pre-anim-hidden .gt-heading,
+  .pre-anim-hidden .gt-subheading,
+  .pre-anim-hidden .gt-table,
+  .pre-anim-hidden .gt-cards {
+    opacity: 1;
+  }
+  .pre-anim-hidden .cert-badge {
+    opacity: 0.5;
+  }
+}

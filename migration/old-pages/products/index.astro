@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductComparisonTable from '../../../ui-components/components/ProductComparisonTable.astro';
+import FindYourSalt from '../../../ui-components/components/FindYourSalt.astro';
+import ProductGrid from '../../../ui-components/components/ProductGrid.astro';
+import content from '../../../content/pages/products.json';
+import products from '../../../content/collections/products.json';
+---
+
+<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image}>
+  <main class="bg-gradient-to-b from-silent-white to-white">
+    <section class="relative bg-indian-red pt-16 lg:pt-24 pb-20 lg:pb-28">
+      <!-- Texture + glow blobs live in their own clipped layer so they
+           can't cause horizontal overflow — kept separate from the section
+           itself so the wave divider below (which deliberately renders
+           outside the section's own box) isn't clipped along with them. -->
+      <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
+        <!-- Same faint vertical-line texture as the homepage's dark
+             sections (Products Teaser, Factory Video) — a dark hero opens
+             the page with real weight instead of another cream block. -->
+        <div
+          class="absolute inset-0 opacity-[0.06]"
+          style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+        />
+        <div class="absolute -top-32 right-[-10%] w-[520px] h-[520px] rounded-full bg-silent-white/[0.06] blur-3xl" />
+        <div class="absolute -bottom-24 left-[-8%] w-[420px] h-[420px] rounded-full bg-silent-white/[0.04] blur-3xl" />
+      </div>
+
+      <div class="relative max-w-[900px] mx-auto px-6 lg:px-10 text-center">
+        <span class="reveal block font-sans text-[11px] font-semibold uppercase tracking-[0.3em] text-silent-white/60" data-cms-field="hero.eyebrow">
+          {content.hero.eyebrow}
+        </span>
+        <h1
+          class="reveal mt-4 font-display font-medium text-4xl lg:text-6xl text-silent-white leading-tight"
+          style="transition-delay: 90ms"
+          data-cms-field="hero.heading"
+        >
+          {content.hero.heading}
+        </h1>
+        <p
+          class="reveal mt-6 text-base lg:text-lg leading-relaxed text-silent-white/75 max-w-[680px] mx-auto"
+          style="transition-delay: 180ms"
+          data-cms-field="hero.intro"
+        >
+          {content.hero.intro}
+        </p>
+      </div>
+
+      <!-- Wavy bottom edge — hands off into the light Comparison Table section below. -->
+      <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none translate-y-[calc(100%-1px)] rotate-180" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" class="w-full h-[64px] lg:h-[120px]" preserveAspectRatio="none">
+          <path d="M0,20 C180,90 360,0 540,50 C720,100 900,10 1080,55 C1260,100 1350,40 1440,60 L1440,120 L0,120 Z" fill="#A82121" />
+        </svg>
+      </div>
+    </section>
+
+    <ProductComparisonTable
+      heading={content.comparisonTable.heading}
+      subheading={content.comparisonTable.subheading}
+      columns={content.comparisonTable.columns}
+      products={products}
+    />
+
+    <FindYourSalt
+      heading={content.findYourSalt.heading}
+      subheading={content.findYourSalt.subheading}
+      prompts={content.findYourSalt.prompts}
+    />
+
+    <ProductGrid
+      heading={content.productGrid.heading}
+      subheading={content.productGrid.subheading}
+      products={products}
+    />
+  </main>
+</BaseLayout>
+
+<style is:global>
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Runs on the initial load AND again after every client-side transition
+  // navigation (astro:page-load) — a plain top-level run only fires once per
+  // module evaluation, which left elements on transition-navigated pages
+  // permanently stuck pre-reveal since no observer was ever attached to them.
+  function initReveal() {
+    const targets = document.querySelectorAll<HTMLElement>('.reveal:not(.in-view)');
+    if (!targets.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+    );
+    targets.forEach((el) => observer.observe(el));
+  }
+  initReveal();
+  document.addEventListener('astro:page-load', initReveal);
+</script>

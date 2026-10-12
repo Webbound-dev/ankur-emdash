@@ -1,0 +1,30 @@
+---
+interface SpecRow { label: string; value: string }
+interface Props {
+  section: { heading: string; rows: SpecRow[] };
+  si: number;
+}
+const { section, si } = Astro.props;
+---
+
+<div class="overflow-hidden rounded-lg ring-1 ring-indian-red/[0.08] bg-white">
+  {section.rows.map((row, ri) => (
+    <div
+      class={`reveal flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6 px-5 lg:px-7 py-4 ${ri % 2 === 1 ? 'bg-indian-red/[0.025]' : ''}`}
+      style={`transition-delay: ${ri * 40}ms`}
+    >
+      <span
+        class="sm:w-1/3 shrink-0 text-[11px] font-semibold uppercase tracking-wide text-indian-red/45"
+        data-cms-field={`detail.sections[${si}].rows[${ri}].label`}
+      >
+        {row.label}
+      </span>
+      <span
+        class="font-display font-medium text-sm lg:text-base text-indian-red"
+        data-cms-field={`detail.sections[${si}].rows[${ri}].value`}
+      >
+        {row.value}
+      </span>
+    </div>
+  ))}
+</div>

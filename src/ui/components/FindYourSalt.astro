@@ -1,0 +1,93 @@
+---
+interface Prompt { label: string; href: string; icon: string }
+interface Props {
+  heading: string;
+  subheading: string;
+  prompts: Prompt[];
+}
+
+const { heading, subheading, prompts } = Astro.props;
+
+// Small hand-drawn icon set, matching the inline-SVG convention used
+// elsewhere on the site (e.g. AboutUs.astro's certification/award marks)
+// rather than pulling in lucide-react for a handful of static glyphs.
+const ICONS: Record<string, string> = {
+  heart: 'M20 34c-9-6-15-12-15-19a9 9 0 0 1 15-6 9 9 0 0 1 15 6c0 7-6 13-15 19Z',
+  droplet: 'M20 6c7 9 11 15 11 20a11 11 0 1 1-22 0c0-5 4-11 11-20Z',
+  cooking: 'M8 18h24v3a12 12 0 0 1-24 0v-3Zm3-6c1-3 3-5 3-8m6 8c1-3 3-5 3-8',
+  moon: 'M27 8a14 14 0 1 0 5 27 12 12 0 0 1-5-27Z',
+};
+
+// Single wavy path reused (mirrored) at both the top and bottom edge of
+// this section, so it reads as one dark "band" cut into the light page
+// rather than a flat rectangle — the same alternating light/dark rhythm
+// as the homepage's Products Teaser / Factory Video sections, just with a
+// soft edge instead of a hard one.
+const WAVE_PATH = 'M0,20 C180,90 360,0 540,50 C720,100 900,10 1080,55 C1260,100 1350,40 1440,60 L1440,120 L0,120 Z';
+---
+
+<section id="find-your-salt" class="relative bg-indian-red py-20 lg:py-28 scroll-mt-24">
+  <!-- Wavy top edge — fades in from the light hero/table sections above. -->
+  <div class="absolute top-0 left-0 w-full overflow-hidden leading-none -translate-y-[calc(100%-1px)]" aria-hidden="true">
+    <svg viewBox="0 0 1440 120" class="w-full h-[64px] lg:h-[120px]" preserveAspectRatio="none">
+      <path d={WAVE_PATH} fill="#A82121" />
+    </svg>
+  </div>
+
+  <!-- Same faint vertical-line texture as the homepage's dark sections. -->
+  <div
+    class="absolute inset-0 opacity-[0.05]"
+    style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+    aria-hidden="true"
+  />
+
+  <div class="relative max-w-[1400px] mx-auto px-6 lg:px-10">
+    <span class="reveal block text-[10px] font-semibold uppercase tracking-widest text-silent-white/60" data-cms-field="findYourSalt.heading">
+      {heading}
+    </span>
+    <h2 class="reveal mt-2 font-display font-medium text-2xl lg:text-3xl text-silent-white" style="transition-delay: 70ms" data-cms-field="findYourSalt.subheading">
+      {subheading}
+    </h2>
+
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {prompts.map((prompt, pi) => (
+        <a
+          href={prompt.href}
+          data-cms-link={`findYourSalt.prompts[${pi}].href`}
+          class="reveal group relative flex flex-col justify-between gap-8 overflow-hidden rounded-lg bg-silent-white p-6 shadow-lg shadow-black/10 transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-black/20"
+          style={`transition-delay: ${140 + pi * 80}ms`}
+        >
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-indian-red/[0.08] text-indian-red transition-colors duration-300 group-hover:bg-indian-red group-hover:text-silent-white">
+            <svg viewBox="0 0 40 40" class="h-5 w-5" fill="none">
+              <path d={ICONS[prompt.icon] ?? ICONS.heart} stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+
+          <div>
+            <p class="font-display font-medium text-lg leading-snug text-indian-red" data-cms-field={`findYourSalt.prompts[${pi}].label`}>
+              {prompt.label}
+            </p>
+            <span class="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-indian-red/70 group-hover:text-indian-red">
+              See the match
+              <span aria-hidden="true" class="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+            </span>
+          </div>
+
+          <!-- Faint oversized icon ghosted in the corner for depth, same
+               "real photography + one brand-tint device" instinct as the
+               rest of the site, just translated into iconography here. -->
+          <svg viewBox="0 0 40 40" class="pointer-events-none absolute -bottom-4 -right-4 h-24 w-24 text-indian-red/[0.06] transition-transform duration-500 group-hover:scale-110" fill="none">
+            <path d={ICONS[prompt.icon] ?? ICONS.heart} stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Wavy bottom edge — hands back off to the light Product Grid section below. -->
+  <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none translate-y-[calc(100%-1px)] rotate-180" aria-hidden="true">
+    <svg viewBox="0 0 1440 120" class="w-full h-[64px] lg:h-[120px]" preserveAspectRatio="none">
+      <path d={WAVE_PATH} fill="#A82121" />
+    </svg>
+  </div>
+</section>

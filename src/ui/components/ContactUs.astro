@@ -1,0 +1,742 @@
+---
+import CustomSelect from './CustomSelect';
+import BecomeDistributorForm from './BecomeDistributorForm';
+import type { BecomeDistributorContent } from './BecomeDistributorForm';
+import ConnectWithDistributorForm from './ConnectWithDistributorForm';
+import type { ConnectWithDistributorContent } from './ConnectWithDistributorForm';
+import ExportInquiryForm from './ExportInquiryForm';
+import type { ExportInquiryContent } from './ExportInquiryForm';
+
+interface InfoItem { label: string; value: string; description: string; href?: string }
+interface NavItem { id: string; label: string }
+
+interface FormCard { ref: string; title: string; body: string; note: string }
+
+interface Props {
+  content: {
+    hero: { title: string; intro: string };
+    info: { heading: string; items: InfoItem[] };
+    nav: { items: NavItem[] };
+    general: {
+      heading: string; subheading: string; card: FormCard;
+      fields: { name: string; email: string; city: string; state: string; subject: string; message: string };
+      subjectOptions: string[];
+      submitLabel: string; successMessage: string;
+    };
+    industrial: {
+      heading: string; subheading: string; linkLabel: string; linkHref: string; card: FormCard;
+      fields: { company: string; industry: string; grade: string; quantity: string; location: string; email: string; message: string };
+      submitLabel: string; successMessage: string;
+    };
+    // Same component (and same look/OTP-verified email/submit endpoint) as
+    // the standalone Network page's Become a Distributor form — reused here
+    // rather than hand-rolled, so the two never visually or behaviorally
+    // drift apart again.
+    becomeDistributor: BecomeDistributorContent;
+    // Same component (and same look/OTP-verified email/submit endpoint) as
+    // the standalone Network page's Connect with a Distributor form.
+    connectWithDistributor: ConnectWithDistributorContent;
+    // Same component (and same look/OTP-verified email/submit endpoint) as
+    // the standalone Export page's inquiry form — reused here rather than
+    // hand-rolled, so the two never visually or behaviorally drift apart again.
+    exportInquiry: ExportInquiryContent;
+    productOptions: { industries: string[]; grades: string[] };
+    visit: { heading: string; text: string; since: string };
+  };
+}
+
+const { content } = Astro.props;
+const { hero, info, nav, general, industrial, becomeDistributor, connectWithDistributor, exportInquiry, productOptions, visit } = content;
+
+const ICONS = {
+  subject: 'M4 6h16M4 12h16M4 18h10',
+  industry: 'M3 21V10l5 3V10l5 3V6l7 4v11H3Z',
+  grade: 'M12 1.5 21 12 12 22.5 3 12Z',
+};
+
+// Same scalloped-seal motif used on the Quality & Certificates page — a
+// traditional "wax seal" reads consistently as this site's mark of trust.
+const petals = Array.from({ length: 12 }, (_, i) => {
+  const angle = (i / 12) * Math.PI * 2;
+  return { cx: 32 + Math.cos(angle) * 21, cy: 32 + Math.sin(angle) * 21 };
+});
+
+
+const infoIcons: Record<string, string> = {
+  Email: 'M8 12h16v10H8Z M8 12l8 6 8-6',
+  'Head Office': 'M16 6C12.13 6 9 9.13 9 13c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Z M16 15.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z',
+  'Factory Address': 'M7 9h18v13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V9Z M12 9V7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2 M7 15h18',
+};
+
+// One glyph per inquiry role — reused as both the quick-nav tab icon and the
+// small seal badge preceding each section's heading, so the two stay tied together.
+const roleIcons: Record<string, string> = {
+  general: 'M8 10h.01M12 10h.01M16 10h.01 M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 0 1-4-.8L3 20l1.3-3.9A7.9 7.9 0 0 1 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8Z',
+  industrial: 'M3 21V10l5 3V10l5 3V6l7 4v11H3Z',
+  distributor: 'M7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M17 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M12 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z M7 8l4.2 9M17 8l-4.2 9',
+  // A speech bubble with a "?" (not the plain-dots bubble already used for
+  // "general") — this tab is about asking a question of/about a distributor,
+  // distinct from a general inquiry.
+  'connect-distributor': 'M9 9a3 3 0 1 1 3 3c-1 0-1.5 0.7-1.5 1.5 M12 16h.01 M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 0 1-4-.8L3 20l1.3-3.9A7.9 7.9 0 0 1 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8Z',
+  'export': 'M3 17h18l-2 4H5l-2-4Z M6 17V9l6-4 6 4v8 M10 17v-5h4v5',
+};
+---
+
+<main class="bg-silent-white">
+  <!-- Hero — deep red with the same faint pinstripe texture used across the business pages -->
+  <section class="relative overflow-hidden bg-indian-red py-16 lg:py-24 text-center">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative max-w-[900px] mx-auto px-6 lg:px-10">
+      <h1 class="reveal font-display font-medium text-4xl lg:text-6xl text-silent-white leading-tight" data-cms-field="hero.title">
+        {hero.title}
+      </h1>
+      <p class="reveal mt-6 text-base lg:text-lg leading-relaxed text-silent-white/75 max-w-[680px] mx-auto" style="transition-delay: 80ms" data-cms-field="hero.intro">
+        {hero.intro}
+      </p>
+    </div>
+
+    <svg class="absolute bottom-0 inset-x-0 z-10 w-full h-14 sm:h-20 lg:h-28 text-silent-white" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        d="M0,130 C120,70 240,190 360,130 C480,70 600,190 720,130 C840,70 960,190 1080,130 C1200,70 1320,190 1440,130 L1440,200 L0,200 Z"
+        fill="currentColor"
+      />
+    </svg>
+  </section>
+
+  <!-- Contact info — seal-badge cards -->
+  <section class="relative max-w-[1100px] mx-auto px-6 lg:px-10 pt-10 lg:pt-16">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05] [mask-image:linear-gradient(to_bottom,black,transparent)]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative">
+      <h2 class="reveal font-display font-medium text-2xl lg:text-3xl text-indian-red mb-8" data-cms-field="info.heading">
+        {info.heading}
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {info.items.map((item, ii) => (
+          <div
+            class="info-card reveal group rounded-2xl bg-white p-6 ring-1 ring-indian-red/[0.08] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-indian-red/10 hover:ring-indian-red/20"
+            style={`transition-delay: ${ii * 70}ms`}
+          >
+            <svg viewBox="0 0 64 64" class="info-icon h-12 w-12 text-indian-red">
+              {petals.map((p) => (
+                <circle cx={p.cx} cy={p.cy} r="8" fill="currentColor" opacity="0.85" />
+              ))}
+              <circle cx="32" cy="32" r="16" fill="currentColor" />
+              <path
+                d={infoIcons[item.label] ?? ''}
+                fill="none"
+                stroke="#FFF6EB"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                transform="scale(1.3) translate(8.6, 8.6)"
+              />
+            </svg>
+            <p class="mt-4 text-[10px] font-semibold uppercase tracking-widest text-indian-red/40" data-cms-field={`info.items[${ii}].label`}>
+              {item.label}
+            </p>
+            <p class="mt-1 font-display font-medium text-lg text-indian-red" data-cms-field={`info.items[${ii}].value`}>
+              {item.href ? (
+                <a
+                  href={item.href}
+                  target={item.href.startsWith('mailto:') ? undefined : '_blank'}
+                  rel={item.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                  class="hover:underline"
+                >
+                  {item.value}
+                </a>
+              ) : (
+                item.value
+              )}
+            </p>
+            <p class="mt-2 text-sm leading-relaxed text-indian-red/70" data-cms-field={`info.items[${ii}].description`}>
+              {item.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick-nav — switches which inquiry form is shown below -->
+  <section class="sticky top-0 z-30 bg-white/90 backdrop-blur-sm border-b border-indian-red/10 mt-10 lg:mt-16">
+    <nav class="max-w-[1100px] mx-auto px-6 lg:px-10">
+      <ul id="contact-nav" role="tablist" class="relative flex gap-1 overflow-x-auto no-scrollbar py-2">
+        <li id="nav-indicator" class="absolute -z-10 top-1 bottom-1 left-0 rounded-full bg-indian-red/10" style="width: 0" aria-hidden="true"></li>
+        {nav.items.map((item, ni) => (
+          <li class="shrink-0" role="presentation">
+            <button
+              type="button"
+              id={`tab-${item.id}`}
+              role="tab"
+              aria-selected={ni === 0 ? 'true' : 'false'}
+              aria-controls={`panel-${item.id}`}
+              data-tab={item.id}
+              class={`nav-pill flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-indian-red/55 transition-colors duration-200 hover:text-indian-red hover:bg-indian-red/5 ${ni === 0 ? 'active' : ''}`}
+            >
+              <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0"><path d={roleIcons[item.id] ?? ''} fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              <span data-cms-field={`nav.items[${ni}].label`}>{item.label}</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </section>
+
+  <!-- General Inquiry -->
+  <section id="panel-general" role="tabpanel" aria-labelledby="tab-general" data-panel="general" class="contact-panel active relative py-10 lg:py-16">
+    <div class="relative max-w-[900px] mx-auto px-6 lg:px-10">
+      <div class="reveal flex items-center gap-3">
+        <svg viewBox="0 0 64 64" class="panel-seal h-10 w-10 shrink-0 text-indian-red">
+          {petals.map((p) => <circle cx={p.cx} cy={p.cy} r="8" fill="currentColor" opacity="0.85" />)}
+          <circle cx="32" cy="32" r="16" fill="currentColor" />
+          <path d={roleIcons.general} fill="none" stroke="#FFF6EB" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="scale(1.3) translate(12.6, 12.6)" />
+        </svg>
+        <h2 class="font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="general.heading">
+          {general.heading}
+        </h2>
+      </div>
+      <p class="reveal mt-3 text-sm leading-relaxed text-indian-red/70 max-w-[600px]" style="transition-delay: 60ms" data-cms-field="general.subheading">
+        {general.subheading}
+      </p>
+
+      <form id="general-form" class="reveal mt-8 overflow-hidden rounded-2xl bg-white shadow-lg shadow-indian-red/10 ring-1 ring-indian-red/[0.08] lg:grid lg:grid-cols-[260px_1fr]" style="transition-delay: 120ms">
+        <div class="relative overflow-hidden bg-indian-red p-6 lg:p-8 flex flex-col justify-between">
+          <div class="pointer-events-none absolute inset-0 opacity-[0.06]" style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);" aria-hidden="true" />
+          <div class="relative">
+            <span class="font-display text-[10px] font-medium uppercase tracking-widest text-silent-white/50" data-cms-field="general.card.ref">{general.card.ref}</span>
+            <h3 class="mt-2 font-display font-medium text-xl text-silent-white" data-cms-field="general.card.title">{general.card.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-silent-white/70" data-cms-field="general.card.body">
+              {general.card.body}
+            </p>
+          </div>
+          <p class="relative mt-8 text-xs text-silent-white/50" data-cms-field="general.card.note">{general.card.note}</p>
+        </div>
+
+        <div class="p-6 lg:p-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <label class="block">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="general.fields.name">{general.fields.name}</span>
+              <div class="relative mt-1.5">
+                <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                <input type="text" name="name" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="Your name" />
+              </div>
+            </label>
+            <label class="block">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="general.fields.email">{general.fields.email}</span>
+              <div class="relative mt-1.5">
+                <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M3 5h18v14H3V5Z M3 5l9 8 9-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+                <input type="email" name="email" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="you@example.com" />
+              </div>
+            </label>
+            <label class="block">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="general.fields.city">{general.fields.city}</span>
+              <div class="relative mt-1.5">
+                <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /><circle cx="12" cy="9" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8" /></svg>
+                <input type="text" name="city" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="e.g. Ahmedabad" />
+              </div>
+            </label>
+            <label class="block">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="general.fields.state">{general.fields.state}</span>
+              <div class="relative mt-1.5">
+                <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /><circle cx="12" cy="9" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8" /></svg>
+                <input type="text" name="state" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="e.g. Gujarat" />
+              </div>
+            </label>
+            <label class="block sm:col-span-2">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="general.fields.subject">{general.fields.subject}</span>
+              <div class="relative mt-1.5">
+                <CustomSelect client:visible name="subject" placeholder="Select a reason" options={general.subjectOptions} icon={ICONS.subject} listPath="general.subjectOptions" required />
+              </div>
+            </label>
+            <label class="block sm:col-span-2">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="general.fields.message">{general.fields.message}</span>
+              <textarea name="message" required rows="4" class="mt-1.5 w-full rounded-lg border border-indian-red/15 bg-white px-3.5 py-2.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="Tell us what's on your mind"></textarea>
+            </label>
+          </div>
+
+          <button id="general-submit" type="submit" class="mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-indian-red px-6 py-3 text-sm font-medium text-silent-white transition-transform duration-200 hover:scale-[1.03] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100">
+            <span id="general-submit-label" data-cms-field="general.submitLabel">{general.submitLabel}</span>
+            <svg viewBox="0 0 24 24" class="h-4 w-4"><path d="M5 12h14m0 0-5-5m5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </button>
+
+          <p id="general-success" class="mt-4 hidden text-sm font-medium text-indian-red" data-cms-field="general.successMessage">{general.successMessage}</p>
+          <p id="general-error" class="mt-4 hidden text-sm font-medium text-red-600"></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Bulk & Industrial Inquiry — same fields as the Industrial Salt RFQ form -->
+  <section id="panel-industrial" role="tabpanel" aria-labelledby="tab-industrial" data-panel="industrial" class="contact-panel relative py-10 lg:py-16">
+    <div class="pointer-events-none absolute inset-0 opacity-[0.05] [mask-image:linear-gradient(to_bottom,black,transparent)]" style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);" aria-hidden="true" />
+    <div class="relative max-w-[900px] mx-auto px-6 lg:px-10">
+      <div class="reveal flex items-center gap-3">
+        <svg viewBox="0 0 64 64" class="panel-seal h-10 w-10 shrink-0 text-indian-red">
+          {petals.map((p) => <circle cx={p.cx} cy={p.cy} r="8" fill="currentColor" opacity="0.85" />)}
+          <circle cx="32" cy="32" r="16" fill="currentColor" />
+          <path d={roleIcons.industrial} fill="none" stroke="#FFF6EB" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="scale(1.3) translate(12.6, 12.6)" />
+        </svg>
+        <h2 class="font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="industrial.heading">
+          {industrial.heading}
+        </h2>
+      </div>
+      <p class="reveal mt-3 text-sm leading-relaxed text-indian-red/70 max-w-[600px]" style="transition-delay: 60ms" data-cms-field="industrial.subheading">
+        {industrial.subheading}
+      </p>
+      <a href={industrial.linkHref} class="reveal group mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-indian-red underline decoration-indian-red/30 underline-offset-4 transition-colors hover:decoration-indian-red" style="transition-delay: 90ms" data-cms-link="industrial.linkHref">
+        <span data-cms-field="industrial.linkLabel">{industrial.linkLabel}</span>
+        <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"><path d="M5 12h14m0 0-5-5m5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </a>
+
+      <form id="industrial-form" class="reveal mt-8 overflow-hidden rounded-2xl bg-white shadow-lg shadow-indian-red/10 ring-1 ring-indian-red/[0.08] lg:grid lg:grid-cols-[260px_1fr]" style="transition-delay: 130ms">
+        <div class="relative overflow-hidden bg-indian-red p-6 lg:p-8 flex flex-col justify-between">
+          <div class="pointer-events-none absolute inset-0 opacity-[0.06]" style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);" aria-hidden="true" />
+          <div class="relative">
+            <span class="font-display text-[10px] font-medium uppercase tracking-widest text-silent-white/50" data-cms-field="industrial.card.ref">{industrial.card.ref}</span>
+            <h3 class="mt-2 font-display font-medium text-xl text-silent-white" data-cms-field="industrial.card.title">{industrial.card.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-silent-white/70" data-cms-field="industrial.card.body">
+              {industrial.card.body}
+            </p>
+          </div>
+          <p class="relative mt-8 text-xs text-silent-white/50" data-cms-field="industrial.card.note">{industrial.card.note}</p>
+        </div>
+
+        <div class="p-6 lg:p-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <label class="block">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="industrial.fields.company">{industrial.fields.company}</span>
+              <div class="relative mt-1.5">
+                <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16M13 21h7V11a1 1 0 0 0-1-1h-6M8 8h1M8 12h1M8 16h1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                <input type="text" name="company" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="Your company" />
+              </div>
+            </label>
+            <label class="block">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="industrial.fields.industry">{industrial.fields.industry}</span>
+              <div class="relative mt-1.5">
+                <CustomSelect client:visible name="industry" placeholder="Select industry" options={[...productOptions.industries, 'Other']} icon={ICONS.industry} listPath="productOptions.industries" required />
+              </div>
+            </label>
+            <label id="contact-industrial-other-wrap" class="hidden sm:col-span-2">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">Please specify your industry</span>
+              <div class="relative mt-1.5">
+                <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M3 21V10l5 3V10l5 3V6l7 4v11H3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+                <input type="text" id="contact-industrial-other" name="industryOther" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="e.g. Cosmetics manufacturing" />
+              </div>
+            </label>
+            <label class="block">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="industrial.fields.grade">{industrial.fields.grade}</span>
+              <div class="relative mt-1.5">
+                <CustomSelect client:visible name="grade" placeholder="Select grade" options={[...productOptions.grades, 'Other']} icon={ICONS.grade} iconFilled listPath="productOptions.grades" required />
+              </div>
+            </label>
+            <label id="contact-grade-other-wrap" class="hidden sm:col-span-2">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">Please specify your grade</span>
+              <div class="relative mt-1.5">
+                <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M12 1.5 21 12 12 22.5 3 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+                <input type="text" id="contact-grade-other" name="gradeOther" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="e.g. Custom 90 PPM" />
+              </div>
+            </label>
+            <label class="block">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="industrial.fields.quantity">{industrial.fields.quantity}</span>
+              <div class="relative mt-1.5">
+                <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M12 3v2M7 5h10l2 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L7 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+                <input type="text" name="quantity" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="e.g. 20 MT / month" />
+              </div>
+            </label>
+            <label class="block sm:col-span-2">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="industrial.fields.location">{industrial.fields.location}</span>
+              <div class="relative mt-1.5">
+                <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /><circle cx="12" cy="9" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8" /></svg>
+                <input type="text" name="location" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="City, state / country" />
+              </div>
+            </label>
+            <label class="block sm:col-span-2">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="industrial.fields.email">{industrial.fields.email}</span>
+              <div class="relative mt-1.5">
+                <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M3 5h18v14H3V5Z M3 5l9 8 9-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+                <input type="email" name="email" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="you@company.com" />
+              </div>
+            </label>
+            <label class="block sm:col-span-2">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">07 · Attachment (Optional)</span>
+              <div class="relative mt-1.5">
+                <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M17.5 6.5 9 15a3 3 0 0 0 4.24 4.24l8-8a5 5 0 0 0-7.07-7.07l-8 8a7 7 0 0 0 9.9 9.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                <input
+                  type="file"
+                  name="attachment"
+                  accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                  class="w-full rounded-lg border border-indian-red/15 bg-white py-2 pl-10 pr-3.5 text-sm text-indian-red/70 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30 file:mr-3 file:rounded-md file:border-0 file:bg-indian-red/[0.08] file:px-3 file:py-1.5 file:text-xs file:font-semibold file:uppercase file:tracking-wide file:text-indian-red hover:file:bg-indian-red/[0.14]"
+                />
+              </div>
+              <p class="mt-1.5 text-[11px] text-indian-red/40">PDF, Word doc, or image, up to 10MB — spec sheet, drawing, or purchase order.</p>
+            </label>
+            <label class="block sm:col-span-2">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="industrial.fields.message">{industrial.fields.message}</span>
+              <div class="relative mt-1.5">
+                <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-3 h-4 w-4 text-indian-red/35"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H8l-5 4V6a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+                <textarea name="message" rows="3" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="Any additional details about your requirement"></textarea>
+              </div>
+            </label>
+          </div>
+
+          <button id="industrial-submit" type="submit" class="mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-indian-red px-6 py-3 text-sm font-medium text-silent-white transition-transform duration-200 hover:scale-[1.03] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100">
+            <span id="industrial-submit-label" data-cms-field="industrial.submitLabel">{industrial.submitLabel}</span>
+            <svg viewBox="0 0 24 24" class="h-4 w-4"><path d="M5 12h14m0 0-5-5m5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </button>
+
+          <p id="industrial-success" class="mt-4 hidden text-sm font-medium text-indian-red" data-cms-field="industrial.successMessage">{industrial.successMessage}</p>
+          <p id="industrial-error" class="mt-4 hidden text-sm font-medium text-red-600"></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Distributor Inquiry — a short quick-capture form, then straight through to the full application -->
+  <section id="panel-distributor" role="tabpanel" aria-labelledby="tab-distributor" data-panel="distributor" class="contact-panel">
+    <BecomeDistributorForm client:load content={becomeDistributor} skipEntranceAnimation />
+  </section>
+
+  <section id="panel-connect-distributor" role="tabpanel" aria-labelledby="tab-connect-distributor" data-panel="connect-distributor" class="contact-panel">
+    <ConnectWithDistributorForm client:load content={connectWithDistributor} skipEntranceAnimation />
+  </section>
+
+  <!-- Export Inquiry -->
+  <section id="panel-export" role="tabpanel" aria-labelledby="tab-export" data-panel="export" class="contact-panel">
+    <ExportInquiryForm client:load content={exportInquiry} skipEntranceAnimation />
+  </section>
+
+  <!-- Find Us — sits between two other red bands (Export's form above and
+       the newsletter CTA below in the footer), so keeping it Indian Red too
+       made it disappear into them as one undifferentiated block. Inverted
+       to Silent White with Indian Red content instead — the brand kit's
+       other documented pairing — so it reads as its own panel and the
+       red/cream/red rhythm actually shows. Background texture is the same
+       pinstripe overlay this file already uses on its other light-bg
+       sections (see the Contact info / Bulk & Industrial panels above)
+       rather than a one-off pattern, so it stays consistent site-wide. -->
+  <section class="relative overflow-hidden bg-silent-white py-16 lg:py-20 text-center">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative max-w-[640px] mx-auto px-6">
+      <div class="est-badge mx-auto flex h-20 w-20 rotate-[8deg] items-center justify-center rounded-full border-[1.5px] border-dashed border-indian-red/40 bg-indian-red/[0.04] shadow-sm">
+        <div class="text-center">
+          <p class="font-display text-[9px] font-semibold uppercase tracking-[0.15em] text-indian-red">Est.</p>
+          <p class="font-display text-lg font-semibold text-indian-red" data-cms-field="visit.since">{visit.since}</p>
+        </div>
+      </div>
+      <h2 class="reveal mt-6 font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="visit.heading">
+        {visit.heading}
+      </h2>
+      <p class="reveal mt-3 text-sm leading-relaxed text-indian-red/70" style="transition-delay: 60ms" data-cms-field="visit.text">
+        {visit.text}
+      </p>
+    </div>
+  </section>
+</main>
+
+<style>
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .nav-pill.active {
+    color: #a82121;
+  }
+  .contact-panel {
+    display: none;
+  }
+  .contact-panel.active {
+    display: block;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { getRecaptchaToken } from '../lib/recaptcha';
+
+  // initContactPage runs on `astro:page-load` (fires on initial load AND
+  // every client-side transition) rather than as plain top-level code —
+  // this <script> is a JS module, and modules only ever execute once per
+  // browser session, so a plain top-level run left every `.reveal` element
+  // permanently invisible (and the tab switching / forms never wired up) on
+  // any revisit later in the same session. revealObserver/badgeObserver are
+  // disconnected at the top of each run so a revisit replaces them instead
+  // of layering a second observer on top; element listeners (tabs, forms,
+  // card hover) don't need the same treatment since Astro's transition
+  // replaces those DOM nodes outright, so stale listeners on the old,
+  // now-detached elements are just garbage collected. The one exception is
+  // `window.addEventListener('load', ...)` below, which only ever fires
+  // once per real page load anyway (not per transition), so it's harmless
+  // to leave unremoved even though `window` itself persists.
+  let revealObserver: IntersectionObserver | null = null;
+  let badgeObserver: IntersectionObserver | null = null;
+  // Unlike revealObserver/badgeObserver above, this listens on `window`
+  // itself — which Astro's transitions don't replace the way they replace
+  // DOM nodes — so it needs the same explicit remove-before-add treatment
+  // or it would stack a duplicate listener (and a duplicate toggle) on
+  // every revisit.
+  let onCustomSelectChange: EventListener | null = null;
+
+  function initContactPage(): void {
+    revealObserver?.disconnect();
+    badgeObserver?.disconnect();
+    if (onCustomSelectChange) window.removeEventListener('customselect:change', onCustomSelectChange);
+
+    const targets = document.querySelectorAll<HTMLElement>('.reveal');
+    if (targets.length) {
+      revealObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              revealObserver?.unobserve(entry.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+      );
+      targets.forEach((el) => revealObserver?.observe(el));
+    }
+
+    // The "Est." seal stamps in with a little bounce the first time it scrolls into view.
+    // Default markup renders it fully visible — this only ever hides-then-reveals via JS,
+    // so nothing depends on the animation firing.
+    const estBadge = document.querySelector<HTMLElement>('.est-badge');
+    if (estBadge) {
+      badgeObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              gsap.fromTo(
+                estBadge,
+                { opacity: 0, scale: 0.5, rotate: -20 },
+                { opacity: 1, scale: 1, rotate: 8, duration: 0.6, ease: 'back.out(1.8)' }
+              );
+              badgeObserver?.unobserve(entry.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+      );
+      badgeObserver.observe(estBadge);
+    }
+
+    // Info card seal icons give a little bounce-and-tilt on hover, same as the
+    // industry cards on the Industrial Salt page.
+    document.querySelectorAll<HTMLElement>('.info-card').forEach((card) => {
+      const icon = card.querySelector<HTMLElement>('.info-icon');
+      if (!icon) return;
+      card.addEventListener('mouseenter', () => {
+        gsap.to(icon, { rotate: -8, scale: 1.15, duration: 0.35, ease: 'back.out(2.5)' });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(icon, { rotate: 0, scale: 1, duration: 0.3, ease: 'power2.out' });
+      });
+    });
+
+    // Tab switching — only the selected inquiry's panel is shown at a time, with a
+    // sliding pill behind the active tab and a crossfade between panels.
+    const tabs = document.querySelectorAll<HTMLButtonElement>('[data-tab]');
+    const panels = document.querySelectorAll<HTMLElement>('[data-panel]');
+    const navIndicator = document.getElementById('nav-indicator');
+    const validIds = new Set(Array.from(tabs).map((t) => t.dataset.tab));
+
+    const moveIndicator = (id: string, animate: boolean) => {
+      const btn = document.getElementById(`tab-${id}`);
+      if (!btn || !navIndicator) return;
+      const { offsetLeft, offsetWidth } = btn;
+      if (animate) {
+        gsap.to(navIndicator, { x: offsetLeft, width: offsetWidth, duration: 0.35, ease: 'power2.out' });
+      } else {
+        gsap.set(navIndicator, { x: offsetLeft, width: offsetWidth });
+      }
+    };
+
+    const switchPanel = (id: string, animate: boolean) => {
+      const next = document.querySelector<HTMLElement>(`[data-panel="${id}"]`);
+      const current = document.querySelector<HTMLElement>('.contact-panel.active');
+      if (!next || current === next) return;
+
+      const revealNext = () => {
+        next.classList.add('active');
+        if (!animate) return;
+        gsap.fromTo(next, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+        const seal = next.querySelector<HTMLElement>('.panel-seal');
+        if (seal) {
+          gsap.fromTo(
+            seal,
+            { opacity: 0, scale: 0.5, rotate: -15 },
+            { opacity: 1, scale: 1, rotate: 0, duration: 0.5, ease: 'back.out(2.2)', delay: 0.08 }
+          );
+        }
+      };
+
+      if (current && animate) {
+        gsap.to(current, {
+          opacity: 0,
+          y: -10,
+          duration: 0.2,
+          ease: 'power1.in',
+          onComplete: () => {
+            current.classList.remove('active');
+            gsap.set(current, { clearProps: 'opacity,transform' });
+            revealNext();
+          },
+        });
+      } else {
+        current?.classList.remove('active');
+        revealNext();
+      }
+    };
+
+    const activateTab = (id: string, { animate = true, focusPanel = false } = {}) => {
+      if (!validIds.has(id)) return;
+      tabs.forEach((tab) => {
+        const isActive = tab.dataset.tab === id;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+      moveIndicator(id, animate);
+      switchPanel(id, animate);
+      if (focusPanel) {
+        document.getElementById(`panel-${id}`)?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      }
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const id = tab.dataset.tab;
+        if (!id) return;
+        history.replaceState(null, '', `#${id}`);
+        activateTab(id, { animate: true, focusPanel: true });
+      });
+    });
+
+    const hashId = location.hash.replace('#', '');
+    const initialId = validIds.has(hashId) ? hashId : 'general';
+    activateTab(initialId, { animate: false });
+    // Recalibrate the indicator once more after web fonts settle, in case tab widths shifted.
+    window.addEventListener('load', () => moveIndicator(initialId, false));
+
+    // "Other" in the Industrial tab's Industry/Grade dropdowns reveals a
+    // free-text field — required only while visible, so a hidden field
+    // doesn't silently block submit when a listed option is picked instead.
+    // These are CustomSelect islands (not native <select>s), so there's no
+    // `change` event on the form to listen to — CustomSelect dispatches its
+    // own 'customselect:change' on window instead whenever a pick is made.
+    const industryOtherWrap = document.getElementById('contact-industrial-other-wrap');
+    const industryOtherInput = document.getElementById('contact-industrial-other') as HTMLInputElement | null;
+    const gradeOtherWrap = document.getElementById('contact-grade-other-wrap');
+    const gradeOtherInput = document.getElementById('contact-grade-other') as HTMLInputElement | null;
+    onCustomSelectChange = ((e: CustomEvent<{ name: string; value: string }>) => {
+      if (e.detail?.name === 'industry') {
+        const isOther = e.detail.value === 'Other';
+        industryOtherWrap?.classList.toggle('hidden', !isOther);
+        if (industryOtherInput) industryOtherInput.required = isOther;
+      } else if (e.detail?.name === 'grade') {
+        const isOther = e.detail.value === 'Other';
+        gradeOtherWrap?.classList.toggle('hidden', !isOther);
+        if (gradeOtherInput) gradeOtherInput.required = isOther;
+      }
+    }) as EventListener;
+    window.addEventListener('customselect:change', onCustomSelectChange);
+
+    const forms: Array<{ formId: string; successId: string; errorId: string; submitId: string; labelId: string; endpoint: string; action: string; multipart?: boolean }> = [
+      { formId: 'general-form', successId: 'general-success', errorId: 'general-error', submitId: 'general-submit', labelId: 'general-submit-label', endpoint: '/api/submit-contact-general', action: 'contact_general' },
+      { formId: 'industrial-form', successId: 'industrial-success', errorId: 'industrial-error', submitId: 'industrial-submit', labelId: 'industrial-submit-label', endpoint: '/api/submit-contact-industrial', action: 'contact_industrial', multipart: true },
+    ];
+    const apiBase = import.meta.env.PUBLIC_OTP_API_BASE_URL ?? '';
+    for (const { formId, successId, errorId, submitId, labelId, endpoint, action, multipart } of forms) {
+      const form = document.getElementById(formId) as HTMLFormElement | null;
+      const success = document.getElementById(successId);
+      const errorEl = document.getElementById(errorId);
+      const submitBtn = document.getElementById(submitId) as HTMLButtonElement | null;
+      const labelEl = document.getElementById(labelId);
+      const originalLabel = labelEl?.textContent ?? '';
+
+      form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (submitBtn?.disabled) return;
+        errorEl?.classList.add('hidden');
+        if (submitBtn) submitBtn.disabled = true;
+        if (labelEl) labelEl.textContent = 'Submitting…';
+        try {
+          const recaptchaToken = await getRecaptchaToken(action);
+          // The industrial form carries an optional file attachment, so it's
+          // sent as multipart FormData (no Content-Type set — the browser
+          // fills in the correct boundary); every other form here is plain
+          // text fields, sent as JSON like the rest of the site's forms.
+          let res: Response;
+          if (multipart) {
+            const formData = new FormData(form);
+            formData.set('recaptchaToken', recaptchaToken);
+            res = await fetch(`${apiBase}${endpoint}`, { method: 'POST', body: formData });
+          } else {
+            res = await fetch(`${apiBase}${endpoint}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ ...Object.fromEntries(new FormData(form).entries()), recaptchaToken }),
+            });
+          }
+          const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+          if (!res.ok || !data.ok) throw new Error(data.error || 'Failed to submit');
+          if (success) {
+            success.classList.remove('hidden');
+            gsap.fromTo(success, { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+          }
+          form.reset();
+          // form.reset() only touches native form controls — CustomSelect's
+          // own displayed value is separate React state it doesn't reach —
+          // but the reveal-field's hidden/required state is plain DOM here,
+          // and would otherwise still reflect whatever was chosen before
+          // this submit.
+          if (formId === 'industrial-form') {
+            industryOtherWrap?.classList.add('hidden');
+            if (industryOtherInput) industryOtherInput.required = false;
+            gradeOtherWrap?.classList.add('hidden');
+            if (gradeOtherInput) gradeOtherInput.required = false;
+          }
+        } catch (err) {
+          if (errorEl) {
+            errorEl.textContent = err instanceof Error ? err.message : 'Failed to submit';
+            errorEl.classList.remove('hidden');
+          }
+        } finally {
+          if (submitBtn) submitBtn.disabled = false;
+          if (labelEl) labelEl.textContent = originalLabel;
+        }
+      });
+    }
+  }
+
+  document.addEventListener('astro:page-load', initContactPage);
+</script>

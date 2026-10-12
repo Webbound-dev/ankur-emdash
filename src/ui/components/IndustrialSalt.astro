@@ -1,0 +1,882 @@
+---
+import GradesTable from './GradesTable';
+import CustomSelect from './CustomSelect';
+
+// Same icons already used for these two fields (factory for industry,
+// filled diamond for grade) — just carried over to CustomSelect's 24x24
+// viewBox convention, matching ContactUs.astro's ICONS.industry/grade.
+const SELECT_ICONS = {
+  industry: 'M3 21V10l5 3V10l5 3V6l7 4v11H3Z',
+  grade: 'M12 1.5 21 12 12 22.5 3 12Z',
+};
+
+interface GradeSpec { tier: string; name: string; hardness: string }
+interface Industry { name: string; useCase: string }
+interface DataSheetGate {
+  heading: string;
+  subheading: string;
+  fields: { name: string; company: string; email: string };
+  placeholders: { name: string; company: string; email: string };
+  sendOtpLabel: string;
+  verifyLabel: string;
+  submitLabel: string;
+  successMessage: string;
+}
+
+interface Props {
+  content: {
+    hero: { title: string; intro: string };
+    grades: { heading: string; subheading: string; items: GradeSpec[] };
+    industries: { heading: string; items: Industry[] };
+    rfq: { heading: string; subheading: string };
+    dataSheets: { heading: string; subheading: string; title: string; description: string; file: string; ctaLabel: string; gate: DataSheetGate };
+    quote: { text: string; attribution: string };
+  };
+}
+
+const { content } = Astro.props;
+const { hero, grades, industries, rfq, dataSheets, quote } = content;
+
+// One glyph per industry — kept intentionally simple, same visual weight as the
+// certification seals used elsewhere on the site.
+const industryIcons: Record<string, string> = {
+  FMCG: 'M20 8h24v48H20z M26 16h12 M26 24h12 M26 32h12',
+  'Textiles and Dyes': 'M8 32c6-10 12-10 18 0s12 10 18 0s12-10 18 0',
+  'Water Treatment': 'M32 8c8 12 14 20 14 28a14 14 0 1 1-28 0c0-8 6-16 14-28Z',
+  'Petroleum Additives': 'M32 6c10 10 16 20 16 30a16 16 0 1 1-32 0c0-10 6-20 16-30Z M32 34a6 6 0 1 0 0 0.1Z',
+  'Chemicals and Intermediates': 'M26 8h12v14l10 24a6 6 0 0 1-6 8H22a6 6 0 0 1-6-8l10-24Z M24 38h16',
+  Pharmaceuticals: 'M20 20a10 10 0 0 1 20 0v10H20Z M20 30h20v10a10 10 0 0 1-20 0Z',
+};
+---
+
+<main data-industrial-salt class="bg-silent-white">
+  <!-- Hero — deep red with the same faint pinstripe texture used throughout, no image -->
+  <section class="relative overflow-hidden bg-indian-red py-16 lg:py-24 text-center">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative max-w-[900px] mx-auto px-6 lg:px-10">
+      <h1 class="reveal font-display font-medium text-4xl lg:text-6xl text-silent-white leading-tight" data-cms-field="hero.title">
+        {hero.title}
+      </h1>
+      <p class="reveal mt-6 text-base lg:text-lg leading-relaxed text-silent-white/75 max-w-[680px] mx-auto" style="transition-delay: 80ms" data-cms-field="hero.intro">
+        {hero.intro}
+      </p>
+    </div>
+  </section>
+
+  <!-- Grades and Specifications -->
+  <section id="grades" class="relative max-w-[1100px] mx-auto px-6 lg:px-10 py-10 lg:py-16 scroll-mt-24">
+    <!-- Same pinstripe texture as the hero, just red-on-cream instead of cream-on-red -->
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05] [mask-image:linear-gradient(to_bottom,black,transparent)]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+
+    <div class="relative">
+      <GradesTable client:visible content={grades} />
+    </div>
+  </section>
+
+  <!-- Industries Served — dark red + texture, white cards floating on top -->
+  <section id="industries-served" class="relative overflow-hidden bg-indian-red pb-16 pt-16 lg:pb-20 lg:pt-20 scroll-mt-24">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+
+    <!-- Wavy edges — a real repeating wave, not a single gentle curve -->
+    <svg class="absolute top-0 inset-x-0 z-10 w-full h-14 sm:h-20 lg:h-28 text-silent-white" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        d="M0,70 C120,130 240,10 360,70 C480,130 600,10 720,70 C840,130 960,10 1080,70 C1200,130 1320,10 1440,70 L1440,0 L0,0 Z"
+        fill="currentColor"
+      />
+    </svg>
+
+    <div class="relative max-w-[1100px] mx-auto px-6 lg:px-10">
+      <h2 class="reveal font-display font-medium text-2xl lg:text-3xl text-silent-white mb-8" data-cms-field="industries.heading">
+        {industries.heading}
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {industries.items.map((industry, ii) => (
+          <div
+            class="industry-card reveal group relative overflow-hidden rounded-2xl bg-white p-6 ring-1 ring-indian-red/[0.08] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-indian-red/10 hover:ring-indian-red/20"
+            style={`transition-delay: ${ii * 60}ms`}
+          >
+            <span class="absolute right-4 top-3 font-display text-3xl font-medium text-indian-red/[0.06] leading-none select-none">
+              {String(ii + 1).padStart(2, '0')}
+            </span>
+            <svg viewBox="0 0 64 64" class="industry-icon relative h-10 w-10 text-indian-red">
+              <path d={industryIcons[industry.name] ?? ''} fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <p class="relative mt-4 font-display font-medium text-lg text-indian-red" data-cms-field={`industries.items[${ii}].name`}>
+              {industry.name}
+            </p>
+            <p class="relative mt-1.5 text-sm leading-relaxed text-indian-red/70" data-cms-field={`industries.items[${ii}].useCase`}>
+              {industry.useCase}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom wave — flows back into the light RFQ section below -->
+    <svg class="absolute bottom-0 inset-x-0 z-10 w-full h-14 sm:h-20 lg:h-28 text-silent-white" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        d="M0,130 C120,70 240,190 360,130 C480,70 600,190 720,130 C840,70 960,190 1080,130 C1200,70 1320,190 1440,130 L1440,200 L0,200 Z"
+        fill="currentColor"
+      />
+    </svg>
+  </section>
+
+  <!-- Bulk Order / RFQ — same light pinstripe texture as Grades, kept light for a readable form -->
+  <section id="rfq" class="relative py-10 lg:py-16 scroll-mt-24">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05] [mask-image:linear-gradient(to_bottom,black,transparent)]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="relative max-w-[900px] mx-auto px-6 lg:px-10">
+    <h2 class="reveal font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="rfq.heading">
+      {rfq.heading}
+    </h2>
+    <p class="reveal mt-2 text-sm leading-relaxed text-indian-red/70 max-w-[600px]" style="transition-delay: 60ms" data-cms-field="rfq.subheading">
+      {rfq.subheading}
+    </p>
+
+    <form id="rfq-form" class="reveal mt-8 overflow-hidden rounded-2xl bg-white shadow-lg shadow-indian-red/10 ring-1 ring-indian-red/[0.08] lg:grid lg:grid-cols-[260px_1fr]" style="transition-delay: 120ms">
+      <!-- Dark context panel -->
+      <div class="relative overflow-hidden bg-indian-red p-6 lg:p-8 flex flex-col justify-between">
+        <div
+          class="pointer-events-none absolute inset-0 opacity-[0.06]"
+          style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+          aria-hidden="true"
+        />
+        <div class="relative">
+          <span class="font-display text-[10px] font-medium uppercase tracking-widest text-silent-white/50">Ref. RFQ</span>
+          <h3 class="mt-2 font-display font-medium text-xl text-silent-white">Bulk Enquiry Form</h3>
+          <p class="mt-3 text-sm leading-relaxed text-silent-white/70">
+            Tell us your grade, quantity and delivery location, and our team will follow up directly with a quote.
+          </p>
+        </div>
+        <p class="relative mt-8 text-xs text-silent-white/50">We typically respond within 1 to 2 business days.</p>
+      </div>
+
+      <div class="p-6 lg:p-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <label class="block">
+            <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">01 · Company Name</span>
+            <div class="relative mt-1.5">
+              <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16M13 21h7V11a1 1 0 0 0-1-1h-6M8 8h1M8 12h1M8 16h1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              <input type="text" name="company" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="Your company" />
+            </div>
+          </label>
+          <label class="block">
+            <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">02 · Industry</span>
+            <div class="relative mt-1.5">
+              <CustomSelect
+                client:visible
+                name="industry"
+                placeholder="Select industry"
+                options={[...industries.items.map((industry) => industry.name), 'Other']}
+                icon={SELECT_ICONS.industry}
+                required
+              />
+            </div>
+          </label>
+          <label id="rfq-industry-other-wrap" class="hidden sm:col-span-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">Please specify your industry</span>
+            <div class="relative mt-1.5">
+              <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M3 21V10l5 3V10l5 3V6l7 4v11H3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+              <input type="text" id="rfq-industry-other" name="industryOther" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="e.g. Cosmetics manufacturing" />
+            </div>
+          </label>
+          <label class="block">
+            <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">03 · Grade Required</span>
+            <div class="relative mt-1.5">
+              <CustomSelect
+                client:visible
+                name="grade"
+                placeholder="Select grade"
+                options={[...grades.items.map((grade) => grade.name), 'Other']}
+                icon={SELECT_ICONS.grade}
+                iconFilled
+                required
+              />
+            </div>
+          </label>
+          <label class="block">
+            <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">04 · Quantity</span>
+            <div class="relative mt-1.5">
+              <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M12 3v2M7 5h10l2 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L7 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+              <input type="text" name="quantity" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="e.g. 20 MT / month" />
+            </div>
+          </label>
+          <label id="rfq-grade-other-wrap" class="hidden sm:col-span-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">Please specify your grade</span>
+            <div class="relative mt-1.5">
+              <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M3 21V10l5 3V10l5 3V6l7 4v11H3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+              <input type="text" id="rfq-grade-other" name="gradeOther" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="e.g. Food grade, custom PPM" />
+            </div>
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">05 · Delivery Location</span>
+            <div class="relative mt-1.5">
+              <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /><circle cx="12" cy="9" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8" /></svg>
+              <input type="text" name="location" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="City, state / country" />
+            </div>
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">06 · Email</span>
+            <div class="relative mt-1.5">
+              <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M3 5h18v14H3V5Z M3 5l9 8 9-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+              <input type="email" name="email" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="you@company.com" />
+            </div>
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">07 · Attachment (optional)</span>
+            <div class="relative mt-1.5">
+              <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M17.5 6.5 9 15a3 3 0 0 0 4.24 4.24l8-8a5 5 0 0 0-7.07-7.07l-8 8a7 7 0 0 0 9.9 9.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              <input
+                type="file"
+                name="attachment"
+                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                class="w-full rounded-lg border border-indian-red/15 bg-white py-2 pl-10 pr-3.5 text-sm text-indian-red/70 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30 file:mr-3 file:rounded-md file:border-0 file:bg-indian-red/[0.08] file:px-3 file:py-1.5 file:text-xs file:font-semibold file:uppercase file:tracking-wide file:text-indian-red hover:file:bg-indian-red/[0.14]"
+              />
+            </div>
+            <p class="mt-1.5 text-[11px] text-indian-red/40">PDF, Word doc, or image, up to 10MB — spec sheet, drawing, or purchase order.</p>
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">08 · Message (Optional)</span>
+            <div class="relative mt-1.5">
+              <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-3 h-4 w-4 text-indian-red/35"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H8l-5 4V6a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+              <textarea name="message" rows="3" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="Any additional details about your requirement"></textarea>
+            </div>
+          </label>
+        </div>
+
+        <button
+          id="rfq-submit"
+          type="submit"
+          class="mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-indian-red px-6 py-3 text-sm font-medium text-silent-white transition-transform duration-200 hover:scale-[1.03] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+        >
+          <span id="rfq-submit-label">Submit Request</span>
+          <svg viewBox="0 0 24 24" class="h-4 w-4"><path d="M5 12h14m0 0-5-5m5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </button>
+
+        <p id="rfq-success" class="mt-4 hidden text-sm font-medium text-indian-red">
+          Thanks, your request has been recorded. Our team will get back to you shortly.
+        </p>
+        <p id="rfq-error" class="mt-4 hidden text-sm font-medium text-red-600"></p>
+      </div>
+    </form>
+    </div>
+  </section>
+
+  <!-- Technical Data Sheets — dark red + texture, matching Industries above -->
+  <section id="data-sheets" class="relative overflow-hidden bg-indian-red pb-10 pt-16 lg:pb-14 lg:pt-20 scroll-mt-24">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+
+    <!-- Wavy edge — same repeating wave as Industries Served, phase-shifted for variety -->
+    <svg class="absolute top-0 inset-x-0 z-10 w-full h-14 sm:h-20 lg:h-28 text-silent-white" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        d="M0,10 C120,70 240,130 360,70 C480,10 600,70 720,130 C840,70 960,10 1080,70 C1200,130 1320,70 1440,10 L1440,0 L0,0 Z"
+        fill="currentColor"
+      />
+    </svg>
+
+    <div class="relative max-w-[900px] mx-auto px-6 lg:px-10">
+      <h2 class="reveal font-display font-medium text-2xl lg:text-3xl text-silent-white" data-cms-field="dataSheets.heading">
+        {dataSheets.heading}
+      </h2>
+      <p class="reveal mt-2 text-sm leading-relaxed text-silent-white/70" style="transition-delay: 60ms" data-cms-field="dataSheets.subheading">
+        {dataSheets.subheading}
+      </p>
+
+      <div class="mt-8">
+        <div class="datasheet-card reveal group relative overflow-hidden rounded-2xl bg-white ring-1 ring-indian-red/[0.08] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-indian-red/10 hover:ring-indian-red/20">
+          <div class="flex flex-col gap-6 p-6 sm:flex-row sm:items-center sm:gap-7 lg:p-8">
+            <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-indian-red/[0.08] text-indian-red">
+              <svg viewBox="0 0 32 40" class="h-8 w-7">
+                <path d="M4 1h17l7 7v31H4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                <path d="M21 1v7h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                <path d="M9 22h14M9 27h14M9 17h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+            </div>
+
+            <div class="min-w-0 flex-1">
+              <p class="font-display font-medium text-lg text-indian-red" data-cms-field="dataSheets.title">
+                {dataSheets.title}
+              </p>
+              <p class="mt-1.5 max-w-[520px] text-sm leading-relaxed text-indian-red/65" data-cms-field="dataSheets.description">
+                {dataSheets.description}
+              </p>
+              <div class="mt-3 flex flex-wrap gap-1.5">
+                {grades.items.map((grade) => (
+                  <span class="rounded-full bg-indian-red/[0.06] px-2.5 py-1 text-[11px] font-medium text-indian-red/55">
+                    {grade.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <button
+              type="button"
+              id="datasheet-download-btn"
+              data-file={dataSheets.file}
+              data-cms-link="dataSheets.file"
+              class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-indian-red px-6 py-3 text-sm font-medium text-silent-white transition-transform duration-200 hover:scale-[1.03]"
+            >
+              <span data-cms-field="dataSheets.ctaLabel">{dataSheets.ctaLabel}</span>
+              <svg viewBox="0 0 24 24" class="h-4 w-4">
+                <path d="M12 4v11m0 0 4-4m-4 4-4-4M5 18h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data Sheet gate — verifies the requester's email (same OTP flow as the
+       other lead-capture forms) and logs a lead before the PDF downloads.
+       Hidden by default; opened only by clicking the card above. -->
+  <div id="datasheet-modal" class="fixed inset-0 z-[100] hidden">
+    <div id="datasheet-modal-backdrop" class="absolute inset-0 bg-indian-red/40 backdrop-blur-sm" />
+    <div class="relative flex h-full items-center justify-center overflow-y-auto px-4 py-10">
+      <div id="datasheet-modal-panel" class="relative w-full max-w-[480px]">
+        <button
+          type="button"
+          id="datasheet-modal-close"
+          aria-label="Close"
+          class="absolute -top-3 -right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white text-indian-red shadow-lg ring-1 ring-indian-red/10 transition-colors hover:bg-indian-red hover:text-silent-white"
+        >
+          <svg viewBox="0 0 24 24" class="h-4 w-4"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+        </button>
+
+        <div class="rounded-2xl bg-white p-6 sm:p-8 shadow-xl">
+          <h3 class="font-display font-medium text-xl text-indian-red" data-cms-field="dataSheets.gate.heading">
+            {dataSheets.gate.heading}
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-indian-red/70" data-cms-field="dataSheets.gate.subheading">
+            {dataSheets.gate.subheading}
+          </p>
+
+          <form id="datasheet-form" class="mt-6 flex flex-col gap-4">
+            <label class="block">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="dataSheets.gate.fields.name">
+                {dataSheets.gate.fields.name}
+              </span>
+              <input
+                type="text"
+                name="name"
+                required
+                class="mt-1.5 w-full rounded-lg border border-indian-red/15 bg-white py-2.5 px-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30"
+                placeholder={dataSheets.gate.placeholders.name}
+              />
+            </label>
+            <label class="block">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="dataSheets.gate.fields.company">
+                {dataSheets.gate.fields.company}
+              </span>
+              <input
+                type="text"
+                name="company"
+                required
+                class="mt-1.5 w-full rounded-lg border border-indian-red/15 bg-white py-2.5 px-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30"
+                placeholder={dataSheets.gate.placeholders.company}
+              />
+            </label>
+            <label class="block">
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="dataSheets.gate.fields.email">
+                {dataSheets.gate.fields.email}
+              </span>
+              <div class="relative mt-1.5">
+                <input
+                  type="email"
+                  id="datasheet-email"
+                  name="email"
+                  required
+                  class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-3.5 pr-24 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30"
+                  placeholder={dataSheets.gate.placeholders.email}
+                />
+                <button
+                  type="button"
+                  id="datasheet-send-otp"
+                  class="absolute right-2 top-1/2 -translate-y-1/2 rounded-md bg-indian-red/[0.08] px-2.5 py-1 text-xs font-semibold text-indian-red transition-colors hover:bg-indian-red/[0.14] disabled:opacity-50"
+                >
+                  {dataSheets.gate.sendOtpLabel}
+                </button>
+                <span id="datasheet-verified-badge" class="absolute right-3 top-1/2 hidden -translate-y-1/2 items-center gap-1 text-xs font-semibold text-emerald-700">
+                  <svg viewBox="0 0 24 24" class="h-3.5 w-3.5"><path d="m5 13 4 4L19 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                  Verified
+                </span>
+              </div>
+            </label>
+
+            <div id="datasheet-otp-row" class="hidden">
+              <div class="flex items-center gap-2">
+                <input
+                  type="text"
+                  id="datasheet-otp-input"
+                  inputmode="numeric"
+                  maxlength="6"
+                  placeholder="6-digit code"
+                  class="w-28 rounded-lg border border-indian-red/18 bg-white px-3 py-1.5 text-sm text-indian-red outline-none transition-colors focus:border-indian-red/45 focus:ring-2 focus:ring-indian-red/30"
+                />
+                <button
+                  type="button"
+                  id="datasheet-verify-otp"
+                  class="rounded-md bg-indian-red px-3 py-1.5 text-xs font-semibold text-silent-white transition-opacity hover:opacity-90 disabled:opacity-50"
+                >
+                  {dataSheets.gate.verifyLabel}
+                </button>
+              </div>
+              <p class="mt-1.5 text-[11px] text-indian-red/40">We've emailed a 6-digit code.</p>
+            </div>
+
+            <p id="datasheet-error" class="hidden text-[11px] text-red-600"></p>
+
+            <button
+              type="submit"
+              id="datasheet-submit"
+              disabled
+              class="mt-1 inline-flex cursor-not-allowed items-center justify-center gap-2 rounded-full bg-indian-red/30 px-6 py-3 text-sm font-medium text-silent-white/70 transition-colors duration-200"
+            >
+              {dataSheets.gate.submitLabel}
+            </button>
+          </form>
+
+          <p id="datasheet-success" class="mt-4 hidden text-sm font-medium text-indian-red" data-cms-field="dataSheets.gate.successMessage">
+            {dataSheets.gate.successMessage}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brand statement — its own light section (hard break, no gradient), same texture as Grades/RFQ -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-silent-white to-white py-16 lg:py-20">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+    <div class="reveal relative max-w-[640px] mx-auto px-6 text-center">
+      <svg viewBox="0 0 32 24" class="mx-auto h-7 w-7 text-indian-red/25">
+        <path
+          d="M0 24V13.5Q0 6 4 3T12 0V5Q8 6 6 9T4 14H10V24H0ZM18 24V13.5Q18 6 22 3T30 0V5Q26 6 24 9T22 14H28V24H18Z"
+          fill="currentColor"
+        />
+      </svg>
+      <p
+        class="mt-4 font-display font-medium text-xl lg:text-2xl text-indian-red leading-snug [text-wrap:balance]"
+        data-cms-field="quote.text"
+      >
+        {quote.text}
+      </p>
+      <p class="mt-3 text-xs font-semibold uppercase tracking-widest text-indian-red/40" data-cms-field="quote.attribution">
+        {quote.attribution}
+      </p>
+    </div>
+  </section>
+</main>
+
+<style>
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  /* Hide only after the reveal script has successfully initialized. */
+  [data-reveal-ready] .reveal:not(.in-view) {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, [data-reveal-ready] .reveal:not(.in-view) {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { getRecaptchaToken } from '../lib/recaptcha';
+
+  // initIndustrialSaltPage runs on `astro:page-load` (fires on initial load
+  // AND every client-side transition) rather than as plain top-level code —
+  // this <script> is a JS module, and modules only ever execute once per
+  // browser session, so a plain top-level run left every `.reveal` element
+  // permanently invisible (and the RFQ form / hover effects never wired up)
+  // on any revisit later in the same session. revealObserver is
+  // disconnected at the top of each run so a revisit replaces it instead of
+  // layering a second observer on top; element listeners (form submit,
+  // card hover) don't need the same treatment since Astro's transition
+  // replaces those DOM nodes outright, so stale listeners on the old,
+  // now-detached elements are just garbage collected.
+  let revealObserver: IntersectionObserver | null = null;
+  // Unlike revealObserver above, this listens on `window` itself — which
+  // Astro's transitions don't replace the way they replace DOM nodes — so
+  // it needs the same explicit remove-before-add treatment or it would
+  // stack a duplicate listener (and a duplicate toggle) on every revisit.
+  let onCustomSelectChange: EventListener | null = null;
+  // Same reasoning as onCustomSelectChange above — `document` is never
+  // replaced by Astro transitions, so this needs the remove-before-add
+  // treatment or Escape would close the data-sheet modal once per revisit,
+  // each time it's opened.
+  let dsKeydownHandler: ((e: KeyboardEvent) => void) | null = null;
+
+  function initIndustrialSaltPage(): void {
+    revealObserver?.disconnect();
+    if (onCustomSelectChange) window.removeEventListener('customselect:change', onCustomSelectChange);
+    if (dsKeydownHandler) document.removeEventListener('keydown', dsKeydownHandler);
+
+    const page = document.querySelector<HTMLElement>('[data-industrial-salt]');
+    if (!page) return;
+    const targets = page.querySelectorAll<HTMLElement>('.reveal');
+    if (targets.length && typeof IntersectionObserver !== 'undefined') {
+      revealObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              revealObserver?.unobserve(entry.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+      );
+      targets.forEach((el) => revealObserver?.observe(el));
+      page.setAttribute('data-reveal-ready', '');
+    }
+
+    const form = document.getElementById('rfq-form') as HTMLFormElement | null;
+    const success = document.getElementById('rfq-success');
+    const errorEl = document.getElementById('rfq-error');
+    const submitBtn = document.getElementById('rfq-submit') as HTMLButtonElement | null;
+    const submitLabel = document.getElementById('rfq-submit-label');
+
+    // "Other" in the Industry dropdown reveals a free-text field — required
+    // only while visible, so a hidden field doesn't silently block submit
+    // when a listed industry is picked instead. The Industry field is a
+    // CustomSelect island (not a native <select>), so there's no `change`
+    // event on a form element to listen to — CustomSelect dispatches its
+    // own 'customselect:change' on window instead whenever a pick is made.
+    const industryOtherWrap = document.getElementById('rfq-industry-other-wrap');
+    const industryOtherInput = document.getElementById('rfq-industry-other') as HTMLInputElement | null;
+    const gradeOtherWrap = document.getElementById('rfq-grade-other-wrap');
+    const gradeOtherInput = document.getElementById('rfq-grade-other') as HTMLInputElement | null;
+    onCustomSelectChange = ((e: CustomEvent<{ name: string; value: string }>) => {
+      if (e.detail?.name === 'industry') {
+        const isOther = e.detail.value === 'Other';
+        industryOtherWrap?.classList.toggle('hidden', !isOther);
+        if (industryOtherInput) industryOtherInput.required = isOther;
+      } else if (e.detail?.name === 'grade') {
+        const isOther = e.detail.value === 'Other';
+        gradeOtherWrap?.classList.toggle('hidden', !isOther);
+        if (gradeOtherInput) gradeOtherInput.required = isOther;
+      }
+    }) as EventListener;
+    window.addEventListener('customselect:change', onCustomSelectChange);
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (submitBtn?.disabled) return;
+      errorEl?.classList.add('hidden');
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitLabel) submitLabel.textContent = 'Submitting…';
+      try {
+        const apiBase = import.meta.env.PUBLIC_OTP_API_BASE_URL ?? '';
+        const formData = new FormData(form);
+        formData.set('recaptchaToken', await getRecaptchaToken('bulk_enquiry'));
+        const res = await fetch(`${apiBase}/api/submit-bulk-enquiry`, { method: 'POST', body: formData });
+        const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+        if (!res.ok || !data.ok) throw new Error(data.error || 'Failed to submit request');
+        success?.classList.remove('hidden');
+        form.reset();
+        // form.reset() only touches native form controls — CustomSelect's own
+        // displayed value is separate React state it doesn't reach — but the
+        // reveal-field's hidden/required state is plain DOM here, and would
+        // otherwise still reflect whatever was chosen before this submit.
+        industryOtherWrap?.classList.add('hidden');
+        if (industryOtherInput) industryOtherInput.required = false;
+        gradeOtherWrap?.classList.add('hidden');
+        if (gradeOtherInput) gradeOtherInput.required = false;
+      } catch (err) {
+        if (errorEl) {
+          errorEl.textContent = err instanceof Error ? err.message : 'Failed to submit request';
+          errorEl.classList.remove('hidden');
+        }
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitLabel) submitLabel.textContent = 'Submit Request';
+      }
+    });
+
+    // Industry card icons give a little bounce-and-tilt on hover.
+    document.querySelectorAll<HTMLElement>('.industry-card').forEach((card) => {
+      const icon = card.querySelector<HTMLElement>('.industry-icon');
+      if (!icon) return;
+      card.addEventListener('mouseenter', () => {
+        gsap.to(icon, { rotate: -8, scale: 1.15, duration: 0.35, ease: 'back.out(2.5)' });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(icon, { rotate: 0, scale: 1, duration: 0.3, ease: 'power2.out' });
+      });
+    });
+
+    // Data sheet card: the document icon tilts like a paper being picked up
+    // on hover — same bounce-and-tilt language as the industry card icons
+    // above, just on the one feature card instead of a grid.
+    document.querySelectorAll<HTMLElement>('.datasheet-card').forEach((card) => {
+      const icon = card.querySelector<HTMLElement>('svg');
+      if (!icon) return;
+      card.addEventListener('mouseenter', () => {
+        gsap.to(icon, { rotate: -6, scale: 1.08, duration: 0.35, ease: 'back.out(2.5)' });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(icon, { rotate: 0, scale: 1, duration: 0.3, ease: 'power2.out' });
+      });
+    });
+
+    // Data sheet gate — the PDF only ever gets touched after a real
+    // send-otp/verify-otp round trip (re-checked server-side too, in
+    // submit-datasheet-request.ts) and a logged lead, so there's no
+    // client-side shortcut to the file beyond guessing its URL directly.
+    const dsModal = document.getElementById('datasheet-modal');
+    const dsBackdrop = document.getElementById('datasheet-modal-backdrop');
+    const dsPanel = document.getElementById('datasheet-modal-panel');
+    const dsClose = document.getElementById('datasheet-modal-close');
+    const dsDownloadBtn = document.getElementById('datasheet-download-btn');
+    const dsForm = document.getElementById('datasheet-form') as HTMLFormElement | null;
+    const dsEmailInput = document.getElementById('datasheet-email') as HTMLInputElement | null;
+    const dsSendOtpBtn = document.getElementById('datasheet-send-otp') as HTMLButtonElement | null;
+    const dsOtpRow = document.getElementById('datasheet-otp-row');
+    const dsOtpInput = document.getElementById('datasheet-otp-input') as HTMLInputElement | null;
+    const dsVerifyBtn = document.getElementById('datasheet-verify-otp') as HTMLButtonElement | null;
+    const dsVerifiedBadge = document.getElementById('datasheet-verified-badge');
+    const dsSubmitBtn = document.getElementById('datasheet-submit') as HTMLButtonElement | null;
+    const dsError = document.getElementById('datasheet-error');
+    const dsSuccess = document.getElementById('datasheet-success');
+    const dsSendOtpLabel = dsSendOtpBtn?.textContent?.trim() ?? 'Send Code';
+    const dsResendLabel = 'Resend';
+    const dsVerifyLabel = dsVerifyBtn?.textContent?.trim() ?? 'Verify';
+
+    // token/verified live as closure state (not module scope) — a fresh
+    // pair of closures is created each init run, same as every other
+    // per-element listener in this file, so a revisit just discards the old
+    // ones along with the DOM nodes Astro replaced.
+    let dsToken: string | null = null;
+    let dsVerified = false;
+
+    function dsShowError(message: string) {
+      if (!dsError) return;
+      dsError.textContent = message;
+      dsError.classList.remove('hidden');
+    }
+    function dsClearError() {
+      dsError?.classList.add('hidden');
+    }
+    function dsSetSubmitEnabled(enabled: boolean) {
+      if (!dsSubmitBtn) return;
+      dsSubmitBtn.disabled = !enabled;
+      dsSubmitBtn.classList.toggle('cursor-not-allowed', !enabled);
+      dsSubmitBtn.classList.toggle('bg-indian-red/30', !enabled);
+      dsSubmitBtn.classList.toggle('text-silent-white/70', !enabled);
+      dsSubmitBtn.classList.toggle('bg-indian-red', enabled);
+      dsSubmitBtn.classList.toggle('text-silent-white', enabled);
+    }
+    function dsOpenModal() {
+      if (!dsModal || !dsBackdrop || !dsPanel) return;
+      dsModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      gsap.fromTo(dsBackdrop, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: 'power2.out' });
+      gsap.fromTo(dsPanel, { opacity: 0, y: 20, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: 'power2.out' });
+    }
+    function dsCloseModal() {
+      if (!dsModal || !dsBackdrop || !dsPanel) return;
+      gsap.to(dsPanel, { opacity: 0, y: 10, scale: 0.97, duration: 0.2, ease: 'power1.in' });
+      gsap.to(dsBackdrop, {
+        opacity: 0,
+        duration: 0.2,
+        ease: 'power1.in',
+        onComplete: () => {
+          dsModal.classList.add('hidden');
+          document.body.style.overflow = '';
+        },
+      });
+    }
+    function dsResetGate() {
+      dsForm?.reset();
+      dsForm?.classList.remove('hidden');
+      dsToken = null;
+      dsVerified = false;
+      dsOtpRow?.classList.add('hidden');
+      dsVerifiedBadge?.classList.add('hidden');
+      dsVerifiedBadge?.classList.remove('inline-flex');
+      dsSendOtpBtn?.classList.remove('hidden');
+      if (dsSendOtpBtn) dsSendOtpBtn.textContent = dsSendOtpLabel;
+      if (dsEmailInput) dsEmailInput.readOnly = false;
+      dsClearError();
+      dsSuccess?.classList.add('hidden');
+      dsSetSubmitEnabled(false);
+    }
+
+    dsDownloadBtn?.addEventListener('click', () => {
+      dsResetGate();
+      dsOpenModal();
+    });
+    dsClose?.addEventListener('click', dsCloseModal);
+    dsBackdrop?.addEventListener('click', dsCloseModal);
+    dsKeydownHandler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !dsModal?.classList.contains('hidden')) dsCloseModal();
+    };
+    document.addEventListener('keydown', dsKeydownHandler);
+
+    // Editing the email after sending/verifying a code shouldn't silently
+    // keep trust in an address that's no longer what was verified — same
+    // reasoning as useOtpVerification.reset() used by the other lead forms.
+    dsEmailInput?.addEventListener('input', () => {
+      if (!dsToken && !dsVerified) return;
+      dsToken = null;
+      dsVerified = false;
+      dsOtpRow?.classList.add('hidden');
+      dsVerifiedBadge?.classList.add('hidden');
+      dsVerifiedBadge?.classList.remove('inline-flex');
+      dsSendOtpBtn?.classList.remove('hidden');
+      if (dsSendOtpBtn) dsSendOtpBtn.textContent = dsSendOtpLabel;
+      dsSetSubmitEnabled(false);
+    });
+
+    dsSendOtpBtn?.addEventListener('click', async () => {
+      const email = dsEmailInput?.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        dsShowError('Enter a valid email address first.');
+        return;
+      }
+      dsClearError();
+      dsSendOtpBtn.disabled = true;
+      dsSendOtpBtn.textContent = 'Sending…';
+      try {
+        const res = await fetch('/api/send-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = (await res.json()) as { token?: string; error?: string };
+        if (!res.ok || !data.token) throw new Error(data.error || 'Failed to send verification code');
+        dsToken = data.token;
+        dsOtpRow?.classList.remove('hidden');
+        dsSendOtpBtn.textContent = dsResendLabel;
+      } catch (err) {
+        dsShowError(err instanceof Error ? err.message : 'Failed to send verification code');
+        dsSendOtpBtn.textContent = dsSendOtpLabel;
+      } finally {
+        dsSendOtpBtn.disabled = false;
+      }
+    });
+
+    dsVerifyBtn?.addEventListener('click', async () => {
+      if (!dsToken || !dsOtpInput?.value) return;
+      dsClearError();
+      dsVerifyBtn.disabled = true;
+      dsVerifyBtn.textContent = 'Verifying…';
+      try {
+        const res = await fetch('/api/verify-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token: dsToken, code: dsOtpInput.value }),
+        });
+        const data = (await res.json()) as { ok?: boolean; error?: string };
+        if (!res.ok || !data.ok) throw new Error(data.error || 'Incorrect code. Please try again.');
+        dsVerified = true;
+        if (dsEmailInput) dsEmailInput.readOnly = true;
+        dsSendOtpBtn?.classList.add('hidden');
+        dsOtpRow?.classList.add('hidden');
+        dsVerifiedBadge?.classList.remove('hidden');
+        dsVerifiedBadge?.classList.add('inline-flex');
+        dsSetSubmitEnabled(true);
+      } catch (err) {
+        dsShowError(err instanceof Error ? err.message : 'Incorrect code. Please try again.');
+      } finally {
+        dsVerifyBtn.textContent = dsVerifyLabel;
+        dsVerifyBtn.disabled = false;
+      }
+    });
+
+    dsForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!dsVerified || !dsToken || !dsOtpInput || !dsForm) return;
+      dsClearError();
+      const submitLabel = dsSubmitBtn?.textContent?.trim() ?? 'Verify & Download';
+      if (dsSubmitBtn) {
+        dsSubmitBtn.disabled = true;
+        dsSubmitBtn.textContent = 'Submitting…';
+      }
+      const name = (dsForm.elements.namedItem('name') as HTMLInputElement | null)?.value.trim();
+      const company = (dsForm.elements.namedItem('company') as HTMLInputElement | null)?.value.trim();
+      try {
+        const res = await fetch('/api/submit-datasheet-request', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, company, token: dsToken, code: dsOtpInput.value }),
+        });
+        const data = (await res.json()) as { ok?: boolean; error?: string };
+        if (!res.ok || !data.ok) throw new Error(data.error || 'Something went wrong. Please try again.');
+
+        // Only ever triggered after a verified, logged request — direct
+        // navigation to this URL without going through the gate is still
+        // possible (it's a static asset), but nothing in this UI offers
+        // that shortcut.
+        const fileUrl = dsDownloadBtn?.getAttribute('data-file');
+        if (fileUrl) {
+          // The fetch URL itself is an unguessable, non-descriptive filename
+          // (the only enforcement this gate has, since it's a static asset
+          // with no server-side auth) — this only sets what the browser
+          // suggests as the saved file's name, which doesn't affect that.
+          const link = document.createElement('a');
+          link.href = fileUrl;
+          link.download = 'ankur-industrial-salt-spec-sheet.pdf';
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+        }
+
+        dsForm.classList.add('hidden');
+        dsSuccess?.classList.remove('hidden');
+        window.setTimeout(dsCloseModal, 2500);
+      } catch (err) {
+        dsShowError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+        if (dsSubmitBtn) {
+          dsSubmitBtn.disabled = false;
+          dsSubmitBtn.textContent = submitLabel;
+        }
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', initIndustrialSaltPage);
+</script>

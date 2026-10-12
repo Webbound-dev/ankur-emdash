@@ -1,0 +1,17 @@
+{
+  "seo": {
+    "title": "Page Not Found | Ankur",
+    "description": "The page you're looking for doesn't exist or may have been moved."
+  },
+  "code": "404",
+  "heading": "This page has gone missing.",
+  "body": "The page you're looking for doesn't exist, may have been moved, or the link might be broken.",
+  "cta": { "label": "Back to Home", "href": "/" },
+  "quickLinksHeading": "Or try one of these",
+  "quickLinks": [
+    { "label": "Products", "href": "/products/" },
+    { "label": "Industrial Salt", "href": "/industrial-salt/" },
+    { "label": "Gallery", "href": "/gallery/" },
+    { "label": "Contact Us", "href": "/contact/" }
+  ]
+}

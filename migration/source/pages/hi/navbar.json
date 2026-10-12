@@ -1,0 +1,89 @@
+{
+  "logo": {
+    "src": "/images/logo.png",
+    "alt": "Ankur Salt"
+  },
+  "leftLinks": [
+    {
+      "label": "हमारे बारे में",
+      "href": "/about/"
+    },
+    {
+      "label": "उपभोगी नमक",
+      "href": "/products/"
+    },
+    {
+      "label": "औद्योगिक नमक",
+      "href": "/industrial-salt/"
+    },
+    {
+      "label": "गैलरी",
+      "href": "/gallery/"
+    }
+  ],
+  "rightLinks": [
+    {
+      "label": "वितरक नेटवर्क",
+      "href": "/network/"
+    },
+    {
+      "label": "गुणवत्ता और प्रमाणपत्र",
+      "href": "/quality-certificates/"
+    },
+    {
+      "label": "निर्यात",
+      "href": "/export/"
+    },
+    {
+      "label": "हमसे संपर्क करें",
+      "href": "/contact/"
+    }
+  ],
+  "_hiddenLinks_note": "Temporarily hidden per request — move entries below back into leftLinks/rightLinks above to restore.",
+  "leftLinksHidden": [
+    {
+      "label": "होम",
+      "href": "/"
+    },
+    {
+      "label": "ब्लॉग",
+      "href": "/blog/"
+    }
+  ],
+  "rightLinksHidden": [
+    {
+      "label": "करियर",
+      "href": "/career/"
+    }
+  ],
+  "products": [
+    {
+      "title": "Ankur Salt",
+      "href": "/products/ankur-salt/"
+    },
+    {
+      "title": "Ankur Gold",
+      "href": "/products/ankur-gold/"
+    },
+    {
+      "title": "Ankur Classic",
+      "href": "/products/ankur-classic/"
+    },
+    {
+      "title": "Dr. Salt",
+      "href": "/products/dr-salt/"
+    },
+    {
+      "title": "Salt Plus",
+      "href": "/products/salt-plus/"
+    },
+    {
+      "title": "Ankur Rock Salt",
+      "href": "/products/rock-salt/"
+    },
+    {
+      "title": "Crystal Salt",
+      "href": "/products/crystal-salt/"
+    }
+  ]
+}

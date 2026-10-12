@@ -1,0 +1,62 @@
+{
+  "seo": {
+    "title": "Gallery | Ankur",
+    "description": "A look inside Ankur Salt — our plants on the Gujarat coast, and the products that leave them every day.",
+    "image": "/images/about/hero.jpg"
+  },
+  "hero": {
+    "title": "Gallery",
+    "intro": "A look inside Ankur Salt: our plants on the Gujarat coast, and the products that leave them every day."
+  },
+  "categories": {
+    "items": [
+      { "id": "all", "label": "All" },
+      { "id": "plants", "label": "Factory & Plants" },
+      { "id": "products", "label": "Product Photography" }
+    ]
+  },
+  "images": {
+    "items": [
+      { "category": "plants", "src": "/images/factory/salt-dispatch-loading.jpeg", "caption": "Loading refined salt for dispatch, Ankur Chemfood Ltd" },
+      { "category": "plants", "src": "/images/factory/warehouse-stacked-bags.jpeg", "caption": "Packed salt bags ready for dispatch" },
+      { "category": "plants", "src": "/images/factory/fbd-dryer-unit.jpeg", "caption": "Fluidized bed dryer on the production line" },
+      { "category": "plants", "src": "/images/factory/packing-line.jpeg", "caption": "Salt processing and packing line, Gandhidham plant" },
+      { "category": "plants", "src": "/images/factory/blower-systems.jpeg", "caption": "Blower and dust collection systems, processing plant" },
+      { "category": "plants", "src": "/images/factory/cyclone-separator.jpeg", "caption": "Cyclone separator unit, salt refinement plant" },
+      { "category": "products", "src": "/images/products/free-flow-iodised.webp", "caption": "Ankur Salt: Refined Free Flow Iodised Salt" },
+      { "category": "products", "src": "/images/products/gold-salt.webp", "caption": "Ankur Gold: Premium Refined Iodised Salt" },
+      { "category": "products", "src": "/images/products/classic-salt.webp", "caption": "Ankur Classic: Premium Refined Iodised Salt in a Spout Pack" },
+      { "category": "products", "src": "/images/products/dr-salt.webp", "caption": "Dr. Salt: 15% Low Sodium Salt" },
+      { "category": "products", "src": "/images/products/dfs.webp", "caption": "DFS Salt: Double Fortified Salt with Iron and Iodine" },
+      { "category": "products", "src": "/images/products/rock-salt-pack.webp", "caption": "Ankur Rock Salt: Natural Himalayan Pink Salt" },
+      { "category": "products", "src": "/images/products/crystal-salt.webp", "caption": "Crystal Salt: Refined Iodised Crystal Salt" }
+    ]
+  },
+  "videos": {
+    "heading": "Celebrity Approved, India Trusted",
+    "subheading": "Featuring Kareena Kapoor Khan and Shilpa Shetty: see why the names India trusts, trust Ankur Salt.",
+    "items": [
+      { "title": "Ankur Namak.. Asli Namak", "url": "https://www.youtube.com/watch?v=bXmBjWVy420" },
+      { "title": "Ankur Salt TVC featuring Kareena Kapoor Khan", "url": "https://www.youtube.com/watch?v=AXJtvH5agl8" },
+      { "title": "Ankur Namak with Shilpa Shetty", "url": "https://www.youtube.com/watch?v=h6cOOsEMcVo" },
+      { "title": "Ankur Salt", "url": "https://www.youtube.com/watch?v=Q0Lu_AtjkPM" }
+    ]
+  },
+  "quote": {
+    "text": "We do not just make salt. We make salt the right way.",
+    "attribution": "Ankur Salt"
+  },
+  "instagram": {
+    "heading": "Follow Us on Instagram",
+    "handle": "@ankursaltindia",
+    "url": "https://www.instagram.com/ankursaltindia/",
+    "posts": [
+      { "src": "/images/products/free-flow-iodised.webp", "alt": "Ankur Salt: Refined Free Flow Iodised Salt" },
+      { "src": "/images/products/gold-salt.webp", "alt": "Ankur Gold: Premium Refined Iodised Salt" },
+      { "src": "/images/products/dr-salt.webp", "alt": "Dr. Salt: 15% Low Sodium Salt" },
+      { "src": "/images/products/rock-salt-pack.webp", "alt": "Ankur Rock Salt: Natural Himalayan Pink Salt" },
+      { "src": "/images/products/classic-salt.webp", "alt": "Ankur Classic: Premium Refined Iodised Salt in a Spout Pack" },
+      { "src": "/images/products/crystal-salt.webp", "alt": "Crystal Salt: Refined Iodised Crystal Salt" }
+    ]
+  }
+}

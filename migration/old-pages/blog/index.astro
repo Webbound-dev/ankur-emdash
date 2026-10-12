@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogList from '../../../ui-components/components/BlogList.astro';
+import type { BlogPost } from '../../../ui-components/components/BlogList.astro';
+import content from '../../../content/pages/blog.json';
+import postsData from '../../../content/collections/blogs.json';
+
+const posts = postsData as BlogPost[];
+---
+<BaseLayout title={content.seo.title} description={content.seo.description}>
+  <BlogList content={content} posts={posts} />
+</BaseLayout>

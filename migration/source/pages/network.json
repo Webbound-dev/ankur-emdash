@@ -1,0 +1,77 @@
+{
+  "seo": {
+    "title": "Find an Ankur Salt Distributor Near You | Nationwide Network",
+    "description": "Find a trusted Ankur Salt distributor near you: stockists and dealers across India, from the salt pans of Kutch to kitchens nationwide. Interested in becoming a distributor? Apply here."
+  },
+  "hero": {
+    "eyebrow": "Nationwide Reach",
+    "heading": "Find Ankur near you.",
+    "intro": "From the salt pans of Kutch to kitchens across the country, Ankur reaches homes through a trusted network of distributors nationwide."
+  },
+  "becomeDistributor": {
+    "eyebrow": "Partner With Us",
+    "heading": "Become a distributor.",
+    "intro": "Interested in stocking Ankur products in your region? Tell us about your business, and our team will get in touch.",
+    "benefits": [
+      "A brand trusted in Indian kitchens since 1994",
+      "Dedicated logistics & marketing support",
+      "Fast onboarding with straightforward terms"
+    ],
+    "fields": {
+      "businessName": "Business / Firm Name",
+      "contactName": "Contact Person",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "city": "City",
+      "state": "State",
+      "message": "Tell us about your business"
+    },
+    "placeholders": {
+      "businessName": "e.g. Shreeji Trading Co.",
+      "contactName": "Your full name",
+      "phone": "+91 98765 43210",
+      "email": "you@business.com",
+      "city": "e.g. Ahmedabad",
+      "state": "e.g. Gujarat",
+      "message": "Tell us about your business and current distribution reach."
+    },
+    "submitLabel": "Submit Application",
+    "successHeading": "Application received.",
+    "successMessage": "Thanks for your interest. Our team will reach out within 2 to 3 business days."
+  },
+  "connectWithDistributor": {
+    "eyebrow": "Distributor Enquiry",
+    "heading": "Connect with distributors",
+    "intro": "Have a question for one of our distributors — stock availability, order status, or anything else? Send us a message and we'll help connect you.",
+    "benefits": [
+      "A real person reads every message that comes through here",
+      "Connected with the right distributor for your city",
+      "Quick response, usually within 1 to 2 business days"
+    ],
+    "fields": {
+      "name": "Your Name",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "city": "City",
+      "state": "State",
+      "message": "Your Message"
+    },
+    "placeholders": {
+      "name": "Your full name",
+      "phone": "+91 98765 43210",
+      "email": "you@example.com",
+      "city": "e.g. Ahmedabad",
+      "state": "e.g. Gujarat",
+      "message": "e.g. Does Shreeji Trading Co. stock Ankur Gold Salt?"
+    },
+    "submitLabel": "Send Enquiry",
+    "successHeading": "Message received.",
+    "successMessage": "Thanks for reaching out. Our team will get back to you shortly."
+  },
+  "distributorFormsTabs": {
+    "eyebrow": "Get In Touch",
+    "heading": "How would you like to connect?",
+    "becomeLabel": "Become a Distributor",
+    "connectLabel": "Connect with distributors"
+  }
+}

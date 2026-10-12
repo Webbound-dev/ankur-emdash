@@ -1,0 +1,71 @@
+---
+interface QuickLink { label: string; href: string }
+
+interface Props {
+  content: {
+    code: string;
+    heading: string;
+    body: string;
+    cta: { label: string; href: string };
+    quickLinksHeading: string;
+    quickLinks: QuickLink[];
+  };
+}
+
+const { content } = Astro.props;
+const { code, heading, body, cta, quickLinksHeading, quickLinks } = content;
+---
+
+<main class="relative overflow-hidden bg-silent-white">
+  <!-- Same restrained pinstripe + glow treatment used on the site's other
+       light sections (see Features/Leadership in AboutUs.astro) — keeps an
+       error page from feeling like a dead end that fell outside the
+       site's visual language. -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.05]"
+    style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+    aria-hidden="true"
+  />
+  <div class="pointer-events-none absolute -top-16 -left-24 h-72 w-72 rounded-full bg-indian-red/[0.05] blur-3xl" aria-hidden="true" />
+  <div class="pointer-events-none absolute -bottom-20 -right-16 h-80 w-80 rounded-full bg-indian-red/[0.05] blur-3xl" aria-hidden="true" />
+
+  <div class="relative mx-auto flex min-h-[70vh] max-w-[720px] flex-col items-center justify-center px-6 py-20 text-center lg:px-10 lg:py-28">
+    <span class="font-display text-7xl font-semibold text-indian-red/15 lg:text-9xl" data-cms-field="code">
+      {code}
+    </span>
+    <h1 class="mt-2 font-display text-2xl font-medium text-indian-red lg:text-4xl" data-cms-field="heading">
+      {heading}
+    </h1>
+    <p class="mt-4 max-w-[480px] text-sm leading-relaxed text-indian-red/70 lg:text-base" data-cms-field="body">
+      {body}
+    </p>
+
+    <a
+      href={cta.href}
+      data-cms-link="cta.href"
+      class="group mt-8 inline-flex items-center gap-2 rounded-full bg-indian-red px-6 py-3 text-sm font-medium text-silent-white transition-opacity duration-200 hover:opacity-90"
+    >
+      <span data-cms-field="cta.label">{cta.label}</span>
+      <span class="transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+    </a>
+
+    {quickLinks.length > 0 && (
+      <div class="mt-14 border-t border-indian-red/10 pt-8">
+        <span class="text-[10px] font-semibold uppercase tracking-widest text-indian-red/40" data-cms-field="quickLinksHeading">
+          {quickLinksHeading}
+        </span>
+        <nav class="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2">
+          {quickLinks.map((link, li) => (
+            <a
+              href={link.href}
+              data-cms-link={`quickLinks[${li}].href`}
+              class="text-sm font-medium text-indian-red/70 underline decoration-indian-red/25 underline-offset-4 transition-colors hover:text-indian-red hover:decoration-indian-red/50"
+            >
+              <span data-cms-field={`quickLinks[${li}].label`}>{link.label}</span>
+            </a>
+          ))}
+        </nav>
+      </div>
+    )}
+  </div>
+</main>

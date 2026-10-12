@@ -1,0 +1,278 @@
+{
+  "seo": {
+    "title": "Ankur Salt — India's Trusted Salt Brand Since 1994 | Ankur Chemfood Ltd.",
+    "description": "India's second largest packaged salt brand, trusted in kitchens since 1994. Explore Ankur's iodised, low sodium, fortified and rock salt ranges, from everyday cooking to industrial and export supply.",
+    "image": "/images/hero-poster.jpg"
+  },
+  "hero": {
+    "slides": [
+      {
+        "eyebrow": "Ankur Namak, Asli Namak",
+        "title": "Real salt. Nothing hidden.",
+        "body": "India's second largest packaged salt brand, trusted in kitchens since 1994. Namak kam hi khaaye, par achha khaaye: eat less salt, but eat salt that's real.",
+        "cta": {
+          "label": "Explore our range",
+          "href": "/products/"
+        },
+        "media": {
+          "type": "video",
+          "src": "/videos/hero.mp4",
+          "poster": "/images/hero-poster.jpg"
+        }
+      },
+      {
+        "eyebrow": "Introducing Dr. Salt",
+        "title": "Namak kam hi khaaye, par achha khaaye.",
+        "body": "Dr. Salt is Ankur's low sodium range, for households who want to eat mindfully without giving up the taste of real salt.",
+        "cta": {
+          "label": "Discover Dr. Salt",
+          "href": "/products/"
+        },
+        "media": {
+          "type": "image",
+          "src": "/images/hero-salad-bowl.jpg"
+        }
+      },
+      {
+        "eyebrow": "From Kitchens to Industry",
+        "title": "Trusted at every scale.",
+        "body": "From the neighbourhood kitchen to industrial and export partners, Ankur's Free Flow Iodised range has carried the same promise of purity since 1994.",
+        "cta": {
+          "label": "See our story",
+          "href": "/legacy/"
+        },
+        "media": {
+          "type": "image",
+          "src": "/images/hero-salt-flats.jpg"
+        }
+      }
+    ],
+    "badge": {
+      "line1": "Est.",
+      "line2": "1994"
+    }
+  },
+  "quote": {
+    "eyebrow": "Our Promise",
+    "slides": [
+      {
+        "line": "Bharose ki shuruaat",
+        "translation": "The beginning of trust.",
+        "attribution": "Ankur Salt, since 1994"
+      },
+      {
+        "line": "Har ghar ka bharosa",
+        "translation": "Trusted in every home.",
+        "attribution": "Ankur Salt, since 1994"
+      }
+    ],
+    "ctaLabel": "Play"
+  },
+  "productsTeaser": {
+    "eyebrow": "Our Range",
+    "title": "Salt for every kitchen, every scale.",
+    "viewAll": {
+      "label": "View all products",
+      "href": "/products/"
+    },
+    "products": [
+      {
+        "name": "Free Flow Iodised",
+        "tag": "Iodised",
+        "tagline": "The everyday salt trusted in Indian kitchens since 1994.",
+        "image": {
+          "src": "/images/products/free-flow-iodised.webp",
+          "alt": "Free Flow Iodised salt"
+        },
+        "href": "/products/ankur-salt/"
+      },
+      {
+        "name": "Ankur Gold Salt",
+        "tag": "Premium",
+        "tagline": "A finer grade of purity, for kitchens that expect more.",
+        "image": {
+          "src": "/images/products/gold-salt.webp",
+          "alt": "Ankur Gold Salt"
+        },
+        "href": "/products/ankur-gold/"
+      },
+      {
+        "name": "Dr. Salt",
+        "tag": "Low Sodium",
+        "tagline": "Made for Healthier Everyday Cooking",
+        "image": {
+          "src": "/images/products/dr-salt.webp",
+          "alt": "Dr. Salt"
+        },
+        "href": "/products/dr-salt/"
+      },
+      {
+        "name": "Rock Salt",
+        "tag": "Traditional",
+        "tagline": "Rock salt- natural everyday cooking and fasting rituals",
+        "image": {
+          "src": "/images/products/rock-salt-pack.webp",
+          "alt": "Rock Salt"
+        },
+        "href": "/products/rock-salt/"
+      }
+    ]
+  },
+  "certificationsStrip": {
+    "certifications": [
+      {
+        "name": "BIS",
+        "logo": {
+          "src": "/images/certifications/bis.svg",
+          "alt": "BIS certified"
+        },
+        "certificateUrl": "/documents/certificates/bis-is-7224.pdf"
+      },
+      {
+        "name": "FSSAI",
+        "logo": {
+          "src": "/images/certifications/fssai.svg",
+          "alt": "FSSAI certified"
+        },
+        "certificateUrl": "/documents/certificates/fssai.pdf"
+      },
+      {
+        "name": "ISO 9001",
+        "logo": {
+          "src": "/images/certifications/iso-9001.svg",
+          "alt": "ISO 9001 certified"
+        },
+        "certificateUrl": "/documents/certificates/fssc-22000.pdf"
+      },
+      {
+        "name": "Bharatiya Udhyog Ratna",
+        "logo": {
+          "src": "/images/certifications/bharatiya-udhyog-ratna.svg",
+          "alt": "Bharatiya Udhyog Ratna award"
+        },
+        "certificateUrl": "/images/certifications/certificate-07.jpeg"
+      }
+    ]
+  },
+  "distributionMap": {
+    "eyebrow": "Our Network",
+    "title": "From our salt pans to kitchens nationwide, and beyond.",
+    "viewAll": {
+      "label": "Explore our network",
+      "href": "/network/"
+    },
+    "states": [
+      {
+        "name": "Delhi"
+      },
+      {
+        "name": "Gujarat"
+      },
+      {
+        "name": "Maharashtra"
+      },
+      {
+        "name": "West Bengal"
+      },
+      {
+        "name": "Tamil Nadu"
+      }
+    ]
+  },
+  "factoryVideo": {
+    "eyebrow": "Behind The Scenes",
+    "title": "Inside the refinery that's kept its promise since 1994.",
+    "items": [
+      {
+        "title": "Inside Our Refinery",
+        "src": "/videos/hero.mp4",
+        "poster": "/images/hero-poster.jpg"
+      },
+      {
+        "title": "Ankur Salt TVC",
+        "src": "/videos/ankur-salt-vid-1.mp4",
+        "poster": "/images/vid-1-poster.jpg"
+      },
+      {
+        "title": "Ankur Salt Campaign",
+        "src": "/videos/ankur-salt-vid-2.mp4",
+        "poster": "/images/vid-2-poster.jpg"
+      },
+      {
+        "title": "Ankur Salt Campaign",
+        "src": "/videos/ankur-salt-vid-3.mp4",
+        "poster": "/images/vid-3-poster.jpg"
+      }
+    ]
+  },
+  "blogTeaser": {
+    "eyebrow": "From The Blog",
+    "title": "Stories worth savouring.",
+    "viewAll": {
+      "label": "View more articles",
+      "href": "/blog/"
+    },
+    "posts": [
+      {
+        "tag": "Health",
+        "date": "Feb 22, 2024",
+        "author": "Ethan Brooks",
+        "title": "The truth about iodised salt",
+        "excerpt": "Why iodisation still matters for everyday health, and how to tell real protection from marketing.",
+        "image": {
+          "src": "/images/products/free-flow-iodised.webp",
+          "alt": "Free Flow Iodised salt"
+        },
+        "href": "/blog/truth-about-iodised-salt/"
+      },
+      {
+        "tag": "Recipes",
+        "date": "Mar 27, 2024",
+        "author": "Lily Thompson",
+        "title": "5 ways to cook with rock salt",
+        "excerpt": "Sendha namak isn't just for fasting. Here's how it earns a permanent spot in the kitchen.",
+        "image": {
+          "src": "/images/products/rock-salt-pack.webp",
+          "alt": "Rock Salt"
+        },
+        "href": "/blog/cooking-with-rock-salt/"
+      },
+      {
+        "tag": "Health",
+        "date": "Apr 30, 2024",
+        "author": "Oliver Davis",
+        "title": "Low sodium doesn't mean low flavour",
+        "excerpt": "Inside Dr. Salt's approach to mindful eating without giving up the taste of real salt.",
+        "image": {
+          "src": "/images/products/dr-salt.webp",
+          "alt": "Dr. Salt"
+        },
+        "href": "/blog/low-sodium-flavor/"
+      },
+      {
+        "tag": "Process",
+        "date": "May 18, 2024",
+        "author": "Meera Nair",
+        "title": "From salt pan to kitchen",
+        "excerpt": "A walk through the process that turns raw crystal into the salt on your table.",
+        "image": {
+          "src": "/images/hero-salt-flats.jpg",
+          "alt": "Salt flats"
+        },
+        "href": "/blog/salt-pan-to-kitchen/"
+      },
+      {
+        "tag": "Health",
+        "date": "Jun 5, 2024",
+        "author": "Ava Bennett",
+        "title": "Eating mindfully, one pinch at a time",
+        "excerpt": "Simple habits for a healthier relationship with salt, without sacrificing what makes food taste like something.",
+        "image": {
+          "src": "/images/hero-salad-bowl.jpg",
+          "alt": "Fresh salad bowl"
+        },
+        "href": "/blog/eating-mindfully/"
+      }
+    ]
+  }
+}

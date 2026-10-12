@@ -1,0 +1,64 @@
+---
+interface GridProduct {
+  slug: string;
+  name: string;
+  tag: string;
+  image: { src: string; alt: string };
+  grid: { description: string; ctaLabel: string };
+}
+interface Props {
+  heading: string;
+  subheading: string;
+  products: GridProduct[];
+}
+
+const { heading, subheading, products } = Astro.props;
+---
+
+<section id="all-products" class="max-w-[1100px] mx-auto px-6 lg:px-10 pt-24 lg:pt-36 pb-14 lg:pb-20 scroll-mt-24">
+  <span class="reveal block text-[10px] font-semibold uppercase tracking-widest text-indian-red/40" data-cms-field="productGrid.heading">
+    {heading}
+  </span>
+  <h2 class="reveal mt-2 font-display font-medium text-2xl lg:text-3xl text-indian-red" style="transition-delay: 70ms" data-cms-field="productGrid.subheading">
+    {subheading}
+  </h2>
+
+  <div class="mt-10 grid grid-cols-2 lg:grid-cols-3 gap-x-6 lg:gap-x-8 gap-y-10 lg:gap-y-12">
+    {products.map((product, pi) => (
+      <a
+        href={`/products/${product.slug}/`}
+        class="reveal group block"
+        style={`transition-delay: ${pi * 60}ms`}
+      >
+        <div class="relative aspect-[4/5] overflow-hidden rounded-lg bg-indian-red/10 shadow-md group-hover:shadow-xl transition-shadow duration-300">
+          <img
+            src={product.image.src}
+            alt={product.image.alt}
+            data-cms-image={`products[${pi}].image.src`}
+            class="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700 ease-out"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-indian-red/25 via-transparent to-indian-red/5 mix-blend-multiply" />
+        </div>
+
+        <div class="mt-4 transition-transform duration-300 group-hover:-translate-y-1">
+          <span class="block font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-indian-red/60 mb-1" data-cms-field={`products[${pi}].tag`}>
+            {product.tag}
+          </span>
+          <h3
+            class="inline font-display font-medium text-indian-red text-lg leading-tight bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-[length:0%_1.5px] group-hover:bg-[length:100%_1.5px] bg-[position:0_100%] transition-[background-size] duration-300"
+            data-cms-field={`products[${pi}].name`}
+          >
+            {product.name}
+          </h3>
+          <p class="mt-1.5 text-xs lg:text-sm text-indian-red/65 leading-snug" data-cms-field={`products[${pi}].grid.description`}>
+            {product.grid.description}
+          </p>
+          <span class="mt-3 inline-flex items-center gap-1 text-xs font-medium text-indian-red group-hover:gap-2 transition-all duration-200" data-cms-field={`products[${pi}].grid.ctaLabel`}>
+            {product.grid.ctaLabel}
+            <span aria-hidden="true">&rarr;</span>
+          </span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

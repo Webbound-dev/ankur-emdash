@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AboutUs from '../../ui-components/components/AboutUs.astro';
+import content from '../../content/pages/about.json';
+---
+<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image}>
+  <AboutUs content={content} />
+  
+</BaseLayout>

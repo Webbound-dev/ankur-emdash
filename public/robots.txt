@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /shopdetail/
+Disallow: /zhHant/
+Disallow: /pcmypage
+Disallow: /safe_search/
+Disallow: /product/detail/
+
+Sitemap: https://ankurgroup.in/sitemap-index.xml

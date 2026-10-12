@@ -1,0 +1,422 @@
+---
+import ChecklistSection from './product-sections/ChecklistSection.astro';
+import SpecTableSection from './product-sections/SpecTableSection.astro';
+import NarrativeSection from './product-sections/NarrativeSection.astro';
+import UseCasesSection from './product-sections/UseCasesSection.astro';
+import WhereToBuySection from './product-sections/WhereToBuySection.astro';
+
+interface SectionBase { id: string; heading: string }
+type ChecklistSectionData = SectionBase & { type: 'checklist'; items: { title: string; description: string }[] };
+type SpecTableSectionData = SectionBase & { type: 'specTable'; rows: { label: string; value: string }[] };
+type NarrativeSectionData = SectionBase & { type: 'narrative'; paragraphs: string[]; stats?: { value: string; label: string }[] };
+type UseCasesSectionData = SectionBase & { type: 'useCasesGrouped'; groups: { heading: string; items: { title: string; description: string }[] }[] };
+type WhereToBuySectionData = SectionBase & { type: 'whereToBuy'; body: string; cta: { label: string; href: string } };
+
+export type Section = ChecklistSectionData | SpecTableSectionData | NarrativeSectionData | UseCasesSectionData | WhereToBuySectionData;
+
+// Full per-SKU shape as stored in collections/products.json. Pages that
+// import that JSON directly should cast to `Product[]` — plain JSON imports
+// infer `type`/`variant` fields as `string`, which doesn't structurally
+// satisfy the discriminated union above without the cast.
+export interface Product {
+  slug: string;
+  name: string;
+  pageTitle: string;
+  metaDescription: string;
+  tag: string;
+  image: { src: string; alt: string };
+  // Optional: a separate, full-bleed cinematic shot for the detail page hero.
+  // Falls back to `image` (the catalog/grid thumbnail) for SKUs that don't
+  // have a dedicated hero shot yet.
+  heroImage?: { src: string; alt: string };
+  comparison: { iodineContent: string; sodiumLevel: string; ironContent: string; bestFor: string; packFormats: string };
+  grid: { description: string; ctaLabel: string };
+  detail: {
+    heroTagline: string;
+    heroCta: { label: string; href: string };
+    heroCtaSecondary?: { label: string; href: string };
+    sections: Section[];
+  };
+}
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+const { sections } = product.detail;
+const heroImage = product.heroImage ?? product.image;
+
+const bodySections = sections.filter((s) => s.type !== 'whereToBuy');
+const whereToBuyEntry = sections
+  .map((s, si) => ({ section: s, si }))
+  .find((entry): entry is { section: Extract<Section, { type: 'whereToBuy' }>; si: number } => entry.section.type === 'whereToBuy');
+
+// Matches the dark/light alternation below (dark = idx % 2 === 0): an odd
+// number of body sections ends on a dark one, which carries its own wave
+// divider curving into the space above this heading. That wave already
+// eats into the visual gap, so it needs extra top padding to clear it
+// cleanly — an even count ends on a plain light section with no wave, so
+// the same padding would just look like an oversized empty gap.
+const lastBodySectionDark = bodySections.length % 2 === 1;
+
+const WAVE_PATH = 'M0,20 C180,90 360,0 540,50 C720,100 900,10 1080,55 C1260,100 1350,40 1440,60 L1440,120 L0,120 Z';
+
+// One small hand-drawn icon per section type, same inline-SVG convention
+// used by ComparisonTable's COLUMN_ICONS / FindYourSalt's ICONS — gives
+// each quick-nav pill its own identity instead of plain text.
+const NAV_ICONS: Record<string, string> = {
+  checklist: 'M4 10.5 8 14.5 16 5.5',
+  specTable: 'M3 3h6v6H3V3Zm8 0h6v6h-6V3ZM3 11h6v6H3v-6Zm8 0h6v6h-6v-6Z',
+  narrative: 'M2 5c2-1 5-1 8 1 3-2 6-2 8-1v10c-2-1-5-1-8 1-3-2-6-2-8-1V5Z',
+  useCasesGrouped: 'M10 2 18 6l-8 4-8-4 8-4Zm-8 8 8 4 8-4M2 14l8 4 8-4',
+  whereToBuy: 'M10 18s6-5.5 6-10a6 6 0 1 0-12 0c0 4.5 6 10 6 10Zm0-8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z',
+};
+---
+
+<main class="bg-silent-white">
+  <!-- Hero — full-bleed cinematic: the product photo IS the backdrop
+       (not boxed in a card), a dark gradient anchors legible text over
+       it, and a slow Ken Burns zoom on load gives it motion instead of
+       sitting static like a poster. -->
+  <section class="relative overflow-hidden min-h-[70vh] lg:min-h-[88vh] flex items-end">
+    <img
+      src={heroImage.src}
+      alt={heroImage.alt}
+      data-cms-image="heroImage.src"
+      class="hero-image absolute inset-0 h-full w-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10" aria-hidden="true" />
+    <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/15 to-transparent" aria-hidden="true" />
+    <div
+      class="absolute inset-0 opacity-[0.05] mix-blend-overlay"
+      style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+      aria-hidden="true"
+    />
+
+    <div class="relative w-full max-w-[1400px] mx-auto px-6 lg:px-10 pt-32 pb-14 lg:pb-20">
+      <div class="max-w-[680px]">
+        <span
+          class="reveal mt-4 inline-flex items-center rounded-md bg-silent-white/10 backdrop-blur-md px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-silent-white ring-1 ring-silent-white/25"
+          style="transition-delay: 40ms"
+          data-cms-field="tag"
+        >
+          {product.tag}
+        </span>
+        <h1
+          class="reveal mt-5 font-display font-medium text-5xl sm:text-6xl lg:text-8xl text-silent-white leading-[0.95] drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)]"
+          style="transition-delay: 100ms"
+          data-cms-field="name"
+        >
+          {product.name}
+        </h1>
+        <p class="reveal mt-6 text-base lg:text-xl leading-relaxed text-silent-white/80 max-w-[520px]" style="transition-delay: 180ms" data-cms-field="detail.heroTagline">
+          {product.detail.heroTagline}
+        </p>
+
+        <div class="reveal mt-9 flex flex-wrap items-center gap-x-6 gap-y-3" style="transition-delay: 260ms">
+          <a
+            href={product.detail.heroCta.href}
+            data-cms-link="detail.heroCta.href"
+            class="inline-flex items-center gap-2 px-7 py-3.5 rounded-md bg-silent-white text-indian-red font-sans text-sm font-semibold shadow-lg shadow-black/20 transition-all duration-200 hover:opacity-90 hover:shadow-xl hover:-translate-y-0.5"
+          >
+            <span data-cms-field="detail.heroCta.label">{product.detail.heroCta.label}</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+          {product.detail.heroCtaSecondary && (
+            <a
+              href={product.detail.heroCtaSecondary.href}
+              data-cms-link="detail.heroCtaSecondary.href"
+              class="inline-flex items-center gap-1.5 text-sm font-medium text-silent-white/85 transition-colors duration-200 hover:text-silent-white"
+            >
+              <span data-cms-field="detail.heroCtaSecondary.label">{product.detail.heroCtaSecondary.label}</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          )}
+        </div>
+
+        <div class="reveal mt-10 inline-flex items-center gap-2.5 rounded-md bg-silent-white/10 backdrop-blur-md px-4 py-2.5 ring-1 ring-silent-white/20" style="transition-delay: 320ms">
+          <svg viewBox="0 0 20 20" class="h-4 w-4 shrink-0 text-silent-white/70" fill="none">
+            <path d="M4 8 10 4l6 4-6 4-6-4Zm0 0v5l6 3m0-8v8m6-8v5l-6 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span class="text-xs font-semibold text-silent-white whitespace-nowrap" data-cms-field="comparison.packFormats">
+            {product.comparison.packFormats}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-silent-white/50">
+      <span class="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+      <svg viewBox="0 0 16 16" class="h-3 w-3 animate-bounce" fill="none">
+        <path d="M2 5 8 11 14 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- Sticky quick-nav — one horizontal pill bar for mobile and desktop,
+       sitting just under the main navbar (sticky top-0, h-20/h-24), so
+       wayfinding works identically at every breakpoint instead of a
+       desktop-only sidebar. -->
+  <nav
+    id="product-toc"
+    class="sticky top-20 lg:top-24 z-40 bg-silent-white/95 backdrop-blur-md border-b border-indian-red/10"
+  >
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-10 flex items-center gap-2 overflow-x-auto py-3 lg:py-4 scrollbar-hide">
+      {sections.map((section) => (
+        <a
+          href={`#${section.id}`}
+          data-toc-link={section.id}
+          class="toc-link group shrink-0 inline-flex items-center gap-2 whitespace-nowrap rounded-md bg-indian-red/[0.03] px-4 py-2.5 text-xs lg:text-sm font-medium text-indian-red/60 ring-1 ring-indian-red/15 shadow-sm transition-all duration-200 hover:bg-indian-red/[0.06] hover:text-indian-red hover:ring-indian-red/35 hover:-translate-y-0.5 hover:shadow-md"
+        >
+          <svg viewBox="0 0 20 20" class="h-3.5 w-3.5 shrink-0 text-indian-red/40 transition-colors duration-200 group-hover:text-indian-red/70" fill="none">
+            <path d={NAV_ICONS[section.type] ?? NAV_ICONS.checklist} stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          {section.heading}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <!-- Sections — full-width bands at the same rhythm as the /products
+       index page, alternating dark/light with wavy dividers between them
+       (same language as the homepage's Products Teaser / Factory Video
+       rhythm). Only dark sections carry waves — their neighbors are
+       always light by construction, so every transition is a clean
+       light<->dark handoff with no two same-color bands ever touching. -->
+  {bodySections.map((section, idx) => {
+    const si = sections.indexOf(section);
+    const dark = idx % 2 === 0;
+    return (
+      <section id={section.id} class={`relative scroll-mt-32 lg:scroll-mt-36 ${dark ? 'bg-indian-red' : ''}`}>
+        {dark && (
+          <>
+            <!-- Texture lives in its own clipped layer so it can't cause
+                 horizontal overflow — kept separate from the section itself
+                 so the wave dividers (which deliberately render outside the
+                 section's own box) aren't clipped along with it. -->
+            <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
+              <div
+                class="absolute inset-0 opacity-[0.05]"
+                style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
+              />
+            </div>
+            <div class="absolute top-0 left-0 w-full overflow-hidden leading-none -translate-y-[calc(100%-1px)]" aria-hidden="true">
+              <svg viewBox="0 0 1440 120" class="w-full h-[56px] lg:h-[100px]" preserveAspectRatio="none">
+                <path d={WAVE_PATH} fill="#A82121" />
+              </svg>
+            </div>
+            <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none translate-y-[calc(100%-1px)] rotate-180" aria-hidden="true">
+              <svg viewBox="0 0 1440 120" class="w-full h-[56px] lg:h-[100px]" preserveAspectRatio="none">
+                <path d={WAVE_PATH} fill="#A82121" />
+              </svg>
+            </div>
+          </>
+        )}
+
+        {/* Heading and cards are independent `.reveal` siblings, not
+            parent/child — nesting the cards' own staggered reveal inside a
+            second, section-wide `.reveal` wrapper would compound the two
+            translateY transforms (each 28px) into an exaggerated, janky
+            rise instead of one clean motion. */}
+        <div
+          class={`relative max-w-[1400px] mx-auto px-6 lg:px-10 ${
+            section.type === 'specTable'
+              ? // Sections strictly alternate dark/light (dark = idx % 2 === 0),
+                // so "this section is light" always means the previous section
+                // was dark — and a dark section's own bottom wave bleeds down
+                // into the light section that follows it. A light specTable
+                // needs extra top clearance for that incoming wave; a dark one
+                // doesn't, since its own wave lives outside its own padding.
+                dark
+                ? 'py-8 lg:py-12'
+                : 'pt-14 pb-8 lg:pt-20 lg:pb-12'
+              : 'py-16 lg:py-24'
+          }`}
+        >
+          <h2
+            class={`reveal font-display font-medium text-2xl lg:text-4xl mb-8 lg:mb-10 ${dark ? 'text-silent-white' : 'text-indian-red'}`}
+            data-cms-field={`detail.sections[${si}].heading`}
+          >
+            {section.heading}
+          </h2>
+
+          {section.type === 'checklist' && <ChecklistSection section={section} si={si} />}
+          {section.type === 'specTable' && <SpecTableSection section={section} si={si} />}
+          {section.type === 'narrative' && <NarrativeSection section={section} si={si} dark={dark} />}
+          {section.type === 'useCasesGrouped' && <UseCasesSection section={section} si={si} />}
+        </div>
+      </section>
+    );
+  })}
+
+  {whereToBuyEntry && (
+    <section id={whereToBuyEntry.section.id} class="scroll-mt-32 lg:scroll-mt-36">
+      <div class={`max-w-[1400px] mx-auto px-6 lg:px-10 pb-8 lg:pb-12 ${lastBodySectionDark ? 'pt-14 lg:pt-20' : 'pt-0'}`}>
+        <h2
+          class="reveal font-display font-medium text-2xl lg:text-4xl text-indian-red mb-8 lg:mb-10"
+          data-cms-field={`detail.sections[${whereToBuyEntry.si}].heading`}
+        >
+          {whereToBuyEntry.section.heading}
+        </h2>
+        <WhereToBuySection section={whereToBuyEntry.section} si={whereToBuyEntry.si} />
+      </div>
+    </section>
+  )}
+</main>
+
+<style>
+  .hero-image {
+    animation: hero-ken-burns 14s ease-out forwards;
+  }
+  @keyframes hero-ken-burns {
+    from {
+      transform: scale(1.12);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-image {
+      animation: none;
+    }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+  .toc-link.active {
+    color: #FFF6EB;
+    background: linear-gradient(135deg, var(--color-indian-red), color-mix(in srgb, var(--color-indian-red) 78%, black));
+    box-shadow: 0 6px 16px color-mix(in srgb, var(--color-indian-red) 35%, transparent);
+    font-weight: 600;
+  }
+  .toc-link.active svg {
+    color: #FFF6EB;
+  }
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  /* Brief highlight pulse on the section a quick-nav link jumps to, so the
+     jump reads as "something happened" instead of a flat instant cut. */
+  .section-flash {
+    animation: section-flash-pulse 900ms ease-out;
+  }
+  @keyframes section-flash-pulse {
+    0% {
+      box-shadow: inset 0 0 0 9999px color-mix(in srgb, var(--color-indian-red) 14%, transparent);
+    }
+    100% {
+      box-shadow: inset 0 0 0 9999px transparent;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .section-flash {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  // Everything below runs inside initProductDetail(), invoked on the
+  // `astro:page-load` event rather than at the top level. This site uses
+  // Astro's <ClientRouter /> (view transitions) for in-app navigation, and
+  // this <script> is a JS module — modules only ever execute ONCE per
+  // browser session (the browser caches the module by URL and never
+  // re-evaluates it), even though Astro swaps in a fresh copy of this
+  // page's HTML on every visit (including navigating between two different
+  // products, which is the same URL pattern re-rendered with new props).
+  // Top-level code here only ever ran on whichever product page happened to
+  // load this module first; every later visit — including a different SKU —
+  // got fresh, .reveal-hidden markup with no observer ever attached to it,
+  // so the whole page (hero, every section, every card) stayed invisible
+  // forever, and the quick-nav highlighting silently stopped working too.
+  // `astro:page-load` fires after the initial load *and* after every
+  // subsequent transition, which is the correct, documented hook for logic
+  // that needs to re-run on every visit. Each observer below tracks its
+  // previous instance and disconnects it at the top of the next run, so a
+  // second visit replaces the prior observer instead of layering on top of
+  // it (toc-link click listeners don't need the same treatment — Astro's
+  // transition replaces those DOM nodes outright, so stale listeners on the
+  // old, now-detached nodes are just garbage collected).
+  let revealObserver: IntersectionObserver | null = null;
+  let tocObserver: IntersectionObserver | null = null;
+
+  function initProductDetail(): void {
+    revealObserver?.disconnect();
+    tocObserver?.disconnect();
+
+    // Fade/slide in each section (and each card within it) as it scrolls into view.
+    const revealTargets = document.querySelectorAll<HTMLElement>('.reveal');
+    if (revealTargets.length) {
+      revealObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              revealObserver?.unobserve(entry.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+      );
+      revealTargets.forEach((el) => revealObserver?.observe(el));
+    }
+
+    // Highlights the current section's link in the sticky quick-nav as you scroll.
+    const links = document.querySelectorAll<HTMLAnchorElement>('.toc-link');
+    const tocSections = Array.from(links)
+      .map((link) => document.getElementById(link.dataset.tocLink ?? ''))
+      .filter((el): el is HTMLElement => !!el);
+
+    // Clicking a quick-nav link smooth-scrolls to its section and flashes a
+    // brief highlight pulse on landing, so the jump gives clear feedback.
+    links.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const targetId = link.dataset.tocLink;
+        const target = targetId ? document.getElementById(targetId) : null;
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.classList.remove('section-flash');
+        // Force reflow so the animation restarts if the same link is clicked twice.
+        void target.offsetWidth;
+        target.classList.add('section-flash');
+        history.pushState(null, '', `#${targetId}`);
+      });
+    });
+
+    if (tocSections.length && links.length) {
+      tocObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            links.forEach((link) => link.classList.toggle('active', link.dataset.tocLink === entry.target.id));
+          }
+        },
+        { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
+      );
+      tocSections.forEach((section) => tocObserver?.observe(section));
+    }
+  }
+
+  document.addEventListener('astro:page-load', initProductDetail);
+</script>

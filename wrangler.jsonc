@@ -1,0 +1,38 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "ankur",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-02-24",
+	"compatibility_flags": ["nodejs_compat"],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "ankur",
+		},
+	],
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "ankur-media",
+		},
+	],
+	// Scheduled publishing + EmDash maintenance
+	"triggers": {
+		"crons": ["* * * * *"],
+	},
+	// Non-secret form-routing vars carried over from ankur-client/wrangler.toml
+	"vars": {
+		"ZEPTOMAIL_FROM_EMAIL": "no-reply@notifications.ankurgroup.in",
+		"ZEPTOMAIL_FROM_NAME": "Ankur Salt",
+		"ZEPTOMAIL_API_URL": "https://api.zeptomail.in/v1.1/email",
+		"CONTACT_GENERAL_EMAIL": "info@ankurgroup.in",
+		"CONTACT_INDUSTRIAL_EMAIL": "info@ankurgroup.in",
+		"CONNECT_DISTRIBUTOR_EMAIL": "info@ankurgroup.in",
+		"BULK_ENQUIRY_EMAIL": "info@ankurgroup.in",
+		"BECOME_DISTRIBUTOR_EMAIL": "info@ankurgroup.in",
+		"EXPORT_INQUIRY_EMAIL": "export@ankurgroup.in",
+		"DATASHEET_REQUEST_EMAIL": "info@ankurgroup.in",
+		"NEWSLETTER_SIGNUP_EMAIL": "info@ankurgroup.in",
+		"CAREER_APPLICATION_EMAIL": "info@ankurgroup.in",
+	},
+}

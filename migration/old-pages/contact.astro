@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactUs from '../../ui-components/components/ContactUs.astro';
+import content from '../../content/pages/contact.json';
+---
+<BaseLayout title={content.seo.title} description={content.seo.description}>
+  <ContactUs content={content} />
+</BaseLayout>

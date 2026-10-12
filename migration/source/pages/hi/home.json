@@ -1,0 +1,266 @@
+{
+  "seo": {
+    "title": "अंकुर साल्ट — भारत का विश्वसनीय नमक ब्रांड 1994 से | अंकुर केमफूड लिमिटेड",
+    "description": "भारत का दूसरा सबसे बड़ा पैकेज्ड नमक ब्रांड, जो 1994 से रसोई में विश्वसनीय है। अंकुर के आयोडीनयुक्त, कम सोडियम, फोर्टिफाइड और रॉक नमक रेंज खोजें, रोज़मर्रा के खाना पकाने से लेकर औद्योगिक और निर्यात सप्लाई तक।",
+    "image": "/images/hero-poster.jpg"
+  },
+  "hero": {
+    "slides": [
+      {
+        "eyebrow": "अंकुर नमक, असली नमक",
+        "title": "असली नमक। कुछ नहीं छिपा।",
+        "body": "भारत का दूसरा सबसे बड़ा पैकेज्ड नमक ब्रांड, जो 1994 से रसोई में विश्वसनीय है। नमक कम ही खाएं, पर अच्छा खाएं: कम नमक खाएं, लेकिन असली नमक खाएं।",
+        "cta": {
+          "label": "हमारी रेंज खोजें",
+          "href": "/products/"
+        },
+        "media": {
+          "type": "video",
+          "src": "/videos/hero.mp4",
+          "poster": "/images/hero-poster.jpg"
+        }
+      },
+      {
+        "eyebrow": "डॉ. साल्ट का परिचय",
+        "title": "नमक कम ही खाएं, पर अच्छा खाएं।",
+        "body": "डॉ. साल्ट अंकुर की कम सोडियम रेंज है, उन घरों के लिए जो सचेतन खाना चाहते हैं असली नमक का स्वाद त्यागे बिना।",
+        "cta": {
+          "label": "डॉ. साल्ट की खोज करें",
+          "href": "/products/"
+        },
+        "media": {
+          "type": "image",
+          "src": "/images/hero-salad-bowl.jpg"
+        }
+      },
+      {
+        "eyebrow": "रसोई से लेकर उद्योग तक",
+        "title": "हर स्तर पर विश्वसनीय।",
+        "body": "पड़ोस की रसोई से लेकर औद्योगिक और निर्यात भागीदारों तक, अंकुर की फ्री फ्लो आयोडीनयुक्त रेंज 1994 से शुद्धता का एक ही वादा लेकर चलती आ रही है।",
+        "cta": {
+          "label": "हमारी कहानी देखें",
+          "href": "/legacy/"
+        },
+        "media": {
+          "type": "image",
+          "src": "/images/hero-salt-flats.jpg"
+        }
+      }
+    ],
+    "badge": {
+      "line1": "स्थापित",
+      "line2": "1994"
+    }
+  },
+  "quote": {
+    "eyebrow": "हमारा वादा",
+    "line": "भरोसे की शुरुआत",
+    "translation": "विश्वास की शुरुआत।",
+    "attribution": "अंकुर नमक, 1994 से",
+    "ctaLabel": "चलाएं",
+    "image": {
+      "src": "/images/hero-salt-flats.jpg",
+      "alt": "गुजरात के समुद्री नमक बेल्ट पर नमक की सपाटी"
+    }
+  },
+  "productsTeaser": {
+    "eyebrow": "हमारी रेंज",
+    "title": "हर रसोई के लिए, हर स्तर के लिए नमक।",
+    "viewAll": {
+      "label": "सभी उत्पाद देखें",
+      "href": "/products/"
+    },
+    "products": [
+      {
+        "name": "फ्री फ्लो आयोडीनयुक्त",
+        "tag": "आयोडीनयुक्त",
+        "tagline": "1994 से भारतीय रसोई में विश्वस्त रोजमर्रा का नमक।",
+        "image": {
+          "src": "/images/products/free-flow-iodised.webp",
+          "alt": "फ्री फ्लो आयोडीनयुक्त नमक"
+        },
+        "href": "/products/ankur-salt/"
+      },
+      {
+        "name": "अंकुर गोल्ड साल्ट",
+        "tag": "प्रीमियम",
+        "tagline": "शुद्धता की बेहतरीन ग्रेड, उन रसोई के लिए जो अधिक की उम्मीद करती हैं।",
+        "image": {
+          "src": "/images/products/gold-salt.webp",
+          "alt": "अंकुर गोल्ड साल्ट"
+        },
+        "href": "/products/ankur-gold/"
+      },
+      {
+        "name": "डॉ. साल्ट",
+        "tag": "कम सोडियम",
+        "tagline": "स्वस्थ रोज़मर्रा के खाना पकाने के लिए बनाया गया",
+        "image": {
+          "src": "/images/products/dr-salt.webp",
+          "alt": "डॉ. साल्ट"
+        },
+        "href": "/products/dr-salt/"
+      },
+      {
+        "name": "रॉक साल्ट",
+        "tag": "परंपरागत",
+        "tagline": "रॉक नमक- रोज़मर्रा के खाना पकाने और उपवास अनुष्ठानों के लिए प्राकृतिक",
+        "image": {
+          "src": "/images/products/rock-salt-pack.webp",
+          "alt": "रॉक साल्ट"
+        },
+        "href": "/products/rock-salt/"
+      }
+    ]
+  },
+  "certificationsStrip": {
+    "certifications": [
+      {
+        "name": "BIS",
+        "logo": {
+          "src": "/images/certifications/bis.svg",
+          "alt": "BIS प्रमाणित"
+        },
+        "certificateUrl": "/documents/certificates/bis-is-7224.pdf"
+      },
+      {
+        "name": "FSSAI",
+        "logo": {
+          "src": "/images/certifications/fssai.svg",
+          "alt": "FSSAI प्रमाणित"
+        },
+        "certificateUrl": "/documents/certificates/fssai.pdf"
+      },
+      {
+        "name": "ISO 9001",
+        "logo": {
+          "src": "/images/certifications/iso-9001.svg",
+          "alt": "ISO 9001 प्रमाणित"
+        },
+        "certificateUrl": "/documents/certificates/fssc-22000.pdf"
+      },
+      {
+        "name": "Bharatiya Udhyog Ratna",
+        "logo": {
+          "src": "/images/certifications/bharatiya-udhyog-ratna.svg",
+          "alt": "भारतीय उद्योग रत्न पुरस्कार"
+        },
+        "certificateUrl": "/images/certifications/certificate-07.jpeg"
+      }
+    ]
+  },
+  "distributionMap": {
+    "eyebrow": "हमारा नेटवर्क",
+    "title": "हमारी नमक की सपाटी से लेकर देशभर की रसोइयों तक, और उससे भी आगे।",
+    "stat": {
+      "states": 24,
+      "countries": 12
+    },
+    "viewAll": {
+      "label": "हमारे नेटवर्क को खोजें",
+      "href": "/network/"
+    },
+    "states": [
+      {
+        "name": "Delhi",
+        "value": 60
+      },
+      {
+        "name": "Gujarat",
+        "value": 180
+      },
+      {
+        "name": "Maharashtra",
+        "value": 95
+      },
+      {
+        "name": "West Bengal",
+        "value": 70
+      },
+      {
+        "name": "Tamil Nadu",
+        "value": 50
+      }
+    ]
+  },
+  "factoryVideo": {
+    "eyebrow": "पर्दे के पीछे",
+    "title": "1994 से अपना वादा निभाने वाली रिफाइनरी के अंदर।",
+    "items": [
+      { "title": "Inside Our Refinery", "src": "/videos/hero.mp4", "poster": "/images/hero-poster.jpg" },
+      { "title": "Ankur Salt TVC", "src": "/videos/ankur-salt-vid-1.mp4", "poster": "/images/vid-1-poster.jpg" },
+      { "title": "Ankur Salt Campaign", "src": "/videos/ankur-salt-vid-2.mp4", "poster": "/images/vid-2-poster.jpg" },
+      { "title": "Ankur Salt Campaign", "src": "/videos/ankur-salt-vid-3.mp4", "poster": "/images/vid-3-poster.jpg" }
+    ]
+  },
+  "blogTeaser": {
+    "eyebrow": "ब्लॉग से",
+    "title": "स्वादपूर्ण कहानियां।",
+    "viewAll": {
+      "label": "और लेख देखें",
+      "href": "/blog/"
+    },
+    "posts": [
+      {
+        "tag": "स्वास्थ्य",
+        "date": "Feb 22, 2024",
+        "author": "Ethan Brooks",
+        "title": "आयोडीनयुक्त नमक के बारे में सच्चाई",
+        "excerpt": "रोज़मर्रा के स्वास्थ्य के लिए आयोडीनकरण क्यों महत्वपूर्ण है, और असली सुरक्षा को मार्केटिंग से कैसे अलग करें।",
+        "image": {
+          "src": "/images/products/free-flow-iodised.webp",
+          "alt": "फ्री फ्लो आयोडीनयुक्त नमक"
+        },
+        "href": "/blog/truth-about-iodised-salt/"
+      },
+      {
+        "tag": "व्यंजन",
+        "date": "Mar 27, 2024",
+        "author": "Lily Thompson",
+        "title": "रॉक नमक के साथ खाना पकाने के 5 तरीके",
+        "excerpt": "सेंधा नमक सिर्फ व्रत के लिए नहीं है। यहाँ देखें कि यह कैसे रसोई में स्थायी जगह बनाता है।",
+        "image": {
+          "src": "/images/products/rock-salt-pack.webp",
+          "alt": "रॉक साल्ट"
+        },
+        "href": "/blog/cooking-with-rock-salt/"
+      },
+      {
+        "tag": "स्वास्थ्य",
+        "date": "Apr 30, 2024",
+        "author": "Oliver Davis",
+        "title": "कम सोडियम का मतलब कम स्वाद नहीं",
+        "excerpt": "डॉ. साल्ट के सचेतन खाने की दृष्टिकोण को जानिए, असली नमक का स्वाद त्यागे बिना।",
+        "image": {
+          "src": "/images/products/dr-salt.webp",
+          "alt": "डॉ. साल्ट"
+        },
+        "href": "/blog/low-sodium-flavor/"
+      },
+      {
+        "tag": "प्रक्रिया",
+        "date": "May 18, 2024",
+        "author": "Meera Nair",
+        "title": "नमक की सपाटी से रसोई तक",
+        "excerpt": "वह प्रक्रिया जो कच्चे क्रिस्टल को आपकी टेबल पर नमक में बदलती है।",
+        "image": {
+          "src": "/images/hero-salt-flats.jpg",
+          "alt": "नमक की सपाटी"
+        },
+        "href": "/blog/salt-pan-to-kitchen/"
+      },
+      {
+        "tag": "स्वास्थ्य",
+        "date": "Jun 5, 2024",
+        "author": "Ava Bennett",
+        "title": "एक बार में एक चुटकी, सचेतन खाना",
+        "excerpt": "स्वास्थ्यकर नमक संबंध के लिए सरल आदतें, बिना इस बात को त्यागे कि खाना स्वादिष्ट क्यों है।",
+        "image": {
+          "src": "/images/hero-salad-bowl.jpg",
+          "alt": "ताज़ी सलाद की कटोरी"
+        },
+        "href": "/blog/eating-mindfully/"
+      }
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "seo": {
+    "title": "ब्लॉग | अंकुर केमफूड लिमिटेड",
+    "description": "अंकुर केमफूड लिमिटेड की स्वास्थ्य, विनिर्माण, निर्यात और कंपनी की कहानियाँ - भारत का दूसरा सबसे बड़ा पैकेज्ड नमक ब्रांड।"
+  },
+  "hero": {
+    "kicker": "अंकुर साल्ट · अंतर्दृष्टि",
+    "title": "साल्ट बेल्ट की कहानियाँ",
+    "intro": "स्वास्थ्य, विनिर्माण, निर्यात और भारत के दूसरे सबसे बड़े पैकेज्ड नमक ब्रांड के पीछे की सभी कहानियाँ, जिन्हें इसे बनाने वाले लोगों ने लिखा है।"
+  },
+  "labels": {
+    "allCategory": "सभी",
+    "featured": "विशेष",
+    "latestArticles": "नवीनतम लेख",
+    "readArticle": "लेख पढ़ें",
+    "moreArticles": "ब्लॉग से अधिक",
+    "backToAllArticles": "सभी लेखों पर वापस जाएं",
+    "breadcrumbHome": "होम",
+    "breadcrumbBlog": "ब्लॉग",
+    "homeHref": "/",
+    "blogHref": "/blog/",
+    "minReadSuffix": "मिनट पढ़ना"
+  },
+  "categoryColors": {
+    "Health & Nutrition": "#0C6B3D",
+    "Manufacturing & Quality": "#1B4F72",
+    "Export & Trade": "#A82121",
+    "Company News": "#8A5A00"
+  },
+  "defaultCategoryColor": "#A82121"
+}
