@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogDetail from '../../ui/components/BlogDetail.astro';
 import type { BlogPost } from '../../ui/components/BlogList.astro';
-import { getBlogs, getPage } from '../../lib/content';
+import { cmsList, cmsScope, getBlogs, getPage } from '../../lib/content';
 import { buildArticleSchema } from '../../lib/structuredData';
 
 const content = await getPage('blog');
@@ -17,7 +17,7 @@ const description = post.excerpt;
 
 const articleSchema = buildArticleSchema(post, Astro.site);
 ---
-<BaseLayout title={title} description={description} image={post.image} type="article">
+<BaseLayout title={title} description={description} image={post.image} type="article" seoFrom={post} cms={cmsScope(content, cmsList('', posts))}>
   {articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}
   <BlogDetail content={content} posts={posts} slug={slug!} />
 </BaseLayout>

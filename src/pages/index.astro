@@ -1,5 +1,5 @@
 ---
-import { getDistributors, getPage } from '../lib/content';
+import { cmsScope, getDistributors, getPage } from '../lib/content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../ui/components/Hero';
 import QuoteSection from '../ui/components/QuoteSection';
@@ -11,7 +11,7 @@ import BlogTeaser from '../ui/components/BlogTeaser';
 const content = await getPage('home');
 const distributors = await getDistributors();
 ---
-<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image}>
+<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} seoFrom={content} cms={cmsScope(content)}>
   <Hero client:load content={content.hero} />
   <QuoteSection client:visible content={content.quote} />
   <ProductsTeaser client:visible content={content.productsTeaser} />

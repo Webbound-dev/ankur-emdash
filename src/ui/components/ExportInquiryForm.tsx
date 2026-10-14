@@ -88,8 +88,11 @@ function PlaceholderOverlay({
 export default function ExportInquiryForm({
   content,
   skipEntranceAnimation,
+  cmsPath = 'inquiry',
 }: {
   content: ExportInquiryContent;
+  // Where the page stores this content, for inline editing paths.
+  cmsPath?: string;
   // Set when rendered inside a tab-switcher (e.g. ContactUs.astro's Export
   // panel) — that wrapper shows/hides this form via a tab click, not a
   // scroll, and toggling display:none leaves this section's own
@@ -175,17 +178,17 @@ export default function ExportInquiryForm({
       <div className="relative max-w-[1100px] mx-auto px-6 lg:px-10 grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-16 items-start">
         <div className="lg:sticky lg:top-28">
           <div className="mb-4">
-            <span data-cms-field="inquiry.eyebrow" className="eif-eyebrow-text font-sans text-[11px] font-semibold uppercase tracking-[0.3em] text-indian-red/60">
+            <span data-cms-field={`${cmsPath}.eyebrow`} className="eif-eyebrow-text font-sans text-[11px] font-semibold uppercase tracking-[0.3em] text-indian-red/60">
               {eyebrow}
             </span>
           </div>
           <h2
-            data-cms-field="inquiry.heading"
+            data-cms-field={`${cmsPath}.heading`}
             className="eif-heading font-display font-medium text-indian-red text-3xl lg:text-4xl leading-[1.1] [text-wrap:balance]"
           >
             {heading}
           </h2>
-          <p data-cms-field="inquiry.intro" className="eif-intro mt-4 font-sans text-indian-red/65 text-sm lg:text-base leading-relaxed max-w-[420px]">
+          <p data-cms-field={`${cmsPath}.intro`} className="eif-intro mt-4 font-sans text-indian-red/65 text-sm lg:text-base leading-relaxed max-w-[420px]">
             {intro}
           </p>
 
@@ -197,7 +200,7 @@ export default function ExportInquiryForm({
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indian-red/[0.08] text-indian-red">
                     <Icon size={16} />
                   </span>
-                  <span data-cms-field={`inquiry.benefits[${i}]`} className="font-sans text-sm text-indian-red/70 leading-relaxed pt-1.5">
+                  <span data-cms-field={`${cmsPath}.benefits[${i}]`} className="font-sans text-sm text-indian-red/70 leading-relaxed pt-1.5">
                     {text}
                   </span>
                 </li>
@@ -215,10 +218,10 @@ export default function ExportInquiryForm({
                 <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indian-red/[0.08] text-indian-red">
                   <BadgeCheck size={22} />
                 </span>
-                <p data-cms-field="inquiry.successHeading" className="mt-4 font-display font-medium text-xl text-indian-red">
+                <p data-cms-field={`${cmsPath}.successHeading`} className="mt-4 font-display font-medium text-xl text-indian-red">
                   {successHeading}
                 </p>
-                <p data-cms-field="inquiry.successMessage" className="mt-2 font-sans text-sm text-indian-red/65 max-w-[360px] mx-auto">
+                <p data-cms-field={`${cmsPath}.successMessage`} className="mt-2 font-sans text-sm text-indian-red/65 max-w-[360px] mx-auto">
                   {successMessage}
                 </p>
               </div>
@@ -248,56 +251,56 @@ export default function ExportInquiryForm({
                 }}
               >
                 <div className="flex flex-col gap-2 sm:col-span-2">
-                  <span data-cms-field="inquiry.fields.companyName" className="font-sans text-sm font-medium text-indian-red/80">
+                  <span data-cms-field={`${cmsPath}.fields.companyName`} className="font-sans text-sm font-medium text-indian-red/80">
                     {fields.companyName}
                   </span>
                   <div className="relative">
                     <Building2 size={16} className={iconClass} />
-                    <PlaceholderOverlay field="inquiry.placeholders.companyName" empty={!form.companyName} text={placeholders.companyName} editing={editing} />
+                    <PlaceholderOverlay field={`${cmsPath}.placeholders.companyName`} empty={!form.companyName} text={placeholders.companyName} editing={editing} />
                     <input required type="text" aria-label={fields.companyName} value={form.companyName} onChange={(e) => update('companyName', e.target.value)} className={fieldClass} />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <span data-cms-field="inquiry.fields.contactName" className="font-sans text-sm font-medium text-indian-red/80">
+                  <span data-cms-field={`${cmsPath}.fields.contactName`} className="font-sans text-sm font-medium text-indian-red/80">
                     {fields.contactName}
                   </span>
                   <div className="relative">
                     <User size={16} className={iconClass} />
-                    <PlaceholderOverlay field="inquiry.placeholders.contactName" empty={!form.contactName} text={placeholders.contactName} editing={editing} />
+                    <PlaceholderOverlay field={`${cmsPath}.placeholders.contactName`} empty={!form.contactName} text={placeholders.contactName} editing={editing} />
                     <input required type="text" aria-label={fields.contactName} value={form.contactName} onChange={(e) => update('contactName', e.target.value)} className={fieldClass} />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <span data-cms-field="inquiry.fields.country" className="font-sans text-sm font-medium text-indian-red/80">
+                  <span data-cms-field={`${cmsPath}.fields.country`} className="font-sans text-sm font-medium text-indian-red/80">
                     {fields.country}
                   </span>
                   <div className="relative">
                     <Globe2 size={16} className={iconClass} />
-                    <PlaceholderOverlay field="inquiry.placeholders.country" empty={!form.country} text={placeholders.country} editing={editing} />
+                    <PlaceholderOverlay field={`${cmsPath}.placeholders.country`} empty={!form.country} text={placeholders.country} editing={editing} />
                     <input required type="text" aria-label={fields.country} value={form.country} onChange={(e) => update('country', e.target.value)} className={fieldClass} />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <span data-cms-field="inquiry.fields.phone" className="font-sans text-sm font-medium text-indian-red/80">
+                  <span data-cms-field={`${cmsPath}.fields.phone`} className="font-sans text-sm font-medium text-indian-red/80">
                     {fields.phone}
                   </span>
                   <div className="relative">
                     <Phone size={16} className={iconClass} />
-                    <PlaceholderOverlay field="inquiry.placeholders.phone" empty={!form.phone} text={placeholders.phone} editing={editing} />
+                    <PlaceholderOverlay field={`${cmsPath}.placeholders.phone`} empty={!form.phone} text={placeholders.phone} editing={editing} />
                     <input required type="tel" aria-label={fields.phone} value={form.phone} onChange={(e) => update('phone', e.target.value)} className={fieldClass} />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-2 sm:col-span-2">
-                  <span data-cms-field="inquiry.fields.email" className="font-sans text-sm font-medium text-indian-red/80">
+                  <span data-cms-field={`${cmsPath}.fields.email`} className="font-sans text-sm font-medium text-indian-red/80">
                     {fields.email}
                   </span>
                   <div className="relative">
                     <Mail size={16} className={iconClass} />
-                    <PlaceholderOverlay field="inquiry.placeholders.email" empty={!form.email} text={placeholders.email} editing={editing} />
+                    <PlaceholderOverlay field={`${cmsPath}.placeholders.email`} empty={!form.email} text={placeholders.email} editing={editing} />
                     <input
                       required
                       type="email"
@@ -360,12 +363,12 @@ export default function ExportInquiryForm({
                 </div>
 
                 <div className="flex flex-col gap-2 sm:col-span-2">
-                  <span data-cms-field="inquiry.fields.message" className="font-sans text-sm font-medium text-indian-red/80">
+                  <span data-cms-field={`${cmsPath}.fields.message`} className="font-sans text-sm font-medium text-indian-red/80">
                     {fields.message}
                   </span>
                   <div className="relative">
                     <MessageSquare size={16} className={`${iconClass} top-3.5 translate-y-0`} />
-                    <PlaceholderOverlay field="inquiry.placeholders.message" empty={!form.message} text={placeholders.message} editing={editing} top="start" />
+                    <PlaceholderOverlay field={`${cmsPath}.placeholders.message`} empty={!form.message} text={placeholders.message} editing={editing} top="start" />
                     <textarea
                       rows={4}
                       aria-label={fields.message}
@@ -390,7 +393,7 @@ export default function ExportInquiryForm({
                       : 'bg-indian-red/30 text-silent-white/70 cursor-not-allowed'
                   }`}
                 >
-                  {submitting ? 'Submitting…' : <span data-cms-field="inquiry.submitLabel">{submitLabel}</span>}
+                  {submitting ? 'Submitting…' : <span data-cms-field={`${cmsPath}.submitLabel`}>{submitLabel}</span>}
                 </button>
                 {!emailOtp.verified && (
                   <p className="sm:col-span-2 -mt-3 text-center font-sans text-xs text-indian-red/45">

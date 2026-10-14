@@ -59,6 +59,56 @@ item blocks alongside their section's heading block. Their order in the
 section controls their order within that list; the page's section layout
 remains fixed. YouTube embeds keep their URL fields.
 
+## Editing on the page
+
+Signed-in editors switch on **Edit** in the EmDash toolbar on any public page.
+Then:
+
+- click any outlined text to type over it (Enter saves, Shift+Enter adds a
+  line, Escape cancels); form placeholders open a small text box;
+- hover a link or image for **Edit link** / **Change image** (upload a new
+  image or pick one from the media library);
+- in the few lists with add/remove buttons (open roles, grades, form options),
+  use **Save list changes** after adding or removing rows;
+- blog article text uses EmDash's own inline rich-text editor;
+- navbar and footer links (EmDash **Menus**) edit the same way: click the
+  label, or **Edit link** for the address.
+
+Each change is saved as a draft of the entry it belongs to; visitors see it
+after **Publish** in the toolbar, which publishes every entry edited on the
+page (for example the page and the footer). Menu changes have no draft and
+are live as soon as they are saved. Adding, removing or reordering page
+sections and most list items stay in the admin. Labels written into the
+components themselves (for example "Read more" or form hints) aren't CMS
+content and can't be edited.
+
+How it works: components mark each editable value with its path in the
+original JSON (`data-cms-field`, `data-cms-link`, `data-cms-image`). In edit
+mode, pages wrap their content with `cmsScope()` from `src/lib/content`,
+naming the entry those paths belong to (`cmsList()` for collection lists such
+as `products[2].name`). `src/ui/lib/inlineEditor.ts` resolves a path to its
+entry and saves it through EmDash's content API; `src/lib/content/edit.mjs`
+re-encodes the change with the codec and writes back only the stored values
+that changed. Public HTML is unchanged outside edit mode. When adding a
+component, mark its values with paths relative to the content passed to
+`cmsScope()`, and keep each value in its own element (no prefixes, suffixes or
+quotes inside the marked element), then run:
+
+```bash
+node migration/check-inline-edit.mjs                         # every stored value edits exactly
+node migration/check-inline-paths.mjs http://localhost:4321  # every marked value resolves (dev server running)
+```
+
+## SEO
+
+Pages, business and legal pages, products and blog posts have EmDash's
+**SEO** panel. Its title, description, image, canonical URL and "hide from
+search engines" override the page's own SEO section (products: page title and
+meta description; posts: title and excerpt), which stay as the defaults.
+Empty panel fields leave the existing head tags unchanged. The panel is
+switched on in the seed; an existing database needs **SEO** enabled per
+collection under **Content Types**.
+
 ## Commands
 
 ```bash

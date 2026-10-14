@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
+import MenuLabel from './MenuLabel';
 
-interface NavLink { label: string; href: string; target?: string; titleAttr?: string }
-interface ProductItem { title: string; href: string; target?: string; titleAttr?: string; variant?: 'callout' }
+interface NavLink { label: string; href: string; target?: string; titleAttr?: string; menuRef?: string }
+interface ProductItem { title: string; href: string; target?: string; titleAttr?: string; menuRef?: string; variant?: 'callout' }
 
 export interface NavbarContent {
   logo: { src: string; alt: string };
@@ -60,12 +61,16 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
     };
   }, [sidebarOpen]);
 
+  // Menu URLs end with a slash ("/products/"); compare without it.
+  const withoutSlash = (href: string) => href.replace(/\/+$/, '') || '/';
+  const isProductsLink = (href: string) => withoutSlash(href) === '/products';
+
   const isActive = (href: string) => pathname === href || (href !== '/' && pathname.startsWith(href));
 
   // Consumer Salt and Industrial Salt are the two core product lines, so
   // they get a touch more visual weight than the rest of the nav — semibold
   // and never dimmed, instead of the resting 80% opacity every other link gets.
-  const isHighlighted = (href: string) => href === '/products' || href === '/industrial-salt';
+  const isHighlighted = (href: string) => isProductsLink(href) || withoutSlash(href) === '/industrial-salt';
 
   // Bolder weight + an underline that grows in from the left on hover
   // (stays fully drawn for the current page).
@@ -103,7 +108,7 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
             out of the flex row entirely (see logo/spacer below). */}
         <div className="hidden lg:flex items-center gap-x-10 gap-y-2 font-sans text-sm">
           {leftLinks.map((link) => {
-            if (link.href === '/products') {
+            if (isProductsLink(link.href)) {
               return (
                 <div
                   key={link.href}
@@ -116,9 +121,10 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
                     target={link.target}
                     rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
                     title={link.titleAttr}
+                    data-cms-menu-link={link.menuRef}
                     className={`${linkClass(link.href)} inline-flex items-center gap-1`}
                   >
-                    {link.label}
+                    <MenuLabel menuRef={link.menuRef}>{link.label}</MenuLabel>
                     <ChevronDown
                       size={14}
                       className={`transition-transform duration-200 ${productsOpen ? 'rotate-180' : ''}`}
@@ -147,9 +153,10 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
                               target={product.target}
                               rel={product.target === "_blank" ? "noopener noreferrer" : undefined}
                               title={product.titleAttr}
+                              data-cms-menu-link={product.menuRef}
                               className="group relative mt-1 flex items-center gap-2.5 rounded-xl border-t border-indian-red/10 px-3 pt-3.5 pb-2.5 text-sm font-semibold text-indian-red transition-colors duration-150 hover:bg-indian-red/[0.06]"
                             >
-                              {product.title}
+                              <MenuLabel menuRef={product.menuRef}>{product.title}</MenuLabel>
                               <span aria-hidden="true" className="ml-auto transition-transform duration-150 group-hover:translate-x-0.5">&rarr;</span>
                             </a>
                           ) : (
@@ -159,10 +166,11 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
                               target={product.target}
                               rel={product.target === "_blank" ? "noopener noreferrer" : undefined}
                               title={product.titleAttr}
+                              data-cms-menu-link={product.menuRef}
                               className="group relative flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm font-medium text-indian-red/80 transition-colors duration-150 hover:bg-indian-red/[0.06] hover:text-indian-red"
                             >
                               <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-indian-red/50 transition-colors duration-150 group-hover:bg-indian-red" />
-                              {product.title}
+                              <MenuLabel menuRef={product.menuRef}>{product.title}</MenuLabel>
                             </a>
                           )
                         )}
@@ -180,9 +188,10 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
                 target={link.target}
                 rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
                 title={link.titleAttr}
+                data-cms-menu-link={link.menuRef}
                 className={linkClass(link.href)}
               >
-                {link.label}
+                <MenuLabel menuRef={link.menuRef}>{link.label}</MenuLabel>
               </a>
             );
           })}
@@ -212,9 +221,10 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
                 target={link.target}
                 rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
                 title={link.titleAttr}
+                data-cms-menu-link={link.menuRef}
                 className={linkClass(link.href)}
               >
-                {link.label}
+                <MenuLabel menuRef={link.menuRef}>{link.label}</MenuLabel>
               </a>
             ))}
           </div>
@@ -274,14 +284,14 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
         <nav className="px-4 py-4 font-sans text-sm flex flex-col gap-1">
           {allLinks.map((link) => {
 
-            if (link.href === '/products') {
+            if (isProductsLink(link.href)) {
               return (
                 <div key={link.href}>
                   <button
                     onClick={() => setMobileProductsOpen((o) => !o)}
                     className="w-full flex items-center justify-between gap-2 rounded-lg px-3 py-3 text-left font-medium"
                   >
-                    <span>{link.label}</span>
+                    <span><MenuLabel menuRef={link.menuRef}>{link.label}</MenuLabel></span>
                     <ChevronDown
                       size={16}
                       className={`transition-transform duration-200 ${mobileProductsOpen ? 'rotate-180' : ''}`}
@@ -301,11 +311,12 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
                             target={product.target}
                             rel={product.target === "_blank" ? "noopener noreferrer" : undefined}
                             title={product.titleAttr}
+                            data-cms-menu-link={product.menuRef}
 
                             onClick={() => setSidebarOpen(false)}
                             className="mt-1 flex items-center gap-2.5 rounded-lg border-t border-indian-red/10 px-3 pt-3 pb-2 font-semibold text-indian-red"
                           >
-                            <span className="min-w-0 flex-1">{product.title}</span>
+                            <span className="min-w-0 flex-1"><MenuLabel menuRef={product.menuRef}>{product.title}</MenuLabel></span>
                             <span aria-hidden="true">&rarr;</span>
                           </a>
                         ) : (
@@ -315,12 +326,13 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
                             target={product.target}
                             rel={product.target === "_blank" ? "noopener noreferrer" : undefined}
                             title={product.titleAttr}
+                            data-cms-menu-link={product.menuRef}
 
                             onClick={() => setSidebarOpen(false)}
                             className="flex items-start gap-2.5 rounded-lg px-3 py-2 text-indian-red/75"
                           >
                             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-indian-red/50" />
-                            <span className="min-w-0 flex-1">{product.title}</span>
+                            <span className="min-w-0 flex-1"><MenuLabel menuRef={product.menuRef}>{product.title}</MenuLabel></span>
                           </a>
                         )
                       )}
@@ -337,11 +349,12 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
                 target={link.target}
                 rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
                 title={link.titleAttr}
+                data-cms-menu-link={link.menuRef}
 
                 onClick={() => setSidebarOpen(false)}
                 className={`rounded-lg px-3 py-3 ${isHighlighted(link.href) ? 'font-semibold' : 'font-medium'} ${isActive(link.href) ? 'text-indian-red' : 'text-indian-red/80'}`}
               >
-                {link.label}
+                <MenuLabel menuRef={link.menuRef}>{link.label}</MenuLabel>
               </a>
             );
           })}

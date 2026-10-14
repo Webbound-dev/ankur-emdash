@@ -53,8 +53,8 @@ const { heading, subheading, products } = Astro.props;
           <p class="mt-1.5 text-xs lg:text-sm text-indian-red/65 leading-snug" data-cms-field={`products[${pi}].grid.description`}>
             {product.grid.description}
           </p>
-          <span class="mt-3 inline-flex items-center gap-1 text-xs font-medium text-indian-red group-hover:gap-2 transition-all duration-200" data-cms-field={`products[${pi}].grid.ctaLabel`}>
-            {product.grid.ctaLabel}
+          <span class="mt-3 inline-flex items-center gap-1 text-xs font-medium text-indian-red group-hover:gap-2 transition-all duration-200">
+            <span data-cms-field={`products[${pi}].grid.ctaLabel`}>{product.grid.ctaLabel}</span>
             <span aria-hidden="true">&rarr;</span>
           </span>
         </div>

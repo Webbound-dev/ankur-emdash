@@ -1,9 +1,9 @@
 ---
-import { getPage } from '../lib/content';
+import { cmsScope, getPage } from '../lib/content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ChampalalGroup from '../ui/components/ChampalalGroup.astro';
 const content = await getPage('champalal-group');
 ---
-<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image}>
+<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} seoFrom={content} cms={cmsScope(content)}>
   <ChampalalGroup content={content} />
 </BaseLayout>

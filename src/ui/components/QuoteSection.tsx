@@ -299,7 +299,7 @@ export default function QuoteSection({ content }: { content: QuoteSectionContent
             </>
           )}
           {!played && (
-            <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.25em] text-indian-red/40">
+            <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.25em] text-indian-red/40" data-cms-field="quote.ctaLabel">
               {ctaLabel}
             </span>
           )}

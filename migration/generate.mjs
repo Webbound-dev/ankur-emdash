@@ -163,7 +163,7 @@ const collectionConfigs = {
 		slugKey: "slug",
 		typedLists: { "detail.sections": "type" },
 		rename: { name: "title" },
-		supports: ["drafts", "revisions", "preview"],
+		supports: ["drafts", "revisions", "preview", "seo"],
 		fieldLabel: { name: "Name" },
 	},
 	blogs: {
@@ -172,7 +172,7 @@ const collectionConfigs = {
 		slugKey: "slug",
 		typedLists: { content: "type" },
 		rename: {},
-		supports: ["drafts", "revisions", "preview", "search"],
+		supports: ["drafts", "revisions", "preview", "search", "seo"],
 	},
 	distributors: {
 		label: "Distributor states",
@@ -231,7 +231,8 @@ const pageCollectionDefs = Object.entries(PAGE_COLLECTIONS).map(([slug, c]) => (
 	slug,
 	label: c.label,
 	labelSingular: c.singular,
-	supports: ["drafts", "revisions", "preview"],
+	// The SEO panel overrides each page's own SEO section (site chrome has no page).
+	supports: slug === "site_chrome" ? ["drafts", "revisions", "preview"] : ["drafts", "revisions", "preview", "seo"],
 	fields: [
 		{ slug: "title", label: "Title", type: "string", required: true },
 		{

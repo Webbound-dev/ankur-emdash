@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, MapPin, Instagram, Facebook, Linkedin, X as XIcon } from 'lucide-react';
 import { getRecaptchaToken } from '../lib/recaptcha';
+import MenuLabel from './MenuLabel';
 
 // Browser only: GSAP starts a timer on registration, which Cloudflare Workers forbid at module scope (SSR).
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
@@ -25,10 +26,13 @@ export interface FooterLink {
   href: string;
   target?: string;
   titleAttr?: string;
+  /** Menu item reference, edit mode only. */
+  menuRef?: string;
 }
 
 export interface FooterColumn {
   title: string;
+  menuRef?: string;
   links: FooterLink[];
 }
 
@@ -238,7 +242,7 @@ export default function Footer({ content }: { content: FooterContent }) {
               <h3
                 className="font-sans text-sm font-semibold text-indian-red mb-4"
               >
-                {column.title}
+                <MenuLabel menuRef={column.menuRef}>{column.title}</MenuLabel>
               </h3>
               <ul className="space-y-3">
                 {column.links.map((link, l) => {
@@ -251,10 +255,11 @@ export default function Footer({ content }: { content: FooterContent }) {
                         target={link.target ?? (isExternal ? '_blank' : undefined)}
                         rel={(link.target ?? (isExternal ? '_blank' : undefined)) === '_blank' ? 'noopener noreferrer' : undefined}
                         title={link.titleAttr}
+                        data-cms-menu-link={link.menuRef}
                         className="inline-flex items-center gap-2 font-sans text-sm text-indian-red/60 hover:text-indian-red transition-colors"
                       >
                         {Icon && <Icon size={14} className="shrink-0" />}
-                        <span>{link.label}</span>
+                        <span><MenuLabel menuRef={link.menuRef}>{link.label}</MenuLabel></span>
                       </a>
                     </li>
                   );
@@ -274,9 +279,10 @@ export default function Footer({ content }: { content: FooterContent }) {
                   target={link.target}
                   rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
                   title={link.titleAttr}
+                  data-cms-menu-link={link.menuRef}
                   className="font-sans text-xs text-indian-red/60 hover:text-indian-red transition-colors"
                 >
-                  <span>{link.label}</span>
+                  <span><MenuLabel menuRef={link.menuRef}>{link.label}</MenuLabel></span>
                 </a>
               ))}
             </div>

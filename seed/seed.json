@@ -7161,7 +7161,8 @@
 			"supports": [
 				"drafts",
 				"revisions",
-				"preview"
+				"preview",
+				"seo"
 			],
 			"fields": [
 				{
@@ -7247,7 +7248,8 @@
 			"supports": [
 				"drafts",
 				"revisions",
-				"preview"
+				"preview",
+				"seo"
 			],
 			"fields": [
 				{
@@ -7302,7 +7304,8 @@
 			"supports": [
 				"drafts",
 				"revisions",
-				"preview"
+				"preview",
+				"seo"
 			],
 			"fields": [
 				{
@@ -7366,7 +7369,8 @@
 			"supports": [
 				"drafts",
 				"revisions",
-				"preview"
+				"preview",
+				"seo"
 			],
 			"fields": [
 				{
@@ -7489,7 +7493,8 @@
 				"drafts",
 				"revisions",
 				"preview",
-				"search"
+				"search",
+				"seo"
 			],
 			"fields": [
 				{
