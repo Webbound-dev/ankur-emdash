@@ -1,5 +1,5 @@
 ---
-import { getBlogs, getPage } from '../../lib/content';
+import { cmsList, cmsScope, getBlogs, getPage } from '../../lib/content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogList from '../../ui/components/BlogList.astro';
 import type { BlogPost } from '../../ui/components/BlogList.astro';
@@ -8,6 +8,6 @@ const postsData = await getBlogs();
 
 const posts = postsData as BlogPost[];
 ---
-<BaseLayout title={content.seo.title} description={content.seo.description}>
+<BaseLayout title={content.seo.title} description={content.seo.description} seoFrom={content} cms={cmsScope(content, cmsList('', posts))}>
   <BlogList content={content} posts={posts} />
 </BaseLayout>

@@ -19,17 +19,26 @@ export function menusFromChrome(navbar, footer) {
 	];
 }
 
-export function withNavigation(name, content, menus) {
+/**
+ * Merge menu items into the navbar/footer content. In edit mode
+ * (`editable`), each link also carries `menuRef` ("menu/itemId") so the
+ * inline editor can save its label and URL to the menu.
+ */
+export function withNavigation(name, content, menus, editable = false) {
 	const items = (key) => menus[key]?.items ?? [];
-	const link = (item) => ({ label: item.label, href: item.url,
-		...(item.target ? { target: item.target } : {}), ...(item.titleAttr ? { titleAttr: item.titleAttr } : {}) });
+	const link = (item, menu) => ({ label: item.label, href: item.url,
+		...(item.target ? { target: item.target } : {}), ...(item.titleAttr ? { titleAttr: item.titleAttr } : {}),
+		...(editable ? { menuRef: `${menu}/${item.id}` } : {}) });
 	if (name === "navbar") return { ...content,
-		leftLinks: items("navbar_left").map(link), rightLinks: items("navbar_right").map(link),
-		products: items("navbar_products").map((item) => { const { label, ...rest } = link(item); return { title: label, ...rest }; }),
+		leftLinks: items("navbar_left").map((item) => link(item, "navbar_left")),
+		rightLinks: items("navbar_right").map((item) => link(item, "navbar_right")),
+		products: items("navbar_products").map((item) => { const { label, ...rest } = link(item, "navbar_products"); return { title: label, ...rest }; }),
 	};
 	if (name === "footer") return { ...content,
-		columns: items("footer_navigation").map((item) => ({ title: item.label, links: (item.children ?? []).map(link) })),
-		legalLinks: items("footer_legal").map(link),
+		columns: items("footer_navigation").map((item) => ({ title: item.label,
+			...(editable ? { menuRef: `footer_navigation/${item.id}` } : {}),
+			links: (item.children ?? []).map((child) => link(child, "footer_navigation")) })),
+		legalLinks: items("footer_legal").map((item) => link(item, "footer_legal")),
 	};
 	return content;
 }

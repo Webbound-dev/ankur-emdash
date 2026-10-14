@@ -1,5 +1,5 @@
 ---
-import { getPage, getProducts } from '../../lib/content';
+import { cmsList, cmsScope, getPage, getProducts } from '../../lib/content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProductComparisonTable from '../../ui/components/ProductComparisonTable.astro';
 import FindYourSalt from '../../ui/components/FindYourSalt.astro';
@@ -8,7 +8,7 @@ const content = await getPage('products');
 const products = await getProducts();
 ---
 
-<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image}>
+<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} seoFrom={content} cms={cmsScope(content, cmsList('products', products))}>
   <main class="bg-gradient-to-b from-silent-white to-white">
     <section class="relative bg-indian-red pt-16 lg:pt-24 pb-20 lg:pb-28">
       <!-- Texture + glow blobs live in their own clipped layer so they

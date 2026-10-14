@@ -5,7 +5,7 @@ import Navbar from '../ui/components/Navbar.astro';
 import Footer from '../ui/components/Footer';
 import AudioPlayer from '../ui/components/AudioPlayer';
 import type { NavbarContent } from '../ui/components/NavbarIsland';
-import { getPage } from '../lib/content';
+import { cmsRegion, getPage, isEditMode, panelSeo } from '../lib/content';
 import { buildOrganizationSchema } from '../lib/structuredData';
 
 const registerCacheHint = (hint: any) => { if (Astro.cache?.enabled) Astro.cache.set(hint); };
@@ -21,12 +21,28 @@ interface Props {
    * when a page/post has no dedicated social-share image of its own. */
   image?: string;
   type?: 'website' | 'article';
+  /** cmsScope() for the page's content, so it can be edited in place. */
+  cms?: Record<string, string>;
+  /** The page, product or post whose SEO panel overrides the values above. */
+  seoFrom?: unknown;
 }
 
-const { title, description, image = '/images/favicon.png', type = 'website' } = Astro.props;
+const { type = 'website', cms = {}, seoFrom } = Astro.props;
+const editMode = isEditMode();
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImageURL = new URL(image, Astro.site);
+// Values set in the entry's SEO panel win over the page's own SEO section.
+const panel = panelSeo(seoFrom, {
+  title: Astro.props.title,
+  description: Astro.props.description,
+  siteUrl: Astro.site!.origin,
+  path: Astro.url.pathname,
+});
+const title = panel?.title ?? Astro.props.title;
+const description = panel?.description ?? Astro.props.description;
+const canonical = panel?.canonical ?? canonicalURL.href;
+const ogImageURL = panel?.ogImage ?? new URL(Astro.props.image ?? '/images/favicon.png', Astro.site).href;
+const robots = panel?.robots;
 
 const organizationSchema = buildOrganizationSchema(footerContent.columns, Astro.site);
 ---
@@ -38,14 +54,15 @@ const organizationSchema = buildOrganizationSchema(footerContent.columns, Astro.
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalURL} />
+    <link rel="canonical" href={canonical} />
+    {robots && <meta name="robots" content={robots} />}
 
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content="Ankur Chemfood Ltd." />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageURL} />
-    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:url" content={canonical} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -134,12 +151,29 @@ const organizationSchema = buildOrganizationSchema(footerContent.columns, Astro.
 </script>
   <body>
     <div class="min-h-screen flex flex-col">
-      <Navbar content={navbarContent} />
-      <div class="flex-grow">
+      {editMode ? (
+        <div style="display: contents" {...cmsRegion(navbarContent)}><Navbar content={navbarContent} /></div>
+      ) : (
+        <Navbar content={navbarContent} />
+      )}
+      <div class="flex-grow" {...cms}>
         <slot />
       </div>
-      <Footer content={footerContent} client:visible />
+      {editMode ? (
+        <div style="display: contents" {...cmsRegion(footerContent)}><Footer content={footerContent} client:visible /></div>
+      ) : (
+        <Footer content={footerContent} client:visible />
+      )}
       <AudioPlayer client:load transition:persist />
     </div>
+    <script>
+      // The inline editor only loads for editors in EmDash's edit mode.
+      const startEditor = () => {
+        if (document.querySelector('#emdash-toolbar[data-edit-mode="true"]')) {
+          import('../ui/lib/inlineEditor').then((m) => m.startInlineEditor());
+        }
+      };
+      document.addEventListener('astro:page-load', startEditor);
+    </script>
   </body>
 </html>

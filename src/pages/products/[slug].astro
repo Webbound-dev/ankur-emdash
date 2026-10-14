@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProductDetail from '../../ui/components/ProductDetail.astro';
 import type { Product } from '../../ui/components/ProductDetail.astro';
-import { getProduct } from '../../lib/content';
+import { cmsScope, getProduct } from '../../lib/content';
 import { buildProductSchema } from '../../lib/structuredData';
 
 const { slug } = Astro.params;
@@ -12,7 +12,7 @@ if (!product) return Astro.rewrite('/404');
 const productSchema = buildProductSchema(product, Astro.site);
 ---
 
-<BaseLayout title={product.pageTitle} description={product.metaDescription} image={product.image?.src}>
+<BaseLayout title={product.pageTitle} description={product.metaDescription} image={product.image?.src} seoFrom={product} cms={cmsScope(product)}>
   <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
   <ProductDetail product={product} />
 </BaseLayout>

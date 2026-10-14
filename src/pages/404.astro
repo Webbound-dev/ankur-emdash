@@ -1,9 +1,9 @@
 ---
-import { getPage } from '../lib/content';
+import { cmsScope, getPage } from '../lib/content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NotFound from '../ui/components/NotFound.astro';
 const content = await getPage('404');
 ---
-<BaseLayout title={content.seo.title} description={content.seo.description}>
+<BaseLayout title={content.seo.title} description={content.seo.description} seoFrom={content} cms={cmsScope(content)}>
   <NotFound content={content} />
 </BaseLayout>

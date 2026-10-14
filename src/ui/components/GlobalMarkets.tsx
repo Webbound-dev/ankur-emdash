@@ -62,10 +62,10 @@ export default function GlobalMarkets({ content }: { content: GlobalMarketsConte
       <div className="relative">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div className="max-w-[560px]">
-            <h2 className="gm-heading font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="heading">
+            <h2 className="gm-heading font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="globalMarkets.heading">
               {heading}
             </h2>
-            <p className="gm-subheading mt-2 text-sm leading-relaxed text-indian-red/70" data-cms-field="subheading">
+            <p className="gm-subheading mt-2 text-sm leading-relaxed text-indian-red/70" data-cms-field="globalMarkets.subheading">
               {subheading}
             </p>
           </div>
@@ -73,7 +73,7 @@ export default function GlobalMarkets({ content }: { content: GlobalMarketsConte
             <div className="gm-stat flex items-center gap-2.5">
               <MapPin className="h-6 w-6 shrink-0 text-indian-red/40" aria-hidden="true" />
               <div>
-                <p className="font-display font-semibold text-2xl text-indian-red tabular-nums" data-cms-field="stat.countries">
+                <p className="font-display font-semibold text-2xl text-indian-red tabular-nums" data-cms-field="globalMarkets.stat.countries">
                   {stat.countries}
                 </p>
                 <p className="text-xs font-medium uppercase tracking-wide text-indian-red/50">Countries</p>
@@ -83,7 +83,7 @@ export default function GlobalMarkets({ content }: { content: GlobalMarketsConte
             <div className="gm-stat flex items-center gap-2.5">
               <Globe2 className="h-6 w-6 shrink-0 text-indian-red/40" aria-hidden="true" />
               <div>
-                <p className="font-display font-semibold text-2xl text-indian-red tabular-nums" data-cms-field="stat.regions">
+                <p className="font-display font-semibold text-2xl text-indian-red tabular-nums" data-cms-field="globalMarkets.stat.regions">
                   {stat.regions}
                 </p>
                 <p className="text-xs font-medium uppercase tracking-wide text-indian-red/50">Regions</p>
@@ -97,7 +97,7 @@ export default function GlobalMarkets({ content }: { content: GlobalMarketsConte
             countries get passed to the map below, so there's no separate
             list to keep in sync. */}
         <div className="gm-tabs mt-8 flex flex-wrap gap-2">
-          {['All', ...regions.map((r) => r.name)].map((name) => (
+          {['All', ...regions.map((r) => r.name)].map((name, i) => (
             <button
               key={name}
               type="button"
@@ -108,7 +108,7 @@ export default function GlobalMarkets({ content }: { content: GlobalMarketsConte
                   : 'bg-indian-red/[0.06] text-indian-red/70 hover:bg-indian-red/[0.12]'
               }`}
             >
-              {name}
+              {i === 0 ? name : <span data-cms-field={`globalMarkets.regions[${i - 1}].name`}>{name}</span>}
             </button>
           ))}
         </div>

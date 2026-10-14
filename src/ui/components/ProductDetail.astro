@@ -164,7 +164,7 @@ const NAV_ICONS: Record<string, string> = {
     class="sticky top-20 lg:top-24 z-40 bg-silent-white/95 backdrop-blur-md border-b border-indian-red/10"
   >
     <div class="max-w-[1400px] mx-auto px-6 lg:px-10 flex items-center gap-2 overflow-x-auto py-3 lg:py-4 scrollbar-hide">
-      {sections.map((section) => (
+      {sections.map((section, ni) => (
         <a
           href={`#${section.id}`}
           data-toc-link={section.id}
@@ -173,7 +173,7 @@ const NAV_ICONS: Record<string, string> = {
           <svg viewBox="0 0 20 20" class="h-3.5 w-3.5 shrink-0 text-indian-red/40 transition-colors duration-200 group-hover:text-indian-red/70" fill="none">
             <path d={NAV_ICONS[section.type] ?? NAV_ICONS.checklist} stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-          {section.heading}
+          <span data-cms-field={`detail.sections[${ni}].heading`}>{section.heading}</span>
         </a>
       ))}
     </div>

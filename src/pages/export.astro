@@ -1,9 +1,9 @@
 ---
-import { getPage } from '../lib/content';
+import { cmsScope, getPage } from '../lib/content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Export from '../ui/components/Export.astro';
 const content = await getPage('export');
 ---
-<BaseLayout title={content.seo.title} description={content.seo.description}>
+<BaseLayout title={content.seo.title} description={content.seo.description} seoFrom={content} cms={cmsScope(content)}>
   <Export content={content} />
 </BaseLayout>
