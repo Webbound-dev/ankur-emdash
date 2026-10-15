@@ -163,7 +163,11 @@ export default function Hero({ content }: { content: HeroContent }) {
             in the same frame as the fade. Now the box never changes size,
             so only opacity/position animate, nothing snaps. */}
         <div className="relative max-w-2xl min-h-[380px] sm:min-h-[360px] lg:min-h-[440px]">
-          {slides.map((slide, i) => (
+          {slides.map((slide, i) => {
+            // One <h1> per page: the first slide's title is the page heading,
+            // the slides after it are secondary.
+            const Title = i === 0 ? 'h1' : 'h2';
+            return (
             <div
               key={i}
               // Incoming rises 0.75rem while fading in; outgoing sinks the
@@ -186,12 +190,12 @@ export default function Hero({ content }: { content: HeroContent }) {
                 </span>
               </div>
 
-              <h1
+              <Title
                 data-cms-field={`hero.slides[${i}].title`}
                 className="hero-title font-display font-medium text-silent-white text-5xl sm:text-6xl lg:text-7xl leading-[1.05] mb-6 [text-wrap:balance]"
               >
                 {slide.title}
-              </h1>
+              </Title>
 
               <p
                 data-cms-field={`hero.slides[${i}].body`}
@@ -208,7 +212,8 @@ export default function Hero({ content }: { content: HeroContent }) {
                 <span data-cms-field={`hero.slides[${i}].cta.label`}>{slide.cta.label}</span>
               </a>
             </div>
-          ))}
+            );
+          })}
         </div>
         </div>
       </div>

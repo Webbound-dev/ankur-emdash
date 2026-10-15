@@ -25,9 +25,12 @@ interface Props {
   cms?: Record<string, string>;
   /** The page, product or post whose SEO panel overrides the values above. */
   seoFrom?: unknown;
+  /** Keep the page out of search results (e.g. the 404 page). Also drops the
+   * canonical, which would otherwise point at a URL that isn't a real page. */
+  noindex?: boolean;
 }
 
-const { type = 'website', cms = {}, seoFrom } = Astro.props;
+const { type = 'website', cms = {}, seoFrom, noindex = false } = Astro.props;
 const editMode = isEditMode();
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -42,7 +45,7 @@ const title = panel?.title ?? Astro.props.title;
 const description = panel?.description ?? Astro.props.description;
 const canonical = panel?.canonical ?? canonicalURL.href;
 const ogImageURL = panel?.ogImage ?? new URL(Astro.props.image ?? '/images/favicon.png', Astro.site).href;
-const robots = panel?.robots;
+const robots = noindex ? 'noindex' : panel?.robots;
 
 const organizationSchema = buildOrganizationSchema(footerContent.columns, Astro.site);
 ---
@@ -54,7 +57,7 @@ const organizationSchema = buildOrganizationSchema(footerContent.columns, Astro.
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {!noindex && <link rel="canonical" href={canonical} />}
     {robots && <meta name="robots" content={robots} />}
 
     <meta property="og:type" content={type} />
@@ -139,16 +142,17 @@ const organizationSchema = buildOrganizationSchema(footerContent.columns, Astro.
         }
       </style>
     </noscript>
-  </head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TCMBKPZ0P0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-TCMBKPZ0P0');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-TCMBKPZ0P0"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TCMBKPZ0P0');
+    </script>
+  </head>
   <body>
     <div class="min-h-screen flex flex-col">
       {editMode ? (
