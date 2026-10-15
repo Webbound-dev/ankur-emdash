@@ -71,8 +71,6 @@ const organizationSchema = buildOrganizationSchema(footerContent.columns, Astro.
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
-    <script defer src="https://umami.ashq.dev/recorder.js" data-website-id="741d014d-bd69-4893-8ceb-5eab10b928e7"></script>
-    <script defer src="https://umami.ashq.dev/script.js" data-performance="true" data-website-id="741d014d-bd69-4893-8ceb-5eab10b928e7"></script>
     <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
 
     <link rel="icon" type="image/png" href="/images/favicon.png" />
@@ -143,14 +141,38 @@ const organizationSchema = buildOrganizationSchema(footerContent.columns, Astro.
       </style>
     </noscript>
 
-    <!-- Google tag (gtag.js) -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-TCMBKPZ0P0"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    <!-- Analytics (Google Analytics + Umami) load after the page's `load`
+         event rather than at parse time, so they never compete with the
+         page's own content for bandwidth; analytics tolerates a short delay
+         far better than Core Web Vitals do. Bundled as a module, it runs
+         once per visit, not again on client-side navigations. -->
+    <script>
+      function loadAnalytics() {
+        const gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-TCMBKPZ0P0';
+        document.head.appendChild(gtagScript);
+        const w = window as any;
+        w.dataLayer = w.dataLayer || [];
+        function gtag(..._args: unknown[]) { w.dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-TCMBKPZ0P0');
 
-      gtag('config', 'G-TCMBKPZ0P0');
+        for (const [src, extra] of [
+          ['https://umami.ashq.dev/recorder.js', {}],
+          ['https://umami.ashq.dev/script.js', { performance: 'true' }],
+        ] as const) {
+          const s = document.createElement('script');
+          s.defer = true;
+          s.src = src;
+          s.dataset.websiteId = '741d014d-bd69-4893-8ceb-5eab10b928e7';
+          Object.assign(s.dataset, extra);
+          document.head.appendChild(s);
+        }
+      }
+      // `load` may already have fired by the time this module runs.
+      if (document.readyState === 'complete') loadAnalytics();
+      else window.addEventListener('load', loadAnalytics);
     </script>
   </head>
   <body>
