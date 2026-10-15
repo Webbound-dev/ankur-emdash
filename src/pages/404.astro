@@ -3,7 +3,8 @@ import { cmsScope, getPage } from '../lib/content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NotFound from '../ui/components/NotFound.astro';
 const content = await getPage('404');
+Astro.response.status = 404;
 ---
-<BaseLayout title={content.seo.title} description={content.seo.description} seoFrom={content} cms={cmsScope(content)}>
+<BaseLayout title={content.seo.title} description={content.seo.description} seoFrom={content} cms={cmsScope(content)} noindex>
   <NotFound content={content} />
 </BaseLayout>

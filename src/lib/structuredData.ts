@@ -55,6 +55,21 @@ export function buildProductSchema(product: ProductForSchema, site: URL | undefi
   };
 }
 
+/** The trail from the homepage to this page — shown by search engines in
+ * place of the raw URL. `path` values are site-relative (e.g. "/blog/"). */
+export function buildBreadcrumbSchema(trail: { name: string; path: string }[], site: URL | undefined) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [{ name: 'Home', path: '/' }, ...trail].map((crumb, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: crumb.name,
+      item: new URL(crumb.path, site).toString(),
+    })),
+  };
+}
+
 interface ArticleForSchema {
   title: string;
   excerpt: string;

@@ -23,6 +23,8 @@ interface CmsRef {
 	edit: unknown;
 	/** The entry's SEO panel values (collections with SEO enabled). */
 	seo?: ContentSeo;
+	/** When the entry was last saved, for sitemap <lastmod>. */
+	updatedAt?: Date;
 }
 
 function withRef<T>(content: T, ref: CmsRef): T {
@@ -33,6 +35,11 @@ function withRef<T>(content: T, ref: CmsRef): T {
 }
 
 const refOf = (content: unknown): CmsRef | undefined => (content as any)?.[REF];
+
+/** When a page or entry from this module was last saved. */
+export function lastModified(content: unknown): Date | undefined {
+	return refOf(content)?.updatedAt;
+}
 
 /** True for an editor viewing the site with EmDash's edit mode switched on. */
 export function isEditMode(): boolean {
@@ -104,6 +111,7 @@ export async function getPage<T = any>(name: string, registerCacheHint?: (hint: 
 		scope: { kind: "page", collection: spec.collection, id: (entry.data as any).id, name },
 		edit: entry.edit,
 		seo: (entry.data as any).seo,
+		updatedAt: (entry.data as any).updatedAt,
 	}) as T;
 }
 
@@ -139,6 +147,7 @@ async function getList<T = any>(collection: string): Promise<T[]> {
 			scope: { kind: "entry", collection, id: (e.data as any).id, slug: (e.data as any).slug ?? e.id },
 			edit: e.edit,
 			seo: (e.data as any).seo,
+			updatedAt: (e.data as any).updatedAt,
 		}),
 	) as T[];
 }
