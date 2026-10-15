@@ -201,7 +201,10 @@ export default function Footer({ content }: { content: FooterContent }) {
               src={brand.logo.src}
               alt={brand.logo.alt}
               data-cms-image="brand.logo.src"
+              width={10558}
+              height={5263}
               className="h-9 w-auto"
+              loading="lazy"
             />
             <p
               data-cms-field="brand.tagline"

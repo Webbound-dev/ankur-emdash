@@ -156,7 +156,10 @@ export default function BlogTeaser({ content }: { content: BlogTeaserContent }) 
                   src={post.image.src}
                   alt={post.image.alt}
                   data-cms-image={`blogTeaser.posts[${i}].image.src`}
+                  width={1254}
+                  height={1254}
                   className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700 ease-out"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-indian-red/40 via-transparent to-indian-red/5 mix-blend-multiply" />
                 <span

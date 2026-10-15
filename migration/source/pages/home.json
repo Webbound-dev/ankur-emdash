@@ -1,7 +1,7 @@
 {
   "seo": {
-    "title": "Ankur Salt — India's Trusted Salt Brand Since 1994 | Ankur Chemfood Ltd.",
-    "description": "India's second largest packaged salt brand, trusted in kitchens since 1994. Explore Ankur's iodised, low sodium, fortified and rock salt ranges, from everyday cooking to industrial and export supply.",
+    "title": "Ankur Salt | Salt Manufacturer in India | Ankur Chemfood",
+    "description": "Ankur is a trusted salt manufacturer in India since 1994, producing iodised, low sodium, fortified and rock salt for kitchens, industry and export.",
     "image": "/images/hero-poster.jpg"
   },
   "hero": {
@@ -9,7 +9,7 @@
       {
         "eyebrow": "Ankur Namak, Asli Namak",
         "title": "Real salt. Nothing hidden.",
-        "body": "India's second largest packaged salt brand, trusted in kitchens since 1994. Namak kam hi khaaye, par achha khaaye: eat less salt, but eat salt that's real.",
+        "body": "A trusted salt manufacturer in India since 1994, known for real, honest salt in kitchens nationwide. Namak kam hi khaaye, par achha khaaye: eat less salt, but eat salt that's real.",
         "cta": {
           "label": "Explore our range",
           "href": "/products/"
@@ -17,7 +17,7 @@
         "media": {
           "type": "video",
           "src": "/videos/hero.mp4",
-          "poster": "/images/hero-poster.jpg"
+          "poster": "/images/hero-poster-mobile.webp"
         }
       },
       {
@@ -30,20 +30,22 @@
         },
         "media": {
           "type": "image",
-          "src": "/images/hero-salad-bowl.jpg"
+          "src": "/images/hero-salad-bowl.jpg",
+          "alt": "Fresh vegetables representing Dr. Salt's low sodium range for healthier everyday cooking"
         }
       },
       {
         "eyebrow": "From Kitchens to Industry",
         "title": "Trusted at every scale.",
-        "body": "From the neighbourhood kitchen to industrial and export partners, Ankur's Free Flow Iodised range has carried the same promise of purity since 1994.",
+        "body": "From the neighbourhood kitchen to industrial and export partners, Ankur has been a trusted salt manufacturer in Gujarat since 1994, carrying the same promise of purity in every Free Flow Iodised pack.",
         "cta": {
           "label": "See our story",
-          "href": "/legacy/"
+          "href": "/about/"
         },
         "media": {
           "type": "image",
-          "src": "/images/hero-salt-flats.jpg"
+          "src": "/images/hero-salt-flats.jpg",
+          "alt": "Salt flats at sunset in Gujarat, representing Ankur's salt manufacturing scale"
         }
       }
     ],
@@ -66,7 +68,11 @@
         "attribution": "Ankur Salt, since 1994"
       }
     ],
-    "ctaLabel": "Play"
+    "ctaLabel": "Play",
+    "image": {
+      "src": "/images/hero-salt-flats.jpg",
+      "alt": "Salt flats on Gujarat's marine salt belt"
+    }
   },
   "productsTeaser": {
     "eyebrow": "Our Range",
@@ -163,19 +169,24 @@
     },
     "states": [
       {
-        "name": "Delhi"
+        "name": "Delhi",
+        "value": 60
       },
       {
-        "name": "Gujarat"
+        "name": "Gujarat",
+        "value": 180
       },
       {
-        "name": "Maharashtra"
+        "name": "Maharashtra",
+        "value": 95
       },
       {
-        "name": "West Bengal"
+        "name": "West Bengal",
+        "value": 70
       },
       {
-        "name": "Tamil Nadu"
+        "name": "Tamil Nadu",
+        "value": 50
       }
     ]
   },
@@ -183,26 +194,10 @@
     "eyebrow": "Behind The Scenes",
     "title": "Inside the refinery that's kept its promise since 1994.",
     "items": [
-      {
-        "title": "Inside Our Refinery",
-        "src": "/videos/hero.mp4",
-        "poster": "/images/hero-poster.jpg"
-      },
-      {
-        "title": "Ankur Salt TVC",
-        "src": "/videos/ankur-salt-vid-1.mp4",
-        "poster": "/images/vid-1-poster.jpg"
-      },
-      {
-        "title": "Ankur Salt Campaign",
-        "src": "/videos/ankur-salt-vid-2.mp4",
-        "poster": "/images/vid-2-poster.jpg"
-      },
-      {
-        "title": "Ankur Salt Campaign",
-        "src": "/videos/ankur-salt-vid-3.mp4",
-        "poster": "/images/vid-3-poster.jpg"
-      }
+      { "title": "Inside Our Refinery", "src": "/videos/hero.mp4", "poster": "/images/hero-poster.jpg", "alt": "Close-up of a hand releasing a pinch of Ankur Salt" },
+      { "title": "Ankur Salt TVC", "src": "/videos/ankur-salt-vid-1.mp4", "poster": "/images/vid-1-poster.jpg", "alt": "Kareena Kapoor smiling in a modern kitchen, from Ankur Salt's TV commercial" },
+      { "title": "Ankur Salt Campaign", "src": "/videos/ankur-salt-vid-2.mp4", "poster": "/images/vid-2-poster.jpg", "alt": "Woman cooking on a stovetop in a modern kitchen, from an Ankur Salt commercial" },
+      { "title": "Ankur Salt Campaign", "src": "/videos/ankur-salt-vid-3.mp4", "poster": "/images/vid-3-poster.jpg", "alt": "Family enjoying a home-cooked Indian meal together, featuring the Ankur Salt brand" }
     ]
   },
   "blogTeaser": {

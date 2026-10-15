@@ -17,7 +17,7 @@
         "media": {
           "type": "video",
           "src": "/videos/hero.mp4",
-          "poster": "/images/hero-poster.jpg"
+          "poster": "/images/hero-poster-mobile.webp"
         }
       },
       {
@@ -30,7 +30,8 @@
         },
         "media": {
           "type": "image",
-          "src": "/images/hero-salad-bowl.jpg"
+          "src": "/images/hero-salad-bowl.jpg",
+          "alt": "ताज़ी सब्ज़ियाँ, डॉ. साल्ट की कम सोडियम रेंज का प्रतिनिधित्व करती हुईं, स्वस्थ रोज़मर्रा के खाना पकाने के लिए"
         }
       },
       {
@@ -39,11 +40,12 @@
         "body": "पड़ोस की रसोई से लेकर औद्योगिक और निर्यात भागीदारों तक, अंकुर की फ्री फ्लो आयोडीनयुक्त रेंज 1994 से शुद्धता का एक ही वादा लेकर चलती आ रही है।",
         "cta": {
           "label": "हमारी कहानी देखें",
-          "href": "/legacy/"
+          "href": "/about/"
         },
         "media": {
           "type": "image",
-          "src": "/images/hero-salt-flats.jpg"
+          "src": "/images/hero-salt-flats.jpg",
+          "alt": "गुजरात में सूर्यास्त के समय नमक के मैदान, अंकुर के नमक उत्पादन के विशाल पैमाने का प्रतिनिधित्व करते हुए"
         }
       }
     ],
@@ -187,10 +189,10 @@
     "eyebrow": "पर्दे के पीछे",
     "title": "1994 से अपना वादा निभाने वाली रिफाइनरी के अंदर।",
     "items": [
-      { "title": "Inside Our Refinery", "src": "/videos/hero.mp4", "poster": "/images/hero-poster.jpg" },
-      { "title": "Ankur Salt TVC", "src": "/videos/ankur-salt-vid-1.mp4", "poster": "/images/vid-1-poster.jpg" },
-      { "title": "Ankur Salt Campaign", "src": "/videos/ankur-salt-vid-2.mp4", "poster": "/images/vid-2-poster.jpg" },
-      { "title": "Ankur Salt Campaign", "src": "/videos/ankur-salt-vid-3.mp4", "poster": "/images/vid-3-poster.jpg" }
+      { "title": "Inside Our Refinery", "src": "/videos/hero.mp4", "poster": "/images/hero-poster.jpg", "alt": "अंकुर साल्ट की एक चुटकी छोड़ते हुए हाथ का क्लोज़-अप" },
+      { "title": "Ankur Salt TVC", "src": "/videos/ankur-salt-vid-1.mp4", "poster": "/images/vid-1-poster.jpg", "alt": "अंकुर साल्ट के टीवी विज्ञापन से, आधुनिक रसोई में मुस्कुराती करीना कपूर" },
+      { "title": "Ankur Salt Campaign", "src": "/videos/ankur-salt-vid-2.mp4", "poster": "/images/vid-2-poster.jpg", "alt": "अंकुर साल्ट के विज्ञापन से, आधुनिक रसोई में चूल्हे पर खाना बनाती महिला" },
+      { "title": "Ankur Salt Campaign", "src": "/videos/ankur-salt-vid-3.mp4", "poster": "/images/vid-3-poster.jpg", "alt": "अंकुर साल्ट ब्रांड के साथ, घर के बने भारतीय खाने का साथ मिलकर आनंद लेता परिवार" }
     ]
   },
   "blogTeaser": {

@@ -1,17 +1,14 @@
 {
   "seo": {
-    "title": "About Us | Ankur",
-    "description": "30+ years of Ankur Salt: our story, journey, leadership and the group behind the brand.",
+    "title": "About Us | Salt Manufacturer in Gujarat, India | Ankur Salt",
+    "description": "30+ years as a trusted salt manufacturer in India, Ankur Salt's story, journey, leadership, and the group behind the brand.",
     "image": "/images/about/hero.jpg"
   },
   "hero": {
     "title": "About Us",
-    "intro": "From a small town on the coast of Gujarat to tables across the world, Ankur Salt has been on a quiet but determined journey for over 30 years. We do not just make salt. We make salt the right way.",
+    "intro": "From a small town on the coast of Gujarat to tables across the world, Ankur has grown into a trusted salt manufacturer in India over more than 30 years. We do not just make salt. We make salt the right way.",
     "images": [
-      {
-        "src": "/images/about/story.jpg",
-        "alt": "Ankur Chemfood leadership receiving the Bhartiya Udyog Ratan Award"
-      }
+      { "src": "/images/about/story.jpg", "alt": "Ankur Chemfood leadership receiving the Bhartiya Udyog Ratan Award" }
     ]
   },
   "story": {
@@ -22,10 +19,7 @@
       "India had one of the richest natural salt belts in the world. But the salt reaching Indian homes was far from what families deserved in terms of purity, nutrition, and quality. Ankur Chemfood Limited was started to fix exactly that.",
       "We set up on the coast of Gujarat, steps away from India's most productive marine salt region and within reach of two of the country's biggest ports. From day one, we chose to do things properly. Swiss technology. Automated machinery. Triple refinement. No shortcuts."
     ],
-    "image": {
-      "src": "/images/about/story.jpg",
-      "alt": "Salt fields on the Gujarat coast"
-    }
+    "image": { "src": "/images/about/story.jpg", "alt": "Salt fields on the Gujarat coast" }
   },
   "timeline": {
     "heading": "Our Journey Through the Years",
@@ -34,64 +28,43 @@
         "year": "1994",
         "caption": "Founded, Champalal Group",
         "description": "Ankur Chemfood Limited begins operations in Gandhidham, Gujarat. Manufacturing starts using fully automated Swiss technology, making us one of the most advanced salt producers in India from the very beginning.",
-        "image": {
-          "src": "/images/about/timeline-placeholder.svg",
-          "alt": "1994: Founded, Champalal Group"
-        }
+        "image": { "src": "/images/about/timeline-placeholder.svg", "alt": "1994: Founded, Champalal Group" }
       },
       {
         "year": "Late 1990s",
         "caption": "First ISO certified salt maker",
         "description": "Ankur Salt becomes the first ISO certified refined salt manufacturer in India. A milestone that set the standard for the entire industry.",
-        "image": {
-          "src": "/images/about/timeline-placeholder.svg",
-          "alt": "Late 1990s: First ISO certified salt maker"
-        }
+        "image": { "src": "/images/about/timeline-placeholder.svg", "alt": "Late 1990s: First ISO certified salt maker" }
       },
       {
         "year": "Early 2000s",
         "caption": "Five plants, NH 8A",
         "description": "We expand to five manufacturing plants on National Highway 8A, near Deendayal Port Trust (Kandla) and Adani Port (Mundra). Our capacity grows. Our export reach grows with it.",
-        "image": {
-          "src": "/images/about/timeline-placeholder.svg",
-          "alt": "Early 2000s: Five plants, NH 8A"
-        }
+        "image": { "src": "/images/about/timeline-placeholder.svg", "alt": "Early 2000s: Five plants, NH 8A" }
       },
       {
         "year": "2004 to 2006",
         "caption": "Dr. Salt & DFS IQ+ launched",
         "description": "Years of research and development lead to two new products. We launch Dr. Salt, a low sodium salt made for people who need to watch their sodium intake. We also introduce DFS IQ+ Salt, a double fortified salt that carries both iron and iodine. These were not trends. They were genuine responses to real health needs in Indian homes.",
-        "image": {
-          "src": "/images/about/timeline-placeholder.svg",
-          "alt": "2004 to 2006: Dr. Salt and DFS IQ+ launched"
-        }
+        "image": { "src": "/images/about/timeline-placeholder.svg", "alt": "2004 to 2006: Dr. Salt and DFS IQ+ launched" }
       },
       {
         "year": "2008",
         "caption": "ICCIDD endorsement",
         "description": "Ankur Salt becomes the first salt brand in India to receive endorsement from ICCIDD, the International Council for Control of Iodine Deficiency Disorders. A global health recognition that no other Indian salt brand had earned before us.",
-        "image": {
-          "src": "/images/about/timeline-placeholder.svg",
-          "alt": "2008: ICCIDD endorsement"
-        }
+        "image": { "src": "/images/about/timeline-placeholder.svg", "alt": "2008: ICCIDD endorsement" }
       },
       {
         "year": "2010",
         "caption": "Emerging India Award nomination",
         "description": "Ankur Chemfood Limited is nominated among the top three companies in India for the Emerging India Award by ICICI Bank, CRISIL and CNBC. The award ceremony is held in Macau, Hong Kong.",
-        "image": {
-          "src": "/images/about/timeline-placeholder.svg",
-          "alt": "2010: Emerging India Award nomination"
-        }
+        "image": { "src": "/images/about/timeline-placeholder.svg", "alt": "2010: Emerging India Award nomination" }
       },
       {
         "year": "Today",
         "caption": "1,000+ clients worldwide",
         "description": "More than 30 years since we started, Ankur Salt has over 1,000 corporate clients, dealers and distributors around the world. Our five plants run at a combined capacity of 10 lakh tons per year. We hold the Bharatiya Udyog Ratna Award and continue to be certified under ISO 9001:2015 and FSSC 22000, the gold standard in food safety.",
-        "image": {
-          "src": "/images/about/timeline-placeholder.svg",
-          "alt": "Today: 1,000+ clients worldwide"
-        }
+        "image": { "src": "/images/about/timeline-placeholder.svg", "alt": "Today: 1,000+ clients worldwide" }
       }
     ]
   },
@@ -104,7 +77,7 @@
       },
       {
         "title": "Five Plants, One Standard",
-        "description": "All five of our manufacturing plants are located at Village Chopadava and Varsana on National Highway 8A, on India's finest marine salt belt."
+        "description": "All five of our manufacturing plants, one of India's leading salt manufacturers, are located at Village Chopadava and Varsana on National Highway 8A, on India's finest marine salt belt."
       },
       {
         "title": "Port Access for Global Reach",
@@ -124,23 +97,11 @@
     "heading": "Our Quality Control Lab",
     "subheading": "Every batch of Ankur Salt is tested and verified before it leaves our plants. Quality is checked, not assumed.",
     "stats": [
-      {
-        "value": "12+",
-        "label": "Tests per batch"
-      },
-      {
-        "value": "In House",
-        "label": "Certified QC lab"
-      },
-      {
-        "value": "Qualified",
-        "label": "Trained lab staff"
-      }
+      { "value": "12+", "label": "Tests per batch" },
+      { "value": "In House", "label": "Certified QC lab" },
+      { "value": "Qualified", "label": "Trained lab staff" }
     ],
-    "cta": {
-      "label": "View Quality Report",
-      "href": "/quality-certificates/"
-    }
+    "cta": { "label": "View Quality Report", "href": "/quality-certificates/" }
   },
   "group": {
     "heading": "The Group Behind the Brand",
@@ -148,14 +109,8 @@
       "Ankur Salt is the flagship brand of Ankur Chemfood Limited, a company that is part of the Champalal Group of Companies.",
       "The Champalal Group is a diversified business group with a combined annual turnover exceeding Rs. 1,000 Crore (US$ 200 Million). The Group's values of quality, integrity and long term thinking run through everything Ankur Salt does."
     ],
-    "image": {
-      "src": "/images/factory/fbd-dryer-unit.jpeg",
-      "alt": "Ankur Chemfood manufacturing facility"
-    },
-    "cta": {
-      "label": "More About the Champalal Group",
-      "href": "/champalal-group/"
-    },
+    "image": { "src": "/images/factory/fbd-dryer-unit.jpeg", "alt": "Ankur Chemfood manufacturing facility" },
+    "cta": { "label": "More About the Champalal Group", "href": "/champalal-group/" },
     "companiesHeading": "Other Companies in the Group",
     "companies": [
       {
@@ -190,62 +145,74 @@
       {
         "name": "Champalal Gekchandji Parekh",
         "title": "Founder and Director",
-        "bio": "Mr. Champalal Parekh founded the Champalal Group and laid the foundation of values that Ankur Salt continues to stand on."
+        "bio": "Mr. Champalal Parekh founded the Champalal Group and laid the foundation of values that Ankur Salt continues to stand on.",
+        "photo": { "src": "/images/about/leader-1.jpg", "alt": "Champalal Gekchandji Parekh" }
       },
       {
         "name": "Ashokkumar Champalal Parekh",
         "title": "Managing Director",
-        "bio": "Mr. Ashok Parekh has led Ankur Chemfood Limited since its early days, steering the company from its first plant in Gandhidham to becoming one of the world's largest salt refineries."
+        "bio": "Mr. Ashok Parekh has led Ankur Chemfood Limited since its early days, steering the company from its first plant in Gandhidham to becoming one of the world's largest salt refineries.",
+        "photo": { "src": "/images/about/leader-2.jpg", "alt": "Ashokkumar Champalal Parekh" }
       },
       {
         "name": "Surendra Kumar Sharma",
         "title": "Director",
-        "bio": "Mr. Sharma has served on the Ankur Chemfood board since November 2022, contributing to the company's governance and operational direction."
+        "bio": "Mr. Sharma has served on the Ankur Chemfood board since November 2022, contributing to the company's governance and operational direction.",
+        "photo": { "src": "/images/about/leader-3.jpg", "alt": "Surendra Kumar Sharma" }
       },
       {
         "name": "Aditya Khatuwala",
         "title": "Director",
-        "bio": "Mr. Khatuwala joined the board in July 2024 and is part of the leadership guiding Ankur Salt's next phase of growth."
+        "bio": "Mr. Khatuwala joined the board in July 2024 and is part of the leadership guiding Ankur Salt's next phase of growth.",
+        "photo": { "src": "/images/about/leader-4.jpg", "alt": "Aditya Khatuwala" }
       },
       {
         "name": "Deep Hamirbhai Virda",
         "title": "Director",
-        "bio": "Mr. Virda has served on the board of Ankur Chemfood Limited since October 2024, contributing to the company's strategic decisions."
+        "bio": "Mr. Virda has served on the board of Ankur Chemfood Limited since October 2024, contributing to the company's strategic decisions.",
+        "photo": { "src": "/images/about/leader-5.jpg", "alt": "Deep Hamirbhai Virda" }
       },
       {
         "name": "Aditya Parekh",
         "title": "Executive Director",
-        "bio": "Mr. Aditya Parekh serves as Executive Director, working closely with the leadership team on strategy and operations across Ankur Chemfood Limited."
+        "bio": "Mr. Aditya Parekh serves as Executive Director, working closely with the leadership team on strategy and operations across Ankur Chemfood Limited.",
+        "photo": { "src": "/images/about/avatar-placeholder.svg", "alt": "Aditya Parekh" }
       },
       {
         "name": "Hitesh Patel",
         "title": "Marketing - Head",
-        "bio": "Mr. Hitesh Patel heads the marketing function at Ankur Chemfood Limited."
+        "bio": "Mr. Hitesh Patel heads the marketing function at Ankur Chemfood Limited.",
+        "photo": { "src": "/images/about/avatar-placeholder.svg", "alt": "Hitesh Patel" }
       },
       {
         "name": "Mishal Jain",
         "title": "Finance",
-        "bio": "Mr. Mishal Jain leads the finance function at Ankur Chemfood Limited."
+        "bio": "Mr. Mishal Jain leads the finance function at Ankur Chemfood Limited.",
+        "photo": { "src": "/images/about/avatar-placeholder.svg", "alt": "Mishal Jain" }
       },
       {
         "name": "Maneklal Gour",
         "title": "Accounts",
-        "bio": "Mr. Maneklal Gour oversees the accounts function at Ankur Chemfood Limited."
+        "bio": "Mr. Maneklal Gour oversees the accounts function at Ankur Chemfood Limited.",
+        "photo": { "src": "/images/about/avatar-placeholder.svg", "alt": "Maneklal Gour" }
       },
       {
         "name": "Dilip Nimavat",
         "title": "Marketing",
-        "bio": "Mr. Dilip Nimavat is part of the marketing team at Ankur Chemfood Limited."
+        "bio": "Mr. Dilip Nimavat is part of the marketing team at Ankur Chemfood Limited.",
+        "photo": { "src": "/images/about/avatar-placeholder.svg", "alt": "Dilip Nimavat" }
       },
       {
         "name": "Harsiddh Soni",
         "title": "Export",
-        "bio": "Mr. Harsiddh Soni leads export operations at Ankur Chemfood Limited."
+        "bio": "Mr. Harsiddh Soni leads export operations at Ankur Chemfood Limited.",
+        "photo": { "src": "/images/about/avatar-placeholder.svg", "alt": "Harsiddh Soni" }
       },
       {
         "name": "Sandeep M. Jain",
         "title": "Marketing & Govt. Tender",
-        "bio": "Mr. Sandeep M. Jain handles marketing and government tenders at Ankur Chemfood Limited."
+        "bio": "Mr. Sandeep M. Jain handles marketing and government tenders at Ankur Chemfood Limited.",
+        "photo": { "src": "/images/about/avatar-placeholder.svg", "alt": "Sandeep M. Jain" }
       }
     ]
   }

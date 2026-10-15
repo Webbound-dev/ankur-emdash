@@ -1,0 +1,126 @@
+---
+// Shared FAQ accordion — used both inside a product's `detail.sections`
+// (basePath="detail.sections[n]") and on standalone pages that keep their
+// FAQ under a top-level `faq` key (basePath="faq"). Numbered rows read as
+// a structured document (same register as SpecTableSection/GradesTable),
+// but the card itself keeps real elevation — a neutral black-based shadow
+// (not a colour-tinted one, which reads as consumer-app) plus rounded-2xl —
+// so it sits as a proper panel on the page rather than a flat outline. One
+// open answer at a time, first one open by default so the panel never
+// reads as an empty stack of collapsed bars. Native heading/button
+// semantics, no client framework: the grid-template-rows 0fr/1fr trick
+// animates height without JS measuring it.
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FaqItem[];
+  basePath: string;
+}
+
+const { items, basePath } = Astro.props;
+const idPrefix = basePath.replace(/[^a-zA-Z0-9]+/g, '-');
+---
+
+<div class="faq-accordion overflow-hidden rounded-2xl bg-white shadow-xl shadow-black/[0.07] ring-1 ring-indian-red/[0.08] divide-y divide-indian-red/[0.08]">
+  {items.map((item, i) => (
+    <div class="faq-item reveal transition-colors duration-300" data-open={i === 0 ? 'true' : 'false'} style={`transition-delay: ${i * 60}ms`}>
+      <h3 class="m-0">
+        <button
+          type="button"
+          class="faq-question group flex w-full items-center gap-4 px-6 py-5 text-left transition-colors duration-200 hover:bg-indian-red/[0.03] lg:gap-5 lg:px-8 lg:py-6"
+          aria-expanded={i === 0 ? 'true' : 'false'}
+          aria-controls={`${idPrefix}-panel-${i}`}
+          id={`${idPrefix}-question-${i}`}
+        >
+          <span class="w-6 shrink-0 font-display text-sm font-medium text-indian-red/30 tabular-nums lg:text-base" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <span class="flex-1 font-display font-medium text-base text-indian-red lg:text-lg" data-cms-field={`${basePath}.items[${i}].question`}>
+            {item.question}
+          </span>
+          <span class="faq-toggle ml-auto flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-indian-red/[0.07] text-indian-red transition-all duration-300 group-hover:bg-indian-red/[0.13]">
+            <svg class="faq-chevron h-4 w-4 transition-transform duration-300" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M5 7.5 10 12.5 15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </button>
+      </h3>
+      <div
+        id={`${idPrefix}-panel-${i}`}
+        role="region"
+        aria-labelledby={`${idPrefix}-question-${i}`}
+        class="faq-panel grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out"
+      >
+        <div class="overflow-hidden">
+          <p
+            class="pb-5 pl-[3.75rem] pr-6 text-sm leading-relaxed text-indian-red/65 lg:pb-6 lg:pl-[4.25rem] lg:pr-8"
+            data-cms-field={`${basePath}.items[${i}].answer`}
+          >
+            {item.answer}
+          </p>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .faq-item[data-open='true'] {
+    background: color-mix(in srgb, var(--color-indian-red) 2.5%, transparent);
+  }
+  .faq-item[data-open='true'] .faq-panel {
+    grid-template-rows: 1fr;
+  }
+  .faq-item[data-open='true'] .faq-toggle {
+    background: var(--color-indian-red);
+    color: #fff;
+  }
+  .faq-item[data-open='true'] .faq-chevron {
+    transform: rotate(180deg);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-panel,
+    .faq-toggle,
+    .faq-chevron {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Event delegation, one listener per page load — re-bound (not stacked)
+  // on every `astro:page-load`, same disconnect-before-add discipline as
+  // ProductDetail/Export/IndustrialSalt's own scripts, since this module
+  // only ever executes once per browser session while the page underneath
+  // it gets swapped out by view transitions on every navigation.
+  let faqClickHandler: ((e: Event) => void) | null = null;
+
+  function initFaqAccordions(): void {
+    if (faqClickHandler) document.removeEventListener('click', faqClickHandler);
+
+    faqClickHandler = (e: Event) => {
+      const button = (e.target as HTMLElement).closest<HTMLButtonElement>('.faq-question');
+      if (!button) return;
+      const item = button.closest<HTMLElement>('.faq-item');
+      const accordion = button.closest<HTMLElement>('.faq-accordion');
+      if (!item || !accordion) return;
+
+      const isOpen = item.dataset.open === 'true';
+      accordion.querySelectorAll<HTMLElement>('.faq-item[data-open="true"]').forEach((openItem) => {
+        if (openItem === item) return;
+        openItem.dataset.open = 'false';
+        openItem.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+      });
+
+      item.dataset.open = isOpen ? 'false' : 'true';
+      button.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    };
+
+    document.addEventListener('click', faqClickHandler);
+  }
+
+  document.addEventListener('astro:page-load', initFaqAccordions);
+</script>

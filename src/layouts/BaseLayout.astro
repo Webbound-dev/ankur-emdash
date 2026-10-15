@@ -4,9 +4,10 @@ import '../styles/global.css';
 import Navbar from '../ui/components/Navbar.astro';
 import Footer from '../ui/components/Footer';
 import AudioPlayer from '../ui/components/AudioPlayer';
+import Breadcrumbs, { type BreadcrumbItem } from '../ui/components/Breadcrumbs.astro';
 import type { NavbarContent } from '../ui/components/NavbarIsland';
 import { cmsRegion, getPage, isEditMode, panelSeo } from '../lib/content';
-import { buildOrganizationSchema } from '../lib/structuredData';
+import { buildBreadcrumbSchema, buildOrganizationSchema } from '../lib/structuredData';
 
 const registerCacheHint = (hint: any) => { if (Astro.cache?.enabled) Astro.cache.set(hint); };
 const [navbarContent, footerContent] = await Promise.all([
@@ -17,7 +18,7 @@ const [navbarContent, footerContent] = await Promise.all([
 interface Props {
   title: string;
   description: string;
-  /** Site-relative path (e.g. "/images/foo.jpg") — falls back to the favicon
+  /** Site-relative path (e.g. "/images/foo.jpg") — falls back to the homepage hero poster
    * when a page/post has no dedicated social-share image of its own. */
   image?: string;
   type?: 'website' | 'article';
@@ -28,9 +29,12 @@ interface Props {
   /** Keep the page out of search results (e.g. the 404 page). Also drops the
    * canonical, which would otherwise point at a URL that isn't a real page. */
   noindex?: boolean;
+  /** Trail shown under the navbar (blog, products, Champalal Group), starting
+   * with Home; the last item is the current page. Also its BreadcrumbList. */
+  breadcrumbs?: BreadcrumbItem[];
 }
 
-const { type = 'website', cms = {}, seoFrom, noindex = false } = Astro.props;
+const { type = 'website', cms = {}, seoFrom, noindex = false, breadcrumbs } = Astro.props;
 const editMode = isEditMode();
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -44,10 +48,13 @@ const panel = panelSeo(seoFrom, {
 const title = panel?.title ?? Astro.props.title;
 const description = panel?.description ?? Astro.props.description;
 const canonical = panel?.canonical ?? canonicalURL.href;
-const ogImageURL = panel?.ogImage ?? new URL(Astro.props.image ?? '/images/favicon.png', Astro.site).href;
+const ogImageURL = panel?.ogImage ?? new URL(Astro.props.image ?? '/images/hero-poster.jpg', Astro.site).href;
 const robots = noindex ? 'noindex' : panel?.robots;
 
 const organizationSchema = buildOrganizationSchema(footerContent.columns, Astro.site);
+const breadcrumbSchema = breadcrumbs?.length
+  ? buildBreadcrumbSchema(breadcrumbs.slice(1).map((item) => ({ name: item.label, path: item.href ?? Astro.url.pathname })), Astro.site)
+  : null;
 ---
 
 <!doctype html>
@@ -72,6 +79,7 @@ const organizationSchema = buildOrganizationSchema(footerContent.columns, Astro.
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
     <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    {breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}
 
     <link rel="icon" type="image/png" href="/images/favicon.png" />
     <ClientRouter />
@@ -182,6 +190,7 @@ const organizationSchema = buildOrganizationSchema(footerContent.columns, Astro.
       ) : (
         <Navbar content={navbarContent} />
       )}
+      {breadcrumbs?.length && <Breadcrumbs items={breadcrumbs} />}
       <div class="flex-grow" {...cms}>
         <slot />
       </div>

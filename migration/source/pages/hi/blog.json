@@ -15,9 +15,6 @@
     "readArticle": "लेख पढ़ें",
     "moreArticles": "ब्लॉग से अधिक",
     "backToAllArticles": "सभी लेखों पर वापस जाएं",
-    "breadcrumbHome": "होम",
-    "breadcrumbBlog": "ब्लॉग",
-    "homeHref": "/",
     "blogHref": "/blog/",
     "minReadSuffix": "मिनट पढ़ना"
   },

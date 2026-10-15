@@ -1,110 +1,59 @@
 {
   "seo": {
-    "title": "Industrial Salt | Ankur",
-    "description": "Industrial-grade salt from Ankur Chemfood: grades, specifications, industries served, and bulk order enquiries."
+    "title": "Industrial Salt Manufacturer & Supplier | Ankur Salt",
+    "description": "Ankur is a trusted industrial salt manufacturer and wholesale salt supplier, offering grades, specifications, and bulk order enquiries.",
+    "image": "/images/factory/warehouse-stacked-bags.jpeg"
   },
   "hero": {
     "title": "Industrial Salt",
-    "intro": "Beyond the retail shelf, Ankur Salt supplies industrial grade salt to manufacturers who need consistent purity and controlled hardness, batch after batch, from Free Flow through our finest Low Hardness grades."
+    "intro": "Beyond the retail shelf, Ankur is one of India's trusted industrial salt manufacturers and bulk salt suppliers, supplying consistent purity and controlled hardness, batch after batch, from Free Flow through our finest low hardness salt grades."
+  },
+  "trustedBy": {
+    "heading": "Trusted By",
+    "items": [
+      { "name": "Balaji", "logo": "/images/clients/balaji.svg" },
+      { "name": "Lay's", "logo": "/images/clients/lays.svg" },
+      { "name": "Nestle", "logo": "/images/clients/nestle.svg" }
+    ]
   },
   "grades": {
     "heading": "Grades and Specifications",
     "subheading": "Every grade is tested against the same specification, every batch.",
+    "columns": {
+      "grade": "Grade",
+      "nacl": "NaCl Purity",
+      "hardness": "Hardness",
+      "moisture": "Moisture"
+    },
     "items": [
-      {
-        "tier": "Standard",
-        "name": "Free Flow",
-        "hardness": "Standard"
-      },
-      {
-        "tier": "Standard",
-        "name": "30 Mesh (500 Micron)",
-        "hardness": "Standard"
-      },
-      {
-        "tier": "Standard",
-        "name": "40 Mesh (425 Micron)",
-        "hardness": "Standard"
-      },
-      {
-        "tier": "Standard",
-        "name": "Medium 1st",
-        "hardness": "Standard"
-      },
-      {
-        "tier": "Standard",
-        "name": "Medium 2nd",
-        "hardness": "Standard"
-      },
-      {
-        "tier": "Low Hardness Series",
-        "name": "Low Hardness 200 PPM",
-        "hardness": "≤ 200 ppm"
-      },
-      {
-        "tier": "Low Hardness Series",
-        "name": "Low Hardness 150 PPM",
-        "hardness": "≤ 150 ppm"
-      },
-      {
-        "tier": "Low Hardness Series",
-        "name": "Low Hardness 120 PPM",
-        "hardness": "≤ 120 ppm"
-      },
-      {
-        "tier": "Low Hardness Series",
-        "name": "Low Hardness 80 PPM",
-        "hardness": "≤ 80 ppm"
-      },
-      {
-        "tier": "Low Hardness Series",
-        "name": "Low Hardness 50 PPM",
-        "hardness": "≤ 50 ppm"
-      },
-      {
-        "tier": "Specialty",
-        "name": "Super Fine Salt",
-        "hardness": "Standard"
-      },
-      {
-        "tier": "Specialty",
-        "name": "Microfine Salt",
-        "hardness": "Standard"
-      }
+      { "tier": "Standard", "name": "Free Flow", "nacl": "≥ 99%", "hardness": "Standard", "moisture": "≤ 0.5%" },
+      { "tier": "Standard", "name": "30 Mesh (500 Micron)", "nacl": "≥ 99%", "hardness": "Standard", "moisture": "≤ 0.5%" },
+      { "tier": "Standard", "name": "40 Mesh (425 Micron)", "nacl": "≥ 99%", "hardness": "Standard", "moisture": "≤ 0.5%" },
+      { "tier": "Standard", "name": "Medium 1st", "nacl": "≥ 99%", "hardness": "Standard", "moisture": "≤ 1%" },
+      { "tier": "Standard", "name": "Medium 2nd", "nacl": "≥ 98%", "hardness": "Standard", "moisture": "≤ 1%" },
+      { "tier": "Low Hardness Series", "name": "Low Hardness 200 PPM", "nacl": "≥ 99.4%", "hardness": "≤ 200 ppm", "moisture": "≤ 0.5%" },
+      { "tier": "Low Hardness Series", "name": "Low Hardness 150 PPM", "nacl": "≥ 99.5%", "hardness": "≤ 150 ppm", "moisture": "≤ 0.3%" },
+      { "tier": "Low Hardness Series", "name": "Low Hardness 120 PPM", "nacl": "≥ 99.55%", "hardness": "≤ 120 ppm", "moisture": "≤ 0.25%" },
+      { "tier": "Low Hardness Series", "name": "Low Hardness 80 PPM", "nacl": "≥ 99.6%", "hardness": "≤ 80 ppm", "moisture": "≤ 0.25%" },
+      { "tier": "Low Hardness Series", "name": "Low Hardness 50 PPM", "nacl": "≥ 99.65%", "hardness": "≤ 50 ppm", "moisture": "≤ 0.25%" },
+      { "tier": "Specialty", "name": "Super Fine Salt", "nacl": "≥ 98.5%", "hardness": "Standard", "moisture": "≤ 0.8%" },
+      { "tier": "Specialty", "name": "Microfine Salt", "nacl": "≥ 98%", "hardness": "Standard", "moisture": "≤ 0.7%" }
     ]
   },
   "industries": {
     "heading": "Industries Served",
     "items": [
-      {
-        "name": "FMCG",
-        "useCase": "Used across food processing, personal care, and household product manufacturing where consistent purity and solubility matter."
-      },
-      {
-        "name": "Textiles and Dyes",
-        "useCase": "Fixes dyes and stabilises colour output during fabric dyeing, printing, and finishing."
-      },
-      {
-        "name": "Water Treatment",
-        "useCase": "Regenerates ion exchange resins in softening plants and effluent treatment."
-      },
-      {
-        "name": "Petroleum Additives",
-        "useCase": "Used as a base input in drilling fluid and petroleum additive formulations."
-      },
-      {
-        "name": "Chemicals and Intermediates",
-        "useCase": "A key raw material in chlor-alkali and other chemical manufacturing processes, including caustic soda, chlorine, and soda ash production."
-      },
-      {
-        "name": "Pharmaceuticals",
-        "useCase": "Meets the high purity, low hardness requirements of pharmaceutical grade formulations."
-      }
+      { "name": "FMCG", "useCase": "Used across food processing, personal care, and household product manufacturing where consistent purity and solubility matter." },
+      { "name": "Textiles and Dyes", "useCase": "Fixes dyes and stabilises colour output during fabric dyeing, printing, and finishing." },
+      { "name": "Water Treatment", "useCase": "Regenerates ion exchange resins in softening plants and effluent treatment." },
+      { "name": "Petroleum Additives", "useCase": "Used as a base input in drilling fluid and petroleum additive formulations." },
+      { "name": "Chemicals and Intermediates", "useCase": "A key raw material meeting chlor alkali salt specification requirements, used in caustic soda, chlorine, and soda ash production." },
+      { "name": "Pharmaceuticals", "useCase": "Meets the high purity, low hardness salt requirements of pharmaceutical grade formulations." }
     ]
   },
   "rfq": {
     "heading": "Request a Bulk Quote",
-    "subheading": "For industrial and B2B orders, tell us your requirement, and our team will get back to you with a quote. For general questions, use our Contact page instead."
+    "subheading": "As one of India's leading bulk salt suppliers, we handle industrial and B2B orders, tell us your requirement and our team will get back to you with a quote. For general questions, use our Contact page instead."
   },
   "dataSheets": {
     "heading": "Technical Data Sheet",
@@ -127,10 +76,37 @@
         "email": "you@company.com"
       },
       "sendOtpLabel": "Send Code",
+      "resendLabel": "Resend",
       "verifyLabel": "Verify",
       "submitLabel": "Verify & Download",
       "successMessage": "Verified — your download will start automatically."
     }
+  },
+  "faq": {
+    "heading": "Frequently Asked Questions",
+    "subheading": "What buyers and procurement teams ask us most before an order.",
+    "items": [
+      {
+        "question": "Does Ankur manufacture industrial salt in bulk?",
+        "answer": "Yes. Ankur is one of India's industrial salt manufacturers, supplying various grades in bulk to industries across the country."
+      },
+      {
+        "question": "What is low hardness salt used for?",
+        "answer": "Low hardness salt is used in industries like pharmaceuticals and chemicals, where high purity and controlled hardness levels are required for the manufacturing process."
+      },
+      {
+        "question": "Does Ankur's industrial salt meet chlor-alkali industry requirements?",
+        "answer": "Yes. Ankur's industrial salt meets chlor alkali salt specification requirements, making it suitable for use in caustic soda, chlorine, and soda ash production."
+      },
+      {
+        "question": "Is Ankur a wholesale salt supplier for businesses?",
+        "answer": "Yes. Ankur works as a wholesale salt supplier and bulk salt supplier, serving industries like FMCG, textiles, water treatment, and pharmaceuticals."
+      },
+      {
+        "question": "How do I request a bulk quote for industrial salt?",
+        "answer": "You can fill out the bulk enquiry form on this page with your grade, quantity, and delivery location. Our team typically responds within 1 to 2 business days."
+      }
+    ]
   },
   "quote": {
     "text": "Bharose ki shuruaat: the beginning of trust.",

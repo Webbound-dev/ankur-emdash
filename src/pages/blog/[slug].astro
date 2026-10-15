@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogDetail from '../../ui/components/BlogDetail.astro';
 import type { BlogPost } from '../../ui/components/BlogList.astro';
 import { cmsList, cmsScope, getBlogs, getPage } from '../../lib/content';
-import { buildArticleSchema, buildBreadcrumbSchema } from '../../lib/structuredData';
+import { buildArticleSchema } from '../../lib/structuredData';
 
 const content = await getPage('blog');
 const posts = (await getBlogs()) as BlogPost[];
@@ -12,20 +12,14 @@ const { slug } = Astro.params;
 const post = posts.find((p) => p.slug === slug);
 if (!post) return Astro.rewrite('/404');
 
-// Google truncates titles past ~60 characters, so the brand suffix is only
-// added when it fits — a long headline is worth more than the brand name.
-const brandedTitle = `${post.title} | Ankur Chemfood Ltd.`;
-const title = brandedTitle.length <= 60 ? brandedTitle : post.title;
-const description = post.excerpt;
+// seoTitle/metaDescription are optional per-post overrides for posts whose
+// on-page title or excerpt is too long for a search result (~60/~155 chars).
+const title = post.seoTitle ?? `${post.title} | Ankur Salt`;
+const description = post.metaDescription ?? post.excerpt;
 
 const articleSchema = buildArticleSchema(post, Astro.site);
-const breadcrumbSchema = buildBreadcrumbSchema([
-  { name: 'Blog', path: '/blog/' },
-  { name: post.title, path: `/blog/${post.slug}/` },
-], Astro.site);
 ---
-<BaseLayout title={title} description={description} image={post.image} type="article" seoFrom={post} cms={cmsScope(content, cmsList('', posts))}>
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+<BaseLayout title={title} description={description} image={post.image} type="article" breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog/' }, { label: post.title }]} seoFrom={post} cms={cmsScope(content, cmsList('', posts))}>
   {articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}
   <BlogDetail content={content} posts={posts} slug={slug!} />
 </BaseLayout>

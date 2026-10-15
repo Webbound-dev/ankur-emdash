@@ -4,6 +4,7 @@ import SpecTableSection from './product-sections/SpecTableSection.astro';
 import NarrativeSection from './product-sections/NarrativeSection.astro';
 import UseCasesSection from './product-sections/UseCasesSection.astro';
 import WhereToBuySection from './product-sections/WhereToBuySection.astro';
+import FaqSection from './product-sections/FaqSection.astro';
 
 interface SectionBase { id: string; heading: string }
 type ChecklistSectionData = SectionBase & { type: 'checklist'; items: { title: string; description: string }[] };
@@ -11,8 +12,9 @@ type SpecTableSectionData = SectionBase & { type: 'specTable'; rows: { label: st
 type NarrativeSectionData = SectionBase & { type: 'narrative'; paragraphs: string[]; stats?: { value: string; label: string }[] };
 type UseCasesSectionData = SectionBase & { type: 'useCasesGrouped'; groups: { heading: string; items: { title: string; description: string }[] }[] };
 type WhereToBuySectionData = SectionBase & { type: 'whereToBuy'; body: string; cta: { label: string; href: string } };
+type FaqSectionData = SectionBase & { type: 'faq'; items: { question: string; answer: string }[] };
 
-export type Section = ChecklistSectionData | SpecTableSectionData | NarrativeSectionData | UseCasesSectionData | WhereToBuySectionData;
+export type Section = ChecklistSectionData | SpecTableSectionData | NarrativeSectionData | UseCasesSectionData | WhereToBuySectionData | FaqSectionData;
 
 // Full per-SKU shape as stored in collections/products.json. Pages that
 // import that JSON directly should cast to `Product[]` — plain JSON imports
@@ -71,6 +73,10 @@ const NAV_ICONS: Record<string, string> = {
   narrative: 'M2 5c2-1 5-1 8 1 3-2 6-2 8-1v10c-2-1-5-1-8 1-3-2-6-2-8-1V5Z',
   useCasesGrouped: 'M10 2 18 6l-8 4-8-4 8-4Zm-8 8 8 4 8-4M2 14l8 4 8-4',
   whereToBuy: 'M10 18s6-5.5 6-10a6 6 0 1 0-12 0c0 4.5 6 10 6 10Zm0-8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z',
+  // Speech-bubble, straight lines only (no arcs) — a curvy "?" glyph turned
+  // muddy at the pill's actual 14px render size; this reads clean at that
+  // size the same way the other geometric nav icons (grid, chevron stack) do.
+  faq: 'M3 4h14v9H9l-3 3v-3H3V4Z',
 };
 ---
 
@@ -84,7 +90,10 @@ const NAV_ICONS: Record<string, string> = {
       src={heroImage.src}
       alt={heroImage.alt}
       data-cms-image="heroImage.src"
+      width={1672}
+      height={941}
       class="hero-image absolute inset-0 h-full w-full object-cover"
+      fetchpriority="high"
     />
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10" aria-hidden="true" />
     <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/15 to-transparent" aria-hidden="true" />
@@ -224,14 +233,17 @@ const NAV_ICONS: Record<string, string> = {
           class={`relative max-w-[1400px] mx-auto px-6 lg:px-10 ${
             section.type === 'specTable'
               ? // Sections strictly alternate dark/light (dark = idx % 2 === 0),
-                // so "this section is light" always means the previous section
-                // was dark — and a dark section's own bottom wave bleeds down
-                // into the light section that follows it. A light specTable
-                // needs extra top clearance for that incoming wave; a dark one
-                // doesn't, since its own wave lives outside its own padding.
+                // so "this section is light" always means both neighbors are
+                // dark — the previous section's bottom wave bleeds down into
+                // this section's top, and (now that `faq` routinely follows
+                // `specTable`) the next section's top wave just as often
+                // bleeds up into this section's bottom. A light specTable
+                // needs matching clearance on both edges for those incoming
+                // waves; a dark one needs neither, since its own waves live
+                // outside its own padding.
                 dark
                 ? 'py-8 lg:py-12'
-                : 'pt-14 pb-8 lg:pt-20 lg:pb-12'
+                : 'pt-14 pb-14 lg:pt-20 lg:pb-20'
               : 'py-16 lg:py-24'
           }`}
         >
@@ -246,6 +258,7 @@ const NAV_ICONS: Record<string, string> = {
           {section.type === 'specTable' && <SpecTableSection section={section} si={si} />}
           {section.type === 'narrative' && <NarrativeSection section={section} si={si} dark={dark} />}
           {section.type === 'useCasesGrouped' && <UseCasesSection section={section} si={si} />}
+          {section.type === 'faq' && <FaqSection section={section} si={si} />}
         </div>
       </section>
     );

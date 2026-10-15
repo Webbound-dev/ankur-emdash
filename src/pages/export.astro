@@ -1,9 +1,12 @@
 ---
 import { cmsScope, getPage } from '../lib/content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { buildFaqSchema } from '../lib/structuredData';
 import Export from '../ui/components/Export.astro';
 const content = await getPage('export');
+const faqSchema = content.faq ? buildFaqSchema(content.faq.items) : null;
 ---
-<BaseLayout title={content.seo.title} description={content.seo.description} seoFrom={content} cms={cmsScope(content)}>
+<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} seoFrom={content} cms={cmsScope(content)}>
+  {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
   <Export content={content} />
 </BaseLayout>

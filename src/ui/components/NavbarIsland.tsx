@@ -206,7 +206,7 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
           className="flex items-center shrink-0 px-2 lg:px-6 transition-transform duration-200 hover:scale-105"
           data-cms-image="logo.src"
         >
-          <img src={logo.src} alt={logo.alt} className="h-9 lg:h-10 w-auto" />
+          <img src={logo.src} alt={logo.alt} width={10558} height={5263} className="h-9 lg:h-10 w-auto" />
         </a>
 
         {/* Right nav links — desktop only, part of the same centered
@@ -264,7 +264,7 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
         }`}
       >
         <div className="flex items-center justify-between px-6 py-5 border-b border-indian-red/15">
-          <img src={logo.src} alt={logo.alt} className="h-8 w-auto" />
+          <img src={logo.src} alt={logo.alt} width={10558} height={5263} className="h-8 w-auto" />
           <div className="flex items-center gap-3">
             {locale && alternateLocale && alternateHref && (
               <a

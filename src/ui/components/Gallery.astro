@@ -170,7 +170,7 @@ function youtubeThumb(url: string): string {
               aria-label={video.title}
             >
               <div class="aspect-video bg-black/20">
-                <img src={youtubeThumb(video.url)} alt={video.title} loading="lazy" class="h-full w-full object-cover" />
+                <img src={youtubeThumb(video.url)} alt={video.title} width={480} height={360} loading="lazy" class="h-full w-full object-cover" />
               </div>
               <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
                 <div class="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-silent-white/90 shadow-lg">
@@ -247,6 +247,8 @@ function youtubeThumb(url: string): string {
               src={img.src}
               alt={img.caption}
               data-cms-image={`images.items[${ii}].src`}
+              width={1600}
+              height={1071}
               loading="lazy"
               onerror="this.style.visibility='hidden'"
               class="gallery-img h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
@@ -371,6 +373,8 @@ function youtubeThumb(url: string): string {
                   src={post.src}
                   alt={post.alt}
                   data-cms-image={`instagram.posts[${pi}].src`}
+                  width={1254}
+                  height={1254}
                   loading="lazy"
                   class="h-full w-full object-cover"
                 />

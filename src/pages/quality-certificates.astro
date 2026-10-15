@@ -4,6 +4,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import QualityCertificates from '../ui/components/QualityCertificates.astro';
 const content = await getPage('quality-certificates');
 ---
-<BaseLayout title={content.seo.title} description={content.seo.description} seoFrom={content} cms={cmsScope(content)}>
+<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} seoFrom={content} cms={cmsScope(content)}>
   <QualityCertificates content={content} />
 </BaseLayout>

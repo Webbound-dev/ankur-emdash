@@ -16,6 +16,12 @@ interface FooterColumn {
   links: FooterLink[];
 }
 
+/** Shared by the sitewide Organization and the contact page's details, so
+ * search engines read them as one organization. */
+function organizationId(site: URL | undefined): string {
+  return new URL('/#organization', site).toString();
+}
+
 /** Sitewide brand identity — same on every page, since every page belongs to the same company. */
 export function buildOrganizationSchema(footerColumns: FooterColumn[], site: URL | undefined) {
   // Social links are pulled from the footer's own columns (matched by
@@ -29,6 +35,7 @@ export function buildOrganizationSchema(footerColumns: FooterColumn[], site: URL
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': organizationId(site),
     name: BRAND_NAME,
     url: new URL('/', site).toString(),
     logo: new URL('/images/logo.png', site).toString(),
@@ -70,9 +77,76 @@ export function buildBreadcrumbSchema(trail: { name: string; path: string }[], s
   };
 }
 
+interface ListedItemForSchema {
+  name: string;
+  slug: string;
+}
+
+/** For a listing page (e.g. /products/) whose primary content is "here is our
+ * full set of X" — lets search engines see the complete list, not just
+ * whichever items happen to be in the crawled HTML. */
+export function buildItemListSchema(items: ListedItemForSchema[], basePath: string, site: URL | undefined) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      url: new URL(`${basePath}${item.slug}/`, site).toString(),
+    })),
+  };
+}
+
+interface ContactInfoForSchema {
+  email: string;
+  /** Free text as it appears in the CMS (the office is given as a Plus Code),
+   * so not split into PostalAddress's individual fields. */
+  address: string;
+}
+
+/** No `telephone`: the CMS has no real phone number for the business itself,
+ * and a made-up one would be incorrect structured data. */
+export function buildContactPageSchema(contact: ContactInfoForSchema, site: URL | undefined) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': organizationId(site),
+    name: BRAND_NAME,
+    url: new URL('/', site).toString(),
+    contactPoint: { '@type': 'ContactPoint', email: contact.email, contactType: 'customer service' },
+    address: { '@type': 'PostalAddress', streetAddress: contact.address, addressCountry: 'IN' },
+  };
+}
+
+interface FaqItemForSchema {
+  question: string;
+  answer: string;
+}
+
+/** FAQPage — makes a page's on-page Q&A eligible for an expandable rich
+ * result directly in search. Only build this from FAQ content the page
+ * actually renders (Google's own guidance): every `answer` here must be
+ * user-visible text, not something invented for the schema alone. */
+export function buildFaqSchema(faqs: FaqItemForSchema[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
 interface ArticleForSchema {
   title: string;
   excerpt: string;
+  metaDescription?: string;
   image?: string;
   /** Human date string, e.g. "12 June 2026" — no time component. */
   publishedAt?: string;
@@ -93,7 +167,7 @@ export function buildArticleSchema(post: ArticleForSchema, site: URL | undefined
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: post.title,
-    description: post.excerpt,
+    description: post.metaDescription ?? post.excerpt,
     image: post.image ? new URL(post.image, site).toString() : undefined,
     ...(datePublished ? { datePublished } : {}),
     author: { '@type': 'Organization', name: BRAND_NAME },

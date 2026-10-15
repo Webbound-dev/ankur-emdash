@@ -1,8 +1,8 @@
 {
   "seo": {
-    "title": "Gallery | Ankur",
+    "title": "Gallery | Salt Plants & Products | Ankur Salt",
     "description": "A look inside Ankur Salt — our plants on the Gujarat coast, and the products that leave them every day.",
-    "image": "/images/about/hero.jpg"
+    "image": "/images/factory/packing-line.jpeg"
   },
   "hero": {
     "title": "Gallery",
@@ -49,7 +49,7 @@
   "instagram": {
     "heading": "Follow Us on Instagram",
     "handle": "@ankursaltindia",
-    "url": "https://www.instagram.com/ankursaltindia/",
+    "url": "https://www.instagram.com/ankursaltindia?igsi=MWJsYTgzbmNmZzZtbw==",
     "posts": [
       { "src": "/images/products/free-flow-iodised.webp", "alt": "Ankur Salt: Refined Free Flow Iodised Salt" },
       { "src": "/images/products/gold-salt.webp", "alt": "Ankur Gold: Premium Refined Iodised Salt" },

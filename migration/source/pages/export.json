@@ -1,11 +1,12 @@
 {
   "seo": {
-    "title": "Salt Exporter from India: Global Supply | Ankur Chemfood Ltd.",
-    "description": "Ankur Chemfood Ltd. exports triple refined, certified salt from India to international buyers. Global markets, export certifications, port access and bulk export enquiries."
+    "title": "Salt Exporter from India: Global Supply | Ankur Salt",
+    "description": "Ankur is a trusted salt exporter from India, FSSC 22000 certified, with global market access, export certifications, and port logistics.",
+    "image": "/images/factory/salt-dispatch-loading.jpeg"
   },
   "hero": {
     "title": "Salt Exporter from India Global Supply",
-    "intro": "Triple refined, Swiss technology salt manufactured on India's marine salt belt in Gujarat, supplied to international buyers with the certifications and port access that global trade demands."
+    "intro": "Vacuum evaporated, FSSAI and FSSC 22000 certified salt, manufactured by one of the leading bulk salt exporters in Gujarat's marine salt belt, supplied to international buyers with the certifications and port access that global trade demands."
   },
   "globalMarkets": {
     "heading": "Global Markets We Serve",
@@ -37,7 +38,7 @@
       {
         "name": "FSSC 22000",
         "issuer": "Food Safety System Certification",
-        "description": "One of the most widely recognised food safety certifications globally, accepted by retailers and food businesses across every market we ship to.",
+        "description": "As FSSC 22000 certified salt manufacturers, we hold one of the most widely recognised food safety certifications globally, accepted by retailers and food businesses across every market we ship to.",
         "logo": { "src": "/images/certifications/fssc-22000.svg", "alt": "FSSC 22000 certified" }
       },
       {
@@ -60,7 +61,7 @@
       {
         "name": "Mundra Port",
         "authority": "Adani Port",
-        "description": "India's largest private port and container terminal, giving us direct access to major global shipping lines for containerised export."
+        "description": "As rock salt suppliers using Mundra Port, India's largest private port and container terminal, we get direct access to major global shipping lines for containerised export."
       }
     ],
     "advantages": [
@@ -69,12 +70,38 @@
       { "value": "FCL / LCL", "label": "Both shipment types" }
     ]
   },
+  "faq": {
+    "heading": "Frequently Asked Questions",
+    "subheading": "What international buyers ask us most before placing an order.",
+    "items": [
+      {
+        "question": "Does Ankur export salt from India to other countries?",
+        "answer": "Yes. Ankur is a trusted salt exporter from India, currently supplying to 17 countries across 4 regions worldwide."
+      },
+      {
+        "question": "What certifications does Ankur's exported salt have?",
+        "answer": "Ankur is FSSC 22000 certified salt manufacturers, and also holds FSSAI, Halal, and ISO 9001:2015 certifications, meeting international food safety standards."
+      },
+      {
+        "question": "Which ports does Ankur use for export shipments?",
+        "answer": "Ankur uses Kandla Port and Mundra Port in Gujarat, both offering direct access to major global shipping lines for bulk and containerised export."
+      },
+      {
+        "question": "Does Ankur supply edible salt for export?",
+        "answer": "Yes. Ankur is one of India's edible salt export suppliers, offering food grade salt that meets international quality and safety requirements."
+      },
+      {
+        "question": "How can I request an export quote?",
+        "answer": "You can share your requirement through the export enquiry form on this page. Our export team will follow up with a quote and expected lead time."
+      }
+    ]
+  },
   "inquiry": {
     "eyebrow": "Export Enquiry",
     "heading": "Export Inquiry",
-    "intro": "Tell us your requirement, and our export team will follow up with a quote and lead time.",
+    "intro": "As one of India's trusted edible salt export suppliers, tell us your requirement, and our export team will follow up with a quote and lead time.",
     "benefits": [
-      "Triple refined salt manufactured on Gujarat's marine salt belt",
+      "Vacuum evaporated, FSSAI and FSSC 22000 certified salt manufactured on Gujarat's marine salt belt",
       "FSSAI, Halal, FSSC 22000 and ISO 9001:2015 certified",
       "Direct access to Kandla and Mundra ports for FCL and LCL shipments"
     ],

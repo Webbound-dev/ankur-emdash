@@ -1,0 +1,14 @@
+---
+import FaqAccordion from '../FaqAccordion.astro';
+
+interface FaqItem { question: string; answer: string }
+interface Props {
+  section: { items: FaqItem[] };
+  si: number;
+}
+const { section, si } = Astro.props;
+---
+
+<div class="mx-auto max-w-[820px]">
+  <FaqAccordion items={section.items} basePath={`detail.sections[${si}]`} />
+</div>

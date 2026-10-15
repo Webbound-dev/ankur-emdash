@@ -19,7 +19,7 @@ const others = post ? posts.filter((p) => p.slug !== slug).slice(0, 2) : [];
         class="pointer-events-none absolute inset-0 opacity-[0.05]"
         style="background-image: repeating-linear-gradient(90deg, #FFF6EB 0, #FFF6EB 1px, transparent 1px, transparent 28px);"
         aria-hidden="true"
-      /><div class="relative max-w-[900px] mx-auto px-6 lg:px-10 pb-14"><nav class="reveal flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-silent-white/45 mb-8"><a href={labels.homeHref} data-cms-link="labels.homeHref" class="hover:text-silent-white/75 transition-colors duration-150"><span data-cms-field="labels.breadcrumbHome">{labels.breadcrumbHome}</span></a><span aria-hidden="true">/</span><a href={labels.blogHref} data-cms-link="labels.blogHref" class="hover:text-silent-white/75 transition-colors duration-150"><span data-cms-field="labels.breadcrumbBlog">{labels.breadcrumbBlog}</span></a><span aria-hidden="true">/</span><span class="truncate max-w-[240px] text-silent-white/70" data-cms-field={`[${postIdx}].title`}>{post.title}</span></nav><div class="reveal flex flex-wrap items-center gap-3 mb-6" style="transition-delay: 60ms"><span
+      /><div class="relative max-w-[900px] mx-auto px-6 lg:px-10 pb-14"><div class="reveal flex flex-wrap items-center gap-3 mb-6 pt-8" style="transition-delay: 60ms"><span
             class="rounded-full px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-silent-white"
             style={`background: ${categoryColors[post.category] ?? defaultCategoryColor}`}
             data-cms-field={`[${postIdx}].category`}
@@ -27,7 +27,7 @@ const others = post ? posts.filter((p) => p.slug !== slug).slice(0, 2) : [];
           class="reveal font-display font-medium text-3xl lg:text-5xl leading-tight text-silent-white max-w-3xl"
           style="transition-delay: 100ms"
           data-cms-field={`[${postIdx}].title`}
-        >{post.title}</h1></div><div class="reveal relative w-full overflow-hidden" style="transition-delay: 140ms; height: clamp(220px, 34vw, 440px);" data-cms-image={`[${postIdx}].image`}><img src={post.image} alt={post.imageAlt} class="h-full w-full object-cover" /><div class="absolute inset-0 bg-gradient-to-t from-indian-red via-transparent to-transparent" /></div></section><!-- Article body --><section class="relative py-16 lg:py-20"><div class="relative max-w-[720px] mx-auto px-6 lg:px-10"><div class="reveal" style="transition-delay: 180ms"><div class="article-body"><PortableText value={post.content} /></div></div><div class="mt-16 pt-10 border-t border-indian-red/10"><a
+        >{post.title}</h1></div>{post.imageUncropped ? (<div class="reveal relative w-full overflow-hidden" style="transition-delay: 140ms;" data-cms-image={`[${postIdx}].image`}><img src={post.image} alt={post.imageAlt} class="block h-auto w-full" fetchpriority="high" /></div>) : (<div class="reveal relative w-full overflow-hidden" style="transition-delay: 140ms; height: clamp(220px, 34vw, 440px);" data-cms-image={`[${postIdx}].image`}><img src={post.image} alt={post.imageAlt} width={1920} height={1280} class="h-full w-full object-cover" fetchpriority="high" /><div class="absolute inset-0 bg-gradient-to-t from-indian-red via-transparent to-transparent" /></div>)}</section><!-- Article body --><section class="relative py-16 lg:py-20"><div class="relative max-w-[720px] mx-auto px-6 lg:px-10"><div class="reveal" style="transition-delay: 180ms"><div class="article-body"><PortableText value={post.content} /></div></div><div class="mt-16 pt-10 border-t border-indian-red/10"><a
             href={labels.blogHref}
             data-cms-link="labels.blogHref"
             class="inline-flex items-center gap-2 text-sm font-medium text-indian-red transition-all duration-200 hover:gap-3"
@@ -37,12 +37,12 @@ const others = post ? posts.filter((p) => p.slug !== slug).slice(0, 2) : [];
                 href={`${labels.blogHref}${p.slug}/`}
                 class="reveal group flex items-start gap-5 sm:gap-8 border-b border-indian-red/10 py-7 first:pt-0 last:border-b-0"
                 style={`transition-delay: ${oi * 70}ms`}
-              ><div class="h-20 w-20 sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-xl"><img src={p.image} alt={p.imageAlt} class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]" loading="lazy" /></div><div class="min-w-0 flex-1"><div class="mb-2 flex flex-wrap items-center gap-x-2 gap-y-1"><span class="h-1.5 w-1.5 shrink-0 rounded-full" style={`background: ${categoryColors[p.category] ?? defaultCategoryColor}`} aria-hidden="true" /><span class="text-[10px] font-semibold uppercase tracking-[0.14em]" style={`color: ${categoryColors[p.category] ?? defaultCategoryColor}`} data-cms-field={`[${posts.indexOf(p)}].category`}>{p.category}</span><span class="text-indian-red/20">&middot;</span><span class="text-[11px] text-indian-red/45" data-cms-field={`[${posts.indexOf(p)}].publishedAt`}>{p.publishedAt}</span></div><h3 class="font-display font-medium text-lg leading-snug text-indian-red mb-1.5" data-cms-field={`[${posts.indexOf(p)}].title`}>{p.title}</h3><span class="inline-flex items-center gap-1.5 text-sm font-medium text-indian-red transition-all duration-200 group-hover:gap-2.5"><span data-cms-field="labels.readArticle">{labels.readArticle}</span><span aria-hidden="true">&rarr;</span></span></div></a>
+              ><div class="h-20 w-20 sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-xl"><img src={p.image} alt={p.imageAlt} width={1920} height={1280} class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]" loading="lazy" /></div><div class="min-w-0 flex-1"><div class="mb-2 flex flex-wrap items-center gap-x-2 gap-y-1"><span class="h-1.5 w-1.5 shrink-0 rounded-full" style={`background: ${categoryColors[p.category] ?? defaultCategoryColor}`} aria-hidden="true" /><span class="text-[10px] font-semibold uppercase tracking-[0.14em]" style={`color: ${categoryColors[p.category] ?? defaultCategoryColor}`} data-cms-field={`[${posts.indexOf(p)}].category`}>{p.category}</span><span class="text-indian-red/20">&middot;</span><span class="text-[11px] text-indian-red/45" data-cms-field={`[${posts.indexOf(p)}].publishedAt`}>{p.publishedAt}</span></div><h3 class="font-display font-medium text-lg leading-snug text-indian-red mb-1.5" data-cms-field={`[${posts.indexOf(p)}].title`}>{p.title}</h3><span class="inline-flex items-center gap-1.5 text-sm font-medium text-indian-red transition-all duration-200 group-hover:gap-2.5"><span data-cms-field="labels.readArticle">{labels.readArticle}</span><span aria-hidden="true">&rarr;</span></span></div></a>
             ))}</div></div></section>
     )}</main>
 )}<style>
   .article-body :global(p) { color: rgb(168 33 33 / 0.8); line-height: 1.75; margin-bottom: 1.25rem; font-size: 1.0625rem; }
-  .article-body > :global(p:first-child) { font-size: 1.25rem; line-height: 1.6; color: rgb(168 33 33 / 0.9); margin-bottom: 2rem; }
+  .article-body > :global(p:first-child) { color: rgb(168 33 33 / 0.9); }
   .article-body :global(h2) { font-size: clamp(1.5rem, 3vw, 1.875rem); margin: 3rem 0 1.25rem; }
   .article-body :global(h3) { font-size: 1.25rem; margin: 2rem 0 0.75rem; }
   .article-body :global(h4), .article-body :global(h5), .article-body :global(h6) { margin: 1.5rem 0 0.75rem; }
@@ -51,7 +51,8 @@ const others = post ? posts.filter((p) => p.slug !== slug).slice(0, 2) : [];
   .article-body :global(ol) { list-style: decimal; }
   .article-body :global(li) { margin-bottom: 0.625rem; line-height: 1.75; }
   .article-body :global(blockquote) { border-left: 3px solid rgb(168 33 33 / 0.3); padding-left: 1.5rem; margin: 2.5rem 0; }
-  .article-body :global(a) { text-decoration: underline; text-underline-offset: 3px; }
+  .article-body :global(a) { text-decoration: underline; text-decoration-color: rgb(168 33 33 / 0.3); text-underline-offset: 2px; }
+  .article-body :global(a:hover) { text-decoration-color: rgb(168 33 33); }
   .article-body :global(img) { max-width: 100%; height: auto; border-radius: 0.75rem; }
   .article-body :global(pre) { overflow-x: auto; padding: 1rem; margin-bottom: 1.5rem; }
   .article-body :global(th), .article-body :global(td) { border-color: rgb(168 33 33 / 0.15); }

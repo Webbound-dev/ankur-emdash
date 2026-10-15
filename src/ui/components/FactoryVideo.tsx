@@ -9,7 +9,7 @@ if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 export interface FactoryVideoContent {
   eyebrow: string;
   title: string;
-  items: { title: string; src: string; poster: string }[];
+  items: { title: string; src: string; poster: string; alt?: string }[];
 }
 
 // Spotlight coverflow — same shape/behavior as Gallery.astro's "Watch"
@@ -188,10 +188,13 @@ export default function FactoryVideo({ content }: { content: FactoryVideoContent
                   <img
                     data-cms-image={`factoryVideo.items[${i}].poster`}
                     src={item.poster}
-                    alt=""
+                    alt={item.alt ?? ''}
+                    width={1920}
+                    height={1080}
                     className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
                       isActivePlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'
                     }`}
+                    loading="lazy"
                   />
 
                   {/* Always mounted (not created on click) so the file stays

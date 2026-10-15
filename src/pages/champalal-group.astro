@@ -4,6 +4,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ChampalalGroup from '../ui/components/ChampalalGroup.astro';
 const content = await getPage('champalal-group');
 ---
-<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} seoFrom={content} cms={cmsScope(content)}>
+<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'About Us', href: '/about/' }, { label: 'Champalal Group' }]} seoFrom={content} cms={cmsScope(content)}>
   <ChampalalGroup content={content} />
 </BaseLayout>

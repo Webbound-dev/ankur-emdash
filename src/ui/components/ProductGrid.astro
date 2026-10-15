@@ -35,6 +35,8 @@ const { heading, subheading, products } = Astro.props;
             src={product.image.src}
             alt={product.image.alt}
             data-cms-image={`products[${pi}].image.src`}
+            width={1254}
+            height={1254}
             class="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700 ease-out"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-indian-red/25 via-transparent to-indian-red/5 mix-blend-multiply" />

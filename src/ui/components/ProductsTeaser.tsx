@@ -170,7 +170,10 @@ export default function ProductsTeaser({ content }: { content: ProductsTeaserCon
                   src={product.image.src}
                   alt={product.image.alt}
                   data-cms-image={`productsTeaser.products[${i}].image.src`}
+                  width={1254}
+                  height={1254}
                   className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700 ease-out"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-indian-red/25 via-transparent to-indian-red/5 mix-blend-multiply" />
               </div>
@@ -239,7 +242,7 @@ export default function ProductsTeaser({ content }: { content: ProductsTeaserCon
             </button>
 
             <div className="relative aspect-[16/10] overflow-hidden">
-              <img src={activeProduct.image.src} alt={activeProduct.image.alt} className="w-full h-full object-cover" />
+              <img src={activeProduct.image.src} alt={activeProduct.image.alt} width={1254} height={1254} className="w-full h-full object-cover" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-indian-red/35 via-transparent to-indian-red/10 mix-blend-multiply" />
             </div>
 

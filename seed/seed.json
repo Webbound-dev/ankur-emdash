@@ -85,7 +85,7 @@
 				{
 					"type": "custom",
 					"label": "DFS Salt",
-					"url": "/products/salt-plus/"
+					"url": "/products/dfs-salt/"
 				},
 				{
 					"type": "custom",
@@ -158,7 +158,17 @@
 						{
 							"type": "custom",
 							"label": "DFS Salt",
-							"url": "/products/salt-plus/"
+							"url": "/products/dfs-salt/"
+						},
+						{
+							"type": "custom",
+							"label": "Ankur Rock Salt",
+							"url": "/products/rock-salt/"
+						},
+						{
+							"type": "custom",
+							"label": "Crystal Salt",
+							"url": "/products/crystal-salt/"
 						}
 					]
 				},
@@ -229,7 +239,7 @@
 						{
 							"type": "custom",
 							"label": "Instagram",
-							"url": "https://www.instagram.com/ankursaltindia/"
+							"url": "https://www.instagram.com/ankursaltindia?igsi=MWJsYTgzbmNmZzZtbw=="
 						},
 						{
 							"type": "custom",
@@ -641,7 +651,7 @@
 			"slug": "about_leadership",
 			"label": "Leadership",
 			"category": "About",
-			"currentVersion": 3,
+			"currentVersion": 4,
 			"versions": [
 				{
 					"version": 1,
@@ -764,6 +774,45 @@
 							}
 						}
 					]
+				},
+				{
+					"version": 4,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "people",
+							"label": "People",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "name",
+										"label": "Name",
+										"type": "string"
+									},
+									{
+										"slug": "title",
+										"label": "Title",
+										"type": "string"
+									},
+									{
+										"slug": "bio",
+										"label": "Bio",
+										"type": "text"
+									},
+									{
+										"slug": "photo_src",
+										"label": "Photo src",
+										"type": "image"
+									}
+								]
+							}
+						}
+					]
 				}
 			]
 		},
@@ -823,7 +872,7 @@
 			"slug": "about_seo",
 			"label": "Seo",
 			"category": "About",
-			"currentVersion": 2,
+			"currentVersion": 3,
 			"versions": [
 				{
 					"version": 1,
@@ -857,6 +906,26 @@
 							"slug": "description",
 							"label": "Description",
 							"type": "string"
+						},
+						{
+							"slug": "image",
+							"label": "Image",
+							"type": "image"
+						}
+					]
+				},
+				{
+					"version": 3,
+					"fields": [
+						{
+							"slug": "title",
+							"label": "Title",
+							"type": "string"
+						},
+						{
+							"slug": "description",
+							"label": "Description",
+							"type": "text"
 						},
 						{
 							"slug": "image",
@@ -1192,7 +1261,7 @@
 			"slug": "blog_labels",
 			"label": "Labels",
 			"category": "Blog",
-			"currentVersion": 1,
+			"currentVersion": 2,
 			"versions": [
 				{
 					"version": 1,
@@ -1240,6 +1309,51 @@
 						{
 							"slug": "home_href",
 							"label": "Home href",
+							"type": "string"
+						},
+						{
+							"slug": "blog_href",
+							"label": "Blog href",
+							"type": "string"
+						},
+						{
+							"slug": "min_read_suffix",
+							"label": "Min read suffix",
+							"type": "string"
+						}
+					]
+				},
+				{
+					"version": 2,
+					"fields": [
+						{
+							"slug": "all_category",
+							"label": "All category",
+							"type": "string"
+						},
+						{
+							"slug": "featured",
+							"label": "Featured",
+							"type": "string"
+						},
+						{
+							"slug": "latest_articles",
+							"label": "Latest articles",
+							"type": "string"
+						},
+						{
+							"slug": "read_article",
+							"label": "Read article",
+							"type": "string"
+						},
+						{
+							"slug": "more_articles",
+							"label": "More articles",
+							"type": "string"
+						},
+						{
+							"slug": "back_to_all_articles",
+							"label": "Back to all articles",
 							"type": "string"
 						},
 						{
@@ -1332,7 +1446,7 @@
 			"slug": "blog_post_p",
 			"label": "P",
 			"category": "Blog post",
-			"currentVersion": 1,
+			"currentVersion": 2,
 			"versions": [
 				{
 					"version": 1,
@@ -1341,6 +1455,35 @@
 							"slug": "text",
 							"label": "Text",
 							"type": "text"
+						}
+					]
+				},
+				{
+					"version": 2,
+					"fields": [
+						{
+							"slug": "text",
+							"label": "Text",
+							"type": "text"
+						},
+						{
+							"slug": "links",
+							"label": "Links",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "text",
+										"label": "Text",
+										"type": "string"
+									},
+									{
+										"slug": "href",
+										"label": "Href",
+										"type": "text"
+									}
+								]
+							}
 						}
 					]
 				}
@@ -1409,7 +1552,7 @@
 			"slug": "blog_seo",
 			"label": "Seo",
 			"category": "Blog",
-			"currentVersion": 1,
+			"currentVersion": 2,
 			"versions": [
 				{
 					"version": 1,
@@ -1423,6 +1566,26 @@
 							"slug": "description",
 							"label": "Description",
 							"type": "text"
+						}
+					]
+				},
+				{
+					"version": 2,
+					"fields": [
+						{
+							"slug": "title",
+							"label": "Title",
+							"type": "string"
+						},
+						{
+							"slug": "description",
+							"label": "Description",
+							"type": "text"
+						},
+						{
+							"slug": "image",
+							"label": "Image",
+							"type": "image"
 						}
 					]
 				}
@@ -2705,7 +2868,7 @@
 			"slug": "contact_seo",
 			"label": "Seo",
 			"category": "Contact",
-			"currentVersion": 1,
+			"currentVersion": 2,
 			"versions": [
 				{
 					"version": 1,
@@ -2719,6 +2882,26 @@
 							"slug": "description",
 							"label": "Description",
 							"type": "text"
+						}
+					]
+				},
+				{
+					"version": 2,
+					"fields": [
+						{
+							"slug": "title",
+							"label": "Title",
+							"type": "string"
+						},
+						{
+							"slug": "description",
+							"label": "Description",
+							"type": "text"
+						},
+						{
+							"slug": "image",
+							"label": "Image",
+							"type": "image"
 						}
 					]
 				}
@@ -2903,6 +3086,48 @@
 			]
 		},
 		{
+			"slug": "export_faq",
+			"label": "Faq",
+			"category": "Export",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "subheading",
+							"label": "Subheading",
+							"type": "string"
+						},
+						{
+							"slug": "items",
+							"label": "Items",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "question",
+										"label": "Question",
+										"type": "string"
+									},
+									{
+										"slug": "answer",
+										"label": "Answer",
+										"type": "text"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
 			"slug": "export_global_markets",
 			"label": "Global markets",
 			"category": "Export",
@@ -2981,7 +3206,7 @@
 			"slug": "export_inquiry",
 			"label": "Inquiry",
 			"category": "Export",
-			"currentVersion": 1,
+			"currentVersion": 2,
 			"versions": [
 				{
 					"version": 1,
@@ -3000,6 +3225,115 @@
 							"slug": "intro",
 							"label": "Intro",
 							"type": "string"
+						},
+						{
+							"slug": "benefits",
+							"label": "Benefits",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "value",
+										"label": "Value",
+										"type": "string"
+									}
+								]
+							}
+						},
+						{
+							"slug": "fields_company_name",
+							"label": "Fields company name",
+							"type": "string"
+						},
+						{
+							"slug": "fields_contact_name",
+							"label": "Fields contact name",
+							"type": "string"
+						},
+						{
+							"slug": "fields_country",
+							"label": "Fields country",
+							"type": "string"
+						},
+						{
+							"slug": "fields_phone",
+							"label": "Fields phone",
+							"type": "string"
+						},
+						{
+							"slug": "fields_email",
+							"label": "Fields email",
+							"type": "string"
+						},
+						{
+							"slug": "fields_message",
+							"label": "Fields message",
+							"type": "string"
+						},
+						{
+							"slug": "placeholders_company_name",
+							"label": "Placeholders company name",
+							"type": "string"
+						},
+						{
+							"slug": "placeholders_contact_name",
+							"label": "Placeholders contact name",
+							"type": "string"
+						},
+						{
+							"slug": "placeholders_country",
+							"label": "Placeholders country",
+							"type": "string"
+						},
+						{
+							"slug": "placeholders_phone",
+							"label": "Placeholders phone",
+							"type": "string"
+						},
+						{
+							"slug": "placeholders_email",
+							"label": "Placeholders email",
+							"type": "string"
+						},
+						{
+							"slug": "placeholders_message",
+							"label": "Placeholders message",
+							"type": "string"
+						},
+						{
+							"slug": "submit_label",
+							"label": "Submit label",
+							"type": "string"
+						},
+						{
+							"slug": "success_heading",
+							"label": "Success heading",
+							"type": "string"
+						},
+						{
+							"slug": "success_message",
+							"label": "Success message",
+							"type": "text"
+						}
+					]
+				},
+				{
+					"version": 2,
+					"fields": [
+						{
+							"slug": "eyebrow",
+							"label": "Eyebrow",
+							"type": "string"
+						},
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "intro",
+							"label": "Intro",
+							"type": "text"
 						},
 						{
 							"slug": "benefits",
@@ -3164,7 +3498,7 @@
 			"slug": "export_seo",
 			"label": "Seo",
 			"category": "Export",
-			"currentVersion": 1,
+			"currentVersion": 2,
 			"versions": [
 				{
 					"version": 1,
@@ -3178,6 +3512,26 @@
 							"slug": "description",
 							"label": "Description",
 							"type": "text"
+						}
+					]
+				},
+				{
+					"version": 2,
+					"fields": [
+						{
+							"slug": "title",
+							"label": "Title",
+							"type": "string"
+						},
+						{
+							"slug": "description",
+							"label": "Description",
+							"type": "text"
+						},
+						{
+							"slug": "image",
+							"label": "Image",
+							"type": "image"
 						}
 					]
 				}
@@ -3357,7 +3711,7 @@
 			"slug": "footer_cta",
 			"label": "Cta",
 			"category": "Footer",
-			"currentVersion": 1,
+			"currentVersion": 2,
 			"versions": [
 				{
 					"version": 1,
@@ -3371,6 +3725,31 @@
 							"slug": "body",
 							"label": "Body",
 							"type": "text"
+						},
+						{
+							"slug": "placeholder",
+							"label": "Placeholder",
+							"type": "string"
+						},
+						{
+							"slug": "button_label",
+							"label": "Button label",
+							"type": "string"
+						}
+					]
+				},
+				{
+					"version": 2,
+					"fields": [
+						{
+							"slug": "title",
+							"label": "Title",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Body",
+							"type": "string"
 						},
 						{
 							"slug": "placeholder",
@@ -4118,7 +4497,7 @@
 			"slug": "home_distribution_map",
 			"label": "Distribution map",
 			"category": "Home",
-			"currentVersion": 2,
+			"currentVersion": 3,
 			"versions": [
 				{
 					"version": 1,
@@ -4202,6 +4581,50 @@
 							}
 						}
 					]
+				},
+				{
+					"version": 3,
+					"fields": [
+						{
+							"slug": "eyebrow",
+							"label": "Eyebrow",
+							"type": "string"
+						},
+						{
+							"slug": "title",
+							"label": "Title",
+							"type": "string"
+						},
+						{
+							"slug": "view_all_label",
+							"label": "View all label",
+							"type": "string"
+						},
+						{
+							"slug": "view_all_href",
+							"label": "View all href",
+							"type": "string"
+						},
+						{
+							"slug": "states",
+							"label": "States",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "name",
+										"label": "Name",
+										"type": "string"
+									},
+									{
+										"slug": "value",
+										"label": "Value",
+										"type": "integer"
+									}
+								]
+							}
+						}
+					]
 				}
 			]
 		},
@@ -4271,7 +4694,7 @@
 			"slug": "home_factory_video_items_item",
 			"label": "Factory video item",
 			"category": "Home",
-			"currentVersion": 1,
+			"currentVersion": 2,
 			"versions": [
 				{
 					"version": 1,
@@ -4290,6 +4713,31 @@
 							"slug": "poster",
 							"label": "Poster",
 							"type": "image"
+						}
+					]
+				},
+				{
+					"version": 2,
+					"fields": [
+						{
+							"slug": "title",
+							"label": "Title",
+							"type": "string"
+						},
+						{
+							"slug": "src",
+							"label": "Src",
+							"type": "file"
+						},
+						{
+							"slug": "poster",
+							"label": "Poster",
+							"type": "image"
+						},
+						{
+							"slug": "alt",
+							"label": "Alt",
+							"type": "string"
 						}
 					]
 				}
@@ -4386,7 +4834,7 @@
 			"slug": "home_hero_slides_item",
 			"label": "Hero item",
 			"category": "Home",
-			"currentVersion": 1,
+			"currentVersion": 2,
 			"versions": [
 				{
 					"version": 1,
@@ -4430,6 +4878,56 @@
 							"slug": "media_poster",
 							"label": "Media poster",
 							"type": "image"
+						}
+					]
+				},
+				{
+					"version": 2,
+					"fields": [
+						{
+							"slug": "eyebrow",
+							"label": "Eyebrow",
+							"type": "string"
+						},
+						{
+							"slug": "title",
+							"label": "Title",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Body",
+							"type": "text"
+						},
+						{
+							"slug": "cta_label",
+							"label": "Cta label",
+							"type": "string"
+						},
+						{
+							"slug": "cta_href",
+							"label": "Cta href",
+							"type": "string"
+						},
+						{
+							"slug": "media_type",
+							"label": "Media type",
+							"type": "string"
+						},
+						{
+							"slug": "media_src",
+							"label": "Media src",
+							"type": "file"
+						},
+						{
+							"slug": "media_poster",
+							"label": "Media poster",
+							"type": "image"
+						},
+						{
+							"slug": "media_alt",
+							"label": "Media alt",
+							"type": "string"
 						}
 					]
 				}
@@ -4634,7 +5132,7 @@
 			"slug": "home_quote",
 			"label": "Quote",
 			"category": "Home",
-			"currentVersion": 3,
+			"currentVersion": 4,
 			"versions": [
 				{
 					"version": 1,
@@ -4770,6 +5268,50 @@
 							"slug": "cta_label",
 							"label": "Cta label",
 							"type": "string"
+						}
+					]
+				},
+				{
+					"version": 4,
+					"fields": [
+						{
+							"slug": "eyebrow",
+							"label": "Eyebrow",
+							"type": "string"
+						},
+						{
+							"slug": "slides",
+							"label": "Slides",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "line",
+										"label": "Line",
+										"type": "string"
+									},
+									{
+										"slug": "translation",
+										"label": "Translation",
+										"type": "string"
+									},
+									{
+										"slug": "attribution",
+										"label": "Attribution",
+										"type": "string"
+									}
+								]
+							}
+						},
+						{
+							"slug": "cta_label",
+							"label": "Cta label",
+							"type": "string"
+						},
+						{
+							"slug": "image_src",
+							"label": "Image src",
+							"type": "image"
 						}
 					]
 				}
@@ -4827,7 +5369,7 @@
 			"slug": "industrial_salt_data_sheets",
 			"label": "Data sheets",
 			"category": "Industrial Salt",
-			"currentVersion": 3,
+			"currentVersion": 4,
 			"versions": [
 				{
 					"version": 1,
@@ -5123,6 +5665,148 @@
 							"type": "string"
 						}
 					]
+				},
+				{
+					"version": 4,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "subheading",
+							"label": "Subheading",
+							"type": "string"
+						},
+						{
+							"slug": "title",
+							"label": "Title",
+							"type": "string"
+						},
+						{
+							"slug": "description",
+							"label": "Description",
+							"type": "text"
+						},
+						{
+							"slug": "file",
+							"label": "File",
+							"type": "file"
+						},
+						{
+							"slug": "cta_label",
+							"label": "Cta label",
+							"type": "string"
+						},
+						{
+							"slug": "gate_heading",
+							"label": "Gate heading",
+							"type": "string"
+						},
+						{
+							"slug": "gate_subheading",
+							"label": "Gate subheading",
+							"type": "string"
+						},
+						{
+							"slug": "gate_fields_name",
+							"label": "Gate fields name",
+							"type": "string"
+						},
+						{
+							"slug": "gate_fields_company",
+							"label": "Gate fields company",
+							"type": "string"
+						},
+						{
+							"slug": "gate_fields_email",
+							"label": "Gate fields email",
+							"type": "string"
+						},
+						{
+							"slug": "gate_placeholders_name",
+							"label": "Gate placeholders name",
+							"type": "string"
+						},
+						{
+							"slug": "gate_placeholders_company",
+							"label": "Gate placeholders company",
+							"type": "string"
+						},
+						{
+							"slug": "gate_placeholders_email",
+							"label": "Gate placeholders email",
+							"type": "string"
+						},
+						{
+							"slug": "gate_send_otp_label",
+							"label": "Gate send otp label",
+							"type": "string"
+						},
+						{
+							"slug": "gate_resend_label",
+							"label": "Gate resend label",
+							"type": "string"
+						},
+						{
+							"slug": "gate_verify_label",
+							"label": "Gate verify label",
+							"type": "string"
+						},
+						{
+							"slug": "gate_submit_label",
+							"label": "Gate submit label",
+							"type": "string"
+						},
+						{
+							"slug": "gate_success_message",
+							"label": "Gate success message",
+							"type": "string"
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "industrial_salt_faq",
+			"label": "Faq",
+			"category": "Industrial Salt",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "subheading",
+							"label": "Subheading",
+							"type": "string"
+						},
+						{
+							"slug": "items",
+							"label": "Items",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "question",
+										"label": "Question",
+										"type": "string"
+									},
+									{
+										"slug": "answer",
+										"label": "Answer",
+										"type": "text"
+									}
+								]
+							}
+						}
+					]
 				}
 			]
 		},
@@ -5130,7 +5814,7 @@
 			"slug": "industrial_salt_grades",
 			"label": "Grades",
 			"category": "Industrial Salt",
-			"currentVersion": 2,
+			"currentVersion": 3,
 			"versions": [
 				{
 					"version": 1,
@@ -5233,6 +5917,75 @@
 									{
 										"slug": "hardness",
 										"label": "Hardness",
+										"type": "string"
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"version": 3,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "subheading",
+							"label": "Subheading",
+							"type": "string"
+						},
+						{
+							"slug": "columns_grade",
+							"label": "Columns grade",
+							"type": "string"
+						},
+						{
+							"slug": "columns_nacl",
+							"label": "Columns nacl",
+							"type": "string"
+						},
+						{
+							"slug": "columns_hardness",
+							"label": "Columns hardness",
+							"type": "string"
+						},
+						{
+							"slug": "columns_moisture",
+							"label": "Columns moisture",
+							"type": "string"
+						},
+						{
+							"slug": "items",
+							"label": "Items",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "tier",
+										"label": "Tier",
+										"type": "string"
+									},
+									{
+										"slug": "name",
+										"label": "Name",
+										"type": "string"
+									},
+									{
+										"slug": "nacl",
+										"label": "Nacl",
+										"type": "string"
+									},
+									{
+										"slug": "hardness",
+										"label": "Hardness",
+										"type": "string"
+									},
+									{
+										"slug": "moisture",
+										"label": "Moisture",
 										"type": "string"
 									}
 								]
@@ -5352,7 +6105,7 @@
 			"slug": "industrial_salt_seo",
 			"label": "Seo",
 			"category": "Industrial Salt",
-			"currentVersion": 1,
+			"currentVersion": 2,
 			"versions": [
 				{
 					"version": 1,
@@ -5368,6 +6121,26 @@
 							"type": "text"
 						}
 					]
+				},
+				{
+					"version": 2,
+					"fields": [
+						{
+							"slug": "title",
+							"label": "Title",
+							"type": "string"
+						},
+						{
+							"slug": "description",
+							"label": "Description",
+							"type": "text"
+						},
+						{
+							"slug": "image",
+							"label": "Image",
+							"type": "image"
+						}
+					]
 				}
 			]
 		},
@@ -5375,7 +6148,7 @@
 			"slug": "industrial_salt_trusted_by",
 			"label": "Trusted by",
 			"category": "Industrial Salt",
-			"currentVersion": 3,
+			"currentVersion": 4,
 			"versions": [
 				{
 					"version": 1,
@@ -5458,6 +6231,35 @@
 										"slug": "logo",
 										"label": "Logo",
 										"type": "string"
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"version": 4,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "items",
+							"label": "Items",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "name",
+										"label": "Name",
+										"type": "string"
+									},
+									{
+										"slug": "logo",
+										"label": "Logo",
+										"type": "image"
 									}
 								]
 							}
@@ -6122,7 +6924,7 @@
 			"slug": "network_hero",
 			"label": "Hero",
 			"category": "Network",
-			"currentVersion": 2,
+			"currentVersion": 3,
 			"versions": [
 				{
 					"version": 1,
@@ -6173,6 +6975,36 @@
 							"type": "text"
 						}
 					]
+				},
+				{
+					"version": 3,
+					"fields": [
+						{
+							"slug": "eyebrow",
+							"label": "Eyebrow",
+							"type": "string"
+						},
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "intro",
+							"label": "Intro",
+							"type": "text"
+						},
+						{
+							"slug": "search_placeholder",
+							"label": "Search placeholder",
+							"type": "string"
+						},
+						{
+							"slug": "search_button_label",
+							"label": "Search button label",
+							"type": "string"
+						}
+					]
 				}
 			]
 		},
@@ -6180,7 +7012,7 @@
 			"slug": "network_seo",
 			"label": "Seo",
 			"category": "Network",
-			"currentVersion": 1,
+			"currentVersion": 2,
 			"versions": [
 				{
 					"version": 1,
@@ -6194,6 +7026,26 @@
 							"slug": "description",
 							"label": "Description",
 							"type": "text"
+						}
+					]
+				},
+				{
+					"version": 2,
+					"fields": [
+						{
+							"slug": "title",
+							"label": "Title",
+							"type": "string"
+						},
+						{
+							"slug": "description",
+							"label": "Description",
+							"type": "text"
+						},
+						{
+							"slug": "image",
+							"label": "Image",
+							"type": "image"
 						}
 					]
 				}
@@ -6316,6 +7168,48 @@
 										"slug": "description",
 										"label": "Description",
 										"type": "string"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "product_faq",
+			"label": "Faq",
+			"category": "Product",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "item_id",
+							"label": "Id",
+							"type": "string"
+						},
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "items",
+							"label": "Items",
+							"type": "repeater",
+							"validation": {
+								"subFields": [
+									{
+										"slug": "question",
+										"label": "Question",
+										"type": "string"
+									},
+									{
+										"slug": "answer",
+										"label": "Answer",
+										"type": "text"
 									}
 								]
 							}
@@ -6468,7 +7362,7 @@
 			"slug": "product_where_to_buy",
 			"label": "Where to buy",
 			"category": "Product",
-			"currentVersion": 1,
+			"currentVersion": 2,
 			"versions": [
 				{
 					"version": 1,
@@ -6487,6 +7381,36 @@
 							"slug": "body",
 							"label": "Body",
 							"type": "string"
+						},
+						{
+							"slug": "cta_label",
+							"label": "Cta label",
+							"type": "string"
+						},
+						{
+							"slug": "cta_href",
+							"label": "Cta href",
+							"type": "string"
+						}
+					]
+				},
+				{
+					"version": 2,
+					"fields": [
+						{
+							"slug": "item_id",
+							"label": "Id",
+							"type": "string"
+						},
+						{
+							"slug": "heading",
+							"label": "Heading",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Body",
+							"type": "text"
 						},
 						{
 							"slug": "cta_label",
@@ -7050,7 +7974,7 @@
 			"slug": "quality_certificates_seo",
 			"label": "Seo",
 			"category": "Quality Certificates",
-			"currentVersion": 1,
+			"currentVersion": 2,
 			"versions": [
 				{
 					"version": 1,
@@ -7064,6 +7988,26 @@
 							"slug": "description",
 							"label": "Description",
 							"type": "string"
+						}
+					]
+				},
+				{
+					"version": 2,
+					"fields": [
+						{
+							"slug": "title",
+							"label": "Title",
+							"type": "string"
+						},
+						{
+							"slug": "description",
+							"label": "Description",
+							"type": "text"
+						},
+						{
+							"slug": "image",
+							"label": "Image",
+							"type": "image"
 						}
 					]
 				}
@@ -7276,16 +8220,20 @@
 							"export_global_markets",
 							"export_certifications",
 							"export_logistics",
+							"export_faq",
 							"export_inquiry",
 							"industrial_salt_seo",
 							"industrial_salt_hero",
+							"industrial_salt_trusted_by",
 							"industrial_salt_grades",
 							"industrial_salt_industries",
 							"industrial_salt_rfq",
 							"industrial_salt_data_sheets",
+							"industrial_salt_faq",
 							"industrial_salt_quote",
 							"network_seo",
 							"network_hero",
+							"network_directory",
 							"network_become_distributor",
 							"network_connect_with_distributor",
 							"network_distributor_forms_tabs",
@@ -7477,6 +8425,7 @@
 						"allowedTypes": [
 							"product_checklist",
 							"product_spec_table",
+							"product_faq",
 							"product_where_to_buy",
 							"product_narrative",
 							"product_use_cases_grouped"
@@ -7515,6 +8464,11 @@
 					"type": "text"
 				},
 				{
+					"slug": "meta_description",
+					"label": "Meta description",
+					"type": "text"
+				},
+				{
 					"slug": "category",
 					"label": "Category",
 					"type": "string"
@@ -7535,10 +8489,20 @@
 					"type": "image"
 				},
 				{
+					"slug": "image_uncropped",
+					"label": "Image uncropped",
+					"type": "boolean"
+				},
+				{
 					"slug": "content",
 					"label": "Article",
 					"type": "portableText",
 					"searchable": true
+				},
+				{
+					"slug": "seo_title",
+					"label": "Seo title",
+					"type": "string"
 				},
 				{
 					"slug": "position",
@@ -7561,6 +8525,31 @@
 					"label": "State",
 					"type": "string",
 					"required": true
+				},
+				{
+					"slug": "name",
+					"label": "Name",
+					"type": "string"
+				},
+				{
+					"slug": "region",
+					"label": "Region",
+					"type": "string"
+				},
+				{
+					"slug": "city",
+					"label": "City",
+					"type": "string"
+				},
+				{
+					"slug": "address",
+					"label": "Address",
+					"type": "string"
+				},
+				{
+					"slug": "phone",
+					"label": "Phone",
+					"type": "string"
 				}
 			]
 		}
@@ -7587,7 +8576,7 @@
 							"_type": "n_404_seo",
 							"_version": 1,
 							"_key": "seo",
-							"title": "Page Not Found | Ankur",
+							"title": "Page Not Found | Ankur Salt",
 							"description": "The page you're looking for doesn't exist or may have been moved."
 						},
 						{
@@ -7632,10 +8621,10 @@
 					"sections": [
 						{
 							"_type": "about_seo",
-							"_version": 2,
+							"_version": 3,
 							"_key": "seo",
-							"title": "About Us | Ankur",
-							"description": "30+ years of Ankur Salt: our story, journey, leadership and the group behind the brand.",
+							"title": "About Us | Salt Manufacturer in Gujarat, India | Ankur Salt",
+							"description": "30+ years as a trusted salt manufacturer in India, Ankur Salt's story, journey, leadership, and the group behind the brand.",
 							"image": {
 								"id": "",
 								"provider": "external",
@@ -7649,7 +8638,7 @@
 							"_version": 3,
 							"_key": "hero",
 							"title": "About Us",
-							"intro": "From a small town on the coast of Gujarat to tables across the world, Ankur Salt has been on a quiet but determined journey for over 30 years. We do not just make salt. We make salt the right way.",
+							"intro": "From a small town on the coast of Gujarat to tables across the world, Ankur has grown into a trusted salt manufacturer in India over more than 30 years. We do not just make salt. We make salt the right way.",
 							"images": [
 								{
 									"src": {
@@ -7791,7 +8780,7 @@
 								},
 								{
 									"title": "Five Plants, One Standard",
-									"description": "All five of our manufacturing plants are located at Village Chopadava and Varsana on National Highway 8A, on India's finest marine salt belt."
+									"description": "All five of our manufacturing plants, one of India's leading salt manufacturers, are located at Village Chopadava and Varsana on National Highway 8A, on India's finest marine salt belt."
 								},
 								{
 									"title": "Port Access for Global Reach",
@@ -7882,69 +8871,153 @@
 						},
 						{
 							"_type": "about_leadership",
-							"_version": 3,
+							"_version": 4,
 							"_key": "leadership",
 							"heading": "Leadership Team",
 							"people": [
 								{
 									"name": "Champalal Gekchandji Parekh",
 									"title": "Founder and Director",
-									"bio": "Mr. Champalal Parekh founded the Champalal Group and laid the foundation of values that Ankur Salt continues to stand on."
+									"bio": "Mr. Champalal Parekh founded the Champalal Group and laid the foundation of values that Ankur Salt continues to stand on.",
+									"photo_src": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/about/leader-1.jpg",
+										"filename": "leader-1.jpg",
+										"alt": "Champalal Gekchandji Parekh"
+									}
 								},
 								{
 									"name": "Ashokkumar Champalal Parekh",
 									"title": "Managing Director",
-									"bio": "Mr. Ashok Parekh has led Ankur Chemfood Limited since its early days, steering the company from its first plant in Gandhidham to becoming one of the world's largest salt refineries."
+									"bio": "Mr. Ashok Parekh has led Ankur Chemfood Limited since its early days, steering the company from its first plant in Gandhidham to becoming one of the world's largest salt refineries.",
+									"photo_src": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/about/leader-2.jpg",
+										"filename": "leader-2.jpg",
+										"alt": "Ashokkumar Champalal Parekh"
+									}
 								},
 								{
 									"name": "Surendra Kumar Sharma",
 									"title": "Director",
-									"bio": "Mr. Sharma has served on the Ankur Chemfood board since November 2022, contributing to the company's governance and operational direction."
+									"bio": "Mr. Sharma has served on the Ankur Chemfood board since November 2022, contributing to the company's governance and operational direction.",
+									"photo_src": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/about/leader-3.jpg",
+										"filename": "leader-3.jpg",
+										"alt": "Surendra Kumar Sharma"
+									}
 								},
 								{
 									"name": "Aditya Khatuwala",
 									"title": "Director",
-									"bio": "Mr. Khatuwala joined the board in July 2024 and is part of the leadership guiding Ankur Salt's next phase of growth."
+									"bio": "Mr. Khatuwala joined the board in July 2024 and is part of the leadership guiding Ankur Salt's next phase of growth.",
+									"photo_src": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/about/leader-4.jpg",
+										"filename": "leader-4.jpg",
+										"alt": "Aditya Khatuwala"
+									}
 								},
 								{
 									"name": "Deep Hamirbhai Virda",
 									"title": "Director",
-									"bio": "Mr. Virda has served on the board of Ankur Chemfood Limited since October 2024, contributing to the company's strategic decisions."
+									"bio": "Mr. Virda has served on the board of Ankur Chemfood Limited since October 2024, contributing to the company's strategic decisions.",
+									"photo_src": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/about/leader-5.jpg",
+										"filename": "leader-5.jpg",
+										"alt": "Deep Hamirbhai Virda"
+									}
 								},
 								{
 									"name": "Aditya Parekh",
 									"title": "Executive Director",
-									"bio": "Mr. Aditya Parekh serves as Executive Director, working closely with the leadership team on strategy and operations across Ankur Chemfood Limited."
+									"bio": "Mr. Aditya Parekh serves as Executive Director, working closely with the leadership team on strategy and operations across Ankur Chemfood Limited.",
+									"photo_src": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/about/avatar-placeholder.svg",
+										"filename": "avatar-placeholder.svg",
+										"alt": "Aditya Parekh"
+									}
 								},
 								{
 									"name": "Hitesh Patel",
 									"title": "Marketing - Head",
-									"bio": "Mr. Hitesh Patel heads the marketing function at Ankur Chemfood Limited."
+									"bio": "Mr. Hitesh Patel heads the marketing function at Ankur Chemfood Limited.",
+									"photo_src": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/about/avatar-placeholder.svg",
+										"filename": "avatar-placeholder.svg",
+										"alt": "Hitesh Patel"
+									}
 								},
 								{
 									"name": "Mishal Jain",
 									"title": "Finance",
-									"bio": "Mr. Mishal Jain leads the finance function at Ankur Chemfood Limited."
+									"bio": "Mr. Mishal Jain leads the finance function at Ankur Chemfood Limited.",
+									"photo_src": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/about/avatar-placeholder.svg",
+										"filename": "avatar-placeholder.svg",
+										"alt": "Mishal Jain"
+									}
 								},
 								{
 									"name": "Maneklal Gour",
 									"title": "Accounts",
-									"bio": "Mr. Maneklal Gour oversees the accounts function at Ankur Chemfood Limited."
+									"bio": "Mr. Maneklal Gour oversees the accounts function at Ankur Chemfood Limited.",
+									"photo_src": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/about/avatar-placeholder.svg",
+										"filename": "avatar-placeholder.svg",
+										"alt": "Maneklal Gour"
+									}
 								},
 								{
 									"name": "Dilip Nimavat",
 									"title": "Marketing",
-									"bio": "Mr. Dilip Nimavat is part of the marketing team at Ankur Chemfood Limited."
+									"bio": "Mr. Dilip Nimavat is part of the marketing team at Ankur Chemfood Limited.",
+									"photo_src": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/about/avatar-placeholder.svg",
+										"filename": "avatar-placeholder.svg",
+										"alt": "Dilip Nimavat"
+									}
 								},
 								{
 									"name": "Harsiddh Soni",
 									"title": "Export",
-									"bio": "Mr. Harsiddh Soni leads export operations at Ankur Chemfood Limited."
+									"bio": "Mr. Harsiddh Soni leads export operations at Ankur Chemfood Limited.",
+									"photo_src": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/about/avatar-placeholder.svg",
+										"filename": "avatar-placeholder.svg",
+										"alt": "Harsiddh Soni"
+									}
 								},
 								{
 									"name": "Sandeep M. Jain",
 									"title": "Marketing & Govt. Tender",
-									"bio": "Mr. Sandeep M. Jain handles marketing and government tenders at Ankur Chemfood Limited."
+									"bio": "Mr. Sandeep M. Jain handles marketing and government tenders at Ankur Chemfood Limited.",
+									"photo_src": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/about/avatar-placeholder.svg",
+										"filename": "avatar-placeholder.svg",
+										"alt": "Sandeep M. Jain"
+									}
 								}
 							]
 						}
@@ -7962,7 +9035,7 @@
 							"_type": "career_seo",
 							"_version": 2,
 							"_key": "seo",
-							"title": "Careers | Ankur",
+							"title": "Careers at Ankur Salt | Jobs in Gandhidham, Gujarat",
 							"description": "Join Ankur Salt: three decades of quality-first thinking, five plants on the Gujarat coast, and a team that's still growing.",
 							"image": {
 								"id": "",
@@ -8258,10 +9331,17 @@
 					"sections": [
 						{
 							"_type": "contact_seo",
-							"_version": 1,
+							"_version": 2,
 							"_key": "seo",
-							"title": "Contact Us | Ankur",
-							"description": "Get in touch with Ankur Salt: general questions, bulk and industrial orders, distributor and export inquiries."
+							"title": "Contact Ankur Salt | Gandhidham, Gujarat",
+							"description": "Get in touch with Ankur Salt: general questions, bulk and industrial orders, distributor and export inquiries.",
+							"image": {
+								"id": "",
+								"provider": "external",
+								"src": "/images/about/hero.jpg",
+								"filename": "hero.jpg",
+								"alt": ""
+							}
 						},
 						{
 							"_type": "contact_hero",
@@ -8561,13 +9641,13 @@
 							"_type": "gallery_seo",
 							"_version": 2,
 							"_key": "seo",
-							"title": "Gallery | Ankur",
+							"title": "Gallery | Salt Plants & Products | Ankur Salt",
 							"description": "A look inside Ankur Salt — our plants on the Gujarat coast, and the products that leave them every day.",
 							"image": {
 								"id": "",
 								"provider": "external",
-								"src": "/images/about/hero.jpg",
-								"filename": "hero.jpg",
+								"src": "/images/factory/packing-line.jpeg",
+								"filename": "packing-line.jpeg",
 								"alt": ""
 							}
 						},
@@ -8785,7 +9865,7 @@
 							"_key": "instagram",
 							"heading": "Follow Us on Instagram",
 							"handle": "@ankursaltindia",
-							"url": "https://www.instagram.com/ankursaltindia/",
+							"url": "https://www.instagram.com/ankursaltindia?igsi=MWJsYTgzbmNmZzZtbw==",
 							"posts": [
 								{
 									"src": {
@@ -8857,8 +9937,8 @@
 							"_type": "home_seo",
 							"_version": 2,
 							"_key": "seo",
-							"title": "Ankur Salt — India's Trusted Salt Brand Since 1994 | Ankur Chemfood Ltd.",
-							"description": "India's second largest packaged salt brand, trusted in kitchens since 1994. Explore Ankur's iodised, low sodium, fortified and rock salt ranges, from everyday cooking to industrial and export supply.",
+							"title": "Ankur Salt | Salt Manufacturer in India | Ankur Chemfood",
+							"description": "Ankur is a trusted salt manufacturer in India since 1994, producing iodised, low sodium, fortified and rock salt for kitchens, industry and export.",
 							"image": {
 								"id": "",
 								"provider": "external",
@@ -8876,11 +9956,11 @@
 						},
 						{
 							"_type": "home_hero_slides_item",
-							"_version": 1,
+							"_version": 2,
 							"_key": "hero-slides-1",
 							"eyebrow": "Ankur Namak, Asli Namak",
 							"title": "Real salt. Nothing hidden.",
-							"body": "India's second largest packaged salt brand, trusted in kitchens since 1994. Namak kam hi khaaye, par achha khaaye: eat less salt, but eat salt that's real.",
+							"body": "A trusted salt manufacturer in India since 1994, known for real, honest salt in kitchens nationwide. Namak kam hi khaaye, par achha khaaye: eat less salt, but eat salt that's real.",
 							"cta_label": "Explore our range",
 							"cta_href": "/products/",
 							"media_type": "video",
@@ -8894,14 +9974,14 @@
 							"media_poster": {
 								"id": "",
 								"provider": "external",
-								"src": "/images/hero-poster.jpg",
-								"filename": "hero-poster.jpg",
+								"src": "/images/hero-poster-mobile.webp",
+								"filename": "hero-poster-mobile.webp",
 								"alt": ""
 							}
 						},
 						{
 							"_type": "home_hero_slides_item",
-							"_version": 1,
+							"_version": 2,
 							"_key": "hero-slides-2",
 							"eyebrow": "Introducing Dr. Salt",
 							"title": "Namak kam hi khaaye, par achha khaaye.",
@@ -8915,17 +9995,18 @@
 								"src": "/images/hero-salad-bowl.jpg",
 								"filename": "hero-salad-bowl.jpg",
 								"url": "/images/hero-salad-bowl.jpg"
-							}
+							},
+							"media_alt": "Fresh vegetables representing Dr. Salt's low sodium range for healthier everyday cooking"
 						},
 						{
 							"_type": "home_hero_slides_item",
-							"_version": 1,
+							"_version": 2,
 							"_key": "hero-slides-3",
 							"eyebrow": "From Kitchens to Industry",
 							"title": "Trusted at every scale.",
-							"body": "From the neighbourhood kitchen to industrial and export partners, Ankur's Free Flow Iodised range has carried the same promise of purity since 1994.",
+							"body": "From the neighbourhood kitchen to industrial and export partners, Ankur has been a trusted salt manufacturer in Gujarat since 1994, carrying the same promise of purity in every Free Flow Iodised pack.",
 							"cta_label": "See our story",
-							"cta_href": "/legacy/",
+							"cta_href": "/about/",
 							"media_type": "image",
 							"media_src": {
 								"id": "",
@@ -8933,11 +10014,12 @@
 								"src": "/images/hero-salt-flats.jpg",
 								"filename": "hero-salt-flats.jpg",
 								"url": "/images/hero-salt-flats.jpg"
-							}
+							},
+							"media_alt": "Salt flats at sunset in Gujarat, representing Ankur's salt manufacturing scale"
 						},
 						{
 							"_type": "home_quote",
-							"_version": 3,
+							"_version": 4,
 							"_key": "quote",
 							"eyebrow": "Our Promise",
 							"slides": [
@@ -8952,7 +10034,14 @@
 									"attribution": "Ankur Salt, since 1994"
 								}
 							],
-							"cta_label": "Play"
+							"cta_label": "Play",
+							"image_src": {
+								"id": "",
+								"provider": "external",
+								"src": "/images/hero-salt-flats.jpg",
+								"filename": "hero-salt-flats.jpg",
+								"alt": "Salt flats on Gujarat's marine salt belt"
+							}
 						},
 						{
 							"_type": "home_products_teaser",
@@ -9104,7 +10193,7 @@
 						},
 						{
 							"_type": "home_distribution_map",
-							"_version": 2,
+							"_version": 3,
 							"_key": "distributionMap",
 							"eyebrow": "Our Network",
 							"title": "From our salt pans to kitchens nationwide, and beyond.",
@@ -9112,19 +10201,24 @@
 							"view_all_href": "/network/",
 							"states": [
 								{
-									"name": "Delhi"
+									"name": "Delhi",
+									"value": 60
 								},
 								{
-									"name": "Gujarat"
+									"name": "Gujarat",
+									"value": 180
 								},
 								{
-									"name": "Maharashtra"
+									"name": "Maharashtra",
+									"value": 95
 								},
 								{
-									"name": "West Bengal"
+									"name": "West Bengal",
+									"value": 70
 								},
 								{
-									"name": "Tamil Nadu"
+									"name": "Tamil Nadu",
+									"value": 50
 								}
 							]
 						},
@@ -9137,7 +10231,7 @@
 						},
 						{
 							"_type": "home_factory_video_items_item",
-							"_version": 1,
+							"_version": 2,
 							"_key": "factoryVideo-items-1",
 							"title": "Inside Our Refinery",
 							"src": {
@@ -9153,11 +10247,12 @@
 								"src": "/images/hero-poster.jpg",
 								"filename": "hero-poster.jpg",
 								"alt": ""
-							}
+							},
+							"alt": "Close-up of a hand releasing a pinch of Ankur Salt"
 						},
 						{
 							"_type": "home_factory_video_items_item",
-							"_version": 1,
+							"_version": 2,
 							"_key": "factoryVideo-items-2",
 							"title": "Ankur Salt TVC",
 							"src": {
@@ -9173,11 +10268,12 @@
 								"src": "/images/vid-1-poster.jpg",
 								"filename": "vid-1-poster.jpg",
 								"alt": ""
-							}
+							},
+							"alt": "Kareena Kapoor smiling in a modern kitchen, from Ankur Salt's TV commercial"
 						},
 						{
 							"_type": "home_factory_video_items_item",
-							"_version": 1,
+							"_version": 2,
 							"_key": "factoryVideo-items-3",
 							"title": "Ankur Salt Campaign",
 							"src": {
@@ -9193,11 +10289,12 @@
 								"src": "/images/vid-2-poster.jpg",
 								"filename": "vid-2-poster.jpg",
 								"alt": ""
-							}
+							},
+							"alt": "Woman cooking on a stovetop in a modern kitchen, from an Ankur Salt commercial"
 						},
 						{
 							"_type": "home_factory_video_items_item",
-							"_version": 1,
+							"_version": 2,
 							"_key": "factoryVideo-items-4",
 							"title": "Ankur Salt Campaign",
 							"src": {
@@ -9213,7 +10310,8 @@
 								"src": "/images/vid-3-poster.jpg",
 								"filename": "vid-3-poster.jpg",
 								"alt": ""
-							}
+							},
+							"alt": "Family enjoying a home-cooked Indian meal together, featuring the Ankur Salt brand"
 						},
 						{
 							"_type": "home_blog_teaser",
@@ -9313,10 +10411,17 @@
 					"sections": [
 						{
 							"_type": "quality_certificates_seo",
-							"_version": 1,
+							"_version": 2,
 							"_key": "seo",
-							"title": "Quality & Certificates | Ankur",
-							"description": "Ankur Salt's certifications, in-house quality control process, and industry recognition."
+							"title": "Quality & Certificates: FSSAI, BIS, FSSC 22000 | Ankur Salt",
+							"description": "Ankur Salt's certifications (FSSAI, BIS, FSSC 22000, ISO 9001, Halal), our in-house quality control process, and industry recognition.",
+							"image": {
+								"id": "",
+								"provider": "external",
+								"src": "/images/factory/packing-line.jpeg",
+								"filename": "packing-line.jpeg",
+								"alt": ""
+							}
 						},
 						{
 							"_type": "quality_certificates_hero",
@@ -9539,10 +10644,17 @@
 						},
 						{
 							"_type": "blog_seo",
-							"_version": 1,
+							"_version": 2,
 							"_key": "seo",
-							"title": "Blog | Ankur Chemfood Ltd.",
-							"description": "Health, manufacturing, exports and company stories from Ankur Chemfood Ltd., India's second largest packaged salt brand."
+							"title": "Salt, Health & Cooking Blog | Ankur Salt",
+							"description": "Health, manufacturing, exports and company stories from Ankur Chemfood Ltd., India's second largest packaged salt brand.",
+							"image": {
+								"id": "",
+								"provider": "external",
+								"src": "/images/hero-salad-bowl.jpg",
+								"filename": "hero-salad-bowl.jpg",
+								"alt": ""
+							}
 						},
 						{
 							"_type": "blog_hero",
@@ -9554,7 +10666,7 @@
 						},
 						{
 							"_type": "blog_labels",
-							"_version": 1,
+							"_version": 2,
 							"_key": "labels",
 							"all_category": "All",
 							"featured": "Featured",
@@ -9562,9 +10674,6 @@
 							"read_article": "Read Article",
 							"more_articles": "More From the Blog",
 							"back_to_all_articles": "Back to All Articles",
-							"breadcrumb_home": "Home",
-							"breadcrumb_blog": "Blog",
-							"home_href": "/",
 							"blog_href": "/blog/",
 							"min_read_suffix": "min read"
 						},
@@ -9590,17 +10699,24 @@
 					"sections": [
 						{
 							"_type": "export_seo",
-							"_version": 1,
+							"_version": 2,
 							"_key": "seo",
-							"title": "Salt Exporter from India: Global Supply | Ankur Chemfood Ltd.",
-							"description": "Ankur Chemfood Ltd. exports triple refined, certified salt from India to international buyers. Global markets, export certifications, port access and bulk export enquiries."
+							"title": "Salt Exporter from India: Global Supply | Ankur Salt",
+							"description": "Ankur is a trusted salt exporter from India, FSSC 22000 certified, with global market access, export certifications, and port logistics.",
+							"image": {
+								"id": "",
+								"provider": "external",
+								"src": "/images/factory/salt-dispatch-loading.jpeg",
+								"filename": "salt-dispatch-loading.jpeg",
+								"alt": ""
+							}
 						},
 						{
 							"_type": "export_hero",
 							"_version": 1,
 							"_key": "hero",
 							"title": "Salt Exporter from India Global Supply",
-							"intro": "Triple refined, Swiss technology salt manufactured on India's marine salt belt in Gujarat, supplied to international buyers with the certifications and port access that global trade demands."
+							"intro": "Vacuum evaporated, FSSAI and FSSC 22000 certified salt, manufactured by one of the leading bulk salt exporters in Gujarat's marine salt belt, supplied to international buyers with the certifications and port access that global trade demands."
 						},
 						{
 							"_type": "export_global_markets",
@@ -9663,7 +10779,7 @@
 								{
 									"name": "FSSC 22000",
 									"issuer": "Food Safety System Certification",
-									"description": "One of the most widely recognised food safety certifications globally, accepted by retailers and food businesses across every market we ship to.",
+									"description": "As FSSC 22000 certified salt manufacturers, we hold one of the most widely recognised food safety certifications globally, accepted by retailers and food businesses across every market we ship to.",
 									"logo_src": {
 										"id": "",
 										"provider": "external",
@@ -9701,7 +10817,7 @@
 								{
 									"name": "Mundra Port",
 									"authority": "Adani Port",
-									"description": "India's largest private port and container terminal, giving us direct access to major global shipping lines for containerised export."
+									"description": "As rock salt suppliers using Mundra Port, India's largest private port and container terminal, we get direct access to major global shipping lines for containerised export."
 								}
 							],
 							"advantages": [
@@ -9720,15 +10836,44 @@
 							]
 						},
 						{
-							"_type": "export_inquiry",
+							"_type": "export_faq",
 							"_version": 1,
+							"_key": "faq",
+							"heading": "Frequently Asked Questions",
+							"subheading": "What international buyers ask us most before placing an order.",
+							"items": [
+								{
+									"question": "Does Ankur export salt from India to other countries?",
+									"answer": "Yes. Ankur is a trusted salt exporter from India, currently supplying to 17 countries across 4 regions worldwide."
+								},
+								{
+									"question": "What certifications does Ankur's exported salt have?",
+									"answer": "Ankur is FSSC 22000 certified salt manufacturers, and also holds FSSAI, Halal, and ISO 9001:2015 certifications, meeting international food safety standards."
+								},
+								{
+									"question": "Which ports does Ankur use for export shipments?",
+									"answer": "Ankur uses Kandla Port and Mundra Port in Gujarat, both offering direct access to major global shipping lines for bulk and containerised export."
+								},
+								{
+									"question": "Does Ankur supply edible salt for export?",
+									"answer": "Yes. Ankur is one of India's edible salt export suppliers, offering food grade salt that meets international quality and safety requirements."
+								},
+								{
+									"question": "How can I request an export quote?",
+									"answer": "You can share your requirement through the export enquiry form on this page. Our export team will follow up with a quote and expected lead time."
+								}
+							]
+						},
+						{
+							"_type": "export_inquiry",
+							"_version": 2,
 							"_key": "inquiry",
 							"eyebrow": "Export Enquiry",
 							"heading": "Export Inquiry",
-							"intro": "Tell us your requirement, and our export team will follow up with a quote and lead time.",
+							"intro": "As one of India's trusted edible salt export suppliers, tell us your requirement, and our export team will follow up with a quote and lead time.",
 							"benefits": [
 								{
-									"value": "Triple refined salt manufactured on Gujarat's marine salt belt"
+									"value": "Vacuum evaporated, FSSAI and FSSC 22000 certified salt manufactured on Gujarat's marine salt belt"
 								},
 								{
 									"value": "FSSAI, Halal, FSSC 22000 and ISO 9001:2015 certified"
@@ -9765,84 +10910,157 @@
 					"sections": [
 						{
 							"_type": "industrial_salt_seo",
-							"_version": 1,
+							"_version": 2,
 							"_key": "seo",
-							"title": "Industrial Salt | Ankur",
-							"description": "Industrial-grade salt from Ankur Chemfood: grades, specifications, industries served, and bulk order enquiries."
+							"title": "Industrial Salt Manufacturer & Supplier | Ankur Salt",
+							"description": "Ankur is a trusted industrial salt manufacturer and wholesale salt supplier, offering grades, specifications, and bulk order enquiries.",
+							"image": {
+								"id": "",
+								"provider": "external",
+								"src": "/images/factory/warehouse-stacked-bags.jpeg",
+								"filename": "warehouse-stacked-bags.jpeg",
+								"alt": ""
+							}
 						},
 						{
 							"_type": "industrial_salt_hero",
 							"_version": 1,
 							"_key": "hero",
 							"title": "Industrial Salt",
-							"intro": "Beyond the retail shelf, Ankur Salt supplies industrial grade salt to manufacturers who need consistent purity and controlled hardness, batch after batch, from Free Flow through our finest Low Hardness grades."
+							"intro": "Beyond the retail shelf, Ankur is one of India's trusted industrial salt manufacturers and bulk salt suppliers, supplying consistent purity and controlled hardness, batch after batch, from Free Flow through our finest low hardness salt grades."
+						},
+						{
+							"_type": "industrial_salt_trusted_by",
+							"_version": 4,
+							"_key": "trustedBy",
+							"heading": "Trusted By",
+							"items": [
+								{
+									"name": "Balaji",
+									"logo": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/clients/balaji.svg",
+										"filename": "balaji.svg",
+										"alt": ""
+									}
+								},
+								{
+									"name": "Lay's",
+									"logo": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/clients/lays.svg",
+										"filename": "lays.svg",
+										"alt": ""
+									}
+								},
+								{
+									"name": "Nestle",
+									"logo": {
+										"id": "",
+										"provider": "external",
+										"src": "/images/clients/nestle.svg",
+										"filename": "nestle.svg",
+										"alt": ""
+									}
+								}
+							]
 						},
 						{
 							"_type": "industrial_salt_grades",
-							"_version": 2,
+							"_version": 3,
 							"_key": "grades",
 							"heading": "Grades and Specifications",
 							"subheading": "Every grade is tested against the same specification, every batch.",
+							"columns_grade": "Grade",
+							"columns_nacl": "NaCl Purity",
+							"columns_hardness": "Hardness",
+							"columns_moisture": "Moisture",
 							"items": [
 								{
 									"tier": "Standard",
 									"name": "Free Flow",
-									"hardness": "Standard"
+									"nacl": "≥ 99%",
+									"hardness": "Standard",
+									"moisture": "≤ 0.5%"
 								},
 								{
 									"tier": "Standard",
 									"name": "30 Mesh (500 Micron)",
-									"hardness": "Standard"
+									"nacl": "≥ 99%",
+									"hardness": "Standard",
+									"moisture": "≤ 0.5%"
 								},
 								{
 									"tier": "Standard",
 									"name": "40 Mesh (425 Micron)",
-									"hardness": "Standard"
+									"nacl": "≥ 99%",
+									"hardness": "Standard",
+									"moisture": "≤ 0.5%"
 								},
 								{
 									"tier": "Standard",
 									"name": "Medium 1st",
-									"hardness": "Standard"
+									"nacl": "≥ 99%",
+									"hardness": "Standard",
+									"moisture": "≤ 1%"
 								},
 								{
 									"tier": "Standard",
 									"name": "Medium 2nd",
-									"hardness": "Standard"
+									"nacl": "≥ 98%",
+									"hardness": "Standard",
+									"moisture": "≤ 1%"
 								},
 								{
 									"tier": "Low Hardness Series",
 									"name": "Low Hardness 200 PPM",
-									"hardness": "≤ 200 ppm"
+									"nacl": "≥ 99.4%",
+									"hardness": "≤ 200 ppm",
+									"moisture": "≤ 0.5%"
 								},
 								{
 									"tier": "Low Hardness Series",
 									"name": "Low Hardness 150 PPM",
-									"hardness": "≤ 150 ppm"
+									"nacl": "≥ 99.5%",
+									"hardness": "≤ 150 ppm",
+									"moisture": "≤ 0.3%"
 								},
 								{
 									"tier": "Low Hardness Series",
 									"name": "Low Hardness 120 PPM",
-									"hardness": "≤ 120 ppm"
+									"nacl": "≥ 99.55%",
+									"hardness": "≤ 120 ppm",
+									"moisture": "≤ 0.25%"
 								},
 								{
 									"tier": "Low Hardness Series",
 									"name": "Low Hardness 80 PPM",
-									"hardness": "≤ 80 ppm"
+									"nacl": "≥ 99.6%",
+									"hardness": "≤ 80 ppm",
+									"moisture": "≤ 0.25%"
 								},
 								{
 									"tier": "Low Hardness Series",
 									"name": "Low Hardness 50 PPM",
-									"hardness": "≤ 50 ppm"
+									"nacl": "≥ 99.65%",
+									"hardness": "≤ 50 ppm",
+									"moisture": "≤ 0.25%"
 								},
 								{
 									"tier": "Specialty",
 									"name": "Super Fine Salt",
-									"hardness": "Standard"
+									"nacl": "≥ 98.5%",
+									"hardness": "Standard",
+									"moisture": "≤ 0.8%"
 								},
 								{
 									"tier": "Specialty",
 									"name": "Microfine Salt",
-									"hardness": "Standard"
+									"nacl": "≥ 98%",
+									"hardness": "Standard",
+									"moisture": "≤ 0.7%"
 								}
 							]
 						},
@@ -9870,11 +11088,11 @@
 								},
 								{
 									"name": "Chemicals and Intermediates",
-									"use_case": "A key raw material in chlor-alkali and other chemical manufacturing processes, including caustic soda, chlorine, and soda ash production."
+									"use_case": "A key raw material meeting chlor alkali salt specification requirements, used in caustic soda, chlorine, and soda ash production."
 								},
 								{
 									"name": "Pharmaceuticals",
-									"use_case": "Meets the high purity, low hardness requirements of pharmaceutical grade formulations."
+									"use_case": "Meets the high purity, low hardness salt requirements of pharmaceutical grade formulations."
 								}
 							]
 						},
@@ -9883,11 +11101,11 @@
 							"_version": 1,
 							"_key": "rfq",
 							"heading": "Request a Bulk Quote",
-							"subheading": "For industrial and B2B orders, tell us your requirement, and our team will get back to you with a quote. For general questions, use our Contact page instead."
+							"subheading": "As one of India's leading bulk salt suppliers, we handle industrial and B2B orders, tell us your requirement and our team will get back to you with a quote. For general questions, use our Contact page instead."
 						},
 						{
 							"_type": "industrial_salt_data_sheets",
-							"_version": 3,
+							"_version": 4,
 							"_key": "dataSheets",
 							"heading": "Technical Data Sheet",
 							"subheading": "One document, every grade.",
@@ -9910,9 +11128,39 @@
 							"gate_placeholders_company": "Your company",
 							"gate_placeholders_email": "you@company.com",
 							"gate_send_otp_label": "Send Code",
+							"gate_resend_label": "Resend",
 							"gate_verify_label": "Verify",
 							"gate_submit_label": "Verify & Download",
 							"gate_success_message": "Verified — your download will start automatically."
+						},
+						{
+							"_type": "industrial_salt_faq",
+							"_version": 1,
+							"_key": "faq",
+							"heading": "Frequently Asked Questions",
+							"subheading": "What buyers and procurement teams ask us most before an order.",
+							"items": [
+								{
+									"question": "Does Ankur manufacture industrial salt in bulk?",
+									"answer": "Yes. Ankur is one of India's industrial salt manufacturers, supplying various grades in bulk to industries across the country."
+								},
+								{
+									"question": "What is low hardness salt used for?",
+									"answer": "Low hardness salt is used in industries like pharmaceuticals and chemicals, where high purity and controlled hardness levels are required for the manufacturing process."
+								},
+								{
+									"question": "Does Ankur's industrial salt meet chlor-alkali industry requirements?",
+									"answer": "Yes. Ankur's industrial salt meets chlor alkali salt specification requirements, making it suitable for use in caustic soda, chlorine, and soda ash production."
+								},
+								{
+									"question": "Is Ankur a wholesale salt supplier for businesses?",
+									"answer": "Yes. Ankur works as a wholesale salt supplier and bulk salt supplier, serving industries like FMCG, textiles, water treatment, and pharmaceuticals."
+								},
+								{
+									"question": "How do I request a bulk quote for industrial salt?",
+									"answer": "You can fill out the bulk enquiry form on this page with your grade, quantity, and delivery location. Our team typically responds within 1 to 2 business days."
+								}
+							]
 						},
 						{
 							"_type": "industrial_salt_quote",
@@ -9933,18 +11181,37 @@
 					"sections": [
 						{
 							"_type": "network_seo",
-							"_version": 1,
+							"_version": 2,
 							"_key": "seo",
-							"title": "Find an Ankur Salt Distributor Near You | Nationwide Network",
-							"description": "Find a trusted Ankur Salt distributor near you: stockists and dealers across India, from the salt pans of Kutch to kitchens nationwide. Interested in becoming a distributor? Apply here."
+							"title": "Find an Ankur Salt Distributor Near You",
+							"description": "Find a trusted Ankur Salt distributor, stockist or dealer near you, with a network across India. Interested in becoming a distributor? Apply here.",
+							"image": {
+								"id": "",
+								"provider": "external",
+								"src": "/images/factory/salt-dispatch-loading.jpeg",
+								"filename": "salt-dispatch-loading.jpeg",
+								"alt": ""
+							}
 						},
 						{
 							"_type": "network_hero",
-							"_version": 2,
+							"_version": 3,
 							"_key": "hero",
 							"eyebrow": "Nationwide Reach",
 							"heading": "Find Ankur near you.",
-							"intro": "From the salt pans of Kutch to kitchens across the country, Ankur reaches homes through a trusted network of distributors nationwide."
+							"intro": "From the salt pans of Kutch to kitchens across the country, Ankur reaches homes through a trusted network of distributors nationwide.",
+							"search_placeholder": "Search by city, state or distributor name",
+							"search_button_label": "Search"
+						},
+						{
+							"_type": "network_directory",
+							"_version": 1,
+							"_key": "directory",
+							"eyebrow": "Distributor Directory",
+							"heading": "Browse by region",
+							"all_label": "All Regions",
+							"result_label": "distributors found",
+							"empty_state": "No distributors match your search. Try another city, state or region."
 						},
 						{
 							"_type": "network_become_distributor",
@@ -10039,8 +11306,8 @@
 							"_type": "products_seo",
 							"_version": 2,
 							"_key": "seo",
-							"title": "Salt Products | Ankur Chemfood Ltd.",
-							"description": "Compare Ankur's full range of iodised, low sodium, fortified and rock salt products, or answer one question to find the right salt for your kitchen.",
+							"title": "Types of Salt: Iodised, Rock, Low Sodium & More | Ankur Salt",
+							"description": "Explore different types of salt: iodised, low sodium, fortified and rock salt. Answer one question to find the right salt for your kitchen.",
 							"image": {
 								"id": "",
 								"provider": "external",
@@ -10054,15 +11321,15 @@
 							"_version": 1,
 							"_key": "hero",
 							"eyebrow": "Our Range",
-							"heading": "Salt for every kitchen, every need.",
-							"intro": "From everyday iodised salt to heart healthy low sodium and double fortified ranges. Compare all seven Ankur products side by side, or let us help you find the right one."
+							"heading": "Types of salt for every kitchen, every need.",
+							"intro": "Discover the different types of salt and their uses, from everyday iodised salt to heart healthy low sodium and double fortified ranges. Compare all six Ankur products side by side, or let us help you find the right one."
 						},
 						{
 							"_type": "products_comparison_table",
 							"_version": 1,
 							"_key": "comparisonTable",
 							"heading": "Compare Our Salts",
-							"subheading": "Every Ankur product, side by side, so you can choose with confidence.",
+							"subheading": "Every Ankur salt variety, side by side, so you can choose with confidence.",
 							"columns_iodine": "Iodine Content",
 							"columns_sodium": "Sodium Level",
 							"columns_iron": "Fortification",
@@ -10083,7 +11350,7 @@
 								},
 								{
 									"label": "Fighting iron deficiency?",
-									"href": "/products/salt-plus/",
+									"href": "/products/dfs-salt/",
 									"icon": "droplet"
 								},
 								{
@@ -10103,7 +11370,7 @@
 							"_version": 1,
 							"_key": "productGrid",
 							"heading": "The Full Range",
-							"subheading": "All seven Ankur products, ready to explore."
+							"subheading": "Explore the full salt range, all six Ankur products."
 						}
 					]
 				}
@@ -10125,10 +11392,10 @@
 						},
 						{
 							"_type": "footer_cta",
-							"_version": 1,
+							"_version": 2,
 							"_key": "cta",
 							"title": "Real salt, real updates.",
-							"body": "Recipes, health tips, and news from India's second largest packaged salt brand, straight to your inbox.",
+							"body": "Recipes, health tips, and news from India's trusted salt manufacturer, straight to your inbox",
 							"placeholder": "Enter your email...",
 							"button_label": "Sign Up"
 						},
@@ -10196,7 +11463,7 @@
 							"_type": "privacy_policy_seo",
 							"_version": 1,
 							"_key": "seo",
-							"title": "Privacy Policy | Ankur",
+							"title": "Privacy Policy | Ankur Salt",
 							"description": "How Ankur Chemfood Ltd. collects, uses and protects your information."
 						},
 						{
@@ -10264,7 +11531,7 @@
 							"_type": "terms_of_service_seo",
 							"_version": 1,
 							"_key": "seo",
-							"title": "Terms of Service | Ankur",
+							"title": "Terms of Service | Ankur Salt",
 							"description": "Legal terms governing use of the Ankur Chemfood Ltd. website, RFQ submissions and export enquiries."
 						},
 						{
@@ -10318,7 +11585,7 @@
 				"data": {
 					"title": "Ankur Salt",
 					"page_title": "Ankur Salt | Refined Free Flow Iodised Salt",
-					"meta_description": "Ankur Salt is India's trusted everyday iodised salt: refined, flows freely, and never clumps. Available in 1kg and 500g packs.",
+					"meta_description": "Ankur Salt is a refined, free flow iodised salt trusted in Indian kitchens since 1994. Available in 1kg and 500g packs.",
 					"tag": "Iodised",
 					"image_src": {
 						"id": "",
@@ -10341,7 +11608,7 @@
 					"comparison_pack_formats": "1kg, 500g",
 					"grid_description": "Everyday iodised salt that stays fine and flows freely, never clumps.",
 					"grid_cta_label": "View Details",
-					"detail_hero_tagline": "The everyday salt trusted in Indian kitchens since 1994.",
+					"detail_hero_tagline": "The everyday free flow salt trusted in Indian kitchens since 1994.",
 					"detail_hero_cta_label": "Find a Distributor",
 					"detail_hero_cta_href": "#where-to-buy",
 					"detail_hero_cta_secondary_label": "View Specifications",
@@ -10402,12 +11669,33 @@
 							]
 						},
 						{
-							"_type": "product_where_to_buy",
+							"_type": "product_faq",
 							"_version": 1,
 							"_key": "detail_sections-3",
+							"item_id": "faq",
+							"heading": "Frequently Asked Questions",
+							"items": [
+								{
+									"question": "Is Ankur Salt a free flow salt?",
+									"answer": "Yes. Ankur Salt is a free flow salt, which means it does not clump or stick together, even in humid weather. It pours easily every time, so you never need to break up hard lumps before cooking."
+								},
+								{
+									"question": "How is Ankur Salt made?",
+									"answer": "Ankur Salt is made using a vacuum evaporated salt process. This method removes impurities and gives the salt a clean, consistent grain, so every packet has the same quality."
+								},
+								{
+									"question": "What sizes does Ankur Salt come in?",
+									"answer": "Ankur Salt is available in convenient salt packets of 1kg and 500g, sold at kirana stores, supermarkets, and leading online grocers across India."
+								}
+							]
+						},
+						{
+							"_type": "product_where_to_buy",
+							"_version": 2,
+							"_key": "detail_sections-4",
 							"item_id": "where-to-buy",
 							"heading": "Where to Buy",
-							"body": "Available at kirana stores, supermarkets, and leading online grocers across India.",
+							"body": "Available in convenient salt packets at kirana stores, supermarkets, and leading online grocers across India.",
 							"cta_label": "Find a Distributor",
 							"cta_href": "/network/"
 						}
@@ -10421,8 +11709,8 @@
 				"status": "published",
 				"data": {
 					"title": "Ankur Gold",
-					"page_title": "Ankur Gold | Premium Refined Iodised Salt",
-					"meta_description": "Ankur Gold is a premium, extra refined grade of iodised salt for kitchens that expect more. Available in 1kg and 500g packs.",
+					"page_title": "Ankur Gold | Fine Grain Table Salt",
+					"meta_description": "Ankur Gold is a premium, extra refined fine grain table salt for kitchens that expect more. Available in 1kg and 500g packs.",
 					"tag": "Premium",
 					"image_src": {
 						"id": "",
@@ -10445,7 +11733,7 @@
 					"comparison_pack_formats": "1kg",
 					"grid_description": "A refined, premium grade of salt for the modern kitchen.",
 					"grid_cta_label": "View Details",
-					"detail_hero_tagline": "A finer grade of purity, for kitchens that expect more.",
+					"detail_hero_tagline": "A fine grain table salt for kitchens that expect more.",
 					"detail_hero_cta_label": "Find a Distributor",
 					"detail_hero_cta_href": "#where-to-buy",
 					"detail_hero_cta_secondary_label": "View Specifications",
@@ -10506,12 +11794,33 @@
 							]
 						},
 						{
-							"_type": "product_where_to_buy",
+							"_type": "product_faq",
 							"_version": 1,
 							"_key": "detail_sections-3",
+							"item_id": "faq",
+							"heading": "Frequently Asked Questions",
+							"items": [
+								{
+									"question": "What makes Ankur Gold different from regular salt?",
+									"answer": "Ankur Gold is a fine grain table salt made through an extra refined process. This gives it a smoother texture and a cleaner taste compared to regular iodised salt."
+								},
+								{
+									"question": "Is Ankur Gold a premium iodised salt?",
+									"answer": "Yes. Ankur Gold is a premium iodised salt made for kitchens that want a finer, whiter grain without giving up the everyday benefits of iodised salt."
+								},
+								{
+									"question": "Can I use Ankur Gold for daily cooking?",
+									"answer": "Yes, Ankur Gold works well as a top cook salt for everyday meals. Its fine grain dissolves quickly, making it suitable for both cooking and table use."
+								}
+							]
+						},
+						{
+							"_type": "product_where_to_buy",
+							"_version": 2,
+							"_key": "detail_sections-4",
 							"item_id": "where-to-buy",
 							"heading": "Where to Buy",
-							"body": "Available at kirana stores, supermarkets, and leading online grocers across India.",
+							"body": "A top cook salt choice, available at kirana stores, supermarkets, and leading online grocers across India.",
 							"cta_label": "Find a Distributor",
 							"cta_href": "/network/"
 						}
@@ -10526,7 +11835,7 @@
 				"data": {
 					"title": "Dr. Salt",
 					"page_title": "Dr. Salt | 15% Low Sodium Salt for Better Heart Health",
-					"meta_description": "Dr. Salt is Ankur's 15% low sodium range, for households who want to eat mindfully without giving up the taste of real salt.",
+					"meta_description": "Dr. Salt is Ankur's 15% low sodium table salt, for households managing hypertension without giving up real salt taste.",
 					"tag": "Low Sodium",
 					"image_src": {
 						"id": "",
@@ -10549,7 +11858,7 @@
 					"comparison_pack_formats": "1kg",
 					"grid_description": "Low sodium salt for mindful eating that's kind to your heart.",
 					"grid_cta_label": "View Details",
-					"detail_hero_tagline": "Made for Healthier Everyday Cooking",
+					"detail_hero_tagline": "A low sodium table salt made for healthier everyday cooking.",
 					"detail_hero_cta_label": "Find a Distributor",
 					"detail_hero_cta_href": "#where-to-buy",
 					"detail_hero_cta_secondary_label": "View Specifications",
@@ -10619,12 +11928,41 @@
 							]
 						},
 						{
-							"_type": "product_where_to_buy",
+							"_type": "product_faq",
 							"_version": 1,
 							"_key": "detail_sections-4",
+							"item_id": "faq",
+							"heading": "Frequently Asked Questions",
+							"items": [
+								{
+									"question": "What is Dr. Salt?",
+									"answer": "Dr. Salt is a low sodium salt made for people who want to cut back on sodium without giving up the taste of real salt. It has 15% less sodium than regular iodised salt."
+								},
+								{
+									"question": "Is Dr. Salt a low sodium table salt?",
+									"answer": "Yes. Dr. Salt is a low sodium table salt that can be used the same way as regular salt, in cooking or sprinkled on food at the table."
+								},
+								{
+									"question": "Is Dr. Salt suitable for people with high blood pressure?",
+									"answer": "Dr. Salt is formulated to support a healthy blood pressure lifestyle as part of an overall balanced diet. If you have high blood pressure or hypertension, it's best to also check with your doctor about your specific salt intake."
+								},
+								{
+									"question": "Does Dr. Salt taste different from regular salt?",
+									"answer": "No. Dr. Salt is designed to taste like real salt, so you don't have to compromise on flavour while eating mindfully."
+								},
+								{
+									"question": "Where can I buy Dr. Salt?",
+									"answer": "Dr. Salt is available at pharmacies, supermarkets, and leading online grocers across India."
+								}
+							]
+						},
+						{
+							"_type": "product_where_to_buy",
+							"_version": 2,
+							"_key": "detail_sections-5",
 							"item_id": "where-to-buy",
 							"heading": "Where to Buy",
-							"body": "Available at pharmacies, supermarkets, and leading online grocers across India.",
+							"body": "A trusted salt for hypertension care, available at pharmacies, supermarkets, and leading online grocers across India.",
 							"cta_label": "Find a Distributor",
 							"cta_href": "/network/"
 						}
@@ -10633,13 +11971,13 @@
 				}
 			},
 			{
-				"id": "product-salt-plus",
-				"slug": "salt-plus",
+				"id": "product-dfs-salt",
+				"slug": "dfs-salt",
 				"status": "published",
 				"data": {
 					"title": "DFS Salt",
 					"page_title": "DFS Salt | Double Fortified Salt with Iron & Iodine",
-					"meta_description": "DFS Salt is Ankur's Double Fortified Salt, fortified with both iron and iodine to help address anaemia and iodine deficiency in one everyday ingredient.",
+					"meta_description": "DFS Salt is Ankur's iron and iodine fortified salt, double fortified to help address anaemia and iodine deficiency.",
 					"tag": "Double Fortified",
 					"image_src": {
 						"id": "",
@@ -10679,7 +12017,7 @@
 									"value": "Salt is one of the few ingredients almost every household already uses every day, which makes it an effective, low cost carrier for essential micronutrients."
 								},
 								{
-									"value": "DFS Salt is double fortified: alongside iodine for thyroid health, it carries iron to help address one of India's most widespread nutrition gaps."
+									"value": "DFS Salt is a twin fortified salt: alongside iodine for thyroid health, it carries iron to help address one of India's most widespread nutrition gaps."
 								}
 							],
 							"stats": [
@@ -10709,7 +12047,7 @@
 							"stats": [
 								{
 									"value": "1 in 2",
-									"label": "Indian women estimated to be affected by anaemia (placeholder, needs verification)"
+									"label": "Indian women are affected by anaemia, as per NFHS-5 national data"
 								}
 							]
 						},
@@ -10735,9 +12073,38 @@
 							]
 						},
 						{
-							"_type": "product_where_to_buy",
+							"_type": "product_faq",
 							"_version": 1,
 							"_key": "detail_sections-4",
+							"item_id": "faq",
+							"heading": "Frequently Asked Questions",
+							"items": [
+								{
+									"question": "What is DFS Salt?",
+									"answer": "DFS Salt, or Double Fortified Salt, is Ankur's iron and iodine fortified salt. It combines two essential nutrients, iron and iodine, in one everyday ingredient."
+								},
+								{
+									"question": "Why is iron fortified salt important?",
+									"answer": "Iron deficiency is common in India, according to NFHS-5 national data, around 1 in 2 Indian women are affected by anaemia. Iron fortified salt is an easy way to add this nutrient to daily meals without changing eating habits."
+								},
+								{
+									"question": "Is twin fortified salt safe for daily use?",
+									"answer": "Yes. Twin fortified salt like DFS is safe for regular household use and is recommended by public health researchers as a simple way to improve everyday nutrition."
+								},
+								{
+									"question": "How is DFS Salt different from regular iodised salt?",
+									"answer": "Regular iodised salt only contains iodine. DFS Salt is a double fortified salt that adds iron as well, helping address both iodine deficiency and iron deficiency anaemia together."
+								},
+								{
+									"question": "Where can I buy DFS Salt?",
+									"answer": "DFS Salt is one of the double fortified salt brands in India available through Ankur's retail and institutional distribution network."
+								}
+							]
+						},
+						{
+							"_type": "product_where_to_buy",
+							"_version": 2,
+							"_key": "detail_sections-5",
 							"item_id": "where-to-buy",
 							"heading": "Where to Buy",
 							"body": "Available at select retailers, and through Ankur's institutional and public distribution network.",
@@ -10755,7 +12122,7 @@
 				"data": {
 					"title": "Ankur Rock Salt",
 					"page_title": "Ankur Rock Salt | Natural Himalayan Pink Salt",
-					"meta_description": "Ankur Rock Salt is a natural, unrefined Sendha Namak, the traditional choice for fasting, rituals, and cooking rich in minerals.",
+					"meta_description": "Ankur Rock Salt is a natural, unrefined Himalayan rock salt, also known as Himalayan pink salt, ideal for fasting, rituals, and healthy cooking.",
 					"tag": "Traditional",
 					"image_src": {
 						"id": "",
@@ -10778,7 +12145,7 @@
 					"comparison_pack_formats": "1kg",
 					"grid_description": "Natural, unrefined Sendha Namak for fasting and traditional cooking.",
 					"grid_cta_label": "View Details",
-					"detail_hero_tagline": "Rock salt- natural everyday cooking and fasting rituals",
+					"detail_hero_tagline": "Himalayan rock salt for fasting, rituals, and everyday cooking.",
 					"detail_hero_cta_label": "Find a Distributor",
 					"detail_hero_cta_href": "#where-to-buy",
 					"detail_hero_cta_secondary_label": "View Specifications",
@@ -10793,7 +12160,7 @@
 							"items": [
 								{
 									"title": "Fasting & Vrat Cooking",
-									"description": "The traditional choice for Navratri, Ekadashi, and other fasting occasions."
+									"description": "Rock salt used for fasting during Navratri, Ekadashi, and other occasions."
 								},
 								{
 									"title": "Rituals & Prasad",
@@ -10801,7 +12168,7 @@
 								},
 								{
 									"title": "Natural Cooking",
-									"description": "A milder alternative for everyday recipes, rich in minerals."
+									"description": "A milder rock salt for health, rich in minerals, perfect for everyday recipes."
 								},
 								{
 									"title": "Ayurvedic Kitchens",
@@ -10830,14 +12197,35 @@
 								},
 								{
 									"label": "Origin",
-									"value": "Natural rock salt deposits"
+									"value": "Natural Himalayan rock salt deposits"
+								}
+							]
+						},
+						{
+							"_type": "product_faq",
+							"_version": 1,
+							"_key": "detail_sections-3",
+							"item_id": "faq",
+							"heading": "Frequently Asked Questions",
+							"items": [
+								{
+									"question": "Is rock salt the same as Sendha Namak?",
+									"answer": "Yes. Ankur Rock Salt is also known as Sendha Namak, a natural, unrefined salt commonly used in Indian kitchens."
+								},
+								{
+									"question": "Is rock salt used for fasting?",
+									"answer": "Yes. Rock salt is used for fasting during Navratri, Ekadashi, and other religious occasions, since it's considered a pure, unprocessed salt."
+								},
+								{
+									"question": "Is rock salt good for health?",
+									"answer": "Rock salt for health is a common reason people choose it, since it's a milder, less processed alternative to regular table salt, rich in natural minerals."
 								}
 							]
 						},
 						{
 							"_type": "product_where_to_buy",
-							"_version": 1,
-							"_key": "detail_sections-3",
+							"_version": 2,
+							"_key": "detail_sections-4",
 							"item_id": "where-to-buy",
 							"heading": "Where to Buy",
 							"body": "Available at kirana stores, supermarkets, and leading online grocers across India.",
@@ -10854,8 +12242,8 @@
 				"status": "published",
 				"data": {
 					"title": "Crystal Salt",
-					"page_title": "Crystal Salt | Refined Iodised Crystal Salt",
-					"meta_description": "Crystal Salt is Ankur's refined iodised salt in a coarse crystal grain, suited to both industrial applications and edible use.",
+					"page_title": "Crystal Salt | Refined Coarse Iodised Salt",
+					"meta_description": "Crystal Salt, also called salt and crystal, is Ankur's coarse iodised salt suited to industrial and edible use.",
 					"tag": "Crystal",
 					"image_src": {
 						"id": "",
@@ -10878,7 +12266,7 @@
 					"comparison_pack_formats": "1kg",
 					"grid_description": "Refined iodised salt in a coarse crystal grain, for kitchens and industry alike.",
 					"grid_cta_label": "View Details",
-					"detail_hero_tagline": "Iodized natural solar evaporated salt for everyday cooking",
+					"detail_hero_tagline": "Iodised natural solar evaporated salt for everyday cooking.",
 					"detail_hero_cta_label": "Find a Distributor",
 					"detail_hero_cta_href": "#where-to-buy",
 					"detail_hero_cta_secondary_label": "View Specifications",
@@ -10893,7 +12281,7 @@
 							"groups": [
 								{
 									"heading": "Industrial",
-									"items": "Food Processing | A consistent, coarse grain suited to bulk food manufacturing.\nWater Treatment | Used in softening and treatment processes across industries.\nTextile & Leather | A traditional input in textile dyeing and leather processing."
+									"items": "Food Processing | Crystal salt for bulk food manufacturing, with a consistent, coarse grain.\nWater Treatment | Crystal salt for water softening and treatment processes across industries.\nTextile & Leather | A traditional input in textile dyeing and leather processing."
 								},
 								{
 									"heading": "Edible",
@@ -10935,9 +12323,30 @@
 							]
 						},
 						{
-							"_type": "product_where_to_buy",
+							"_type": "product_faq",
 							"_version": 1,
 							"_key": "detail_sections-3",
+							"item_id": "faq",
+							"heading": "Frequently Asked Questions",
+							"items": [
+								{
+									"question": "What is crystal salt used for?",
+									"answer": "Crystal salt has multiple uses. It works as a coarse iodised salt for cooking, and is also used for water softening and bulk food manufacturing."
+								},
+								{
+									"question": "Can crystal salt be used in water softeners?",
+									"answer": "Yes. Ankur's crystal salt for water softening is suitable for use in water softener units, helping reduce water hardness at home or in industrial settings."
+								},
+								{
+									"question": "Is crystal salt suitable for bulk food manufacturing?",
+									"answer": "Yes. Crystal salt for bulk food manufacturing is commonly used by food businesses that need a consistent, coarse grain salt for large scale production."
+								}
+							]
+						},
+						{
+							"_type": "product_where_to_buy",
+							"_version": 2,
+							"_key": "detail_sections-4",
 							"item_id": "where-to-buy",
 							"heading": "Where to Buy",
 							"body": "Available for both industrial bulk orders and retail purchase through our distributor network.",
@@ -10951,12 +12360,852 @@
 		],
 		"blogs": [
 			{
+				"id": "blog_post-how-to-choose-iodised-salt-for-everyday-cooking",
+				"slug": "how-to-choose-iodised-salt-for-everyday-cooking",
+				"status": "published",
+				"data": {
+					"title": "How to Choose Iodised Salt for Everyday Cooking",
+					"excerpt": "Choosing an iodised salt takes more than checking the label for the word \"iodised.\" Here's what fortification, purity, grain quality, and manufacturing standards actually tell you about a product.",
+					"meta_description": "Looking for the best cooking salt? Learn how to choose refined, free-flowing iodised salt based on iodine fortification, vacuum-evaporated purity, and storage.",
+					"category": "Health & Nutrition",
+					"read_time": 6,
+					"published_at_field": "16 September 2026",
+					"image": {
+						"id": "",
+						"provider": "external",
+						"src": "/images/choose-iodised-salt-for-everyday-cooking.webp",
+						"filename": "choose-iodised-salt-for-everyday-cooking.webp",
+						"alt": "Ankur Salt product packaging displaying refined free flow iodised salt next to a wooden bowl of white cooking salt and fresh vegetables."
+					},
+					"image_uncropped": true,
+					"content": [
+						{
+							"_type": "block",
+							"_key": "content-1",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-1-text",
+									"text": "Salt is a basic ingredient used in kitchens and food production around the world. It is used to season food and, in the case of iodised salt, to provide iodine through a commonly consumed ingredient.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-2",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-2-text",
+									"text": "However, choosing an iodised salt involves more than looking for the word \"iodised\" on a package. Factors such as iodine fortification, purity, processing, grain characteristics, quality control, packaging, and storage can influence the suitability of a product.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-3",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-3-text",
+									"text": "For consumers, food manufacturers, distributors, and international buyers, understanding these factors can make it easier to evaluate an iodised salt based on its actual characteristics and the capabilities of its manufacturer.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-4",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-4-text",
+									"text": "What Is Iodised Salt?",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-5",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-5-text",
+									"text": "Iodised salt is salt that has been fortified with iodine. Iodine is an essential nutrient required by the body for normal thyroid function and healthy development.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-6",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "content-6-link-1",
+									"href": "https://www.who.int/tools/elena/review-summaries/salt-iodization--iodized-salt-for-the-prevention-of-iodine-deficiency-disorders",
+									"blank": true
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-6-text-1",
+									"text": "Salt is commonly used as a carrier for iodine because it is consumed regularly and provides a practical way of increasing iodine intake across populations. The ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "content-6-link-1",
+									"text": "World Health Organization (WHO)",
+									"marks": [
+										"content-6-link-1"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "content-6-text-2",
+									"text": " recognises salt iodisation as an effective strategy for preventing iodine deficiency disorders.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-7",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-7-text",
+									"text": "Iodisation is not intended to encourage greater salt consumption. Salt intake should still be kept within appropriate dietary limits. Instead, it allows iodine to be provided through an ingredient that is already widely used in food preparation.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-8",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-8-text",
+									"text": "It is also important to distinguish iodisation from refining. Iodised describes the addition of iodine, while refined describes the processing that the salt undergoes.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-9",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-9-text",
+									"text": "What Should You Look for When Choosing Iodised Salt?",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-10",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-10-text",
+									"text": "The right choice depends on the intended application, but several characteristics are useful when evaluating an iodised salt.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-11",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-11-text",
+									"text": "Iodine Fortification",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-12",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-12-text",
+									"text": "Check whether the product is properly iodised and whether the manufacturer provides clear information about its iodine content or fortification specifications. For commercial buyers, documented specifications can be especially important when consistency between batches is required.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-13",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-13-text",
+									"text": "Purity and Quality",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-14",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-14-text",
+									"text": "Specifications such as sodium chloride content, moisture, and water-insoluble matter provide useful information about the product. Food businesses may also need to consider applicable food safety requirements, certifications, and quality-control practices based on their market and intended use.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-15",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-15-text",
+									"text": "Grain and Flow Characteristics",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-16",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-16-text",
+									"text": "Grain size and flow characteristics can influence how salt behaves during handling and use. Consistent grains can make dispensing easier, while suitable flow characteristics can support handling, weighing, blending, and processing in commercial applications.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-17",
+							"style": "h3",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-17-text",
+									"text": "Packaging and Storage",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-18",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-18-text",
+									"text": "Packaging should protect the product from moisture and contamination while being appropriate for its intended market and application. Storage is equally important because excessive moisture can cause grains to stick together and affect handling.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-19",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-19-text",
+									"text": "Does Refined Salt Mean the Same as Iodised Salt?",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-20",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-20-text",
+									"text": "No. Refined and iodised describe different characteristics of a salt product.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-21",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-21-text",
+									"text": "Refined salt refers to salt that has undergone processing to remove impurities and achieve defined quality and physical characteristics.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-22",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-22-text",
+									"text": "Iodised salt refers to salt that has been fortified with iodine.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-23",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "content-23-link-1",
+									"href": "/products/ankur-salt/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-23-text-1",
+									"text": "A product can therefore be both refined and iodised. Ankur Salt is positioned as a ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "content-23-link-1",
+									"text": "refined, free-flow iodised salt",
+									"marks": [
+										"content-23-link-1"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "content-23-text-2",
+									"text": ", with vacuum evaporation used as part of its refining process.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-24",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-24-text",
+									"text": "This distinction is useful when comparing products because processing and fortification address different aspects of the finished product.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-25",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-25-text",
+									"text": "Why Does Free-Flow Salt Matter?",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-26",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-26-text",
+									"text": "Salt can interact with moisture from its surrounding environment. Under humid conditions, the grains can begin sticking together and become more difficult to handle.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-27",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-27-text",
+									"text": "Free-flow characteristics can therefore be useful in both domestic and commercial settings. For consumers, they can make dispensing and measuring easier. For food manufacturers and other commercial users, suitable flow characteristics can support smoother handling and processing.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-28",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-28-text",
+									"text": "Ankur describes its Free Flow Iodised Salt as a product designed to maintain loose grains, including under humid conditions. The importance of this characteristic depends on the application and storage environment, so buyers should consider how and where the product will be transported, stored, and used.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-29",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-29-text",
+									"text": "What Makes Ankur's Manufacturing Approach Relevant to Buyers?",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-30",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-30-text",
+									"text": "A product specification tells only part of the story. The manufacturing and quality systems behind the product can also provide useful information when evaluating a salt supplier.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-31",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "content-31-link-1",
+									"href": "/about/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-31-link-1",
+									"text": "Ankur Chemfood Limited",
+									"marks": [
+										"content-31-link-1"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "content-31-text-2",
+									"text": " has been manufacturing salt since 1994, with its operations based in Gandhidham on Gujarat's marine salt belt. The company states that its manufacturing began with fully automated machinery based on Swiss technology.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-32",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-32-text",
+									"text": "Ankur currently operates five manufacturing plants and states that its combined production capacity is 10 lakh tons per year. Its location near Kandla and Mundra ports also supports its export operations and international supply network.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-33",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-33-text",
+									"text": "The company describes a manufacturing process that includes sourcing raw salt, washing and crushing, refining, iodisation, quality testing and packaging. It also states that its salt passes through final screening and magnetic separation before undergoing more than 12 additional tests in its in-house quality-control laboratory.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-34",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "content-34-link-1",
+									"href": "/quality-certificates/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-34-text-1",
+									"text": "Ankur's ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "content-34-link-1",
+									"text": "quality and certifications",
+									"marks": [
+										"content-34-link-1"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "content-34-text-2",
+									"text": " include ISO 22000:2018, FSSC 22000, BIS IS:7224, FSSAI and Halal certification. The company also highlights an ICCIDD endorsement received in 2008 for its iodisation practices.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-35",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "content-35-link-1",
+									"href": "/export/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-35-text-1",
+									"text": "For ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "content-35-link-1",
+									"text": "international buyers",
+									"marks": [
+										"content-35-link-1"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "content-35-text-2",
+									"text": ", these manufacturing capabilities, quality systems and certifications can provide useful evidence when assessing a supplier. However, certifications do not replace the need to review product specifications and confirm compliance with the regulations of the destination market.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-36",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-36-text",
+									"text": "Ankur Salt for Everyday Food Use",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-37",
+							"style": "normal",
+							"markDefs": [
+								{
+									"_type": "link",
+									"_key": "content-37-link-1",
+									"href": "/products/ankur-salt/"
+								}
+							],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-37-text-1",
+									"text": "Ankur Salt is positioned as a ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "content-37-link-1",
+									"text": "refined, free-flow iodised salt",
+									"marks": [
+										"content-37-link-1"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "content-37-text-2",
+									"text": " for everyday food use. The individual product page provides specific information about its composition, physical characteristics, processing, and pack formats.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-38",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-38-text",
+									"text": "According to the current Ankur Salt product page, the product has a minimum sodium chloride content of 99%, maximum moisture of 0.5%, maximum water-insoluble matter of 0.5%, and a minimum iodine content of 20 ppm at production, or as per party requirement. The page also specifies that at least 98% of the salt should pass through an 850-micron sieve.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-39",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-39-text",
+									"text": "The product is manufactured using a vacuum evaporation process and is stated to be FSSAI compliant.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-40",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-40-text",
+									"text": "These product-level specifications should be considered separately from Ankur's broader manufacturing capabilities and company-wide certifications. For buyers, this distinction is important because supplier credentials and individual product specifications answer different questions.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-41",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-41-text",
+									"text": "International buyers, importers, and distributors should evaluate the product against the requirements of their destination country, intended application, packaging requirements, and applicable food regulations.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-42",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-42-text",
+									"text": "How to Store Iodised Salt Properly",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-43",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-43-text",
+									"text": "Proper storage helps maintain the intended physical condition of salt after manufacturing and packaging.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-44",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-44-text",
+									"text": "For smaller quantities, keep the product sealed and store it in a clean, dry location away from excessive moisture and direct heat. Once opened, a suitable well-sealed container can help protect the product from humid conditions.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-45",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-45-text",
+									"text": "For commercial and bulk handling, storage conditions become even more important. The product should be protected from moisture, contamination, and unsuitable environmental conditions during transportation and warehousing.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-46",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-46-text",
+									"text": "Good storage practices should therefore be considered throughout the supply chain, from production and distribution to final use.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-47",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-47-text",
+									"text": "Conclusion",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-48",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-48-text",
+									"text": "Choosing an iodised salt involves more than checking whether iodine has been added. The intended application, iodine fortification, purity, processing, grain characteristics, manufacturing controls, certifications, packaging, and storage conditions can all contribute to an informed purchasing decision.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-49",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-49-text",
+									"text": "Ankur Salt combines defined product specifications with a manufacturing operation built around automated Swiss technology, refining, in-house quality testing, and established food-safety systems. Its manufacturing and export infrastructure also supports supply beyond the domestic market.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "content-50",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "content-50-text",
+									"text": "For consumers, food businesses, distributors, and international buyers, the most useful approach is to evaluate the actual product specifications alongside the systems and evidence behind the manufacturer. This provides a more complete basis for choosing an iodised salt than relying on a product label alone.",
+									"marks": []
+								}
+							]
+						}
+					],
+					"position": 1
+				}
+			},
+			{
 				"id": "blog_post-why-iodised-salt-still-matters",
 				"slug": "why-iodised-salt-still-matters",
 				"status": "published",
 				"data": {
 					"title": "Why Iodised Salt Still Matters: What the ICCIDD Endorsement Actually Means",
 					"excerpt": "Iodine deficiency looks like a solved problem in India, but the numbers behind it tell a different story. Universal salt iodisation is still the frontline defence, and it only works if every batch is consistent.",
+					"meta_description": "Iodine deficiency isn't solved in India yet. Why universal salt iodisation is still the frontline defence, and what the ICCIDD endorsement means.",
 					"category": "Health & Nutrition",
 					"read_time": 5,
 					"published_at_field": "12 June 2026",
@@ -11250,7 +13499,8 @@
 							]
 						}
 					],
-					"position": 1
+					"seo_title": "Why Iodised Salt Still Matters in India | Ankur Salt",
+					"position": 2
 				}
 			},
 			{
@@ -11260,6 +13510,7 @@
 				"data": {
 					"title": "Inside Our Triple Refining Process: From Raw Crystal to 99.28% Purity",
 					"excerpt": "Six steps stand between raw salt on our own fields in Gujarat and the bag on your shelf. Here's exactly what happens at each one, and why we run it the same way every time.",
+					"meta_description": "The six steps between raw salt on our Gujarat fields and the pack on your shelf, and how triple refining reaches 99.28% purity every batch.",
 					"category": "Manufacturing & Quality",
 					"read_time": 6,
 					"published_at_field": "28 May 2026",
@@ -11533,7 +13784,8 @@
 							]
 						}
 					],
-					"position": 2
+					"seo_title": "Triple Refined Salt: From Raw Crystal to 99.28% Purity",
+					"position": 3
 				}
 			},
 			{
@@ -11543,6 +13795,7 @@
 				"data": {
 					"title": "What FSSC 22000 and ISO 9001:2015 Actually Mean for Your Kitchen",
 					"excerpt": "Certifications can read like a logo wall. Here's what each one on our packaging actually guarantees, and why we hold all of them instead of just the minimum required to sell in India.",
+					"meta_description": "What each certification on our salt packaging actually guarantees, and why we hold FSSC 22000, ISO 9001:2015 and more beyond the legal minimum.",
 					"category": "Manufacturing & Quality",
 					"read_time": 5,
 					"published_at_field": "14 May 2026",
@@ -11777,7 +14030,8 @@
 							]
 						}
 					],
-					"position": 3
+					"seo_title": "FSSC 22000 & ISO 9001 Explained | Ankur Salt",
+					"position": 4
 				}
 			},
 			{
@@ -11787,6 +14041,7 @@
 				"data": {
 					"title": "Why Kandla and Mundra Make Ankur One of India's Most Efficient Salt Exporters",
 					"excerpt": "Our plants sit minutes from two of India's busiest ports, and that's no coincidence. Here's how that geography turns into shorter lead times for buyers from the Middle East to the Pacific.",
+					"meta_description": "Our plants sit minutes from Kandla and Mundra ports. How that geography means shorter lead times for salt buyers from the Middle East to the Pacific.",
 					"category": "Export & Trade",
 					"read_time": 5,
 					"published_at_field": "30 April 2026",
@@ -12060,7 +14315,8 @@
 							]
 						}
 					],
-					"position": 4
+					"seo_title": "Kandla & Mundra Ports: Efficient Salt Export | Ankur Salt",
+					"position": 5
 				}
 			},
 			{
@@ -12070,6 +14326,7 @@
 				"data": {
 					"title": "30 Years on Gujarat's Marine Salt Belt: The Ankur Chemfood Story",
 					"excerpt": "In 1994, the Champalal Group saw an opportunity hiding in plain sight on the coast of Gujarat. Three decades and five manufacturing plants later, here's how that decision played out.",
+					"meta_description": "How the Champalal Group's bet on Gujarat's coast grew into Ankur Chemfood: three decades and five salt manufacturing plants later.",
 					"category": "Company News",
 					"read_time": 4,
 					"published_at_field": "09 April 2026",
@@ -12315,7 +14572,8 @@
 							]
 						}
 					],
-					"position": 5
+					"seo_title": "30 Years on Gujarat's Salt Belt: The Ankur Story",
+					"position": 6
 				}
 			},
 			{
@@ -12325,6 +14583,7 @@
 				"data": {
 					"title": "Low Sodium or Double Fortified? Choosing the Right Ankur Salt for Your Family",
 					"excerpt": "Not every household needs the same salt. Here's a plain language guide to our range, from the everyday iodised standard to low sodium and double fortified variants.",
+					"meta_description": "A plain-language guide to choosing salt for your family, from everyday iodised salt to low sodium and double fortified (iron + iodine) variants.",
 					"category": "Health & Nutrition",
 					"read_time": 4,
 					"published_at_field": "22 March 2026",
@@ -12555,7 +14814,8 @@
 							]
 						}
 					],
-					"position": 6
+					"seo_title": "Low Sodium or Double Fortified Salt? Choosing the Right One",
+					"position": 7
 				}
 			},
 			{
@@ -12858,7 +15118,7 @@
 							]
 						}
 					],
-					"position": 7
+					"position": 8
 				}
 			},
 			{
@@ -13090,7 +15350,7 @@
 							]
 						}
 					],
-					"position": 8
+					"position": 9
 				}
 			},
 			{
@@ -13349,7 +15609,7 @@
 							]
 						}
 					],
-					"position": 9
+					"position": 10
 				}
 			},
 			{
@@ -13581,7 +15841,7 @@
 							]
 						}
 					],
-					"position": 10
+					"position": 11
 				}
 			},
 			{
@@ -13779,7 +16039,7 @@
 							]
 						}
 					],
-					"position": 11
+					"position": 12
 				}
 			}
 		],
@@ -13789,7 +16049,38 @@
 				"slug": "d01",
 				"status": "published",
 				"data": {
-					"title": "Gujarat"
+					"name": "Shreeji Trading Co.",
+					"region": "West",
+					"title": "Gujarat",
+					"city": "Ahmedabad",
+					"address": "12 Ashram Road, Navrangpura",
+					"phone": "+91 79 4012 3456"
+				}
+			},
+			{
+				"id": "distributor_state-d02",
+				"slug": "d02",
+				"status": "published",
+				"data": {
+					"name": "Diamond City Provisions",
+					"region": "West",
+					"title": "Gujarat",
+					"city": "Surat",
+					"address": "44 Ring Road, Katargam",
+					"phone": "+91 261 401 7788"
+				}
+			},
+			{
+				"id": "distributor_state-d03",
+				"slug": "d03",
+				"status": "published",
+				"data": {
+					"name": "Saurashtra Wholesale Traders",
+					"region": "West",
+					"title": "Gujarat",
+					"city": "Rajkot",
+					"address": "9 Kalawad Road",
+					"phone": "+91 281 402 9911"
 				}
 			},
 			{
@@ -13797,7 +16088,38 @@
 				"slug": "d04",
 				"status": "published",
 				"data": {
-					"title": "Maharashtra"
+					"name": "Konkan Grocers & Co.",
+					"region": "West",
+					"title": "Maharashtra",
+					"city": "Mumbai",
+					"address": "221 Linking Road, Bandra West",
+					"phone": "+91 22 6701 2345"
+				}
+			},
+			{
+				"id": "distributor_state-d05",
+				"slug": "d05",
+				"status": "published",
+				"data": {
+					"name": "Deccan Distributors",
+					"region": "West",
+					"title": "Maharashtra",
+					"city": "Pune",
+					"address": "56 FC Road, Shivajinagar",
+					"phone": "+91 20 6702 8899"
+				}
+			},
+			{
+				"id": "distributor_state-d06",
+				"slug": "d06",
+				"status": "published",
+				"data": {
+					"name": "Vidarbha Agencies",
+					"region": "West",
+					"title": "Maharashtra",
+					"city": "Nagpur",
+					"address": "18 Wardha Road",
+					"phone": "+91 712 670 4433"
 				}
 			},
 			{
@@ -13805,7 +16127,12 @@
 				"slug": "d07",
 				"status": "published",
 				"data": {
-					"title": "Goa"
+					"name": "Goa Coastal Traders",
+					"region": "West",
+					"title": "Goa",
+					"city": "Panaji",
+					"address": "7 Dayanand Bandodkar Marg",
+					"phone": "+91 832 671 5566"
 				}
 			},
 			{
@@ -13813,7 +16140,25 @@
 				"slug": "d08",
 				"status": "published",
 				"data": {
-					"title": "Rajasthan"
+					"name": "Pink City Provisions",
+					"region": "North",
+					"title": "Rajasthan",
+					"city": "Jaipur",
+					"address": "33 MI Road",
+					"phone": "+91 141 411 2233"
+				}
+			},
+			{
+				"id": "distributor_state-d09",
+				"slug": "d09",
+				"status": "published",
+				"data": {
+					"name": "Marwar Traders",
+					"region": "North",
+					"title": "Rajasthan",
+					"city": "Jodhpur",
+					"address": "15 Ratanada Road",
+					"phone": "+91 291 412 6677"
 				}
 			},
 			{
@@ -13821,7 +16166,12 @@
 				"slug": "d10",
 				"status": "published",
 				"data": {
-					"title": "Delhi"
+					"name": "Capital Foods Distributors",
+					"region": "North",
+					"title": "Delhi",
+					"city": "New Delhi",
+					"address": "88 Karol Bagh",
+					"phone": "+91 11 4913 4455"
 				}
 			},
 			{
@@ -13829,7 +16179,12 @@
 				"slug": "d11",
 				"status": "published",
 				"data": {
-					"title": "Punjab"
+					"name": "Punjab Grain & Grocery Co.",
+					"region": "North",
+					"title": "Punjab",
+					"city": "Ludhiana",
+					"address": "24 Ferozepur Road",
+					"phone": "+91 161 421 3344"
 				}
 			},
 			{
@@ -13837,7 +16192,12 @@
 				"slug": "d12",
 				"status": "published",
 				"data": {
-					"title": "Haryana"
+					"name": "Aravalli Mart Distributors",
+					"region": "North",
+					"title": "Haryana",
+					"city": "Gurugram",
+					"address": "5 MG Road",
+					"phone": "+91 124 422 5588"
 				}
 			},
 			{
@@ -13845,7 +16205,25 @@
 				"slug": "d13",
 				"status": "published",
 				"data": {
-					"title": "Uttar Pradesh"
+					"name": "Awadh Wholesale Traders",
+					"region": "North",
+					"title": "Uttar Pradesh",
+					"city": "Lucknow",
+					"address": "61 Hazratganj",
+					"phone": "+91 522 423 7799"
+				}
+			},
+			{
+				"id": "distributor_state-d14",
+				"slug": "d14",
+				"status": "published",
+				"data": {
+					"name": "Ganga Provisions",
+					"region": "North",
+					"title": "Uttar Pradesh",
+					"city": "Kanpur",
+					"address": "19 Mall Road",
+					"phone": "+91 512 424 8811"
 				}
 			},
 			{
@@ -13853,7 +16231,12 @@
 				"slug": "d15",
 				"status": "published",
 				"data": {
-					"title": "Chandigarh"
+					"name": "Tricity Distributors",
+					"region": "North",
+					"title": "Chandigarh",
+					"city": "Chandigarh",
+					"address": "Booth 3, Sector 17",
+					"phone": "+91 172 425 9922"
 				}
 			},
 			{
@@ -13861,7 +16244,25 @@
 				"slug": "d16",
 				"status": "published",
 				"data": {
-					"title": "Madhya Pradesh"
+					"name": "Malwa Traders",
+					"region": "Central",
+					"title": "Madhya Pradesh",
+					"city": "Indore",
+					"address": "27 AB Road",
+					"phone": "+91 731 431 1122"
+				}
+			},
+			{
+				"id": "distributor_state-d17",
+				"slug": "d17",
+				"status": "published",
+				"data": {
+					"name": "Narmada Distributors",
+					"region": "Central",
+					"title": "Madhya Pradesh",
+					"city": "Bhopal",
+					"address": "10 MP Nagar",
+					"phone": "+91 755 432 2233"
 				}
 			},
 			{
@@ -13869,7 +16270,12 @@
 				"slug": "d18",
 				"status": "published",
 				"data": {
-					"title": "Chhattisgarh"
+					"name": "Chhattisgarh Agencies",
+					"region": "Central",
+					"title": "Chhattisgarh",
+					"city": "Raipur",
+					"address": "42 Shankar Nagar",
+					"phone": "+91 771 433 3344"
 				}
 			},
 			{
@@ -13877,7 +16283,12 @@
 				"slug": "d19",
 				"status": "published",
 				"data": {
-					"title": "Karnataka"
+					"name": "Namma Bengaluru Traders",
+					"region": "South",
+					"title": "Karnataka",
+					"city": "Bengaluru",
+					"address": "77 MG Road",
+					"phone": "+91 80 4141 5566"
 				}
 			},
 			{
@@ -13885,7 +16296,25 @@
 				"slug": "d20",
 				"status": "published",
 				"data": {
-					"title": "Tamil Nadu"
+					"name": "Marina Provisions Pvt. Ltd.",
+					"region": "South",
+					"title": "Tamil Nadu",
+					"city": "Chennai",
+					"address": "31 Anna Salai",
+					"phone": "+91 44 4142 6677"
+				}
+			},
+			{
+				"id": "distributor_state-d21",
+				"slug": "d21",
+				"status": "published",
+				"data": {
+					"name": "Kovai Wholesale Mart",
+					"region": "South",
+					"title": "Tamil Nadu",
+					"city": "Coimbatore",
+					"address": "8 Trichy Road",
+					"phone": "+91 422 414 7788"
 				}
 			},
 			{
@@ -13893,7 +16322,12 @@
 				"slug": "d22",
 				"status": "published",
 				"data": {
-					"title": "Telangana"
+					"name": "Nizam Trading Co.",
+					"region": "South",
+					"title": "Telangana",
+					"city": "Hyderabad",
+					"address": "63 Banjara Hills",
+					"phone": "+91 40 4143 8899"
 				}
 			},
 			{
@@ -13901,7 +16335,12 @@
 				"slug": "d23",
 				"status": "published",
 				"data": {
-					"title": "Kerala"
+					"name": "Malabar Coast Traders",
+					"region": "South",
+					"title": "Kerala",
+					"city": "Kochi",
+					"address": "14 MG Road",
+					"phone": "+91 484 414 9900"
 				}
 			},
 			{
@@ -13909,7 +16348,12 @@
 				"slug": "d24",
 				"status": "published",
 				"data": {
-					"title": "Andhra Pradesh"
+					"name": "Krishna Delta Distributors",
+					"region": "South",
+					"title": "Andhra Pradesh",
+					"city": "Vijayawada",
+					"address": "22 Governorpet",
+					"phone": "+91 866 415 1122"
 				}
 			},
 			{
@@ -13917,7 +16361,12 @@
 				"slug": "d25",
 				"status": "published",
 				"data": {
-					"title": "West Bengal"
+					"name": "Howrah Wholesale Traders",
+					"region": "East",
+					"title": "West Bengal",
+					"city": "Kolkata",
+					"address": "5 Park Street",
+					"phone": "+91 33 4515 2233"
 				}
 			},
 			{
@@ -13925,7 +16374,12 @@
 				"slug": "d26",
 				"status": "published",
 				"data": {
-					"title": "Odisha"
+					"name": "Utkal Provisions",
+					"region": "East",
+					"title": "Odisha",
+					"city": "Bhubaneswar",
+					"address": "39 Janpath",
+					"phone": "+91 674 452 3344"
 				}
 			},
 			{
@@ -13933,7 +16387,12 @@
 				"slug": "d27",
 				"status": "published",
 				"data": {
-					"title": "Bihar"
+					"name": "Ganga Ghat Traders",
+					"region": "East",
+					"title": "Bihar",
+					"city": "Patna",
+					"address": "16 Boring Road",
+					"phone": "+91 612 453 4455"
 				}
 			},
 			{
@@ -13941,7 +16400,12 @@
 				"slug": "d28",
 				"status": "published",
 				"data": {
-					"title": "Jharkhand"
+					"name": "Chotanagpur Distributors",
+					"region": "East",
+					"title": "Jharkhand",
+					"city": "Ranchi",
+					"address": "28 Main Road",
+					"phone": "+91 651 454 5566"
 				}
 			},
 			{
@@ -13949,7 +16413,12 @@
 				"slug": "d29",
 				"status": "published",
 				"data": {
-					"title": "Assam"
+					"name": "Brahmaputra Traders",
+					"region": "North East",
+					"title": "Assam",
+					"city": "Guwahati",
+					"address": "11 GS Road",
+					"phone": "+91 361 461 6677"
 				}
 			},
 			{
@@ -13957,7 +16426,12 @@
 				"slug": "d30",
 				"status": "published",
 				"data": {
-					"title": "Jammu and Kashmir"
+					"name": "Kashmir Valley Traders",
+					"region": "North",
+					"title": "Jammu and Kashmir",
+					"city": "Srinagar",
+					"address": "18 Residency Road, Lal Chowk",
+					"phone": "+91 194 245 6677"
 				}
 			},
 			{
@@ -13965,7 +16439,12 @@
 				"slug": "d31",
 				"status": "published",
 				"data": {
-					"title": "Himachal Pradesh"
+					"name": "Shivalik Foods & Provisions",
+					"region": "North",
+					"title": "Himachal Pradesh",
+					"city": "Shimla",
+					"address": "7 The Mall Road",
+					"phone": "+91 177 265 1122"
 				}
 			},
 			{
@@ -13973,7 +16452,12 @@
 				"slug": "d32",
 				"status": "published",
 				"data": {
-					"title": "Uttarakhand"
+					"name": "Doon Valley Grocers",
+					"region": "North",
+					"title": "Uttarakhand",
+					"city": "Dehradun",
+					"address": "23 Rajpur Road",
+					"phone": "+91 135 265 3344"
 				}
 			},
 			{
@@ -13981,7 +16465,12 @@
 				"slug": "d33",
 				"status": "published",
 				"data": {
-					"title": "Arunachal Pradesh"
+					"name": "Itanagar Wholesale Mart",
+					"region": "North East",
+					"title": "Arunachal Pradesh",
+					"city": "Itanagar",
+					"address": "5 Naharlagun Road",
+					"phone": "+91 360 221 5566"
 				}
 			},
 			{
@@ -13989,7 +16478,12 @@
 				"slug": "d34",
 				"status": "published",
 				"data": {
-					"title": "Manipur"
+					"name": "Imphal Valley Traders",
+					"region": "North East",
+					"title": "Manipur",
+					"city": "Imphal",
+					"address": "14 Thangal Bazar",
+					"phone": "+91 385 244 7788"
 				}
 			},
 			{
@@ -13997,7 +16491,12 @@
 				"slug": "d35",
 				"status": "published",
 				"data": {
-					"title": "Meghalaya"
+					"name": "Shillong Hill Provisions",
+					"region": "North East",
+					"title": "Meghalaya",
+					"city": "Shillong",
+					"address": "9 Police Bazar",
+					"phone": "+91 364 250 9900"
 				}
 			},
 			{
@@ -14005,7 +16504,12 @@
 				"slug": "d36",
 				"status": "published",
 				"data": {
-					"title": "Mizoram"
+					"name": "Aizawl Trading Co.",
+					"region": "North East",
+					"title": "Mizoram",
+					"city": "Aizawl",
+					"address": "3 Zarkawt Road",
+					"phone": "+91 389 233 1122"
 				}
 			},
 			{
@@ -14013,7 +16517,12 @@
 				"slug": "d37",
 				"status": "published",
 				"data": {
-					"title": "Nagaland"
+					"name": "Kohima Wholesale Traders",
+					"region": "North East",
+					"title": "Nagaland",
+					"city": "Kohima",
+					"address": "11 Officers Hill",
+					"phone": "+91 370 224 3344"
 				}
 			},
 			{
@@ -14021,7 +16530,12 @@
 				"slug": "d38",
 				"status": "published",
 				"data": {
-					"title": "Tripura"
+					"name": "Agartala Foods & Provisions",
+					"region": "North East",
+					"title": "Tripura",
+					"city": "Agartala",
+					"address": "6 HGB Road",
+					"phone": "+91 381 232 5566"
 				}
 			},
 			{
@@ -14029,7 +16543,12 @@
 				"slug": "d39",
 				"status": "published",
 				"data": {
-					"title": "Sikkim"
+					"name": "Kanchenjunga Traders",
+					"region": "North East",
+					"title": "Sikkim",
+					"city": "Gangtok",
+					"address": "4 MG Marg",
+					"phone": "+91 3592 220 1122"
 				}
 			}
 		]

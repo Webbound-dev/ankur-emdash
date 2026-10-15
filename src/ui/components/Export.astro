@@ -2,11 +2,13 @@
 import GlobalMarkets from './GlobalMarkets';
 import ExportInquiryForm from './ExportInquiryForm';
 import type { ExportInquiryContent } from './ExportInquiryForm';
+import FaqAccordion from './FaqAccordion.astro';
 
 interface Region { name: string; countries: string[] }
 interface Certification { name: string; issuer: string; description: string; logo: { src: string; alt: string } }
 interface Port { name: string; authority: string; description: string }
 interface Advantage { value: string; label: string }
+interface FaqItem { question: string; answer: string }
 
 interface Props {
   content: {
@@ -14,12 +16,13 @@ interface Props {
     globalMarkets: { heading: string; subheading: string; stat: { countries: number; regions: number }; regions: Region[] };
     certifications: { heading: string; subheading: string; items: Certification[] };
     logistics: { heading: string; subheading: string; ports: Port[]; advantages: Advantage[] };
+    faq?: { heading: string; subheading: string; items: FaqItem[] };
     inquiry: ExportInquiryContent;
   };
 }
 
 const { content } = Astro.props;
-const { hero, globalMarkets, certifications, logistics, inquiry } = content;
+const { hero, globalMarkets, certifications, logistics, faq, inquiry } = content;
 
 const portIcons: Record<string, string> = {
   'Kandla Port': 'M32 6v28 M20 20h24 M10 58c6 4 12 4 18 0s12-4 18 0s12 4 18 0 M14 34l18 8 18-8v14l-18 8-18-8Z',
@@ -80,7 +83,7 @@ const portIcons: Record<string, string> = {
             style={`transition-delay: ${ci * 60}ms`}
           >
             <div class="cert-logo relative flex h-12 w-auto max-w-[160px] items-center" data-cms-image={`certifications.items[${ci}].logo.src`}>
-              <img src={cert.logo.src} alt={cert.logo.alt} class="h-full w-auto object-contain object-left" />
+              <img src={cert.logo.src} alt={cert.logo.alt} width={124} height={56} class="h-full w-auto object-contain object-left" />
             </div>
             <p class="relative mt-4 font-display font-medium text-lg text-indian-red" data-cms-field={`certifications.items[${ci}].name`}>
               {cert.name}
@@ -157,6 +160,31 @@ const portIcons: Record<string, string> = {
       </div>
     </div>
   </section>
+
+  <!-- FAQ — light band, same pinstripe treatment as Logistics, narrower
+       max-width than the card grids above since a question/answer list
+       reads best closer to prose measure. Sits right before the inquiry
+       form so buyer objections are answered just before the CTA. -->
+  {faq && faq.items.length > 0 && (
+    <section id="export-faq" class="relative py-14 lg:py-20 scroll-mt-24">
+      <div
+        class="pointer-events-none absolute inset-0 opacity-[0.05] [mask-image:linear-gradient(to_bottom,black,transparent)]"
+        style="background-image: repeating-linear-gradient(90deg, #A82121 0, #A82121 1px, transparent 1px, transparent 28px);"
+        aria-hidden="true"
+      />
+      <div class="relative max-w-[820px] mx-auto px-6 lg:px-10">
+        <h2 class="reveal font-display font-medium text-2xl lg:text-3xl text-indian-red" data-cms-field="faq.heading">
+          {faq.heading}
+        </h2>
+        <p class="reveal mt-2 text-sm leading-relaxed text-indian-red/70 max-w-[600px]" style="transition-delay: 60ms" data-cms-field="faq.subheading">
+          {faq.subheading}
+        </p>
+        <div class="mt-8">
+          <FaqAccordion items={faq.items} basePath="faq" />
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- Export Inquiry — real embedded form, same pattern (radiant-free light
        section, sticky benefits column + form card) as BecomeDistributorForm/

@@ -38,7 +38,15 @@
         },
         {
           "label": "Salt Plus",
-          "href": "/products/salt-plus/"
+          "href": "/products/dfs-salt/"
+        },
+        {
+          "label": "Ankur Rock Salt",
+          "href": "/products/rock-salt/"
+        },
+        {
+          "label": "Crystal Salt",
+          "href": "/products/crystal-salt/"
         }
       ]
     },
@@ -93,7 +101,7 @@
       "links": [
         {
           "label": "Instagram",
-          "href": "https://www.instagram.com/ankursaltindia/"
+          "href": "https://www.instagram.com/ankursaltindia?igsi=MWJsYTgzbmNmZzZtbw=="
         },
         {
           "label": "Facebook",

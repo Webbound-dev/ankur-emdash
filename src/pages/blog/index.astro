@@ -8,6 +8,6 @@ const postsData = await getBlogs();
 
 const posts = postsData as BlogPost[];
 ---
-<BaseLayout title={content.seo.title} description={content.seo.description} seoFrom={content} cms={cmsScope(content, cmsList('', posts))}>
+<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Blog' }]} seoFrom={content} cms={cmsScope(content, cmsList('', posts))}>
   <BlogList content={content} posts={posts} />
 </BaseLayout>

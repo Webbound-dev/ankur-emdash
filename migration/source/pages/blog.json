@@ -1,7 +1,8 @@
 {
   "seo": {
-    "title": "Blog | Ankur Chemfood Ltd.",
-    "description": "Health, manufacturing, exports and company stories from Ankur Chemfood Ltd., India's second largest packaged salt brand."
+    "title": "Salt, Health & Cooking Blog | Ankur Salt",
+    "description": "Health, manufacturing, exports and company stories from Ankur Chemfood Ltd., India's second largest packaged salt brand.",
+    "image": "/images/hero-salad-bowl.jpg"
   },
   "hero": {
     "kicker": "Ankur Salt · Insights",
@@ -15,9 +16,6 @@
     "readArticle": "Read Article",
     "moreArticles": "More From the Blog",
     "backToAllArticles": "Back to All Articles",
-    "breadcrumbHome": "Home",
-    "breadcrumbBlog": "Blog",
-    "homeHref": "/",
     "blogHref": "/blog/",
     "minReadSuffix": "min read"
   },

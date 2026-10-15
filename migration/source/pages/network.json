@@ -1,12 +1,22 @@
 {
   "seo": {
-    "title": "Find an Ankur Salt Distributor Near You | Nationwide Network",
-    "description": "Find a trusted Ankur Salt distributor near you: stockists and dealers across India, from the salt pans of Kutch to kitchens nationwide. Interested in becoming a distributor? Apply here."
+    "title": "Find an Ankur Salt Distributor Near You",
+    "description": "Find a trusted Ankur Salt distributor, stockist or dealer near you, with a network across India. Interested in becoming a distributor? Apply here.",
+    "image": "/images/factory/salt-dispatch-loading.jpeg"
   },
   "hero": {
     "eyebrow": "Nationwide Reach",
     "heading": "Find Ankur near you.",
-    "intro": "From the salt pans of Kutch to kitchens across the country, Ankur reaches homes through a trusted network of distributors nationwide."
+    "intro": "From the salt pans of Kutch to kitchens across the country, Ankur reaches homes through a trusted network of distributors nationwide.",
+    "searchPlaceholder": "Search by city, state or distributor name",
+    "searchButtonLabel": "Search"
+  },
+  "directory": {
+    "eyebrow": "Distributor Directory",
+    "heading": "Browse by region",
+    "allLabel": "All Regions",
+    "resultLabel": "distributors found",
+    "emptyState": "No distributors match your search. Try another city, state or region."
   },
   "becomeDistributor": {
     "eyebrow": "Partner With Us",

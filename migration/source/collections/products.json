@@ -3,7 +3,7 @@
     "slug": "ankur-salt",
     "name": "Ankur Salt",
     "pageTitle": "Ankur Salt | Refined Free Flow Iodised Salt",
-    "metaDescription": "Ankur Salt is India's trusted everyday iodised salt: refined, flows freely, and never clumps. Available in 1kg and 500g packs.",
+    "metaDescription": "Ankur Salt is a refined, free flow iodised salt trusted in Indian kitchens since 1994. Available in 1kg and 500g packs.",
     "tag": "Iodised",
     "image": {
       "src": "/images/products/free-flow-iodised.webp",
@@ -25,7 +25,7 @@
       "ctaLabel": "View Details"
     },
     "detail": {
-      "heroTagline": "The everyday salt trusted in Indian kitchens since 1994.",
+      "heroTagline": "The everyday free flow salt trusted in Indian kitchens since 1994.",
       "heroCta": {
         "label": "Find a Distributor",
         "href": "#where-to-buy"
@@ -86,10 +86,29 @@
           ]
         },
         {
+          "id": "faq",
+          "type": "faq",
+          "heading": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Is Ankur Salt a free flow salt?",
+              "answer": "Yes. Ankur Salt is a free flow salt, which means it does not clump or stick together, even in humid weather. It pours easily every time, so you never need to break up hard lumps before cooking."
+            },
+            {
+              "question": "How is Ankur Salt made?",
+              "answer": "Ankur Salt is made using a vacuum evaporated salt process. This method removes impurities and gives the salt a clean, consistent grain, so every packet has the same quality."
+            },
+            {
+              "question": "What sizes does Ankur Salt come in?",
+              "answer": "Ankur Salt is available in convenient salt packets of 1kg and 500g, sold at kirana stores, supermarkets, and leading online grocers across India."
+            }
+          ]
+        },
+        {
           "id": "where-to-buy",
           "type": "whereToBuy",
           "heading": "Where to Buy",
-          "body": "Available at kirana stores, supermarkets, and leading online grocers across India.",
+          "body": "Available in convenient salt packets at kirana stores, supermarkets, and leading online grocers across India.",
           "cta": {
             "label": "Find a Distributor",
             "href": "/network/"
@@ -101,8 +120,8 @@
   {
     "slug": "ankur-gold",
     "name": "Ankur Gold",
-    "pageTitle": "Ankur Gold | Premium Refined Iodised Salt",
-    "metaDescription": "Ankur Gold is a premium, extra refined grade of iodised salt for kitchens that expect more. Available in 1kg and 500g packs.",
+    "pageTitle": "Ankur Gold | Fine Grain Table Salt",
+    "metaDescription": "Ankur Gold is a premium, extra refined fine grain table salt for kitchens that expect more. Available in 1kg and 500g packs.",
     "tag": "Premium",
     "image": {
       "src": "/images/products/gold-salt.webp",
@@ -124,7 +143,7 @@
       "ctaLabel": "View Details"
     },
     "detail": {
-      "heroTagline": "A finer grade of purity, for kitchens that expect more.",
+      "heroTagline": "A fine grain table salt for kitchens that expect more.",
       "heroCta": {
         "label": "Find a Distributor",
         "href": "#where-to-buy"
@@ -185,10 +204,29 @@
           ]
         },
         {
+          "id": "faq",
+          "type": "faq",
+          "heading": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "What makes Ankur Gold different from regular salt?",
+              "answer": "Ankur Gold is a fine grain table salt made through an extra refined process. This gives it a smoother texture and a cleaner taste compared to regular iodised salt."
+            },
+            {
+              "question": "Is Ankur Gold a premium iodised salt?",
+              "answer": "Yes. Ankur Gold is a premium iodised salt made for kitchens that want a finer, whiter grain without giving up the everyday benefits of iodised salt."
+            },
+            {
+              "question": "Can I use Ankur Gold for daily cooking?",
+              "answer": "Yes, Ankur Gold works well as a top cook salt for everyday meals. Its fine grain dissolves quickly, making it suitable for both cooking and table use."
+            }
+          ]
+        },
+        {
           "id": "where-to-buy",
           "type": "whereToBuy",
           "heading": "Where to Buy",
-          "body": "Available at kirana stores, supermarkets, and leading online grocers across India.",
+          "body": "A top cook salt choice, available at kirana stores, supermarkets, and leading online grocers across India.",
           "cta": {
             "label": "Find a Distributor",
             "href": "/network/"
@@ -201,7 +239,7 @@
     "slug": "dr-salt",
     "name": "Dr. Salt",
     "pageTitle": "Dr. Salt | 15% Low Sodium Salt for Better Heart Health",
-    "metaDescription": "Dr. Salt is Ankur's 15% low sodium range, for households who want to eat mindfully without giving up the taste of real salt.",
+    "metaDescription": "Dr. Salt is Ankur's 15% low sodium table salt, for households managing hypertension without giving up real salt taste.",
     "tag": "Low Sodium",
     "image": {
       "src": "/images/products/dr-salt.webp",
@@ -223,7 +261,7 @@
       "ctaLabel": "View Details"
     },
     "detail": {
-      "heroTagline": "Made for Healthier Everyday Cooking",
+      "heroTagline": "A low sodium table salt made for healthier everyday cooking.",
       "heroCta": {
         "label": "Find a Distributor",
         "href": "#where-to-buy"
@@ -287,10 +325,37 @@
           ]
         },
         {
+          "id": "faq",
+          "type": "faq",
+          "heading": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "What is Dr. Salt?",
+              "answer": "Dr. Salt is a low sodium salt made for people who want to cut back on sodium without giving up the taste of real salt. It has 15% less sodium than regular iodised salt."
+            },
+            {
+              "question": "Is Dr. Salt a low sodium table salt?",
+              "answer": "Yes. Dr. Salt is a low sodium table salt that can be used the same way as regular salt, in cooking or sprinkled on food at the table."
+            },
+            {
+              "question": "Is Dr. Salt suitable for people with high blood pressure?",
+              "answer": "Dr. Salt is formulated to support a healthy blood pressure lifestyle as part of an overall balanced diet. If you have high blood pressure or hypertension, it's best to also check with your doctor about your specific salt intake."
+            },
+            {
+              "question": "Does Dr. Salt taste different from regular salt?",
+              "answer": "No. Dr. Salt is designed to taste like real salt, so you don't have to compromise on flavour while eating mindfully."
+            },
+            {
+              "question": "Where can I buy Dr. Salt?",
+              "answer": "Dr. Salt is available at pharmacies, supermarkets, and leading online grocers across India."
+            }
+          ]
+        },
+        {
           "id": "where-to-buy",
           "type": "whereToBuy",
           "heading": "Where to Buy",
-          "body": "Available at pharmacies, supermarkets, and leading online grocers across India.",
+          "body": "A trusted salt for hypertension care, available at pharmacies, supermarkets, and leading online grocers across India.",
           "cta": {
             "label": "Find a Distributor",
             "href": "/network/"
@@ -300,10 +365,10 @@
     }
   },
   {
-    "slug": "salt-plus",
+    "slug": "dfs-salt",
     "name": "DFS Salt",
     "pageTitle": "DFS Salt | Double Fortified Salt with Iron & Iodine",
-    "metaDescription": "DFS Salt is Ankur's Double Fortified Salt, fortified with both iron and iodine to help address anaemia and iodine deficiency in one everyday ingredient.",
+    "metaDescription": "DFS Salt is Ankur's iron and iodine fortified salt, double fortified to help address anaemia and iodine deficiency.",
     "tag": "Double Fortified",
     "image": {
       "src": "/images/products/dfs.webp",
@@ -341,7 +406,7 @@
           "heading": "Why Fortified Salt",
           "paragraphs": [
             "Salt is one of the few ingredients almost every household already uses every day, which makes it an effective, low cost carrier for essential micronutrients.",
-            "DFS Salt is double fortified: alongside iodine for thyroid health, it carries iron to help address one of India's most widespread nutrition gaps."
+            "DFS Salt is a twin fortified salt: alongside iodine for thyroid health, it carries iron to help address one of India's most widespread nutrition gaps."
           ],
           "stats": [
             {
@@ -362,7 +427,7 @@
           "stats": [
             {
               "value": "1 in 2",
-              "label": "Indian women estimated to be affected by anaemia (placeholder, needs verification)"
+              "label": "Indian women are affected by anaemia, as per NFHS-5 national data"
             }
           ]
         },
@@ -386,6 +451,33 @@
           ]
         },
         {
+          "id": "faq",
+          "type": "faq",
+          "heading": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "What is DFS Salt?",
+              "answer": "DFS Salt, or Double Fortified Salt, is Ankur's iron and iodine fortified salt. It combines two essential nutrients, iron and iodine, in one everyday ingredient."
+            },
+            {
+              "question": "Why is iron fortified salt important?",
+              "answer": "Iron deficiency is common in India, according to NFHS-5 national data, around 1 in 2 Indian women are affected by anaemia. Iron fortified salt is an easy way to add this nutrient to daily meals without changing eating habits."
+            },
+            {
+              "question": "Is twin fortified salt safe for daily use?",
+              "answer": "Yes. Twin fortified salt like DFS is safe for regular household use and is recommended by public health researchers as a simple way to improve everyday nutrition."
+            },
+            {
+              "question": "How is DFS Salt different from regular iodised salt?",
+              "answer": "Regular iodised salt only contains iodine. DFS Salt is a double fortified salt that adds iron as well, helping address both iodine deficiency and iron deficiency anaemia together."
+            },
+            {
+              "question": "Where can I buy DFS Salt?",
+              "answer": "DFS Salt is one of the double fortified salt brands in India available through Ankur's retail and institutional distribution network."
+            }
+          ]
+        },
+        {
           "id": "where-to-buy",
           "type": "whereToBuy",
           "heading": "Where to Buy",
@@ -402,7 +494,7 @@
     "slug": "rock-salt",
     "name": "Ankur Rock Salt",
     "pageTitle": "Ankur Rock Salt | Natural Himalayan Pink Salt",
-    "metaDescription": "Ankur Rock Salt is a natural, unrefined Sendha Namak, the traditional choice for fasting, rituals, and cooking rich in minerals.",
+    "metaDescription": "Ankur Rock Salt is a natural, unrefined Himalayan rock salt, also known as Himalayan pink salt, ideal for fasting, rituals, and healthy cooking.",
     "tag": "Traditional",
     "image": {
       "src": "/images/products/rock-salt-pack.webp",
@@ -424,7 +516,7 @@
       "ctaLabel": "View Details"
     },
     "detail": {
-      "heroTagline": "Rock salt- natural everyday cooking and fasting rituals",
+      "heroTagline": "Himalayan rock salt for fasting, rituals, and everyday cooking.",
       "heroCta": {
         "label": "Find a Distributor",
         "href": "#where-to-buy"
@@ -441,7 +533,7 @@
           "items": [
             {
               "title": "Fasting & Vrat Cooking",
-              "description": "The traditional choice for Navratri, Ekadashi, and other fasting occasions."
+              "description": "Rock salt used for fasting during Navratri, Ekadashi, and other occasions."
             },
             {
               "title": "Rituals & Prasad",
@@ -449,7 +541,7 @@
             },
             {
               "title": "Natural Cooking",
-              "description": "A milder alternative for everyday recipes, rich in minerals."
+              "description": "A milder rock salt for health, rich in minerals, perfect for everyday recipes."
             },
             {
               "title": "Ayurvedic Kitchens",
@@ -476,7 +568,26 @@
             },
             {
               "label": "Origin",
-              "value": "Natural rock salt deposits"
+              "value": "Natural Himalayan rock salt deposits"
+            }
+          ]
+        },
+        {
+          "id": "faq",
+          "type": "faq",
+          "heading": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "Is rock salt the same as Sendha Namak?",
+              "answer": "Yes. Ankur Rock Salt is also known as Sendha Namak, a natural, unrefined salt commonly used in Indian kitchens."
+            },
+            {
+              "question": "Is rock salt used for fasting?",
+              "answer": "Yes. Rock salt is used for fasting during Navratri, Ekadashi, and other religious occasions, since it's considered a pure, unprocessed salt."
+            },
+            {
+              "question": "Is rock salt good for health?",
+              "answer": "Rock salt for health is a common reason people choose it, since it's a milder, less processed alternative to regular table salt, rich in natural minerals."
             }
           ]
         },
@@ -496,8 +607,8 @@
   {
     "slug": "crystal-salt",
     "name": "Crystal Salt",
-    "pageTitle": "Crystal Salt | Refined Iodised Crystal Salt",
-    "metaDescription": "Crystal Salt is Ankur's refined iodised salt in a coarse crystal grain, suited to both industrial applications and edible use.",
+    "pageTitle": "Crystal Salt | Refined Coarse Iodised Salt",
+    "metaDescription": "Crystal Salt, also called salt and crystal, is Ankur's coarse iodised salt suited to industrial and edible use.",
     "tag": "Crystal",
     "image": {
       "src": "/images/products/crystal-salt.webp",
@@ -519,7 +630,7 @@
       "ctaLabel": "View Details"
     },
     "detail": {
-      "heroTagline": "Iodized natural solar evaporated salt for everyday cooking",
+      "heroTagline": "Iodised natural solar evaporated salt for everyday cooking.",
       "heroCta": {
         "label": "Find a Distributor",
         "href": "#where-to-buy"
@@ -539,11 +650,11 @@
               "items": [
                 {
                   "title": "Food Processing",
-                  "description": "A consistent, coarse grain suited to bulk food manufacturing."
+                  "description": "Crystal salt for bulk food manufacturing, with a consistent, coarse grain."
                 },
                 {
                   "title": "Water Treatment",
-                  "description": "Used in softening and treatment processes across industries."
+                  "description": "Crystal salt for water softening and treatment processes across industries."
                 },
                 {
                   "title": "Textile & Leather",
@@ -594,6 +705,25 @@
             {
               "label": "Pack Formats",
               "value": "Industrial & retail"
+            }
+          ]
+        },
+        {
+          "id": "faq",
+          "type": "faq",
+          "heading": "Frequently Asked Questions",
+          "items": [
+            {
+              "question": "What is crystal salt used for?",
+              "answer": "Crystal salt has multiple uses. It works as a coarse iodised salt for cooking, and is also used for water softening and bulk food manufacturing."
+            },
+            {
+              "question": "Can crystal salt be used in water softeners?",
+              "answer": "Yes. Ankur's crystal salt for water softening is suitable for use in water softener units, helping reduce water hardness at home or in industrial settings."
+            },
+            {
+              "question": "Is crystal salt suitable for bulk food manufacturing?",
+              "answer": "Yes. Crystal salt for bulk food manufacturing is commonly used by food businesses that need a consistent, coarse grain salt for large scale production."
             }
           ]
         },

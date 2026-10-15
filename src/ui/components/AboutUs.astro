@@ -45,7 +45,11 @@ function initials(name: string): string {
         class={`hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out ${hi === 0 ? 'opacity-100' : 'opacity-0'}`}
         data-cms-image={`hero.images[${hi}].src`}
       >
-        <img src={image.src} alt={image.alt} class="w-full h-full object-cover" />
+        {hi === 0 ? (
+          <img src={image.src} alt={image.alt} width={1665} height={1554} class="w-full h-full object-cover" fetchpriority="high" />
+        ) : (
+          <img src={image.src} alt={image.alt} width={1665} height={1554} class="w-full h-full object-cover" loading="lazy" />
+        )}
       </div>
     ))}
 
@@ -134,7 +138,7 @@ function initials(name: string): string {
         </div>
       </div>
       <div class="reveal rounded-2xl overflow-hidden aspect-[4/3] bg-indian-red/5" style="transition-delay: 120ms" data-cms-image="story.image.src">
-        <img src={story.image.src} alt={story.image.alt} class="w-full h-full object-cover" />
+        <img src={story.image.src} alt={story.image.alt} width={1665} height={1554} class="w-full h-full object-cover" />
       </div>
     </div>
   </section>
@@ -313,7 +317,7 @@ function initials(name: string): string {
   <section class="max-w-[1100px] mx-auto px-6 lg:px-10 py-10 lg:py-14">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
       <div class="reveal rounded-2xl overflow-hidden aspect-[4/3] bg-indian-red/5 lg:order-2" data-cms-image="group.image.src">
-        <img src={group.image.src} alt={group.image.alt} class="w-full h-full object-cover" />
+        <img src={group.image.src} alt={group.image.alt} width={1600} height={1071} class="w-full h-full object-cover" />
       </div>
       <div class="lg:order-1">
         <h2 class="reveal font-display font-medium text-3xl lg:text-4xl text-indian-red mb-6" data-cms-field="group.heading">

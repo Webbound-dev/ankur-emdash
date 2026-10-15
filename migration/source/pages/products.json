@@ -1,17 +1,17 @@
 {
   "seo": {
-    "title": "Salt Products | Ankur Chemfood Ltd.",
-    "description": "Compare Ankur's full range of iodised, low sodium, fortified and rock salt products, or answer one question to find the right salt for your kitchen.",
+    "title": "Types of Salt: Iodised, Rock, Low Sodium & More | Ankur Salt",
+    "description": "Explore different types of salt: iodised, low sodium, fortified and rock salt. Answer one question to find the right salt for your kitchen.",
     "image": "/images/products/free-flow-iodised.webp"
   },
   "hero": {
     "eyebrow": "Our Range",
-    "heading": "Salt for every kitchen, every need.",
-    "intro": "From everyday iodised salt to heart healthy low sodium and double fortified ranges. Compare all seven Ankur products side by side, or let us help you find the right one."
+    "heading": "Types of salt for every kitchen, every need.",
+    "intro": "Discover the different types of salt and their uses, from everyday iodised salt to heart healthy low sodium and double fortified ranges. Compare all six Ankur products side by side, or let us help you find the right one."
   },
   "comparisonTable": {
     "heading": "Compare Our Salts",
-    "subheading": "Every Ankur product, side by side, so you can choose with confidence.",
+    "subheading": "Every Ankur salt variety, side by side, so you can choose with confidence.",
     "columns": {
       "iodine": "Iodine Content",
       "sodium": "Sodium Level",
@@ -25,13 +25,13 @@
     "subheading": "Answer one question, get the right product.",
     "prompts": [
       { "label": "Watching blood pressure?", "href": "/products/dr-salt/", "icon": "heart" },
-      { "label": "Fighting iron deficiency?", "href": "/products/salt-plus/", "icon": "droplet" },
+      { "label": "Fighting iron deficiency?", "href": "/products/dfs-salt/", "icon": "droplet" },
       { "label": "Everyday cooking?", "href": "/products/ankur-salt/", "icon": "cooking" },
       { "label": "Fasting or rituals?", "href": "/products/rock-salt/", "icon": "moon" }
     ]
   },
   "productGrid": {
     "heading": "The Full Range",
-    "subheading": "All seven Ankur products, ready to explore."
+    "subheading": "Explore the full salt range, all six Ankur products."
   }
 }

@@ -14,9 +14,26 @@ export function toBlogRichText(content) {
 			_type: "block", _key: suffix === "text" ? key : `${key}-${suffix}`,
 			style, markDefs: [], children: [span(text ?? "", suffix)],
 		});
+		// A paragraph's `links` mark the first occurrence of each link's text.
+		const linked = (text = "", links = []) => {
+			const markDefs = [], children = [];
+			let rest = text, n = 0;
+			for (const link of links) {
+				const at = rest.indexOf(link.text);
+				if (at < 0) throw new Error(`Blog link text "${link.text}" is not in its paragraph`);
+				const mark = `${key}-link-${++n}`;
+				// External links open in a new tab, as on the old site.
+				markDefs.push({ _type: "link", _key: mark, href: link.href, ...(link.href.startsWith("http") ? { blank: true } : {}) });
+				if (at > 0) children.push(span(rest.slice(0, at), `text-${n}`));
+				children.push({ ...span(link.text, `link-${n}`), marks: [mark] });
+				rest = rest.slice(at + link.text.length);
+			}
+			if (rest || !children.length) children.push(span(rest, `text-${n + 1}`));
+			return { _type: "block", _key: key, style: "normal", markDefs, children };
+		};
 		switch (type) {
 			case "lead":
-			case "p": return [block(section.text)];
+			case "p": return [section.links?.length ? linked(section.text, section.links) : block(section.text)];
 			case "h2":
 			case "h3": return [block(section.text, type)];
 			case "quote": return [block(section.text, "blockquote")];

@@ -6,7 +6,7 @@ export interface HeroSlide {
   title: string;
   body: string;
   cta: { label: string; href: string };
-  media: { type: 'video'; src: string; poster: string } | { type: 'image'; src: string };
+  media: { type: 'video'; src: string; poster: string } | { type: 'image'; src: string; alt?: string };
 }
 
 export interface HeroContent {
@@ -116,7 +116,20 @@ export default function Hero({ content }: { content: HeroContent }) {
               aria-hidden="true"
             />
           ) : (
-            <img className="w-full h-full object-cover" src={slide.media.src} alt="" aria-hidden="true" />
+            <img
+              className="w-full h-full object-cover"
+              src={slide.media.src}
+              alt={slide.media.alt ?? ''}
+              width={1920}
+              height={1280}
+              aria-hidden="true"
+              // Every slide's media downloads immediately (see comment
+              // above), but only slide 0 is ever the first paint — the rest
+              // shouldn't compete with it (or the poster preload BaseLayout
+              // adds for slide 0) for bandwidth on the initial load.
+              loading={i === 0 ? 'eager' : 'lazy'}
+              fetchPriority={i === 0 ? 'high' : 'low'}
+            />
           )}
         </div>
       ))}

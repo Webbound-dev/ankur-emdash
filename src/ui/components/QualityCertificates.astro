@@ -100,6 +100,8 @@ const petals = Array.from({ length: 12 }, (_, i) => {
                 src={cert.logo.src}
                 alt={cert.logo.alt}
                 data-cms-image={`certifications.items[${ci}].logo.src`}
+                width={595}
+                height={544}
                 class="h-14 w-auto max-w-[96px] shrink-0 object-contain"
               />
             ) : (
@@ -159,6 +161,8 @@ const petals = Array.from({ length: 12 }, (_, i) => {
                 src={award.image.src}
                 alt={award.image.alt}
                 data-cms-image={`awards.items[${ai}].image.src`}
+                width={1071}
+                height={1600}
                 class="max-h-full max-w-full object-contain rounded-md shadow-sm ring-1 ring-black/5"
               />
             ) : (
