@@ -7158,6 +7158,7 @@
 			"slug": "pages",
 			"label": "Pages",
 			"labelSingular": "Page",
+			"urlPattern": "/{slug}/",
 			"supports": [
 				"drafts",
 				"revisions",
@@ -7245,6 +7246,7 @@
 			"slug": "business_pages",
 			"label": "Business pages",
 			"labelSingular": "Business page",
+			"urlPattern": "/{slug}/",
 			"supports": [
 				"drafts",
 				"revisions",
@@ -7301,6 +7303,7 @@
 			"slug": "legal_pages",
 			"label": "Legal pages",
 			"labelSingular": "Legal page",
+			"urlPattern": "/{slug}/",
 			"supports": [
 				"drafts",
 				"revisions",
@@ -7335,6 +7338,7 @@
 			"slug": "site_chrome",
 			"label": "Branding & footer copy",
 			"labelSingular": "Branding or footer copy",
+			"urlPattern": "/",
 			"supports": [
 				"drafts",
 				"revisions",
@@ -7366,6 +7370,7 @@
 			"slug": "products",
 			"label": "Products",
 			"labelSingular": "Product",
+			"urlPattern": "/products/{slug}/",
 			"supports": [
 				"drafts",
 				"revisions",
@@ -7489,6 +7494,7 @@
 			"slug": "blogs",
 			"label": "Blog posts",
 			"labelSingular": "Blog post",
+			"urlPattern": "/blog/{slug}/",
 			"supports": [
 				"drafts",
 				"revisions",

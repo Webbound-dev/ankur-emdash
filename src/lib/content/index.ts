@@ -123,6 +123,14 @@ async function getAllEntries(collection: string) {
 		all.push(...res.entries);
 		cursor = res.nextCursor;
 	} while (cursor);
+	// A preview link (`?_preview=…`) for an entry of this collection: the list
+	// above already carries the draft of a published entry, but leaves out one
+	// that was never published, so add that entry for this request only.
+	const preview = getRequestContext()?.preview;
+	if (preview?.collection === collection && !all.some((e) => e.id === preview.id || (e.data as any).id === preview.id)) {
+		const { entry } = await getEmDashEntry(collection as any, preview.id);
+		if (entry) all.push(entry);
+	}
 	return all.sort((a, b) => ((a.data as any).position ?? 0) - ((b.data as any).position ?? 0));
 }
 

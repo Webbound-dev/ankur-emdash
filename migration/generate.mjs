@@ -52,22 +52,29 @@ const PAGE_COLLECTIONS = {
 	pages: {
 		label: "Pages",
 		singular: "Page",
-		pages: ["home", "about", "champalal-group", "quality-certificates", "career", "gallery", "contact", "404"],
+		// Where the admin's Live View / Preview links open. `home` gives
+		// /home/, which src/pages/home.astro sends to the homepage.
+		urlPattern: "/{slug}/",
+		pages:["home", "about", "champalal-group", "quality-certificates", "career", "gallery", "contact", "404"],
 	},
 	business_pages: {
 		label: "Business pages",
 		singular: "Business page",
-		pages: ["products", "blog", "industrial-salt", "export", "network"],
+		urlPattern: "/{slug}/",
+		pages:["products", "blog", "industrial-salt", "export", "network"],
 	},
 	legal_pages: {
 		label: "Legal pages",
 		singular: "Legal page",
-		pages: ["privacy-policy", "terms-of-service"],
+		urlPattern: "/{slug}/",
+		pages:["privacy-policy", "terms-of-service"],
 	},
 	site_chrome: {
 		label: "Branding & footer copy",
 		singular: "Branding or footer copy",
-		pages: ["navbar", "footer"],
+		// No page of its own: the navbar and footer are previewed on the homepage.
+		urlPattern: "/",
+		pages:["navbar", "footer"],
 	},
 };
 const collectionOfPage = Object.fromEntries(
@@ -163,6 +170,7 @@ const collectionConfigs = {
 		slugKey: "slug",
 		typedLists: { "detail.sections": "type" },
 		rename: { name: "title" },
+		urlPattern: "/products/{slug}/",
 		supports: ["drafts", "revisions", "preview", "seo"],
 		fieldLabel: { name: "Name" },
 	},
@@ -172,6 +180,8 @@ const collectionConfigs = {
 		slugKey: "slug",
 		typedLists: { content: "type" },
 		rename: {},
+		// The collection is `blogs`, but posts live under /blog/.
+		urlPattern: "/blog/{slug}/",
 		supports: ["drafts", "revisions", "preview", "search", "seo"],
 	},
 	distributors: {
@@ -219,7 +229,8 @@ for (const [slug, cfg] of Object.entries(collectionConfigs)) {
 	// `title` first so the admin lists entries by it
 	fields.sort((a, b) => (a.slug === "title" ? -1 : b.slug === "title" ? 1 : 0));
 	for (const f of fields) if (f.slug === "title") f.required = true;
-	collectionDefs.push({ slug, label: cfg.label, labelSingular: cfg.singular, supports: cfg.supports, fields });
+	collectionDefs.push({ slug, label: cfg.label, labelSingular: cfg.singular,
+		...(cfg.urlPattern ? { urlPattern: cfg.urlPattern } : {}), supports: cfg.supports, fields });
 	collectionContent[slug] = items.map((item, i) => {
 		const { slug: entrySlug, data } = encodeEntry(collectionSpecs[slug], item, i + 1);
 		return { id: `${prefix}-${entrySlug}`, slug: entrySlug, status: "published", data };
@@ -231,6 +242,7 @@ const pageCollectionDefs = Object.entries(PAGE_COLLECTIONS).map(([slug, c]) => (
 	slug,
 	label: c.label,
 	labelSingular: c.singular,
+	urlPattern: c.urlPattern,
 	// The SEO panel overrides each page's own SEO section (site chrome has no page).
 	supports: slug === "site_chrome" ? ["drafts", "revisions", "preview"] : ["drafts", "revisions", "preview", "seo"],
 	fields: [
