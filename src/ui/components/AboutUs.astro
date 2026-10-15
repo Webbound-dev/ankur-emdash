@@ -1,5 +1,6 @@
 ---
 import GroupCompanies, { type GroupCompany } from './GroupCompanies.astro';
+import { mobileVariant } from '../lib/mobileImage';
 
 interface TimelineItem { year: string; caption: string; description: string; image: { src: string; alt: string } }
 interface FeatureItem { title: string; description: string }
@@ -46,7 +47,10 @@ function initials(name: string): string {
         data-cms-image={`hero.images[${hi}].src`}
       >
         {hi === 0 ? (
-          <img src={image.src} alt={image.alt} width={1665} height={1554} class="w-full h-full object-cover" fetchpriority="high" />
+          <picture>
+            {mobileVariant(image.src) && <source media="(max-width: 1023px)" srcset={mobileVariant(image.src)} type="image/webp" />}
+            <img src={image.src} alt={image.alt} width={1665} height={1554} class="w-full h-full object-cover" fetchpriority="high" />
+          </picture>
         ) : (
           <img src={image.src} alt={image.alt} width={1665} height={1554} class="w-full h-full object-cover" loading="lazy" />
         )}

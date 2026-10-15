@@ -2,13 +2,13 @@
 import { cmsScope, getPage } from '../lib/content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactUs from '../ui/components/ContactUs.astro';
-import { buildContactPageSchema } from '../lib/structuredData';
+import { buildContactPageSchema, toJsonLd } from '../lib/structuredData';
 const content = await getPage('contact');
 const email = content.info.items.find((item: { label: string }) => item.label === 'Email')?.value;
 const headOffice = content.info.items.find((item: { label: string }) => item.label === 'Head Office')?.value;
 const contactSchema = email && headOffice ? buildContactPageSchema({ email, address: headOffice }, Astro.site) : null;
 ---
 <BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} seoFrom={content} cms={cmsScope(content)}>
-  {contactSchema && <script type="application/ld+json" set:html={JSON.stringify(contactSchema)} />}
+  {contactSchema && <script type="application/ld+json" set:html={toJsonLd(contactSchema)} />}
   <ContactUs content={content} />
 </BaseLayout>

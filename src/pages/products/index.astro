@@ -4,14 +4,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProductComparisonTable from '../../ui/components/ProductComparisonTable.astro';
 import FindYourSalt from '../../ui/components/FindYourSalt.astro';
 import ProductGrid from '../../ui/components/ProductGrid.astro';
-import { buildItemListSchema } from '../../lib/structuredData';
+import { buildItemListSchema, toJsonLd } from '../../lib/structuredData';
 const content = await getPage('products');
 const products = await getProducts();
 const itemListSchema = buildItemListSchema(products, '/products/', Astro.site);
 ---
 
 <BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Consumable Salt' }]} seoFrom={content} cms={cmsScope(content, cmsList('products', products))}>
-  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  <script type="application/ld+json" set:html={toJsonLd(itemListSchema)} />
   <main class="bg-gradient-to-b from-silent-white to-white">
     <section class="relative bg-indian-red pt-16 lg:pt-24 pb-20 lg:pb-28">
       <!-- Texture + glow blobs live in their own clipped layer so they

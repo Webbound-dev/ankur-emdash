@@ -1,12 +1,12 @@
 ---
 import { cmsScope, getPage } from '../lib/content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { buildFaqSchema } from '../lib/structuredData';
+import { buildFaqSchema, toJsonLd } from '../lib/structuredData';
 import IndustrialSalt from '../ui/components/IndustrialSalt.astro';
 const content = await getPage('industrial-salt');
 const faqSchema = content.faq ? buildFaqSchema(content.faq.items) : null;
 ---
 <BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} seoFrom={content} cms={cmsScope(content)}>
-  {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+  {faqSchema && <script type="application/ld+json" set:html={toJsonLd(faqSchema)} />}
   <IndustrialSalt content={content} />
 </BaseLayout>

@@ -10,8 +10,12 @@ import FactoryVideo from '../ui/components/FactoryVideo';
 import BlogTeaser from '../ui/components/BlogTeaser';
 const content = await getPage('home');
 const distributors = await getDistributors();
+// The hero mounts every slide upfront, but slide 0 is the first paint: its
+// video poster or image is this page's largest image.
+const firstSlideMedia = content.hero.slides[0]?.media;
+const preloadImage = firstSlideMedia ? (firstSlideMedia.type === 'video' ? firstSlideMedia.poster : firstSlideMedia.src) : undefined;
 ---
-<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} seoFrom={content} cms={cmsScope(content)}>
+<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} preloadImage={preloadImage} seoFrom={content} cms={cmsScope(content)}>
   <Hero client:load content={content.hero} />
   <QuoteSection client:visible content={content.quote} />
   <ProductsTeaser client:visible content={content.productsTeaser} />

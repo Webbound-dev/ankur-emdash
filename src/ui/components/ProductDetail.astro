@@ -1,5 +1,6 @@
 ---
 import ChecklistSection from './product-sections/ChecklistSection.astro';
+import { mobileVariant } from '../lib/mobileImage';
 import SpecTableSection from './product-sections/SpecTableSection.astro';
 import NarrativeSection from './product-sections/NarrativeSection.astro';
 import UseCasesSection from './product-sections/UseCasesSection.astro';
@@ -88,6 +89,8 @@ const NAV_ICONS: Record<string, string> = {
   <section class="relative overflow-hidden min-h-[70vh] lg:min-h-[88vh] flex items-end">
     <img
       src={heroImage.src}
+      srcset={mobileVariant(heroImage.src) ? `${mobileVariant(heroImage.src)} 800w, ${heroImage.src} 1920w` : undefined}
+      sizes={mobileVariant(heroImage.src) ? '100vw' : undefined}
       alt={heroImage.alt}
       data-cms-image="heroImage.src"
       width={1672}

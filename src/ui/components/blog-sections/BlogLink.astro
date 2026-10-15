@@ -1,0 +1,16 @@
+---
+// EmDash's link mark (emdash/src/components/marks/Link.astro) puts line
+// breaks around its text, which render as a space before punctuation right
+// after a link ("salt ,"). Same behaviour, written on one line.
+import { sanitizeHref } from 'emdash';
+
+interface Props {
+  node: { markDef: { href: string; blank?: boolean } };
+}
+
+const { node } = Astro.props;
+const href = sanitizeHref(node?.markDef?.href);
+// Same-page anchors never open in a new tab.
+const blank = !href.startsWith('#') && node?.markDef?.blank;
+---
+<a href={href} target={blank ? '_blank' : undefined} rel={blank ? 'noopener noreferrer' : undefined}><slot /></a>

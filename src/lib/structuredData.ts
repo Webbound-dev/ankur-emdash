@@ -1,10 +1,35 @@
 // Schema.org / JSON-LD structured data — the machine-readable facts search
 // engines read about a page (as opposed to meta tags, which target search
 // snippets/social previews). Each builder returns a plain object; render it
-// with `<script type="application/ld+json" set:html={JSON.stringify(...)} />`.
+// with `<script type="application/ld+json" set:html={toJsonLd(...)} />`.
 
-const BRAND_NAME = 'Ankur Chemfood Ltd.';
+// "Ankur Chemfood Limited" is the form the site's own About/Careers/Champalal
+// Group pages consistently spell out (13x vs 4x on /about/ alone) — the
+// abbreviated "Ltd." only shows up in the footer copyright and meta titles.
+// Structured data should match the dominant, authoritative name; "Ltd." is
+// kept as alternateName on the Organization node so both forms are captured.
+const BRAND_NAME = 'Ankur Chemfood Limited';
+const BRAND_ALTERNATE_NAME = 'Ankur Chemfood Ltd.';
 const SOCIAL_DOMAINS = /instagram\.com|facebook\.com|twitter\.com|x\.com|linkedin\.com|youtube\.com/i;
+
+/** Serializes a schema object for `set:html` injection into a JSON-LD
+ * `<script>` tag. `set:html` writes the string as raw, unescaped HTML, and
+ * `JSON.stringify` never escapes `<` — so free-text CMS content (a product
+ * description, blog excerpt, etc.) containing the literal substring
+ * "</script>" would otherwise prematurely close the tag and corrupt both the
+ * structured data and the surrounding page markup. Escaping `<` to `<`
+ * (invisible to JSON parsers, since it's just a different encoding of the
+ * same character) neutralizes that without changing the parsed data. */
+export function toJsonLd(schema: unknown): string {
+  return JSON.stringify(schema).replace(/</g, '\\u003c');
+}
+
+/** Shared identifier so the sitewide Organization node (every page) and the
+ * contact page's extra Organization node (with contactPoint/address) are
+ * recognized as the same entity rather than two distinct, conflicting ones. */
+function organizationId(site: URL | undefined): string {
+  return new URL('/#organization', site).toString();
+}
 
 interface FooterLink {
   label: string;
@@ -14,12 +39,6 @@ interface FooterLink {
 interface FooterColumn {
   title: string;
   links: FooterLink[];
-}
-
-/** Shared by the sitewide Organization and the contact page's details, so
- * search engines read them as one organization. */
-function organizationId(site: URL | undefined): string {
-  return new URL('/#organization', site).toString();
 }
 
 /** Sitewide brand identity — same on every page, since every page belongs to the same company. */
@@ -37,6 +56,7 @@ export function buildOrganizationSchema(footerColumns: FooterColumn[], site: URL
     '@type': 'Organization',
     '@id': organizationId(site),
     name: BRAND_NAME,
+    alternateName: BRAND_ALTERNATE_NAME,
     url: new URL('/', site).toString(),
     logo: new URL('/images/logo.png', site).toString(),
     ...(sameAs.length > 0 ? { sameAs } : {}),
@@ -47,33 +67,23 @@ interface ProductForSchema {
   name: string;
   metaDescription: string;
   image?: { src: string };
+  heroImage?: { src: string };
 }
 
 /** No `offers`/price — the CMS doesn't hold real pricing data, and fabricating
  * one would be incorrect structured data (penalized, not rewarded, by search engines). */
 export function buildProductSchema(product: ProductForSchema, site: URL | undefined) {
+  // Same heroImage-first fallback as the page's own hero (ProductDetail.astro)
+  // and its LCP preload ([slug].astro) — `image` is only ever a grid/thumbnail
+  // shot that doesn't actually appear on the product page itself.
+  const imageSrc = product.heroImage?.src ?? product.image?.src;
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
     description: product.metaDescription,
-    image: product.image?.src ? new URL(product.image.src, site).toString() : undefined,
+    image: imageSrc ? new URL(imageSrc, site).toString() : undefined,
     brand: { '@type': 'Brand', name: BRAND_NAME },
-  };
-}
-
-/** The trail from the homepage to this page — shown by search engines in
- * place of the raw URL. `path` values are site-relative (e.g. "/blog/"). */
-export function buildBreadcrumbSchema(trail: { name: string; path: string }[], site: URL | undefined) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [{ name: 'Home', path: '/' }, ...trail].map((crumb, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: crumb.name,
-      item: new URL(crumb.path, site).toString(),
-    })),
   };
 }
 
@@ -85,7 +95,11 @@ interface ListedItemForSchema {
 /** For a listing page (e.g. /products/) whose primary content is "here is our
  * full set of X" — lets search engines see the complete list, not just
  * whichever items happen to be in the crawled HTML. */
-export function buildItemListSchema(items: ListedItemForSchema[], basePath: string, site: URL | undefined) {
+export function buildItemListSchema(
+  items: ListedItemForSchema[],
+  basePath: string,
+  site: URL | undefined
+) {
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -100,13 +114,18 @@ export function buildItemListSchema(items: ListedItemForSchema[], basePath: stri
 
 interface ContactInfoForSchema {
   email: string;
-  /** Free text as it appears in the CMS (the office is given as a Plus Code),
-   * so not split into PostalAddress's individual fields. */
+  /** Free-text as it appears in the CMS (e.g. "349P+GWP, Ward 12B, Gandhidham,
+   * Gujarat 370201") — not split into PostalAddress's individual fields, since
+   * guessing at that split (the office is given as a Plus Code, not a
+   * conventional street address) risks getting it wrong; schema.org allows a
+   * partial PostalAddress. */
   address: string;
 }
 
-/** No `telephone`: the CMS has no real phone number for the business itself,
- * and a made-up one would be incorrect structured data. */
+/** No `telephone` — the CMS has no real phone number for the business itself
+ * (only "+91 98765 43210" placeholder text inside form field hints), and
+ * fabricating one would be incorrect structured data, same reasoning as
+ * `buildProductSchema` omitting `offers`. */
 export function buildContactPageSchema(contact: ContactInfoForSchema, site: URL | undefined) {
   return {
     '@context': 'https://schema.org',
@@ -114,8 +133,50 @@ export function buildContactPageSchema(contact: ContactInfoForSchema, site: URL 
     '@id': organizationId(site),
     name: BRAND_NAME,
     url: new URL('/', site).toString(),
-    contactPoint: { '@type': 'ContactPoint', email: contact.email, contactType: 'customer service' },
-    address: { '@type': 'PostalAddress', streetAddress: contact.address, addressCountry: 'IN' },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: contact.email,
+      contactType: 'customer service',
+    },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: contact.address,
+      addressCountry: 'IN',
+    },
+  };
+}
+
+interface ArticleForSchema {
+  title: string;
+  excerpt: string;
+  metaDescription?: string;
+  image?: string;
+  /** Human date string, e.g. "12 June 2026" — no time component. */
+  publishedAt?: string;
+}
+
+interface BreadcrumbItemForSchema {
+  label: string;
+  href?: string;
+}
+
+/** Only rendered when a page passes `breadcrumbs` to BaseLayout. The final item (the
+ * current page) has no href — same as <Breadcrumbs> rendering it as plain text — so it
+ * falls back to the page's own canonical URL, since every ListItem needs a URL. */
+export function buildBreadcrumbSchema(
+  items: BreadcrumbItemForSchema[],
+  site: URL | undefined,
+  currentUrl: URL
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.label,
+      item: new URL(item.href ?? currentUrl.pathname, site).toString(),
+    })),
   };
 }
 
@@ -141,15 +202,6 @@ export function buildFaqSchema(faqs: FaqItemForSchema[]) {
       },
     })),
   };
-}
-
-interface ArticleForSchema {
-  title: string;
-  excerpt: string;
-  metaDescription?: string;
-  image?: string;
-  /** Human date string, e.g. "12 June 2026" — no time component. */
-  publishedAt?: string;
 }
 
 export function buildArticleSchema(post: ArticleForSchema, site: URL | undefined) {

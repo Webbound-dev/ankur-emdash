@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProductDetail from '../../ui/components/ProductDetail.astro';
 import type { Product } from '../../ui/components/ProductDetail.astro';
 import { cmsScope, getProduct } from '../../lib/content';
-import { buildFaqSchema, buildProductSchema } from '../../lib/structuredData';
+import { buildFaqSchema, buildProductSchema, toJsonLd } from '../../lib/structuredData';
 
 const { slug } = Astro.params;
 const product = slug ? await getProduct<Product>(slug) : undefined;
@@ -16,8 +16,8 @@ const faqSection = product.detail.sections.find(
 const faqSchema = faqSection ? buildFaqSchema(faqSection.items) : null;
 ---
 
-<BaseLayout title={product.pageTitle} description={product.metaDescription} image={product.image?.src} breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Consumable Salt', href: '/products/' }, { label: product.name }]} seoFrom={product} cms={cmsScope(product)}>
-  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
-  {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+<BaseLayout title={product.pageTitle} description={product.metaDescription} image={product.image?.src} preloadImage={product.heroImage?.src ?? product.image?.src} breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Consumable Salt', href: '/products/' }, { label: product.name }]} seoFrom={product} cms={cmsScope(product)}>
+  <script type="application/ld+json" set:html={toJsonLd(productSchema)} />
+  {faqSchema && <script type="application/ld+json" set:html={toJsonLd(faqSchema)} />}
   <ProductDetail product={product} />
 </BaseLayout>

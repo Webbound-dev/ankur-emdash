@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogDetail from '../../ui/components/BlogDetail.astro';
 import type { BlogPost } from '../../ui/components/BlogList.astro';
 import { cmsList, cmsScope, getBlogs, getPage } from '../../lib/content';
-import { buildArticleSchema } from '../../lib/structuredData';
+import { buildArticleSchema, toJsonLd } from '../../lib/structuredData';
 
 const content = await getPage('blog');
 const posts = (await getBlogs()) as BlogPost[];
@@ -19,7 +19,7 @@ const description = post.metaDescription ?? post.excerpt;
 
 const articleSchema = buildArticleSchema(post, Astro.site);
 ---
-<BaseLayout title={title} description={description} image={post.image} type="article" breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog/' }, { label: post.title }]} seoFrom={post} cms={cmsScope(content, cmsList('', posts))}>
-  {articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}
+<BaseLayout title={title} description={description} image={post.image} type="article" preloadImage={post.image} breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog/' }, { label: post.title }]} seoFrom={post} cms={cmsScope(content, cmsList('', posts))}>
+  {articleSchema && <script type="application/ld+json" set:html={toJsonLd(articleSchema)} />}
   <BlogDetail content={content} posts={posts} slug={slug!} />
 </BaseLayout>

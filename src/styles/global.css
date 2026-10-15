@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+/* Nunito/Inter are loaded via real <link> tags in BaseLayout.astro's <head>,
+   not a CSS @import here — @import forces a serial, render-blocking fetch
+   that the browser can't discover until after it parses down to this line,
+   instead of in parallel with the rest of the page like a <link> allows. */
 @import "tailwindcss";
 
 @source "../ui";

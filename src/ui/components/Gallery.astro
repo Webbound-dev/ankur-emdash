@@ -431,16 +431,20 @@ function youtubeThumb(url: string): string {
 </main>
 
 <style>
+  /* Same colours as the old site's utility classes (inactive:
+     bg-silent-white/10 text-silent-white/70 ring-1 ring-silent-white/25;
+     active: bg-silent-white text-indian-red; arrows: bg-white text-indian-red
+     ring-1 ring-indian-red/15 hover:bg-indian-red/5). */
   .filter-pill {
-    color: #fff6eb;
+    color: rgb(255 246 235 / 70%);
     background: rgb(255 246 235 / 10%);
-    border: 1px solid rgb(255 246 235 / 35%);
-    transition: background-color 180ms ease, color 180ms ease;
+    box-shadow: 0 0 0 1px rgb(255 246 235 / 25%);
+    transition: background-color 200ms ease, color 200ms ease;
   }
-  .filter-pill:hover { background: rgb(255 246 235 / 20%); }
-  .filter-pill[aria-pressed="true"] { color: #a82121; background: #fff6eb; border-color: #fff6eb; }
-  .gallery-page-arrow { color: #a82121; background: #fff6eb; transition: background-color 180ms ease; }
-  .gallery-page-arrow:hover { background: #eadbcc; }
+  .filter-pill:hover { color: #fff6eb; }
+  .filter-pill[aria-pressed="true"] { color: #a82121; background: #fff6eb; box-shadow: none; }
+  .gallery-page-arrow { color: #a82121; background: #fff; box-shadow: 0 0 0 1px rgb(168 33 33 / 15%); transition: background-color 150ms ease; }
+  .gallery-page-arrow:hover { background: rgb(168 33 33 / 5%); }
   .filter-pill:focus-visible, .gallery-page-arrow:focus-visible { outline: 2px solid #fff6eb; outline-offset: 3px; }
   .reveal {
     opacity: 1;

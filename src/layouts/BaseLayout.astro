@@ -5,9 +5,10 @@ import Navbar from '../ui/components/Navbar.astro';
 import Footer from '../ui/components/Footer';
 import AudioPlayer from '../ui/components/AudioPlayer';
 import Breadcrumbs, { type BreadcrumbItem } from '../ui/components/Breadcrumbs.astro';
+import { mobileVariant } from '../ui/lib/mobileImage';
 import type { NavbarContent } from '../ui/components/NavbarIsland';
 import { cmsRegion, getPage, isEditMode, panelSeo } from '../lib/content';
-import { buildBreadcrumbSchema, buildOrganizationSchema } from '../lib/structuredData';
+import { buildBreadcrumbSchema, buildOrganizationSchema, toJsonLd } from '../lib/structuredData';
 
 const registerCacheHint = (hint: any) => { if (Astro.cache?.enabled) Astro.cache.set(hint); };
 const [navbarContent, footerContent] = await Promise.all([
@@ -32,9 +33,13 @@ interface Props {
   /** Trail shown under the navbar (blog, products, Champalal Group), starting
    * with Home; the last item is the current page. Also its BreadcrumbList. */
   breadcrumbs?: BreadcrumbItem[];
+  /** The page's largest above-the-fold image, preloaded so the browser fetches
+   * it first; its "-mobile.webp" copy is preloaded instead below 1024px. */
+  preloadImage?: string;
 }
 
-const { type = 'website', cms = {}, seoFrom, noindex = false, breadcrumbs } = Astro.props;
+const { type = 'website', cms = {}, seoFrom, noindex = false, breadcrumbs, preloadImage } = Astro.props;
+const preloadImageMobile = mobileVariant(preloadImage);
 const editMode = isEditMode();
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -49,12 +54,10 @@ const title = panel?.title ?? Astro.props.title;
 const description = panel?.description ?? Astro.props.description;
 const canonical = panel?.canonical ?? canonicalURL.href;
 const ogImageURL = panel?.ogImage ?? new URL(Astro.props.image ?? '/images/hero-poster.jpg', Astro.site).href;
-const robots = noindex ? 'noindex' : panel?.robots;
+const robots = noindex ? 'noindex, follow' : panel?.robots;
 
 const organizationSchema = buildOrganizationSchema(footerContent.columns, Astro.site);
-const breadcrumbSchema = breadcrumbs?.length
-  ? buildBreadcrumbSchema(breadcrumbs.slice(1).map((item) => ({ name: item.label, path: item.href ?? Astro.url.pathname })), Astro.site)
-  : null;
+const breadcrumbSchema = breadcrumbs?.length ? buildBreadcrumbSchema(breadcrumbs, Astro.site, canonicalURL) : null;
 ---
 
 <!doctype html>
@@ -78,9 +81,22 @@ const breadcrumbSchema = breadcrumbs?.length
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
-    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
-    {breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}
+    {preloadImage && preloadImageMobile && (
+      <>
+        <link rel="preload" as="image" href={preloadImageMobile} media="(max-width: 1023px)" fetchpriority="high" type="image/webp" />
+        <link rel="preload" as="image" href={preloadImage} media="(min-width: 1024px)" fetchpriority="high" />
+      </>
+    )}
+    {preloadImage && !preloadImageMobile && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+    <script type="application/ld+json" set:html={toJsonLd(organizationSchema)} />
+    {breadcrumbSchema && <script type="application/ld+json" set:html={toJsonLd(breadcrumbSchema)} />}
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+    />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
     <ClientRouter />
     <!-- No-JS fallback for the GSAP entrance pre-hide rules in global.css —

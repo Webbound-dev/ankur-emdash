@@ -131,7 +131,11 @@ async function getAllEntries(collection: string) {
 		const { entry } = await getEmDashEntry(collection as any, preview.id);
 		if (entry) all.push(entry);
 	}
-	return all.sort((a, b) => ((a.data as any).position ?? 0) - ((b.data as any).position ?? 0));
+	// Ties (distributors have no display order) keep the source order, which is
+	// slug order (d01, d02, …), rather than the database's newest-first default.
+	const slug = (e: any) => String(e.data?.slug ?? e.id);
+	return all.sort((a, b) => ((a.data as any).position ?? 0) - ((b.data as any).position ?? 0)
+		|| slug(a).localeCompare(slug(b), "en", { numeric: true }));
 }
 
 // In edit mode EmDash marks rich-text values so its <PortableText> renders

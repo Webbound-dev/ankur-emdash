@@ -137,16 +137,21 @@ export default function BlogTeaser({ content }: { content: BlogTeaserContent }) 
         </div>
       </div>
 
-      {/* Share the heading's container so the carousel starts at the same
-          gutter on every viewport, while remaining horizontally scrollable. */}
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+      {/* Bleeds past the section's own padding so the last card can peek off
+          the right edge — a horizontally scrollable teaser row, not a fixed
+          grid, so it reads as "here's a slice of the blog" rather than
+          "here are exactly four posts." No scroll-snap here on purpose —
+          snap-align on the first card fights the leading gutter and
+          scrolls it away on load (eats the left inset every time). */}
+      <div className="-mx-6 lg:-mx-10">
         <div ref={trackRef} className="flex gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="shrink-0 w-6 lg:w-10" aria-hidden="true" />
           {posts.map((post, i) => (
             <a
               key={i}
               href={post.href}
               data-cms-link={`blogTeaser.posts[${i}].href`}
-              className="bt-card group shrink-0 w-[280px] sm:w-[320px] flex flex-col"
+              className="bt-card group shrink-0 w-[280px] sm:w-[320px] block"
             >
               {/* Same permanent brand-tint wash used on the product cards
                   above — ties the two photo grids into one visual system
@@ -170,7 +175,7 @@ export default function BlogTeaser({ content }: { content: BlogTeaserContent }) 
                 </span>
               </div>
 
-              <div className="mt-5 flex flex-1 flex-col transition-transform duration-300 group-hover:-translate-y-1">
+              <div className="mt-5 transition-transform duration-300 group-hover:-translate-y-1">
                 <p className="font-sans text-xs text-indian-red/50">
                   <span data-cms-field={`blogTeaser.posts[${i}].date`}>{post.date}</span>
                   {' • '}
@@ -178,7 +183,7 @@ export default function BlogTeaser({ content }: { content: BlogTeaserContent }) 
                 </p>
                 <h3
                   data-cms-field={`blogTeaser.posts[${i}].title`}
-                  className="mt-2 block min-h-[2.75em] font-display font-medium text-indian-red text-xl lg:text-[1.375rem] leading-snug bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-[length:0%_1.5px] group-hover:bg-[length:100%_1.5px] bg-[position:0_100%] transition-[background-size] duration-300"
+                  className="mt-2 inline font-display font-medium text-indian-red text-xl lg:text-[1.375rem] leading-snug bg-[linear-gradient(currentColor,currentColor)] bg-no-repeat bg-[length:0%_1.5px] group-hover:bg-[length:100%_1.5px] bg-[position:0_100%] transition-[background-size] duration-300"
                 >
                   {post.title}
                 </h3>
@@ -188,7 +193,7 @@ export default function BlogTeaser({ content }: { content: BlogTeaserContent }) 
                 >
                   {post.excerpt}
                 </p>
-                <span className="mt-auto pt-3 inline-flex items-center gap-1.5 font-sans text-sm font-medium text-indian-red">
+                <span className="mt-3 inline-flex items-center gap-1.5 font-sans text-sm font-medium text-indian-red">
                   Read more
                   <span aria-hidden="true" className="group-hover:translate-x-1 transition-transform">
                     &rarr;
@@ -197,6 +202,7 @@ export default function BlogTeaser({ content }: { content: BlogTeaserContent }) 
               </div>
             </a>
           ))}
+          <div className="shrink-0 w-6 lg:w-10" aria-hidden="true" />
         </div>
       </div>
 
