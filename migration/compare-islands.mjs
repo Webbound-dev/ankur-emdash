@@ -15,7 +15,7 @@ const flat = (o, p = '', out = {}) => { if (o && typeof o === 'object') { for (c
 async function islands(base, path) {
   const doc = parseDocument(await (await fetch(base + path)).text());
   return DomUtils.findAll((e) => e.name === 'astro-island', doc.children).map((e) => {
-    const name = (e.attribs['component-url'] ?? '').split('/').pop().replace(/\?.*$/, '').replace(/\.(tsx|jsx|ts)$/, '');
+    const name = (e.attribs['component-url'] ?? '').split('/').pop().replace(/\?.*$/, '').replace(/\.(tsx|jsx|ts)$/, '').replace(/\.[A-Za-z0-9_-]{8}\.js$/, '');
     let props = {}; try { props = revive([0, JSON.parse(e.attribs.props ?? '{}')]); } catch { props = { BAD: true }; }
     return { name, props: flat(props) };
   });
