@@ -19,7 +19,9 @@ export default defineConfig({
 	integrations: [
 		react(),
 		emdash({
-			database: d1({ binding: "DB", session: "auto" }),
+			// coalesce: a page's reads go to D1 as one batch instead of one
+			// round trip each (EmDash docs: Database → Read replicas).
+			database: d1({ binding: "DB", session: "auto", coalesce: true }),
 			storage: r2({ binding: "MEDIA" }),
 			plugins: [{
 				...smtpPlugin,
@@ -56,4 +58,8 @@ export default defineConfig({
 	// Leaving the markup uncompressed keeps rendering identical to the old site.
 	compressHTML: true,
 	devToolbar: { enabled: false },
+	// Pages are rendered per request (~0.7 s away for visitors served far from
+	// the Worker), so start loading a link's page as soon as it is hovered or
+	// focused; by the click it is usually there.
+	prefetch: { prefetchAll: true, defaultStrategy: "hover" },
 });

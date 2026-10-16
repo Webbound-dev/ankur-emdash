@@ -4,6 +4,10 @@
 	"main": "./src/worker.ts",
 	"compatibility_date": "2026-02-24",
 	"compatibility_flags": ["nodejs_compat"],
+	// Run the Worker near the D1 primary (APAC) rather than near the visitor:
+	// a page makes several D1 round trips, which from a distant data center
+	// (Indian traffic is often served from Europe) took ~165 ms each.
+	"placement": { "mode": "smart", "hint": "apac" },
 	"d1_databases": [
 		{
 			"binding": "DB",
