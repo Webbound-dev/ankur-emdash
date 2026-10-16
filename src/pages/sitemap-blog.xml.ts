@@ -13,5 +13,5 @@ export const GET: APIRoute = async ({ site }) => {
 ${posts.map((p) => `  <url><loc>${new URL(`/blog/${p.slug}/`, site)}</loc>${lastmod(lastModified(p))}</url>`).join('\n')}
 </urlset>
 `;
-  return new Response(xml, { headers: { 'Content-Type': 'application/xml' } });
+  return new Response(xml, { headers: { 'Content-Type': 'application/xml', 'Cache-Control': 'public, max-age=3600' } });
 };

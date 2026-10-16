@@ -1,4 +1,5 @@
 import cloudflare from "@astrojs/cloudflare";
+import { cacheCloudflare } from "@astrojs/cloudflare/cache";
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 import { d1, r2 } from "@emdash-cms/cloudflare";
@@ -16,6 +17,11 @@ export default defineConfig({
 	// EmDash needs server rendering: content is read from D1 per request.
 	output: "server",
 	adapter: cloudflare(),
+	// Workers Cache in front of the Worker: public pages are served from the
+	// nearest Cloudflare location without rendering or querying D1. Pages set
+	// their lifetime and tags in BaseLayout; EmDash purges the tags whenever
+	// content, menus or settings change.
+	cache: { provider: cacheCloudflare() },
 	integrations: [
 		react(),
 		emdash({
@@ -23,6 +29,9 @@ export default defineConfig({
 			// round trip each (EmDash docs: Database → Read replicas).
 			database: d1({ binding: "DB", session: "auto", coalesce: true }),
 			storage: r2({ binding: "MEDIA" }),
+			// Cached pages are the same for everyone: editors get an "Edit" pill
+			// that reloads the page with ?_edit, which is always rendered fresh.
+			toolbar: "client",
 			plugins: [{
 				...smtpPlugin,
 				adminPages: [...smtpPlugin.adminPages, FORM_RECIPIENTS_PAGE],

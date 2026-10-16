@@ -10,5 +10,5 @@ export const GET: APIRoute = ({ site }) => {
 ${files.map((f) => `  <sitemap><loc>${new URL(f, site)}</loc></sitemap>`).join('\n')}
 </sitemapindex>
 `;
-  return new Response(xml, { headers: { 'Content-Type': 'application/xml' } });
+  return new Response(xml, { headers: { 'Content-Type': 'application/xml', 'Cache-Control': 'public, max-age=3600' } });
 };

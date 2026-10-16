@@ -32,5 +32,5 @@ export const GET: APIRoute = async ({ site }) => {
 ${PAGES.map(([p], i) => `  <url><loc>${new URL(p, site)}</loc>${lastmod(updated[i])}</url>`).join('\n')}
 </urlset>
 `;
-  return new Response(xml, { headers: { 'Content-Type': 'application/xml' } });
+  return new Response(xml, { headers: { 'Content-Type': 'application/xml', 'Cache-Control': 'public, max-age=3600' } });
 };
