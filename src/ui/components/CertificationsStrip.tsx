@@ -1,6 +1,8 @@
 import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 
 // Browser only: GSAP starts a timer on registration, which Cloudflare Workers forbid at module scope (SSR).
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
@@ -15,7 +17,7 @@ export interface CertificationsStripContent {
   certifications: Certification[];
 }
 
-export default function CertificationsStrip({ content }: { content: CertificationsStripContent }) {
+export default function CertificationsStrip({ content, locale = 'en' }: { content: CertificationsStripContent; locale?: Locale }) {
   const { certifications } = content;
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -76,7 +78,7 @@ export default function CertificationsStrip({ content }: { content: Certificatio
   return (
     <section ref={sectionRef} className="pre-anim-hidden bg-silent-white border-t border-indian-red/10 py-12 lg:py-16">
       {/* No visible copy per spec — just a screen-reader label for context. */}
-      <h2 className="sr-only">Certifications and awards</h2>
+      <h2 className="sr-only">{t(locale, 'Certifications and awards')}</h2>
       <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
         {/* Flat logo wall — no decorative frames or wrappers around the
             marks themselves (appropriate for official certification logos:

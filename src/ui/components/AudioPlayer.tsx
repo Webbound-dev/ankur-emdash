@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { VolumeX } from 'lucide-react';
+import { pageLocale, t } from '../../lib/ui-strings';
 
 export interface AudioTrack {
   src: string;
@@ -76,7 +77,7 @@ export default function AudioPlayer() {
       audio.play().then(
         () => {
           setMuted(false);
-          showToast('Sound on');
+          showToast(t(pageLocale(), 'Sound on'));
         },
         () => showToast("Couldn't play sound")
       );
@@ -119,13 +120,13 @@ export default function AudioPlayer() {
     audio.pause();
     audio.currentTime = 0;
     audio.src = TRACKS[trackIndex].src;
-    showToast(TRACKS[trackIndex].title);
+    showToast(t(pageLocale(), TRACKS[trackIndex].title));
     currentTrackIndex = trackIndex;
     document.dispatchEvent(
       new CustomEvent<AudioTrackChangeDetail>(AUDIO_TRACK_CHANGE_EVENT, {
         detail: {
           index: trackIndex,
-          title: TRACKS[trackIndex].title,
+          title: t(pageLocale(), TRACKS[trackIndex].title),
           direction: lastDirection.current,
         },
       })
@@ -161,14 +162,14 @@ export default function AudioPlayer() {
       audio.play().then(
         () => {
           setMuted(false);
-          showToast('Sound on');
+          showToast(t(pageLocale(), 'Sound on'));
         },
         () => showToast("Couldn't play sound")
       );
     } else {
       audio.pause();
       setMuted(true);
-      showToast('Sound off');
+      showToast(t(pageLocale(), 'Sound off'));
     }
   }
 
@@ -223,7 +224,7 @@ export default function AudioPlayer() {
         <button
           type="button"
           onClick={toggle}
-          aria-label={muted ? 'Unmute site audio' : 'Mute site audio'}
+          aria-label={t(pageLocale(), muted ? 'Unmute site audio' : 'Mute site audio')}
           aria-pressed={!muted}
           className={`flex h-14 w-14 items-center justify-center rounded-full backdrop-blur-xl ring-1 transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
             muted

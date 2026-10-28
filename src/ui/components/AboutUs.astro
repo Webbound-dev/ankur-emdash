@@ -1,6 +1,9 @@
 ---
+import { toLocale } from '../../lib/i18n';
+import { t } from '../../lib/ui-strings';
 import GroupCompanies, { type GroupCompany } from './GroupCompanies.astro';
 import { mobileVariant } from '../lib/mobileImage';
+const locale = toLocale(Astro.currentLocale);
 
 interface TimelineItem { year: string; caption: string; description: string; image: { src: string; alt: string } }
 interface FeatureItem { title: string; description: string }
@@ -69,7 +72,7 @@ function initials(name: string): string {
 
     <!-- Heritage seal -->
     <div class="about-hero-badge absolute top-28 right-6 lg:top-32 lg:right-10 z-10 w-20 h-20 lg:w-24 lg:h-24 rotate-[8deg] rounded-full bg-silent-white/10 backdrop-blur-sm border-[1.5px] border-dashed border-silent-white/60 shadow-lg flex flex-col items-center justify-center">
-      <span class="font-display text-[9px] lg:text-[10px] font-semibold uppercase tracking-[0.15em] text-silent-white">Est.</span>
+      <span class="font-display text-[9px] lg:text-[10px] font-semibold uppercase tracking-[0.15em] text-silent-white">{t(locale, 'Est.')}</span>
       <span class="font-display text-lg lg:text-xl font-semibold text-silent-white">1994</span>
     </div>
 
@@ -220,7 +223,7 @@ function initials(name: string): string {
                   <button
                     type="button"
                     class={`tl-prev w-10 h-10 rounded-full border border-indian-red/20 text-indian-red flex items-center justify-center hover:bg-indian-red hover:text-silent-white transition-colors duration-200 text-base ${ti === 0 ? 'opacity-25 pointer-events-none' : ''}`}
-                    aria-label="Previous milestone"
+                    aria-label={t(locale, 'Previous milestone')}
                   >←</button>
                   <span class="font-sans text-xs text-indian-red/30 tabular-nums whitespace-nowrap">
                     {ti + 1} / {timeline.items.length}
@@ -228,7 +231,7 @@ function initials(name: string): string {
                   <button
                     type="button"
                     class={`tl-next w-10 h-10 rounded-full border border-indian-red/20 text-indian-red flex items-center justify-center hover:bg-indian-red hover:text-silent-white transition-colors duration-200 text-base ${ti === timeline.items.length - 1 ? 'opacity-25 pointer-events-none' : ''}`}
-                    aria-label="Next milestone"
+                    aria-label={t(locale, 'Next milestone')}
                   >→</button>
                 </div>
               </div>
@@ -458,6 +461,7 @@ function initials(name: string): string {
      in. See AboutUs.astro's <script> below for the GSAP timeline itself. -->
 
 <script>
+  import { pageLocale, t } from '../../lib/ui-strings';
   import { gsap } from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
   gsap.registerPlugin(ScrollTrigger);
@@ -586,7 +590,7 @@ function initials(name: string): string {
       button.addEventListener('click', () => {
         const expanded = description.classList.toggle('line-clamp-none');
         description.classList.toggle('line-clamp-3', !expanded);
-        button.textContent = expanded ? 'Read less' : 'Read more';
+        button.textContent = expanded ? t(pageLocale(), 'Read less') : t(pageLocale(), 'Read more');
       });
     });
   }

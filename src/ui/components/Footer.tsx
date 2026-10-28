@@ -4,6 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, MapPin, Instagram, Facebook, Linkedin, X as XIcon } from 'lucide-react';
 import { getRecaptchaToken } from '../lib/recaptcha';
 import MenuLabel from './MenuLabel';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 
 // Browser only: GSAP starts a timer on registration, which Cloudflare Workers forbid at module scope (SSR).
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
@@ -56,7 +58,7 @@ export interface FooterContent {
   copyrightName: string;
 }
 
-export default function Footer({ content }: { content: FooterContent }) {
+export default function Footer({ content, locale = 'en' }: { content: FooterContent; locale?: Locale }) {
   const { cta, brand, columns, legalLinks, copyrightName } = content;
   const sectionRef = useRef<HTMLElement>(null);
   const [email, setEmail] = useState('');
@@ -124,10 +126,10 @@ export default function Footer({ content }: { content: FooterContent }) {
         body: JSON.stringify({ email, recaptchaToken }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
-      if (!res.ok || !data.ok) throw new Error(data.error || 'Failed to submit');
+      if (!res.ok || !data.ok) throw new Error(data.error || t(locale, 'Failed to submit'));
       setSubmitted(true);
     } catch (err) {
-      setSubmitError(err instanceof Error ? err.message : 'Failed to submit');
+      setSubmitError(err instanceof Error ? err.message : t(locale, 'Failed to submit'));
     } finally {
       setSubmitting(false);
     }
@@ -184,7 +186,7 @@ export default function Footer({ content }: { content: FooterContent }) {
                   disabled={submitting}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-silent-white text-indian-red font-sans text-sm font-medium hover:opacity-90 transition-opacity shrink-0 disabled:opacity-60"
                 >
-                  <span data-cms-field="cta.buttonLabel">{submitting ? 'Sending…' : cta.buttonLabel}</span>
+                  <span data-cms-field="cta.buttonLabel">{submitting ? t(locale, 'Sending…') : cta.buttonLabel}</span>
                 </button>
               </>
             )}

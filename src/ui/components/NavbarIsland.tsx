@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import MenuLabel from './MenuLabel';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 
 interface NavLink { label: string; href: string; target?: string; titleAttr?: string; menuRef?: string }
 interface ProductItem { title: string; href: string; target?: string; titleAttr?: string; menuRef?: string; variant?: 'callout' }
@@ -15,8 +17,6 @@ export interface NavbarContent {
    *  cross-sell row instead of a plain SKU link. */
   products: ProductItem[];
 }
-
-type Locale = 'en' | 'hi';
 
 const LOCALE_LABEL: Record<Locale, string> = { en: 'EN', hi: 'हिं' };
 
@@ -61,11 +61,12 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
     };
   }, [sidebarOpen]);
 
-  // Menu URLs end with a slash ("/products/"); compare without it.
-  const withoutSlash = (href: string) => href.replace(/\/+$/, '') || '/';
+  // Menu URLs end with a slash ("/products/") and, on Hindi pages, start
+  // with the language ("/hi/products/"); compare without either.
+  const withoutSlash = (href: string) => href.replace(/^\/hi(?=\/|$)/, '').replace(/\/+$/, '') || '/';
   const isProductsLink = (href: string) => withoutSlash(href) === '/products';
 
-  const isActive = (href: string) => pathname === href || (href !== '/' && pathname.startsWith(href));
+  const isActive = (href: string) => pathname === href || (withoutSlash(href) !== '/' && pathname.startsWith(href));
 
   // Consumer Salt and Industrial Salt are the two core product lines, so
   // they get a touch more visual weight than the rest of the nav — semibold
@@ -94,7 +95,7 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
         <button
           onClick={() => setSidebarOpen(true)}
           className="lg:hidden p-1.5 -ml-1.5 shrink-0"
-          aria-label="Open menu"
+          aria-label={t(locale ?? 'en', 'Open menu')}
         >
           <Menu size={22} />
         </button>
@@ -202,7 +203,7 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
             this sits between the hamburger and the spacer below, centered
             by justify-between with those two equal-width elements. */}
         <a
-          href="/"
+          href={locale === 'hi' ? '/hi/' : '/'}
           className="flex items-center shrink-0 px-2 lg:px-6 transition-transform duration-200 hover:scale-105"
           data-cms-image="logo.src"
         >
@@ -238,7 +239,7 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
           <a
             href={alternateHref}
             className="hidden lg:inline-block shrink-0 rounded-full border border-indian-red/20 px-3 py-1 font-sans text-xs font-semibold text-indian-red/70 transition-colors duration-150 hover:border-indian-red/40 hover:text-indian-red"
-            aria-label={`Switch to ${alternateLocale === 'hi' ? 'Hindi' : 'English'}`}
+            aria-label={t(locale ?? 'en', alternateLocale === 'hi' ? 'Switch to Hindi' : 'Switch to English')}
           >
             {LOCALE_LABEL[alternateLocale]}
           </a>
@@ -270,12 +271,12 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
               <a
                 href={alternateHref}
                 className="rounded-full border border-indian-red/20 px-2.5 py-1 font-sans text-xs font-semibold text-indian-red/70"
-                aria-label={`Switch to ${alternateLocale === 'hi' ? 'Hindi' : 'English'}`}
+                aria-label={t(locale ?? 'en', alternateLocale === 'hi' ? 'Switch to Hindi' : 'Switch to English')}
               >
                 {LOCALE_LABEL[alternateLocale]}
               </a>
             )}
-            <button onClick={() => setSidebarOpen(false)} aria-label="Close menu" className="p-1">
+            <button onClick={() => setSidebarOpen(false)} aria-label={t(locale ?? 'en', 'Close menu')} className="p-1">
               <X size={22} />
             </button>
           </div>

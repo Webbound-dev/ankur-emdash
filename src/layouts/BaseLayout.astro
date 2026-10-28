@@ -7,8 +7,10 @@ import AudioPlayer from '../ui/components/AudioPlayer';
 import Breadcrumbs, { type BreadcrumbItem } from '../ui/components/Breadcrumbs.astro';
 import { mobileVariant } from '../ui/lib/mobileImage';
 import type { NavbarContent } from '../ui/components/NavbarIsland';
-import { cmsRegion, getPage, isEditMode, panelSeo } from '../lib/content';
+import { cmsRegion, getPage, isEditMode, isFallback, panelSeo } from '../lib/content';
 import { buildBreadcrumbSchema, buildOrganizationSchema, toJsonLd } from '../lib/structuredData';
+import { DEFAULT_LOCALE, LOCALES, alternateLocale, localePath, toLocale } from '../lib/i18n';
+import { t } from '../lib/ui-strings';
 
 const registerCacheHint = (hint: any) => { if (Astro.cache?.enabled) Astro.cache.set(hint); };
 // Edge cache (see astro.config.mjs). A page reads from most collections plus
@@ -47,7 +49,16 @@ interface Props {
   preloadImage?: string;
 }
 
-const { type = 'website', cms = {}, seoFrom, noindex = false, breadcrumbs, preloadImage } = Astro.props;
+const { type = 'website', cms = {}, seoFrom, noindex = false, preloadImage } = Astro.props;
+// /hi/… pages render Hindi content (EmDash reads the locale from the URL).
+const locale = toLocale(Astro.currentLocale);
+const otherLocale = alternateLocale(locale);
+// Pages pass breadcrumbs in English with English paths; show them in the
+// page's language.
+const breadcrumbs = Astro.props.breadcrumbs?.map((item) => ({
+  label: t(locale, item.label),
+  ...(item.href ? { href: localePath(item.href, locale) } : {}),
+}));
 const preloadImageMobile = mobileVariant(preloadImage);
 const editMode = isEditMode();
 
@@ -61,16 +72,22 @@ const panel = panelSeo(seoFrom, {
 });
 const title = panel?.title ?? Astro.props.title;
 const description = panel?.description ?? Astro.props.description;
-const canonical = panel?.canonical ?? canonicalURL.href;
+// A /hi/ page without a published Hindi translation shows the English page:
+// point search engines at the English URL instead of indexing a duplicate.
+const fallback = locale !== DEFAULT_LOCALE && isFallback(seoFrom);
+const canonical = fallback ? new URL(localePath(Astro.url.pathname, DEFAULT_LOCALE), Astro.site).href : panel?.canonical ?? canonicalURL.href;
 const ogImageURL = panel?.ogImage ?? new URL(Astro.props.image ?? '/images/hero-poster.jpg', Astro.site).href;
 const robots = noindex ? 'noindex, follow' : panel?.robots;
+// The same page in each language, for search engines (hreflang) and the
+// navbar's language switcher.
+const pageIn = (l: typeof locale) => new URL(localePath(Astro.url.pathname, l), Astro.site).href;
 
 const organizationSchema = buildOrganizationSchema(footerContent.columns, Astro.site);
 const breadcrumbSchema = breadcrumbs?.length ? buildBreadcrumbSchema(breadcrumbs, Astro.site, canonicalURL) : null;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -78,9 +95,12 @@ const breadcrumbSchema = breadcrumbs?.length ? buildBreadcrumbSchema(breadcrumbs
     <meta name="description" content={description} />
     {!noindex && <link rel="canonical" href={canonical} />}
     {robots && <meta name="robots" content={robots} />}
+    {!noindex && !fallback && LOCALES.map((l) => <link rel="alternate" hreflang={l} href={pageIn(l)} />)}
+    {!noindex && !fallback && <link rel="alternate" hreflang="x-default" href={pageIn(DEFAULT_LOCALE)} />}
 
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content="Ankur Chemfood Ltd." />
+    <meta property="og:locale" content={locale === 'hi' ? 'hi_IN' : 'en_IN'} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageURL} />
@@ -211,18 +231,18 @@ const breadcrumbSchema = breadcrumbs?.length ? buildBreadcrumbSchema(breadcrumbs
   <body>
     <div class="min-h-screen flex flex-col">
       {editMode ? (
-        <div style="display: contents" {...cmsRegion(navbarContent)}><Navbar content={navbarContent} /></div>
+        <div style="display: contents" {...cmsRegion(navbarContent)}><Navbar content={navbarContent} locale={locale} alternateLocale={otherLocale} alternateHref={localePath(Astro.url.pathname, otherLocale) + Astro.url.search} /></div>
       ) : (
-        <Navbar content={navbarContent} />
+        <Navbar content={navbarContent} locale={locale} alternateLocale={otherLocale} alternateHref={localePath(Astro.url.pathname, otherLocale) + Astro.url.search} />
       )}
       {breadcrumbs?.length && <Breadcrumbs items={breadcrumbs} />}
       <div class="flex-grow" {...cms}>
         <slot />
       </div>
       {editMode ? (
-        <div style="display: contents" {...cmsRegion(footerContent)}><Footer content={footerContent} client:visible /></div>
+        <div style="display: contents" {...cmsRegion(footerContent)}><Footer locale={locale} content={footerContent} client:visible /></div>
       ) : (
-        <Footer content={footerContent} client:visible />
+        <Footer locale={locale} content={footerContent} client:visible />
       )}
       <AudioPlayer client:load transition:persist />
     </div>

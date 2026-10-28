@@ -1,8 +1,8 @@
 ---
-import { cmsScope, getPage } from '../lib/content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { buildFaqSchema, toJsonLd } from '../lib/structuredData';
-import Export from '../ui/components/Export.astro';
+import { cmsScope, getPage } from '../../lib/content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { buildFaqSchema, toJsonLd } from '../../lib/structuredData';
+import Export from '../../ui/components/Export.astro';
 const content = await getPage('export');
 const faqSchema = content.faq ? buildFaqSchema(content.faq.items) : null;
 ---

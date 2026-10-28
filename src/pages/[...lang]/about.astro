@@ -1,7 +1,7 @@
 ---
-import { cmsScope, getPage } from '../lib/content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import AboutUs from '../ui/components/AboutUs.astro';
+import { cmsScope, getPage } from '../../lib/content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AboutUs from '../../ui/components/AboutUs.astro';
 const content = await getPage('about');
 ---
 <BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} preloadImage={content.hero.images[0]?.src} seoFrom={content} cms={cmsScope(content)}>

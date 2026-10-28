@@ -1,4 +1,7 @@
 ---
+import { localePath, toLocale } from '../../lib/i18n';
+import { t } from '../../lib/ui-strings';
+const locale = toLocale(Astro.currentLocale);
 interface ComparisonProduct {
   slug: string;
   name: string;
@@ -119,10 +122,10 @@ const valueClass = (value: string) => {
               </td>
               <td class="px-6 py-6 align-middle text-right">
                 <a
-                  href={`/products/${product.slug}/`}
+                  href={localePath(`/products/${product.slug}/`, locale)}
                   class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-md bg-indian-red text-silent-white text-xs font-medium shadow-sm transition-all duration-200 hover:opacity-90 hover:shadow-md hover:shadow-indian-red/20 hover:-translate-y-0.5 whitespace-nowrap"
                 >
-                  View <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
+                  {t(locale, 'View')} <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
                 </a>
               </td>
             </tr>

@@ -1,4 +1,7 @@
 ---
+import { toLocale } from '../../lib/i18n';
+import { t } from '../../lib/ui-strings';
+const locale = toLocale(Astro.currentLocale);
 interface Stat { value: string; label: string }
 interface CompanyProfile {
   name: string;
@@ -147,14 +150,14 @@ const WAVE_PATH = 'M0,20 C180,90 360,0 540,50 C720,100 900,10 1080,55 C1260,100 
             {company.description}
           </p>
           <button type="button" class="read-more-toggle mt-1.5 hidden self-start text-xs font-semibold text-indian-red/70 hover:text-indian-red">
-            Read more
+            {t(locale, 'Read more')}
           </button>
 
           {(company.founded || company.headquarters) && (
             <div class="mt-5 flex flex-wrap gap-x-8 gap-y-3 border-y border-indian-red/10 py-4">
               {company.founded && (
                 <div>
-                  <p class="text-[10px] font-semibold uppercase tracking-wide text-indian-red/40">Founded</p>
+                  <p class="text-[10px] font-semibold uppercase tracking-wide text-indian-red/40">{t(locale, 'Founded')}</p>
                   <p class="mt-0.5 font-display font-medium text-indian-red" data-cms-field={`companies.items[${ci}].founded`}>
                     {company.founded}
                   </p>
@@ -162,7 +165,7 @@ const WAVE_PATH = 'M0,20 C180,90 360,0 540,50 C720,100 900,10 1080,55 C1260,100 
               )}
               {company.headquarters && (
                 <div>
-                  <p class="text-[10px] font-semibold uppercase tracking-wide text-indian-red/40">Headquarters</p>
+                  <p class="text-[10px] font-semibold uppercase tracking-wide text-indian-red/40">{t(locale, 'Headquarters')}</p>
                   <p class="mt-0.5 font-display font-medium text-indian-red" data-cms-field={`companies.items[${ci}].headquarters`}>
                     {company.headquarters}
                   </p>
@@ -188,7 +191,7 @@ const WAVE_PATH = 'M0,20 C180,90 360,0 540,50 C720,100 900,10 1080,55 C1260,100 
             {...company.website.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
             class="group/link mt-auto pt-6 inline-flex w-fit items-center gap-1.5 self-start text-sm font-semibold text-indian-red hover:underline"
           >
-            Visit Website
+            {t(locale, 'Visit Website')}
             <svg viewBox="0 0 16 16" class="h-3.5 w-3.5 shrink-0 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">
               <path d="M4 12 12 4M6 4h6v6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
@@ -230,6 +233,7 @@ const WAVE_PATH = 'M0,20 C180,90 360,0 540,50 C720,100 900,10 1080,55 C1260,100 
 </main>
 
 <script>
+  import { pageLocale, t } from '../../lib/ui-strings';
   // Same plain-CSS reveal-on-scroll used by simpler pages like Export.astro
   // and the /products index — no GSAP needed for a page this size.
   function initReveal() {
@@ -265,7 +269,7 @@ const WAVE_PATH = 'M0,20 C180,90 360,0 540,50 C720,100 900,10 1080,55 C1260,100 
       button.addEventListener('click', () => {
         const expanded = description.classList.toggle('line-clamp-none');
         description.classList.toggle('line-clamp-3', !expanded);
-        button.textContent = expanded ? 'Read less' : 'Read more';
+        button.textContent = expanded ? t(pageLocale(), 'Read less') : t(pageLocale(), 'Read more');
       });
     });
   }

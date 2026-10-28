@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MapPin, Globe2 } from 'lucide-react';
 import WorldMarketsMap from './WorldMarketsMap';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 
 // Browser only: GSAP starts a timer on registration, which Cloudflare Workers forbid at module scope (SSR).
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
@@ -19,7 +21,7 @@ export interface GlobalMarketsContent {
   regions: Region[];
 }
 
-export default function GlobalMarkets({ content }: { content: GlobalMarketsContent }) {
+export default function GlobalMarkets({ content, locale = 'en' }: { content: GlobalMarketsContent; locale?: Locale }) {
   const { heading, subheading, stat, regions } = content;
   const [active, setActive] = useState<string>('All');
   const sectionRef = useRef<HTMLElement>(null);
@@ -76,7 +78,7 @@ export default function GlobalMarkets({ content }: { content: GlobalMarketsConte
                 <p className="font-display font-semibold text-2xl text-indian-red tabular-nums" data-cms-field="globalMarkets.stat.countries">
                   {stat.countries}
                 </p>
-                <p className="text-xs font-medium uppercase tracking-wide text-indian-red/50">Countries</p>
+                <p className="text-xs font-medium uppercase tracking-wide text-indian-red/50">{t(locale, 'Countries')}</p>
               </div>
             </div>
             <div className="h-8 w-px bg-indian-red/10" aria-hidden="true" />
@@ -86,7 +88,7 @@ export default function GlobalMarkets({ content }: { content: GlobalMarketsConte
                 <p className="font-display font-semibold text-2xl text-indian-red tabular-nums" data-cms-field="globalMarkets.stat.regions">
                   {stat.regions}
                 </p>
-                <p className="text-xs font-medium uppercase tracking-wide text-indian-red/50">Regions</p>
+                <p className="text-xs font-medium uppercase tracking-wide text-indian-red/50">{t(locale, 'Regions')}</p>
               </div>
             </div>
           </div>
@@ -108,7 +110,7 @@ export default function GlobalMarkets({ content }: { content: GlobalMarketsConte
                   : 'bg-indian-red/[0.06] text-indian-red/70 hover:bg-indian-red/[0.12]'
               }`}
             >
-              {i === 0 ? name : <span data-cms-field={`globalMarkets.regions[${i - 1}].name`}>{name}</span>}
+              {i === 0 ? t(locale, 'All') : <span data-cms-field={`globalMarkets.regions[${i - 1}].name`}>{name}</span>}
             </button>
           ))}
         </div>
@@ -122,6 +124,7 @@ export default function GlobalMarkets({ content }: { content: GlobalMarketsConte
                 ? regions.flatMap((r) => r.countries.map((name) => ({ name, region: r.name })))
                 : (regions.find((r) => r.name === active)?.countries ?? []).map((name) => ({ name, region: active }))
             }
+            locale={locale}
           />
         </div>
       </div>

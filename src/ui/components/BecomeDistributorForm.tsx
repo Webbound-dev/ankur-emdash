@@ -5,6 +5,8 @@ import { BadgeCheck, Building2, Mail, MapPin, MessageSquare, Phone, Truck, User,
 import { isEditModeActive, onEditModeChange } from '../lib/editMode';
 import { useOtpVerification } from '../lib/useOtpVerification';
 import { getRecaptchaToken } from '../lib/recaptcha';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 
 // Browser only: GSAP starts a timer on registration, which Cloudflare Workers forbid at module scope (SSR).
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
@@ -96,9 +98,12 @@ function PlaceholderOverlay({
 // before a real submit endpoint exists.
 export default function BecomeDistributorForm({
   content,
+  locale = 'en',
   skipEntranceAnimation,
 }: {
   content: BecomeDistributorContent;
+  /** Page language, for the interface text (src/lib/ui-strings.ts). */
+  locale?: Locale;
   // Set when rendered inside DistributorFormsTabs — that wrapper shows/hides
   // this form via a tab click, not a scroll, and toggling display:none
   // leaves this section's own scroll-triggered entrance below with a
@@ -252,10 +257,10 @@ export default function BecomeDistributorForm({
                       body: JSON.stringify({ ...form, recaptchaToken }),
                     });
                     const data = (await res.json()) as { ok?: boolean; error?: string };
-                    if (!res.ok || !data.ok) throw new Error(data.error || 'Failed to submit application');
+                    if (!res.ok || !data.ok) throw new Error(data.error || t(locale, 'Failed to submit application'));
                     setSubmitted(true);
                   } catch (err) {
-                    setSubmitError(err instanceof Error ? err.message : 'Failed to submit application');
+                    setSubmitError(err instanceof Error ? err.message : t(locale, 'Failed to submit application'));
                   } finally {
                     setSubmitting(false);
                   }
@@ -325,7 +330,7 @@ export default function BecomeDistributorForm({
                           onClick={() => emailOtp.sendOtp(form.email)}
                           className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md bg-indian-red/[0.08] px-2.5 py-1 font-sans text-xs font-semibold text-indian-red hover:bg-indian-red/[0.14] transition-colors disabled:opacity-50"
                         >
-                          {emailOtp.sending ? 'Sending…' : emailOtp.otpSent ? 'Resend' : 'Send OTP'}
+                          {emailOtp.sending ? t(locale, 'Sending…') : emailOtp.otpSent ? t(locale, 'Resend') : t(locale, 'Send OTP')}
                         </button>
                       )
                     )}
@@ -349,7 +354,7 @@ export default function BecomeDistributorForm({
                           onClick={emailOtp.verifyOtp}
                           className="rounded-md bg-indian-red px-3 py-1.5 font-sans text-xs font-semibold text-silent-white hover:opacity-90 transition-opacity disabled:opacity-50"
                         >
-                          {emailOtp.verifying ? 'Verifying…' : 'Verify'}
+                          {emailOtp.verifying ? t(locale, 'Verifying…') : t(locale, 'Verify')}
                         </button>
                       </div>
                       <p className="mt-1 font-sans text-[11px] text-indian-red/40">We've emailed a 6-digit code to {form.email}.</p>
@@ -415,7 +420,7 @@ export default function BecomeDistributorForm({
                       : 'bg-indian-red/30 text-silent-white/70 cursor-not-allowed'
                   }`}
                 >
-                  {submitting ? 'Submitting…' : <span data-cms-field="becomeDistributor.submitLabel">{submitLabel}</span>}
+                  {submitting ? t(locale, 'Submitting…') : <span data-cms-field="becomeDistributor.submitLabel">{submitLabel}</span>}
                 </button>
                 {!emailOtp.verified && (
                   <p className="sm:col-span-2 -mt-3 text-center font-sans text-xs text-indian-red/45">

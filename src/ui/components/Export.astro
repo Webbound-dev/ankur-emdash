@@ -1,8 +1,10 @@
 ---
+import { toLocale } from '../../lib/i18n';
 import GlobalMarkets from './GlobalMarkets';
 import ExportInquiryForm from './ExportInquiryForm';
 import type { ExportInquiryContent } from './ExportInquiryForm';
 import FaqAccordion from './FaqAccordion.astro';
+const locale = toLocale(Astro.currentLocale);
 
 interface Region { name: string; countries: string[] }
 interface Certification { name: string; issuer: string; description: string; logo: { src: string; alt: string } }
@@ -51,7 +53,7 @@ const portIcons: Record<string, string> = {
   <!-- Global Markets — region-tabbed directory, its own React island (needs
        tab state); light band, same pinstripe treatment as the rest of the
        page lives inside the component itself. -->
-  <GlobalMarkets client:load content={globalMarkets} />
+  <GlobalMarkets locale={locale} client:load content={globalMarkets} />
 
   <!-- Export Certifications — dark red + texture, wavy top/bottom, white cards on top -->
   <section id="export-certifications" class="relative overflow-hidden bg-indian-red pb-16 pt-16 lg:pb-20 lg:pt-20 scroll-mt-24">
@@ -190,7 +192,7 @@ const portIcons: Record<string, string> = {
        section, sticky benefits column + form card) as BecomeDistributorForm/
        ConnectWithDistributorForm on the network page, including OTP-verified
        email before submission is allowed. -->
-  <ExportInquiryForm client:load content={inquiry} />
+  <ExportInquiryForm locale={locale} client:load content={inquiry} />
 </main>
 
 <style>

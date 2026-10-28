@@ -17,6 +17,15 @@ export default defineConfig({
 	// EmDash needs server rendering: content is read from D1 per request.
 	output: "server",
 	adapter: cloudflare(),
+	// English is served unprefixed (/about/), Hindi under /hi/ (/hi/about/).
+	// EmDash reads this for its locales: each page, product, post and menu can
+	// have a Hindi translation, and a page without one falls back to English.
+	// Prefixing English too would break the admin (EmDash docs: i18n).
+	i18n: {
+		defaultLocale: "en",
+		locales: ["en", "hi"],
+		fallback: { hi: "en" },
+	},
 	// Workers Cache in front of the Worker: public pages are served from the
 	// nearest Cloudflare location without rendering or querying D1. Pages set
 	// their lifetime and tags in BaseLayout; EmDash purges the tags whenever

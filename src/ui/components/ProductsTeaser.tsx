@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 
 // Browser only: GSAP starts a timer on registration, which Cloudflare Workers forbid at module scope (SSR).
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -21,7 +23,7 @@ export interface ProductsTeaserContent {
   products: Product[];
 }
 
-export default function ProductsTeaser({ content }: { content: ProductsTeaserContent }) {
+export default function ProductsTeaser({ content, locale = 'en' }: { content: ProductsTeaserContent; locale?: Locale }) {
   const { eyebrow, title, viewAll, products } = content;
   const sectionRef = useRef<HTMLElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -235,7 +237,7 @@ export default function ProductsTeaser({ content }: { content: ProductsTeaserCon
             <button
               type="button"
               onClick={() => setActiveIndex(null)}
-              aria-label="Close"
+              aria-label={t(locale, 'Close')}
               className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-silent-white/90 backdrop-blur-sm flex items-center justify-center text-indian-red hover:bg-indian-red hover:text-silent-white transition-colors"
             >
               &times;
@@ -261,7 +263,7 @@ export default function ProductsTeaser({ content }: { content: ProductsTeaserCon
                 data-cms-link={`productsTeaser.products[${activeIndex}].href`}
                 className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-indian-red text-silent-white font-sans text-sm font-medium hover:opacity-90 transition-opacity"
               >
-                View full details
+                {t(locale, 'View full details')}
                 <span aria-hidden="true">&rarr;</span>
               </a>
             </div>

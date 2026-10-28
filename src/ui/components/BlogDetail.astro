@@ -1,10 +1,13 @@
 ---
+import { toLocale } from '../../lib/i18n';
+import { t } from '../../lib/ui-strings';
 import { PortableText } from 'emdash/ui';
 import { mobileVariant } from '../lib/mobileImage';
 import BlogLink from './blog-sections/BlogLink.astro';
 
 const components = { mark: { link: BlogLink } };
 import type { BlogPost, BlogContent } from './BlogList.astro';
+const locale = toLocale(Astro.currentLocale);
 
 interface Props {
   content: BlogContent;
@@ -47,7 +50,7 @@ for (const block of (post?.content ?? []) as Block[]) {
             class="rounded-full px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-silent-white"
             style={`background: ${categoryColors[post.category] ?? defaultCategoryColor}`}
             data-cms-field={`[${postIdx}].category`}
-          >{post.category}</span><span class="text-[11px] text-silent-white/50"><span data-cms-field={`[${postIdx}].readTime`}>{post.readTime}</span><span data-cms-field="labels.minReadSuffix">{labels.minReadSuffix}</span></span><span class="text-[11px] text-silent-white/50" data-cms-field={`[${postIdx}].publishedAt`}>{post.publishedAt}</span></div><h1
+          >{t(locale, post.category)}</span><span class="text-[11px] text-silent-white/50"><span data-cms-field={`[${postIdx}].readTime`}>{post.readTime}</span><span data-cms-field="labels.minReadSuffix">{labels.minReadSuffix}</span></span><span class="text-[11px] text-silent-white/50" data-cms-field={`[${postIdx}].publishedAt`}>{post.publishedAt}</span></div><h1
           class="reveal font-display font-medium text-3xl lg:text-5xl leading-tight text-silent-white max-w-3xl"
           style="transition-delay: 100ms"
           data-cms-field={`[${postIdx}].title`}
@@ -61,7 +64,7 @@ for (const block of (post?.content ?? []) as Block[]) {
                 href={`${labels.blogHref}${p.slug}/`}
                 class="reveal group flex items-start gap-5 sm:gap-8 border-b border-indian-red/10 py-7 first:pt-0 last:border-b-0"
                 style={`transition-delay: ${oi * 70}ms`}
-              ><div class="h-20 w-20 sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-xl"><img src={p.image} alt={p.imageAlt} width={1920} height={1280} class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]" loading="lazy" /></div><div class="min-w-0 flex-1"><div class="mb-2 flex flex-wrap items-center gap-x-2 gap-y-1"><span class="h-1.5 w-1.5 shrink-0 rounded-full" style={`background: ${categoryColors[p.category] ?? defaultCategoryColor}`} aria-hidden="true" /><span class="text-[10px] font-semibold uppercase tracking-[0.14em]" style={`color: ${categoryColors[p.category] ?? defaultCategoryColor}`} data-cms-field={`[${posts.indexOf(p)}].category`}>{p.category}</span><span class="text-indian-red/20">&middot;</span><span class="text-[11px] text-indian-red/45" data-cms-field={`[${posts.indexOf(p)}].publishedAt`}>{p.publishedAt}</span></div><h3 class="font-display font-medium text-lg leading-snug text-indian-red mb-1.5" data-cms-field={`[${posts.indexOf(p)}].title`}>{p.title}</h3><span class="inline-flex items-center gap-1.5 text-sm font-medium text-indian-red transition-all duration-200 group-hover:gap-2.5"><span data-cms-field="labels.readArticle">{labels.readArticle}</span><span aria-hidden="true">&rarr;</span></span></div></a>
+              ><div class="h-20 w-20 sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-xl"><img src={p.image} alt={p.imageAlt} width={1920} height={1280} class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]" loading="lazy" /></div><div class="min-w-0 flex-1"><div class="mb-2 flex flex-wrap items-center gap-x-2 gap-y-1"><span class="h-1.5 w-1.5 shrink-0 rounded-full" style={`background: ${categoryColors[p.category] ?? defaultCategoryColor}`} aria-hidden="true" /><span class="text-[10px] font-semibold uppercase tracking-[0.14em]" style={`color: ${categoryColors[p.category] ?? defaultCategoryColor}`} data-cms-field={`[${posts.indexOf(p)}].category`}>{t(locale, p.category)}</span><span class="text-indian-red/20">&middot;</span><span class="text-[11px] text-indian-red/45" data-cms-field={`[${posts.indexOf(p)}].publishedAt`}>{p.publishedAt}</span></div><h3 class="font-display font-medium text-lg leading-snug text-indian-red mb-1.5" data-cms-field={`[${posts.indexOf(p)}].title`}>{p.title}</h3><span class="inline-flex items-center gap-1.5 text-sm font-medium text-indian-red transition-all duration-200 group-hover:gap-2.5"><span data-cms-field="labels.readArticle">{labels.readArticle}</span><span aria-hidden="true">&rarr;</span></span></div></a>
             ))}</div></div></section>
     )}</main>
 )}<style>

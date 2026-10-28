@@ -1,8 +1,8 @@
 ---
-import { cmsScope, getPage } from '../lib/content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactUs from '../ui/components/ContactUs.astro';
-import { buildContactPageSchema, toJsonLd } from '../lib/structuredData';
+import { cmsScope, getPage } from '../../lib/content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactUs from '../../ui/components/ContactUs.astro';
+import { buildContactPageSchema, toJsonLd } from '../../lib/structuredData';
 const content = await getPage('contact');
 const email = content.info.items.find((item: { label: string }) => item.label === 'Email')?.value;
 const headOffice = content.info.items.find((item: { label: string }) => item.label === 'Head Office')?.value;

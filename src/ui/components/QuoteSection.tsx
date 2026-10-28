@@ -2,6 +2,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Play } from 'lucide-react';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 import {
   AUDIO_ENGAGE_EVENT,
   AUDIO_GOTO_EVENT,
@@ -40,7 +42,7 @@ export interface QuoteSectionContent {
 // via its DOM node rather than duplicating any state, and skip straight to
 // the "already playing" display instead of re-pitching Play. Nothing here
 // persists across an actual reload — that's intentional, see AudioPlayer.
-export default function QuoteSection({ content }: { content: QuoteSectionContent }) {
+export default function QuoteSection({ content, locale = 'en' }: { content: QuoteSectionContent; locale?: Locale }) {
   const { eyebrow, slides, ctaLabel } = content;
   const sectionRef = useRef<HTMLElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -318,7 +320,7 @@ export default function QuoteSection({ content }: { content: QuoteSectionContent
                 key={i}
                 type="button"
                 onClick={() => document.dispatchEvent(new CustomEvent<AudioGotoDetail>(AUDIO_GOTO_EVENT, { detail: { index: i } }))}
-                aria-label={`Play track ${i + 1}`}
+                aria-label={t(locale, 'Play track {n}', { n: i + 1 })}
                 aria-current={i === activeIndex}
                 className="group flex h-6 items-center justify-center px-1"
               >

@@ -1,10 +1,10 @@
 ---
-import { cmsList, cmsScope, getPage, getProducts } from '../../lib/content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProductComparisonTable from '../../ui/components/ProductComparisonTable.astro';
-import FindYourSalt from '../../ui/components/FindYourSalt.astro';
-import ProductGrid from '../../ui/components/ProductGrid.astro';
-import { buildItemListSchema, toJsonLd } from '../../lib/structuredData';
+import { cmsList, cmsScope, getPage, getProducts } from '../../../lib/content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProductComparisonTable from '../../../ui/components/ProductComparisonTable.astro';
+import FindYourSalt from '../../../ui/components/FindYourSalt.astro';
+import ProductGrid from '../../../ui/components/ProductGrid.astro';
+import { buildItemListSchema, toJsonLd } from '../../../lib/structuredData';
 const content = await getPage('products');
 const products = await getProducts();
 const itemListSchema = buildItemListSchema(products, '/products/', Astro.site);

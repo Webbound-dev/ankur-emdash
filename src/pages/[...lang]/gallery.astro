@@ -1,7 +1,7 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Gallery from '../ui/components/Gallery.astro';
-import { cmsScope, getPage } from '../lib/content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Gallery from '../../ui/components/Gallery.astro';
+import { cmsScope, getPage } from '../../lib/content';
 
 const content = await getPage('gallery');
 // Live Instagram posts used to be baked in at build time (fetch-instagram.mjs).

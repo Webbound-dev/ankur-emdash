@@ -1,0 +1,8 @@
+---
+import { localePath, toLocale } from '../../lib/i18n';
+// The `home` page's preview link from the EmDash admin is built from the
+// pages collection's URL pattern (`/{slug}/`), which gives `/home/` (or
+// `/hi/home/`). Send it to the homepage in the same language, keeping the
+// query so a `?_preview=` token still applies.
+return Astro.redirect(`${localePath('/', toLocale(Astro.currentLocale))}${Astro.url.search}`, 301);
+---
