@@ -8900,7 +8900,7 @@
 				"slug": "404",
 				"locale": "hi",
 				"translationOf": "page-404",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "404",
 					"sections": [
@@ -9370,7 +9370,7 @@
 				"slug": "about",
 				"locale": "hi",
 				"translationOf": "page-about",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "हमारे बारे में",
 					"sections": [
@@ -9969,7 +9969,7 @@
 				"slug": "career",
 				"locale": "hi",
 				"translationOf": "page-career",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "करियर",
 					"sections": [
@@ -10269,7 +10269,7 @@
 				"slug": "champalal-group",
 				"locale": "hi",
 				"translationOf": "page-champalal-group",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "चंपालाल ग्रुप",
 					"sections": [
@@ -10692,7 +10692,7 @@
 				"slug": "contact",
 				"locale": "hi",
 				"translationOf": "page-contact",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "संपर्क",
 					"sections": [
@@ -11298,7 +11298,7 @@
 				"slug": "gallery",
 				"locale": "hi",
 				"translationOf": "page-gallery",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "गैलरी",
 					"sections": [
@@ -12072,7 +12072,7 @@
 				"slug": "home",
 				"locale": "hi",
 				"translationOf": "page-home",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "होम",
 					"sections": [
@@ -12775,7 +12775,7 @@
 				"slug": "quality-certificates",
 				"locale": "hi",
 				"translationOf": "page-quality-certificates",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "क्वालिटी सर्टिफ़िकेट",
 					"sections": [
@@ -13065,7 +13065,7 @@
 				"slug": "blog",
 				"locale": "hi",
 				"translationOf": "page-blog",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "ब्लॉग",
 					"sections": [
@@ -13339,7 +13339,7 @@
 				"slug": "export",
 				"locale": "hi",
 				"translationOf": "page-export",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "एक्सपोर्ट",
 					"sections": [
@@ -13823,7 +13823,7 @@
 				"slug": "industrial-salt",
 				"locale": "hi",
 				"translationOf": "page-industrial-salt",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "इंडस्ट्रियल नमक",
 					"sections": [
@@ -14219,7 +14219,7 @@
 				"slug": "network",
 				"locale": "hi",
 				"translationOf": "page-network",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "नेटवर्क",
 					"sections": [
@@ -14424,7 +14424,7 @@
 				"slug": "products",
 				"locale": "hi",
 				"translationOf": "page-products",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "प्रोडक्ट",
 					"sections": [
@@ -14551,7 +14551,7 @@
 				"slug": "footer",
 				"locale": "hi",
 				"translationOf": "page-footer",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "फ़ुटर",
 					"sections": [
@@ -14618,7 +14618,7 @@
 				"slug": "navbar",
 				"locale": "hi",
 				"translationOf": "page-navbar",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "नेवबार",
 					"sections": [
@@ -14712,7 +14712,7 @@
 				"slug": "privacy-policy",
 				"locale": "hi",
 				"translationOf": "page-privacy-policy",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "प्राइवेसी पॉलिसी",
 					"sections": [
@@ -14846,7 +14846,7 @@
 				"slug": "terms-of-service",
 				"locale": "hi",
 				"translationOf": "page-terms-of-service",
-				"status": "draft",
+				"status": "published",
 				"data": {
 					"title": "सेवा की शर्तें",
 					"sections": [
@@ -15039,9 +15039,9 @@
 				"slug": "ankur-salt",
 				"locale": "hi",
 				"translationOf": "product-ankur-salt",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "Ankur Salt",
+					"title": "अंकुर साल्ट",
 					"page_title": "अंकुर साल्ट | रिफाइंड फ्री फ्लो आयोडीन युक्त नमक",
 					"meta_description": "अंकुर साल्ट एक रिफाइंड, फ्री फ्लो आयोडीन युक्त नमक है, जिस पर 1994 से भारतीय रसोई भरोसा करती है। 1kg और 500g के पैकेट में मिलता है।",
 					"tag": "आयोडीन युक्त",
@@ -15291,9 +15291,9 @@
 				"slug": "ankur-gold",
 				"locale": "hi",
 				"translationOf": "product-ankur-gold",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "Ankur Gold",
+					"title": "अंकुर गोल्ड",
 					"page_title": "अंकुर गोल्ड | फ़ाइन ग्रेन टेबल नमक",
 					"meta_description": "अंकुर गोल्ड एक प्रीमियम, एक्स्ट्रा रिफाइंड फ़ाइन ग्रेन टेबल नमक है, उन रसोइयों के लिए जो कुछ बेहतर चाहते हैं। 1kg और 500g पैक में उपलब्ध।",
 					"tag": "प्रीमियम",
@@ -15560,9 +15560,9 @@
 				"slug": "dr-salt",
 				"locale": "hi",
 				"translationOf": "product-dr-salt",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "Dr. Salt",
+					"title": "डॉ. साल्ट",
 					"page_title": "डॉ. साल्ट | 15% कम सोडियम वाला नमक, दिल की बेहतर सेहत के लिए",
 					"meta_description": "डॉ. साल्ट अंकुर का 15% कम सोडियम वाला टेबल साल्ट है, उन परिवारों के लिए जो हाइपरटेंशन को संभाल रहे हैं, बिना असली नमक का स्वाद छोड़े।",
 					"tag": "कम सोडियम",
@@ -15849,9 +15849,9 @@
 				"slug": "dfs-salt",
 				"locale": "hi",
 				"translationOf": "product-dfs-salt",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "DFS Salt",
+					"title": "डीएफएस साल्ट",
 					"page_title": "डीएफएस साल्ट | आयरन और आयोडीन वाला डबल फोर्टिफाइड नमक",
 					"meta_description": "डीएफएस साल्ट अंकुर का आयरन और आयोडीन वाला नमक है, जो डबल फोर्टिफाइड है और एनीमिया व आयोडीन की कमी से निपटने में मदद करता है।",
 					"tag": "डबल फोर्टिफाइड",
@@ -16117,9 +16117,9 @@
 				"slug": "rock-salt",
 				"locale": "hi",
 				"translationOf": "product-rock-salt",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "Ankur Rock Salt",
+					"title": "अंकुर रॉक साल्ट",
 					"page_title": "अंकुर रॉक साल्ट | प्राकृतिक हिमालयन पिंक नमक",
 					"meta_description": "अंकुर रॉक साल्ट एक प्राकृतिक, बिना रिफाइन किया हुआ हिमालयन रॉक साल्ट है, जिसे हिमालयन पिंक नमक के नाम से भी जाना जाता है। यह व्रत, पूजा-पाठ और सेहतमंद खाना पकाने के लिए बढ़िया है।",
 					"tag": "पारंपरिक",
@@ -16361,9 +16361,9 @@
 				"slug": "crystal-salt",
 				"locale": "hi",
 				"translationOf": "product-crystal-salt",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "Crystal Salt",
+					"title": "क्रिस्टल साल्ट",
 					"page_title": "क्रिस्टल साल्ट | रिफाइंड मोटा आयोडीन युक्त नमक",
 					"meta_description": "क्रिस्टल साल्ट, जिसे नमक और क्रिस्टल भी कहा जाता है, अंकुर का मोटा आयोडीन युक्त नमक है, जो औद्योगिक और खाने के इस्तेमाल दोनों के लिए सही है।",
 					"tag": "क्रिस्टल",
@@ -17325,9 +17325,9 @@
 				"slug": "how-to-choose-iodised-salt-for-everyday-cooking",
 				"locale": "hi",
 				"translationOf": "blog_post-how-to-choose-iodised-salt-for-everyday-cooking",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "How to Choose Iodised Salt for Everyday Cooking",
+					"title": "रोज़ के खाना पकाने के लिए आयोडीन युक्त नमक कैसे चुनें",
 					"excerpt": "आयोडीन युक्त नमक चुनना सिर्फ़ पैकेट पर “आयोडाइज़्ड” शब्द देखने से ज़्यादा है। यहाँ बताया गया है कि फ़ोर्टिफ़िकेशन, शुद्धता, दाने की क्वालिटी और मैन्युफ़ैक्चरिंग स्टैंडर्ड असल में प्रोडक्ट के बारे में क्या बताते हैं।",
 					"meta_description": "बेहतरीन खाना पकाने वाला नमक ढूँढ रहे हैं? आयोडीन फ़ोर्टिफ़िकेशन, वैक्यूम-इवैपोरेटेड शुद्धता और स्टोरेज के आधार पर रिफाइंड, फ़्री फ्लो आयोडीन युक्त नमक कैसे चुनें, यह जानें।",
 					"category": "Health & Nutrition",
@@ -18465,9 +18465,9 @@
 				"slug": "why-iodised-salt-still-matters",
 				"locale": "hi",
 				"translationOf": "blog_post-why-iodised-salt-still-matters",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "Why Iodised Salt Still Matters: What the ICCIDD Endorsement Actually Means",
+					"title": "आयोडीन युक्त नमक आज भी क्यों मायने रखता है: ICCIDD एंडोर्समेंट का असल मतलब क्या है",
 					"excerpt": "भारत में आयोडीन की कमी अब सुलझी हुई समस्या लगती है, लेकिन इसके पीछे के आंकड़े कुछ और ही कहानी कहते हैं। सार्वभौमिक नमक आयोडीकरण आज भी पहली रक्षा पंक्ति है, और यह तभी काम करता है जब हर बैच एक जैसा हो।",
 					"meta_description": "भारत में आयोडीन की कमी अभी खत्म नहीं हुई है। जानें क्यों सार्वभौमिक नमक आयोडीकरण आज भी पहली रक्षा पंक्ति है, और ICCIDD एंडोर्समेंट का क्या मतलब है।",
 					"category": "Health & Nutrition",
@@ -19057,9 +19057,9 @@
 				"slug": "inside-our-triple-refining-process",
 				"locale": "hi",
 				"translationOf": "blog_post-inside-our-triple-refining-process",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "Inside Our Triple Refining Process: From Raw Crystal to 99.28% Purity",
+					"title": "हमारी ट्रिपल रिफाइनिंग प्रक्रिया के अंदर: कच्चे क्रिस्टल से 99.28% शुद्धता तक",
 					"excerpt": "हमारे अपने खेतों के कच्चे नमक से लेकर आपकी अलमारी पर रखे पैकेट तक, बीच में छह चरण हैं। हर चरण पर ठीक-ठीक क्या होता है, यहां बताया गया है, और हम इसे हर बार एक ही तरीके से क्यों करते हैं।",
 					"meta_description": "गुजरात के हमारे खेतों के कच्चे नमक से लेकर आपकी अलमारी के पैकेट तक के छह चरण, और ट्रिपल रिफाइनिंग हर बैच में 99.28% शुद्धता तक कैसे पहुंचती है।",
 					"category": "Manufacturing & Quality",
@@ -19590,9 +19590,9 @@
 				"slug": "what-fssc-22000-and-iso-9001-mean",
 				"locale": "hi",
 				"translationOf": "blog_post-what-fssc-22000-and-iso-9001-mean",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "What FSSC 22000 and ISO 9001:2015 Actually Mean for Your Kitchen",
+					"title": "FSSC 22000 और ISO 9001:2015 का आपकी रसोई के लिए असल मतलब क्या है",
 					"excerpt": "सर्टिफ़िकेट अक्सर लोगो की एक दीवार जैसे लगते हैं। यहाँ बताया गया है कि हमारी पैकेजिंग पर लिखा हर सर्टिफ़िकेट असल में क्या गारंटी देता है, और हमने भारत में बिक्री के लिए ज़रूरी न्यूनतम के बजाय सभी सर्टिफ़िकेट क्यों रखे हैं।",
 					"meta_description": "हमारे नमक की पैकेजिंग पर लिखा हर सर्टिफ़िकेट असल में क्या गारंटी देता है, और हम कानूनी न्यूनतम से आगे जाकर FSSC 22000, ISO 9001:2015 और दूसरे सर्टिफ़िकेट क्यों रखते हैं।",
 					"category": "Manufacturing & Quality",
@@ -20123,9 +20123,9 @@
 				"slug": "why-kandla-and-mundra-matter",
 				"locale": "hi",
 				"translationOf": "blog_post-why-kandla-and-mundra-matter",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "Why Kandla and Mundra Make Ankur One of India's Most Efficient Salt Exporters",
+					"title": "कांडला और मुंद्रा बनाते हैं अंकुर को भारत के सबसे कुशल नमक निर्यातकों में से एक",
 					"excerpt": "हमारे प्लांट भारत के दो सबसे व्यस्त बंदरगाहों से कुछ ही मिनट की दूरी पर हैं, और यह कोई संयोग नहीं है। जानिए कि यह भौगोलिक स्थिति मिडिल ईस्ट से प्रशांत क्षेत्र तक के खरीदारों के लिए लीड टाइम कैसे कम करती है।",
 					"meta_description": "हमारे प्लांट कांडला और मुंद्रा बंदरगाहों से कुछ ही मिनट की दूरी पर हैं। यह भौगोलिक स्थिति मिडिल ईस्ट से प्रशांत क्षेत्र तक नमक खरीदने वालों के लिए लीड टाइम कैसे कम करती है।",
 					"category": "Export & Trade",
@@ -20667,9 +20667,9 @@
 				"slug": "30-years-on-gujarats-marine-salt-belt",
 				"locale": "hi",
 				"translationOf": "blog_post-30-years-on-gujarats-marine-salt-belt",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "30 Years on Gujarat's Marine Salt Belt: The Ankur Chemfood Story",
+					"title": "गुजरात की समुद्री नमक पट्टी पर 30 साल: अंकुर केमफूड की कहानी",
 					"excerpt": "1994 में चंपालाल ग्रुप ने गुजरात के तट पर एक ऐसा मौका देखा, जो आंखों के सामने छिपा था। तीन दशक और पाँच मैन्युफैक्चरिंग प्लांट बाद, जानिए उस फ़ैसले ने क्या रंग दिखाया।",
 					"meta_description": "गुजरात के तट पर चंपालाल ग्रुप का दांव कैसे बढ़कर अंकुर केमफूड बन गया: तीन दशक और पाँच नमक निर्माण प्लांट बाद।",
 					"category": "Company News",
@@ -21168,9 +21168,9 @@
 				"slug": "choosing-the-right-ankur-salt-for-your-family",
 				"locale": "hi",
 				"translationOf": "blog_post-choosing-the-right-ankur-salt-for-your-family",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "Low Sodium or Double Fortified? Choosing the Right Ankur Salt for Your Family",
+					"title": "कम सोडियम या डबल फोर्टिफाइड? अपने परिवार के लिए सही अंकुर साल्ट चुनें",
 					"excerpt": "हर घर को एक जैसा नमक नहीं चाहिए। यहाँ हमारी रेंज की आसान भाषा में गाइड है, रोज़मर्रा के आयोडीन युक्त नमक से लेकर कम सोडियम और डबल फोर्टिफाइड वेरिएंट तक।",
 					"meta_description": "परिवार के लिए नमक कैसे चुनें, इसकी आसान भाषा में गाइड, रोज़ के आयोडीन युक्त नमक से लेकर कम सोडियम और डबल फोर्टिफाइड (आयरन + आयोडीन) वेरिएंट तक।",
 					"category": "Health & Nutrition",
@@ -21715,9 +21715,9 @@
 				"slug": "truth-about-iodised-salt",
 				"locale": "hi",
 				"translationOf": "blog_post-truth-about-iodised-salt",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "The Truth About Iodised Salt",
+					"title": "आयोडीन युक्त नमक की असली सच्चाई",
 					"excerpt": "रोज़ की सेहत के लिए आयोडीनीकरण आज भी क्यों ज़रूरी है, और असली सुरक्षा को मार्केटिंग से कैसे पहचानें।",
 					"category": "Health & Nutrition",
 					"read_time": 4,
@@ -22252,9 +22252,9 @@
 				"slug": "cooking-with-rock-salt",
 				"locale": "hi",
 				"translationOf": "blog_post-cooking-with-rock-salt",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "5 Ways to Cook With Rock Salt",
+					"title": "रॉक साल्ट से खाना बनाने के 5 तरीके",
 					"excerpt": "सेंधा नमक सिर्फ़ व्रत के लिए नहीं है। जानिए यह रसोई में अपनी पक्की जगह कैसे बनाता है।",
 					"category": "Recipes",
 					"read_time": 4,
@@ -22745,9 +22745,9 @@
 				"slug": "low-sodium-flavor",
 				"locale": "hi",
 				"translationOf": "blog_post-low-sodium-flavor",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "Low Sodium Doesn't Mean Low Flavour",
+					"title": "कम सोडियम का मतलब कम स्वाद नहीं होता",
 					"excerpt": "डॉ. साल्ट की सोच: असली नमक का स्वाद छोड़े बिना, ध्यान से खाने का तरीका।",
 					"category": "Health & Nutrition",
 					"read_time": 4,
@@ -23238,9 +23238,9 @@
 				"slug": "salt-pan-to-kitchen",
 				"locale": "hi",
 				"translationOf": "blog_post-salt-pan-to-kitchen",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "From Salt Pan to Kitchen: Inside Our Process",
+					"title": "सॉल्ट पैन से रसोई तक: हमारी प्रक्रिया की अंदरूनी झलक",
 					"excerpt": "एक नज़र उस प्रक्रिया पर, जो कच्चे क्रिस्टल को आपकी मेज़ पर रखे नमक में बदलती है।",
 					"category": "Manufacturing & Quality",
 					"read_time": 5,
@@ -23670,9 +23670,9 @@
 				"slug": "eating-mindfully",
 				"locale": "hi",
 				"translationOf": "blog_post-eating-mindfully",
-				"status": "draft",
+				"status": "published",
 				"data": {
-					"title": "Eating Mindfully, One Pinch at a Time",
+					"title": "एक-एक चुटकी में, सोच-समझकर खाना",
 					"excerpt": "नमक के साथ बेहतर रिश्ते के लिए आसान आदतें, बिना उस स्वाद को खोए जिससे खाना सचमुच स्वादिष्ट लगता है।",
 					"category": "Health & Nutrition",
 					"read_time": 4,

@@ -46,6 +46,21 @@ export default defineConfig({
 				adminPages: [...smtpPlugin.adminPages, FORM_RECIPIENTS_PAGE],
 				entrypoint: fileURLToPath(new URL("./src/plugins/smtp-cloudflare.mjs", import.meta.url)),
 				allowedHosts: collectAllowedHosts("marketplace"),
+			}, {
+				// Translates and publishes Hindi when English content is
+				// published (src/plugins/hindi-translate.mjs); the API key is
+				// set in its settings in the admin.
+				id: "hindi-translate",
+				version: "1.0.0",
+				format: "native",
+				entrypoint: fileURLToPath(new URL("./src/plugins/hindi-translate.mjs", import.meta.url)),
+				capabilities: ["content:write", "content:publish", "content:revisions:read", "network:request"],
+				allowedHosts: ["openrouter.ai"],
+				settingsSchema: {
+					enabled: { type: "boolean", label: "Translate and publish Hindi when English content is published", default: true },
+					openrouterApiKey: { type: "secret", label: "OpenRouter API key", description: "From openrouter.ai/keys. Stored encrypted." },
+					model: { type: "string", label: "Model", description: "OpenRouter model id", default: "anthropic/claude-haiku-5.5" },
+				},
 			}],
 		}),
 	],
