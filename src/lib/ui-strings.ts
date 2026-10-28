@@ -46,6 +46,7 @@ const hi: Record<string, string> = {
   'Close menu': 'मेन्यू बंद करें',
   'Switch to Hindi': 'हिंदी में देखें',
   'Switch to English': 'अंग्रेज़ी में देखें',
+  'Language': 'भाषा',
   'Close': 'बंद करें',
   'Previous video': 'पिछला वीडियो',
   'Next video': 'अगला वीडियो',

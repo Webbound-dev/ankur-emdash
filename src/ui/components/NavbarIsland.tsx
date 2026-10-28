@@ -18,8 +18,51 @@ export interface NavbarContent {
   products: ProductItem[];
 }
 
-// Each language named in itself, as the switcher shows the one to switch to.
-const LOCALE_LABEL: Record<Locale, string> = { en: 'English', hi: 'हिंदी' };
+// Each language named in itself, in the language toggle.
+const LOCALE_SHORT: Record<Locale, string> = { en: 'EN', hi: 'हिं' };
+const LOCALES: Locale[] = ['en', 'hi'];
+
+/**
+ * Both languages side by side as a sliding switch: a red thumb sits under the
+ * current one; clicking the other slides it across while that page loads.
+ */
+function LanguageToggle({ locale, alternateHref, className = '' }: { locale: Locale; alternateHref: string; className?: string }) {
+  const [switching, setSwitching] = useState(false);
+  const shown: Locale = switching ? (locale === 'en' ? 'hi' : 'en') : locale;
+  return (
+    <div role="group" aria-label={t(locale, 'Language')} className={`items-center gap-2 ${className}`}>
+      <Globe size={16} strokeWidth={1.75} aria-hidden="true" className="text-indian-red/60" />
+      <div className="relative grid grid-cols-2 rounded-full bg-indian-red/[0.06] p-[3px] ring-1 ring-inset ring-indian-red/15 shadow-[inset_0_1px_2px_rgba(168,33,33,0.08)]">
+        <span
+          aria-hidden="true"
+          className={`absolute inset-y-[3px] left-[3px] w-[calc(50%-3px)] rounded-full bg-indian-red shadow-[0_2px_6px_rgba(168,33,33,0.35)] transition-transform duration-300 ease-[cubic-bezier(.4,0,.2,1)] ${shown === 'hi' ? 'translate-x-full' : 'translate-x-0'}`}
+        />
+        {LOCALES.map((l) => {
+          const label = (
+            <span className={`relative z-10 flex h-7 w-11 items-center justify-center font-sans text-[13px] font-semibold leading-none transition-colors duration-300 ${shown === l ? 'text-silent-white' : 'text-indian-red/60 group-hover:text-indian-red'}`}>
+              {LOCALE_SHORT[l]}
+            </span>
+          );
+          return l === locale ? (
+            <span key={l} lang={l} aria-current="true" className="rounded-full">{label}</span>
+          ) : (
+            <a
+              key={l}
+              href={alternateHref}
+              hrefLang={l}
+              lang={l}
+              onClick={() => setSwitching(true)}
+              aria-label={t(locale, l === 'hi' ? 'Switch to Hindi' : 'Switch to English')}
+              className="group rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-indian-red/40"
+            >
+              {label}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 interface NavbarProps {
   pathname: string;
@@ -237,16 +280,7 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
             this component stays routing-agnostic). Hidden until both props
             are supplied. */}
         {locale && alternateLocale && alternateHref && (
-          <a
-            href={alternateHref}
-            hrefLang={alternateLocale}
-            lang={alternateLocale}
-            className={`hidden lg:inline-flex shrink-0 items-center gap-1.5 font-sans text-sm ${linkClass(alternateHref)}`}
-            aria-label={t(locale ?? 'en', alternateLocale === 'hi' ? 'Switch to Hindi' : 'Switch to English')}
-          >
-            <Globe size={15} strokeWidth={1.75} aria-hidden="true" />
-            {LOCALE_LABEL[alternateLocale]}
-          </a>
+          <LanguageToggle locale={locale} alternateHref={alternateHref} className="hidden lg:inline-flex shrink-0" />
         )}
 
         {/* Mobile spacer — balances the hamburger's width so the logo stays centered */}
@@ -272,16 +306,7 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
           <img src={logo.src} alt={logo.alt} width={10558} height={5263} className="h-8 w-auto" />
           <div className="flex items-center gap-3">
             {locale && alternateLocale && alternateHref && (
-              <a
-                href={alternateHref}
-                hrefLang={alternateLocale}
-                lang={alternateLocale}
-                className="inline-flex items-center gap-1.5 font-sans text-sm font-medium text-indian-red"
-                aria-label={t(locale ?? 'en', alternateLocale === 'hi' ? 'Switch to Hindi' : 'Switch to English')}
-              >
-                <Globe size={15} strokeWidth={1.75} aria-hidden="true" />
-                {LOCALE_LABEL[alternateLocale]}
-              </a>
+              <LanguageToggle locale={locale} alternateHref={alternateHref} className="inline-flex" />
             )}
             <button onClick={() => setSidebarOpen(false)} aria-label={t(locale ?? 'en', 'Close menu')} className="p-1">
               <X size={22} />
