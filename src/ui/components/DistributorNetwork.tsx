@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import indiaMapRaw from '@svg-maps/india';
 import { computePathCentroid } from '../lib/mapCentroid';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 
 // Browser only: GSAP starts a timer on registration, which Cloudflare Workers forbid at module scope (SSR).
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
@@ -43,8 +45,11 @@ export interface DistributorNetworkContent {
 export default function DistributorNetwork({
   content,
   distributors: initialDistributors,
+  locale = 'en',
 }: {
   content: DistributorNetworkContent;
+  /** Page language, for the interface text (src/lib/ui-strings.ts). */
+  locale?: Locale;
   distributors: Distributor[];
 }) {
   const { hero } = content;
@@ -184,7 +189,7 @@ export default function DistributorNetwork({
           <div className="relative mt-10 lg:mt-12 mx-auto h-[280px] sm:h-[340px] lg:h-[420px]">
             <div className="pointer-events-none absolute -top-10 -left-10 h-56 w-56 rounded-full bg-silent-white/10 blur-3xl" aria-hidden="true" />
             <div className="pointer-events-none absolute -bottom-14 -right-6 h-64 w-64 rounded-full bg-silent-white/10 blur-3xl" aria-hidden="true" />
-            <span className="sr-only">Map of Ankur's distributor network across India</span>
+            <span className="sr-only">{t(locale, 'Map of Ankur\'s distributor network across India')}</span>
             <svg viewBox={indiaMap.viewBox} className="relative h-full w-auto mx-auto block drop-shadow-[0_12px_28px_rgba(0,0,0,0.25)]" aria-hidden="true">
               {indiaMap.locations.map((loc) => (
                 <path

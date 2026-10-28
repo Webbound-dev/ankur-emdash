@@ -2,6 +2,8 @@ import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 
 // Browser only: GSAP starts a timer on registration, which Cloudflare Workers forbid at module scope (SSR).
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
@@ -23,7 +25,7 @@ export interface BlogTeaserContent {
   posts: BlogPost[];
 }
 
-export default function BlogTeaser({ content }: { content: BlogTeaserContent }) {
+export default function BlogTeaser({ content, locale = 'en' }: { content: BlogTeaserContent; locale?: Locale }) {
   const { eyebrow, title, viewAll, posts } = content;
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -119,7 +121,7 @@ export default function BlogTeaser({ content }: { content: BlogTeaserContent }) 
               <button
                 type="button"
                 onClick={() => scrollByCard(-1)}
-                aria-label="Previous article"
+                aria-label={t(locale, 'Previous article')}
                 className="flex items-center justify-center w-11 h-11 rounded-full border border-indian-red/25 text-indian-red hover:bg-indian-red hover:text-silent-white hover:border-indian-red transition-colors"
               >
                 <ArrowLeft size={16} />
@@ -127,7 +129,7 @@ export default function BlogTeaser({ content }: { content: BlogTeaserContent }) 
               <button
                 type="button"
                 onClick={() => scrollByCard(1)}
-                aria-label="Next article"
+                aria-label={t(locale, 'Next article')}
                 className="flex items-center justify-center w-11 h-11 rounded-full border border-indian-red/25 text-indian-red hover:bg-indian-red hover:text-silent-white hover:border-indian-red transition-colors"
               >
                 <ArrowRight size={16} />

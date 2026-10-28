@@ -34,6 +34,14 @@ The EmDash docs are available as an MCP server at `https://docs.emdashcms.com/mc
 
 This template ships with `.mcp.json`, `.cursor/mcp.json`, and `.vscode/mcp.json` so Claude Code, Cursor, and VS Code auto-discover the docs server. Other tools (OpenCode, Windsurf, etc.) need a manual one-time setup -- see [docs.emdashcms.com/docs-mcp](https://docs.emdashcms.com/docs-mcp).
 
+## Languages (English + Hindi)
+
+- English is served at `/about/`, Hindi at `/hi/about/`. Both come from the same files in `src/pages/[...lang]/`; `src/middleware.ts` 404s any other prefix and gives EmDash the page's locale, so `getPage()`, the collection getters and menus return the Hindi translation when one is published, and English otherwise.
+- Hindi content lives in EmDash as translations of the English entries (`locale: "hi"`). Content stores plain English paths (`/about/`); the loader adds `/hi/` on Hindi pages. Use `localePath()` from `src/lib/i18n.ts` for links written in templates.
+- Text written in templates (labels, placeholders, form messages) goes through `t(locale, 'English text')` from `src/lib/ui-strings.ts`, with its Hindi in the same file. React islands take a `locale` prop; client scripts use `t(pageLocale(), …)`.
+- Blog categories and export country names stay English in the content (code matches on them) and are translated for display via `t()`.
+- `node migration/hindi/translate.mjs` translates new or changed English content with Claude (see its header and `migration/hindi/style-guide.md`) and writes the Hindi entries to `seed/seed.json` as drafts.
+
 ## Rules
 
 - All content pages must be server-rendered (`output: "server"`). No `getStaticPaths()` for CMS content.

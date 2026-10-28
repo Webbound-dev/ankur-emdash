@@ -1,4 +1,7 @@
 ---
+import { toLocale } from '../../lib/i18n';
+import { t } from '../../lib/ui-strings';
+const locale = toLocale(Astro.currentLocale);
 export interface BreadcrumbItem {
   label: string;
   href?: string;
@@ -12,7 +15,7 @@ const { items } = Astro.props;
 ---
 
 {items.length > 1 && (
-  <nav aria-label="Breadcrumb" class="border-b border-indian-red/10 bg-silent-white">
+  <nav aria-label={t(locale, 'Breadcrumb')} class="border-b border-indian-red/10 bg-silent-white">
     <ol class="max-w-[1200px] mx-auto px-6 lg:px-10 py-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-indian-red/60">
       {/* One line per item: Astro 7 keeps whitespace between elements, which the
           old site's build (Astro 5) dropped. */}

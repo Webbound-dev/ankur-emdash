@@ -1,4 +1,5 @@
 ---
+import { localePath, toLocale } from '../../lib/i18n';
 interface GridProduct {
   slug: string;
   name: string;
@@ -26,7 +27,7 @@ const { heading, subheading, products } = Astro.props;
   <div class="mt-10 grid grid-cols-2 lg:grid-cols-3 gap-x-6 lg:gap-x-8 gap-y-10 lg:gap-y-12">
     {products.map((product, pi) => (
       <a
-        href={`/products/${product.slug}/`}
+        href={localePath(`/products/${product.slug}/`, toLocale(Astro.currentLocale))}
         class="reveal group block"
         style={`transition-delay: ${pi * 60}ms`}
       >

@@ -2,6 +2,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Play } from 'lucide-react';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 
 // Browser only: GSAP starts a timer on registration, which Cloudflare Workers forbid at module scope (SSR).
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
@@ -23,7 +25,7 @@ export interface FactoryVideoContent {
 // place instead of navigating away.
 const AUTOPLAY_MS = 4500;
 
-export default function FactoryVideo({ content }: { content: FactoryVideoContent }) {
+export default function FactoryVideo({ content, locale = 'en' }: { content: FactoryVideoContent; locale?: Locale }) {
   const { eyebrow, title, items } = content;
   const sectionRef = useRef<HTMLElement>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -242,7 +244,7 @@ export default function FactoryVideo({ content }: { content: FactoryVideoContent
               <button
                 type="button"
                 onClick={() => goTo((activeIndex - 1 + items.length) % items.length)}
-                aria-label="Previous video"
+                aria-label={t(locale, 'Previous video')}
                 className="hidden sm:flex absolute left-2 lg:left-6 top-1/2 -translate-y-1/2 z-40 h-10 w-10 items-center justify-center rounded-full bg-silent-white/10 text-silent-white ring-1 ring-silent-white/20 transition-colors hover:bg-silent-white/20"
               >
                 <svg viewBox="0 0 24 24" className="h-4 w-4"><path d="M15 6 9 12l6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -250,7 +252,7 @@ export default function FactoryVideo({ content }: { content: FactoryVideoContent
               <button
                 type="button"
                 onClick={() => goTo((activeIndex + 1) % items.length)}
-                aria-label="Next video"
+                aria-label={t(locale, 'Next video')}
                 className="hidden sm:flex absolute right-2 lg:right-6 top-1/2 -translate-y-1/2 z-40 h-10 w-10 items-center justify-center rounded-full bg-silent-white/10 text-silent-white ring-1 ring-silent-white/20 transition-colors hover:bg-silent-white/20"
               >
                 <svg viewBox="0 0 24 24" className="h-4 w-4"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>

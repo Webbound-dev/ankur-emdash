@@ -6,6 +6,7 @@ import type { ContentSeo, SeoMeta } from "emdash";
 import { navigationMenus, withNavigation } from "./navigation.mjs";
 import { decodeEntry, decodePage } from "./codec.mjs";
 import specs from "../../content/specs.json";
+import { DEFAULT_LOCALE, localePath, toLocale } from "../i18n";
 
 const pageSpecs = specs.pages as Record<string, any>;
 const collectionSpecs = specs.collections as Record<string, any>;
@@ -25,6 +26,8 @@ interface CmsRef {
 	seo?: ContentSeo;
 	/** When the entry was last saved, for sitemap <lastmod>. */
 	updatedAt?: Date;
+	/** A /hi/ page showing English because it has no published Hindi translation. */
+	fallback?: boolean;
 }
 
 function withRef<T>(content: T, ref: CmsRef): T {
@@ -35,6 +38,11 @@ function withRef<T>(content: T, ref: CmsRef): T {
 }
 
 const refOf = (content: unknown): CmsRef | undefined => (content as any)?.[REF];
+
+/** True when a page or entry is shown in English on a page in another language. */
+export function isFallback(content: unknown): boolean {
+	return refOf(content)?.fallback === true;
+}
 
 /** When a page or entry from this module was last saved. */
 export function lastModified(content: unknown): Date | undefined {
@@ -91,11 +99,47 @@ export function panelSeo(
 	});
 }
 
+/** The language of the page being rendered (from its /hi/ prefix). */
+const requestLocale = () => toLocale(getRequestContext()?.locale);
+
+/**
+ * On a Hindi page, point the content's internal links at Hindi pages
+ * (`/about/` -> `/hi/about/`). Content stores plain paths in every language,
+ * so editors and translations never have to change URLs.
+ *
+ * Copies only the objects on the way to a changed link: decoded rich text can
+ * be EmDash's own (cached) value, which must not change for other requests.
+ * Copies keep their symbol-keyed edit markers.
+ */
+function localizeLinks<T>(content: T): T {
+	const locale = requestLocale();
+	if (locale === DEFAULT_LOCALE) return content;
+	const rewrite = (node: any): any => {
+		if (!node || typeof node !== "object") return node;
+		let copy: any;
+		for (const [key, value] of Object.entries(node)) {
+			const next = typeof value === "string"
+				? (/^(href|blogHref|linkHref)$/.test(key) ? localePath(value, locale) : value)
+				: rewrite(value);
+			if (next === value) continue;
+			if (!copy) {
+				copy = Array.isArray(node) ? [...node] : { ...node };
+				for (const symbol of Object.getOwnPropertySymbols(node)) {
+					Object.defineProperty(copy, symbol, Object.getOwnPropertyDescriptor(node, symbol)!);
+				}
+			}
+			copy[key] = next;
+		}
+		return copy ?? node;
+	};
+	return rewrite(content);
+}
+
 /** A page such as `home`, `about`, `navbar`, `footer` (pages/<name>.json). */
 export async function getPage<T = any>(name: string, registerCacheHint?: (hint: any) => void): Promise<T> {
 	const spec = pageSpecs[name];
 	if (!spec) throw new Error(`No content spec for page "${name}"`);
-	const { entry } = await getEmDashEntry(spec.collection as any, name);
+	const { entry, fallbackLocale } = await getEmDashEntry(spec.collection as any, name);
 	if (!entry) {
 		throw new Error(`Page "${name}" is missing from EmDash. Has the seed been applied?`);
 	}
@@ -107,22 +151,42 @@ export async function getPage<T = any>(name: string, registerCacheHint?: (hint: 
 		if (!data) throw new Error(`Menu "${menuName}" is missing. Apply the navigation migration.`);
 		return [menuName, data];
 	}));
-	return withRef(withNavigation(name, content, Object.fromEntries(menus), isEditMode()), {
+	return withRef(localizeLinks(withNavigation(name, content, Object.fromEntries(menus), isEditMode())), {
 		scope: { kind: "page", collection: spec.collection, id: (entry.data as any).id, name },
 		edit: entry.edit,
 		seo: (entry.data as any).seo,
 		updatedAt: (entry.data as any).updatedAt,
+		fallback: fallbackLocale !== undefined && fallbackLocale !== requestLocale(),
 	}) as T;
 }
 
-async function getAllEntries(collection: string) {
+async function getLocaleEntries(collection: string, locale: string) {
 	const all: any[] = [];
 	let cursor: string | undefined;
 	do {
-		const res = await getEmDashCollection(collection as any, { limit: 100, cursor });
+		const res = await getEmDashCollection(collection as any, { limit: 100, cursor, locale });
 		all.push(...res.entries);
 		cursor = res.nextCursor;
 	} while (cursor);
+	return all;
+}
+
+// Marks an English entry standing in for a missing translation.
+const FALLBACK = Symbol("fallback");
+
+async function getAllEntries(collection: string) {
+	// Lists don't follow the locale fallback that single entries do (EmDash
+	// docs: i18n), so on a Hindi page take each English entry's Hindi
+	// translation where it has one (same slug) and keep the English otherwise.
+	const locale = requestLocale();
+	let all = await getLocaleEntries(collection, DEFAULT_LOCALE);
+	if (locale !== DEFAULT_LOCALE) {
+		// Matched by slug: a translation's entry id carries its locale ("hi/ankur-salt").
+		const slugOf = (e: any) => String(e.data?.slug ?? e.id);
+		const translated = new Map((await getLocaleEntries(collection, locale)).map((e) => [slugOf(e), e]));
+		// A marked copy: the entry itself may be EmDash's cached object.
+		all = all.map((e) => translated.get(slugOf(e)) ?? { ...e, [FALLBACK]: true });
+	}
 	// A preview link (`?_preview=…`) for an entry of this collection: the list
 	// above already carries the draft of a published entry, but leaves out one
 	// that was never published, so add that entry for this request only.
@@ -155,11 +219,12 @@ async function getList<T = any>(collection: string): Promise<T[]> {
 	const spec = collectionSpecs[collection];
 	const entries = await getAllEntries(collection);
 	return entries.map((e) =>
-		withRef(keepRichTextEditing(decodeEntry(spec, { slug: (e.data as any).slug ?? e.id, data: e.data }), e.data as any), {
+		withRef(localizeLinks(keepRichTextEditing(decodeEntry(spec, { slug: (e.data as any).slug ?? e.id, data: e.data }), e.data as any)), {
 			scope: { kind: "entry", collection, id: (e.data as any).id, slug: (e.data as any).slug ?? e.id },
 			edit: e.edit,
 			seo: (e.data as any).seo,
 			updatedAt: (e.data as any).updatedAt,
+			fallback: e[FALLBACK] === true,
 		}),
 	) as T[];
 }

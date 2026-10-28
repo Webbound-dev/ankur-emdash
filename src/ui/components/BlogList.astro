@@ -1,5 +1,8 @@
 ---
+import { toLocale } from '../../lib/i18n';
+import { t } from '../../lib/ui-strings';
 import type { PortableTextBlock } from 'emdash';
+const locale = toLocale(Astro.currentLocale);
 export interface BlogSection {
   type: 'lead' | 'h2' | 'h3' | 'p' | 'ul' | 'quote' | 'statrow' | 'image';
   text?: string;
@@ -110,7 +113,7 @@ const [featured, ...rest] = posts;
               style={`color: ${categoryColors[featured.category] ?? defaultCategoryColor}`}
               data-cms-field="[0].category"
             >
-              {featured.category}
+              {t(locale, featured.category)}
             </span>
           </div>
           <h2 class="font-display font-medium text-2xl lg:text-[2rem] leading-tight text-indian-red mb-4" data-cms-field="[0].title">
@@ -158,7 +161,7 @@ const [featured, ...rest] = posts;
               class="blog-filter-pill rounded-full px-3.5 py-1 text-xs font-medium transition-colors duration-150 bg-indian-red/[0.06] text-indian-red/70 hover:bg-indian-red/[0.12]"
               data-filter={cat}
             >
-              {cat}
+              {t(locale, cat)}
             </button>
           ))}
         </div>
@@ -195,7 +198,7 @@ const [featured, ...rest] = posts;
                     style={`color: ${categoryColors[post.category] ?? defaultCategoryColor}`}
                     data-cms-field={`[${pi}].category`}
                   >
-                    {post.category}
+                    {t(locale, post.category)}
                   </span>
                   <span class="text-indian-red/20">&middot;</span>
                   <span class="text-[11px] text-indian-red/45" data-cms-field={`[${pi}].publishedAt`}>{post.publishedAt}</span>
@@ -223,7 +226,7 @@ const [featured, ...rest] = posts;
       </div>
 
       <!-- Pagination — 10 rows per page; hidden automatically while everything fits on one page -->
-      <nav id="blog-pagination" class="mt-10 hidden items-center justify-center gap-4" aria-label="Blog pagination">
+      <nav id="blog-pagination" class="mt-10 hidden items-center justify-center gap-4" aria-label={t(locale, 'Blog pagination')}>
         <button
           type="button"
           id="blog-prev"
@@ -231,7 +234,7 @@ const [featured, ...rest] = posts;
         >
           <span aria-hidden="true">&larr;</span> Prev
         </button>
-        <span id="blog-page-indicator" class="text-sm text-indian-red/50 tabular-nums">Page 1 of 1</span>
+        <span id="blog-page-indicator" class="text-sm text-indian-red/50 tabular-nums">{t(locale, 'Page {current} of {total}', { current: 1, total: 1 })}</span>
         <button
           type="button"
           id="blog-next"
@@ -276,6 +279,7 @@ const [featured, ...rest] = posts;
 </style>
 
 <script>
+  import { pageLocale, t } from '../../lib/ui-strings';
   // initBlogList runs on `astro:page-load` (fires on initial load AND every
   // client-side transition) rather than as plain top-level code — this
   // <script> is a JS module, and modules only ever execute once per browser
@@ -331,7 +335,7 @@ const [featured, ...rest] = posts;
 
       rows.forEach((row) => row.classList.toggle('hidden', !pageRows.has(row)));
 
-      if (pageIndicator) pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+      if (pageIndicator) pageIndicator.textContent = t(pageLocale(), 'Page {current} of {total}', { current: currentPage, total: totalPages });
       if (prevBtn) prevBtn.disabled = currentPage <= 1;
       if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
       paginationNav?.classList.toggle('hidden', totalPages <= 1);

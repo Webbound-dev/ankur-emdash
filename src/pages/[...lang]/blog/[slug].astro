@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogDetail from '../../ui/components/BlogDetail.astro';
-import type { BlogPost } from '../../ui/components/BlogList.astro';
-import { cmsList, cmsScope, getBlogs, getPage } from '../../lib/content';
-import { buildArticleSchema, toJsonLd } from '../../lib/structuredData';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogDetail from '../../../ui/components/BlogDetail.astro';
+import type { BlogPost } from '../../../ui/components/BlogList.astro';
+import { cmsList, cmsScope, getBlogs, getPage } from '../../../lib/content';
+import { buildArticleSchema, toJsonLd } from '../../../lib/structuredData';
 
 const content = await getPage('blog');
 const posts = (await getBlogs()) as BlogPost[];

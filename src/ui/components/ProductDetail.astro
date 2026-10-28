@@ -1,4 +1,6 @@
 ---
+import { toLocale } from '../../lib/i18n';
+import { t } from '../../lib/ui-strings';
 import ChecklistSection from './product-sections/ChecklistSection.astro';
 import { mobileVariant } from '../lib/mobileImage';
 import SpecTableSection from './product-sections/SpecTableSection.astro';
@@ -6,6 +8,7 @@ import NarrativeSection from './product-sections/NarrativeSection.astro';
 import UseCasesSection from './product-sections/UseCasesSection.astro';
 import WhereToBuySection from './product-sections/WhereToBuySection.astro';
 import FaqSection from './product-sections/FaqSection.astro';
+const locale = toLocale(Astro.currentLocale);
 
 interface SectionBase { id: string; heading: string }
 type ChecklistSectionData = SectionBase & { type: 'checklist'; items: { title: string; description: string }[] };
@@ -160,7 +163,7 @@ const NAV_ICONS: Record<string, string> = {
 
     <!-- Scroll cue -->
     <div class="absolute bottom-6 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-silent-white/50">
-      <span class="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+      <span class="text-[10px] uppercase tracking-[0.3em]">{t(locale, 'Scroll')}</span>
       <svg viewBox="0 0 16 16" class="h-3 w-3 animate-bounce" fill="none">
         <path d="M2 5 8 11 14 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
       </svg>

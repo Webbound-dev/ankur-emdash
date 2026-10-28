@@ -1,0 +1,28 @@
+---
+import { toLocale } from '../../lib/i18n';
+import { cmsScope, getDistributors, getPage } from '../../lib/content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../ui/components/Hero';
+import QuoteSection from '../../ui/components/QuoteSection';
+import ProductsTeaser from '../../ui/components/ProductsTeaser';
+import CertificationsStrip from '../../ui/components/CertificationsStrip';
+import DistributionMap from '../../ui/components/DistributionMap';
+import FactoryVideo from '../../ui/components/FactoryVideo';
+import BlogTeaser from '../../ui/components/BlogTeaser';
+const locale = toLocale(Astro.currentLocale);
+const content = await getPage('home');
+const distributors = await getDistributors();
+// The hero mounts every slide upfront, but slide 0 is the first paint: its
+// video poster or image is this page's largest image.
+const firstSlideMedia = content.hero.slides[0]?.media;
+const preloadImage = firstSlideMedia ? (firstSlideMedia.type === 'video' ? firstSlideMedia.poster : firstSlideMedia.src) : undefined;
+---
+<BaseLayout title={content.seo.title} description={content.seo.description} image={content.seo.image} preloadImage={preloadImage} seoFrom={content} cms={cmsScope(content)}>
+  <Hero locale={locale} client:load content={content.hero} />
+  <QuoteSection locale={locale} client:visible content={content.quote} />
+  <ProductsTeaser locale={locale} client:visible content={content.productsTeaser} />
+  <CertificationsStrip locale={locale} client:visible content={content.certificationsStrip} />
+  <DistributionMap locale={locale} client:visible content={content.distributionMap} distributors={distributors} />
+  <FactoryVideo locale={locale} client:visible content={content.factoryVideo} />
+  <BlogTeaser locale={locale} client:visible content={content.blogTeaser} />
+</BaseLayout>

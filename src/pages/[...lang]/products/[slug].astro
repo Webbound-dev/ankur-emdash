@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProductDetail from '../../ui/components/ProductDetail.astro';
-import type { Product } from '../../ui/components/ProductDetail.astro';
-import { cmsScope, getProduct } from '../../lib/content';
-import { buildFaqSchema, buildProductSchema, toJsonLd } from '../../lib/structuredData';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProductDetail from '../../../ui/components/ProductDetail.astro';
+import type { Product } from '../../../ui/components/ProductDetail.astro';
+import { cmsScope, getProduct } from '../../../lib/content';
+import { buildFaqSchema, buildProductSchema, toJsonLd } from '../../../lib/structuredData';
 
 const { slug } = Astro.params;
 const product = slug ? await getProduct<Product>(slug) : undefined;

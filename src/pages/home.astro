@@ -1,6 +1,0 @@
----
-// The `home` page's preview link from the EmDash admin is built from the
-// pages collection's URL pattern (`/{slug}/`), which gives `/home/`. Send it to
-// the homepage, keeping the query so a `?_preview=` token still applies.
-return Astro.redirect(`/${Astro.url.search}`, 301);
----

@@ -1,7 +1,10 @@
 ---
+import { toLocale } from '../../lib/i18n';
+import { t } from '../../lib/ui-strings';
 import GradesTable from './GradesTable';
 import CustomSelect from './CustomSelect';
 import FaqAccordion from './FaqAccordion.astro';
+const locale = toLocale(Astro.currentLocale);
 
 // Same icons already used for these two fields (factory for industry,
 // filled diamond for grade) — just carried over to CustomSelect's 24x24
@@ -171,7 +174,7 @@ const industryIcons: Record<string, string> = {
         <button
           type="button"
           id="datasheet-modal-close"
-          aria-label="Close"
+          aria-label={t(locale, 'Close')}
           class="absolute -top-3 -right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white text-indian-red shadow-lg ring-1 ring-indian-red/10 transition-colors hover:bg-indian-red hover:text-silent-white"
         >
           <svg viewBox="0 0 24 24" class="h-4 w-4"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
@@ -355,7 +358,7 @@ const industryIcons: Record<string, string> = {
         />
         <div class="relative">
           <span class="font-display text-[10px] font-medium uppercase tracking-widest text-silent-white/50">Ref. RFQ</span>
-          <h3 class="mt-2 font-display font-medium text-xl text-silent-white">Bulk Enquiry Form</h3>
+          <h3 class="mt-2 font-display font-medium text-xl text-silent-white">{t(locale, 'Bulk Enquiry Form')}</h3>
           <p class="mt-3 text-sm leading-relaxed text-silent-white/70">
             Tell us your grade, quantity and delivery location, and our team will follow up directly with a quote.
           </p>
@@ -369,7 +372,7 @@ const industryIcons: Record<string, string> = {
             <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">01 · Company Name</span>
             <div class="relative mt-1.5">
               <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16M13 21h7V11a1 1 0 0 0-1-1h-6M8 8h1M8 12h1M8 16h1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
-              <input type="text" name="company" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="Your company" />
+              <input type="text" name="company" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder={t(locale, 'Your company')} />
             </div>
           </label>
           <label class="block">
@@ -378,7 +381,7 @@ const industryIcons: Record<string, string> = {
               <CustomSelect
                 client:visible
                 name="industry"
-                placeholder="Select industry"
+                placeholder={t(locale, 'Select industry')}
                 options={[...industries.items.map((industry) => industry.name), 'Other']}
                 icon={SELECT_ICONS.industry}
                 required
@@ -386,7 +389,7 @@ const industryIcons: Record<string, string> = {
             </div>
           </label>
           <label id="rfq-industry-other-wrap" class="hidden sm:col-span-2">
-            <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">Please specify your industry</span>
+            <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">{t(locale, 'Please specify your industry')}</span>
             <div class="relative mt-1.5">
               <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M3 21V10l5 3V10l5 3V6l7 4v11H3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
               <input type="text" id="rfq-industry-other" name="industryOther" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="e.g. Cosmetics manufacturing" />
@@ -398,7 +401,7 @@ const industryIcons: Record<string, string> = {
               <CustomSelect
                 client:visible
                 name="grade"
-                placeholder="Select grade"
+                placeholder={t(locale, 'Select grade')}
                 options={[...grades.items.map((grade) => grade.name), 'Other']}
                 icon={SELECT_ICONS.grade}
                 iconFilled
@@ -414,7 +417,7 @@ const industryIcons: Record<string, string> = {
             </div>
           </label>
           <label id="rfq-grade-other-wrap" class="hidden sm:col-span-2">
-            <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">Please specify your grade</span>
+            <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">{t(locale, 'Please specify your grade')}</span>
             <div class="relative mt-1.5">
               <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M3 21V10l5 3V10l5 3V6l7 4v11H3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
               <input type="text" id="rfq-grade-other" name="gradeOther" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="e.g. Food grade, custom PPM" />
@@ -424,7 +427,7 @@ const industryIcons: Record<string, string> = {
             <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">05 · Delivery Location</span>
             <div class="relative mt-1.5">
               <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /><circle cx="12" cy="9" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8" /></svg>
-              <input type="text" name="location" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="City, state / country" />
+              <input type="text" name="location" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder={t(locale, 'City, state / country')} />
             </div>
           </label>
           <label class="block sm:col-span-2">
@@ -451,7 +454,7 @@ const industryIcons: Record<string, string> = {
             <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">08 · Message (Optional)</span>
             <div class="relative mt-1.5">
               <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-3 h-4 w-4 text-indian-red/35"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H8l-5 4V6a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
-              <textarea name="message" rows="3" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="Any additional details about your requirement"></textarea>
+              <textarea name="message" rows="3" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder={t(locale, 'Any additional details about your requirement')}></textarea>
             </div>
           </label>
         </div>
@@ -461,7 +464,7 @@ const industryIcons: Record<string, string> = {
           type="submit"
           class="mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-indian-red px-6 py-3 text-sm font-medium text-silent-white transition-transform duration-200 hover:scale-[1.03] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
         >
-          <span id="rfq-submit-label">Submit Request</span>
+          <span id="rfq-submit-label">{t(locale, 'Submit Request')}</span>
           <svg viewBox="0 0 24 24" class="h-4 w-4"><path d="M5 12h14m0 0-5-5m5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
         </button>
 
@@ -558,6 +561,7 @@ const industryIcons: Record<string, string> = {
 </style>
 
 <script>
+  import { pageLocale, t } from '../../lib/ui-strings';
   import gsap from 'gsap';
   import { getRecaptchaToken } from '../lib/recaptcha';
 
@@ -642,14 +646,14 @@ const industryIcons: Record<string, string> = {
       if (submitBtn?.disabled) return;
       errorEl?.classList.add('hidden');
       if (submitBtn) submitBtn.disabled = true;
-      if (submitLabel) submitLabel.textContent = 'Submitting…';
+      if (submitLabel) submitLabel.textContent = t(pageLocale(), 'Submitting…');
       try {
         const apiBase = import.meta.env.PUBLIC_OTP_API_BASE_URL ?? '';
         const formData = new FormData(form);
         formData.set('recaptchaToken', await getRecaptchaToken('bulk_enquiry'));
         const res = await fetch(`${apiBase}/api/submit-bulk-enquiry`, { method: 'POST', body: formData });
         const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
-        if (!res.ok || !data.ok) throw new Error(data.error || 'Failed to submit request');
+        if (!res.ok || !data.ok) throw new Error(data.error || t(pageLocale(), 'Failed to submit request'));
         success?.classList.remove('hidden');
         form.reset();
         // form.reset() only touches native form controls — CustomSelect's own
@@ -662,12 +666,12 @@ const industryIcons: Record<string, string> = {
         if (gradeOtherInput) gradeOtherInput.required = false;
       } catch (err) {
         if (errorEl) {
-          errorEl.textContent = err instanceof Error ? err.message : 'Failed to submit request';
+          errorEl.textContent = err instanceof Error ? err.message : t(pageLocale(), 'Failed to submit request');
           errorEl.classList.remove('hidden');
         }
       } finally {
         if (submitBtn) submitBtn.disabled = false;
-        if (submitLabel) submitLabel.textContent = 'Submit Request';
+        if (submitLabel) submitLabel.textContent = t(pageLocale(), 'Submit Request');
       }
     });
 
@@ -716,9 +720,9 @@ const industryIcons: Record<string, string> = {
     const dsSubmitBtn = document.getElementById('datasheet-submit') as HTMLButtonElement | null;
     const dsError = document.getElementById('datasheet-error');
     const dsSuccess = document.getElementById('datasheet-success');
-    const dsSendOtpLabel = dsSendOtpBtn?.textContent?.trim() ?? 'Send Code';
-    const dsResendLabel = 'Resend';
-    const dsVerifyLabel = dsVerifyBtn?.textContent?.trim() ?? 'Verify';
+    const dsSendOtpLabel = dsSendOtpBtn?.textContent?.trim() ?? t(pageLocale(), 'Send Code');
+    const dsResendLabel = t(pageLocale(), 'Resend');
+    const dsVerifyLabel = dsVerifyBtn?.textContent?.trim() ?? t(pageLocale(), 'Verify');
 
     // token/verified live as closure state (not module scope) — a fresh
     // pair of closures is created each init run, same as every other
@@ -809,12 +813,12 @@ const industryIcons: Record<string, string> = {
     dsSendOtpBtn?.addEventListener('click', async () => {
       const email = dsEmailInput?.value.trim();
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        dsShowError('Enter a valid email address first.');
+        dsShowError(t(pageLocale(), 'Enter a valid email address first.'));
         return;
       }
       dsClearError();
       dsSendOtpBtn.disabled = true;
-      dsSendOtpBtn.textContent = 'Sending…';
+      dsSendOtpBtn.textContent = t(pageLocale(), 'Sending…');
       try {
         const res = await fetch('/api/send-otp', {
           method: 'POST',
@@ -822,12 +826,12 @@ const industryIcons: Record<string, string> = {
           body: JSON.stringify({ email }),
         });
         const data = (await res.json()) as { token?: string; error?: string };
-        if (!res.ok || !data.token) throw new Error(data.error || 'Failed to send verification code');
+        if (!res.ok || !data.token) throw new Error(data.error || t(pageLocale(), 'Failed to send verification code'));
         dsToken = data.token;
         dsOtpRow?.classList.remove('hidden');
         dsSendOtpBtn.textContent = dsResendLabel;
       } catch (err) {
-        dsShowError(err instanceof Error ? err.message : 'Failed to send verification code');
+        dsShowError(err instanceof Error ? err.message : t(pageLocale(), 'Failed to send verification code'));
         dsSendOtpBtn.textContent = dsSendOtpLabel;
       } finally {
         dsSendOtpBtn.disabled = false;
@@ -838,7 +842,7 @@ const industryIcons: Record<string, string> = {
       if (!dsToken || !dsOtpInput?.value) return;
       dsClearError();
       dsVerifyBtn.disabled = true;
-      dsVerifyBtn.textContent = 'Verifying…';
+      dsVerifyBtn.textContent = t(pageLocale(), 'Verifying…');
       try {
         const res = await fetch('/api/verify-otp', {
           method: 'POST',
@@ -846,7 +850,7 @@ const industryIcons: Record<string, string> = {
           body: JSON.stringify({ token: dsToken, code: dsOtpInput.value }),
         });
         const data = (await res.json()) as { ok?: boolean; error?: string };
-        if (!res.ok || !data.ok) throw new Error(data.error || 'Incorrect code. Please try again.');
+        if (!res.ok || !data.ok) throw new Error(data.error || t(pageLocale(), 'Incorrect code. Please try again.'));
         dsVerified = true;
         if (dsEmailInput) dsEmailInput.readOnly = true;
         dsSendOtpBtn?.classList.add('hidden');
@@ -855,7 +859,7 @@ const industryIcons: Record<string, string> = {
         dsVerifiedBadge?.classList.add('inline-flex');
         dsSetSubmitEnabled(true);
       } catch (err) {
-        dsShowError(err instanceof Error ? err.message : 'Incorrect code. Please try again.');
+        dsShowError(err instanceof Error ? err.message : t(pageLocale(), 'Incorrect code. Please try again.'));
       } finally {
         dsVerifyBtn.textContent = dsVerifyLabel;
         dsVerifyBtn.disabled = false;
@@ -866,10 +870,10 @@ const industryIcons: Record<string, string> = {
       e.preventDefault();
       if (!dsVerified || !dsToken || !dsOtpInput || !dsForm) return;
       dsClearError();
-      const submitLabel = dsSubmitBtn?.textContent?.trim() ?? 'Verify & Download';
+      const submitLabel = dsSubmitBtn?.textContent?.trim() ?? t(pageLocale(), 'Verify & Download');
       if (dsSubmitBtn) {
         dsSubmitBtn.disabled = true;
-        dsSubmitBtn.textContent = 'Submitting…';
+        dsSubmitBtn.textContent = t(pageLocale(), 'Submitting…');
       }
       const name = (dsForm.elements.namedItem('name') as HTMLInputElement | null)?.value.trim();
       const company = (dsForm.elements.namedItem('company') as HTMLInputElement | null)?.value.trim();
@@ -880,7 +884,7 @@ const industryIcons: Record<string, string> = {
           body: JSON.stringify({ name, company, token: dsToken, code: dsOtpInput.value }),
         });
         const data = (await res.json()) as { ok?: boolean; error?: string };
-        if (!res.ok || !data.ok) throw new Error(data.error || 'Something went wrong. Please try again.');
+        if (!res.ok || !data.ok) throw new Error(data.error || t(pageLocale(), 'Something went wrong. Please try again.'));
 
         // Only ever triggered after a verified, logged request — direct
         // navigation to this URL without going through the gate is still
@@ -904,7 +908,7 @@ const industryIcons: Record<string, string> = {
         dsSuccess?.classList.remove('hidden');
         window.setTimeout(dsCloseModal, 2500);
       } catch (err) {
-        dsShowError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+        dsShowError(err instanceof Error ? err.message : t(pageLocale(), 'Something went wrong. Please try again.'));
         if (dsSubmitBtn) {
           dsSubmitBtn.disabled = false;
           dsSubmitBtn.textContent = submitLabel;

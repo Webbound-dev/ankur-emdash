@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import indiaMapRaw from '@svg-maps/india';
 import { computePathCentroid } from '../lib/mapCentroid';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 
 // Browser only: GSAP starts a timer on registration, which Cloudflare Workers forbid at module scope (SSR).
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
@@ -44,8 +46,11 @@ export interface DistributionMapContent {
 export default function DistributionMap({
   content,
   distributors,
+  locale = 'en',
 }: {
   content: DistributionMapContent;
+  /** Page language, for the interface text (src/lib/ui-strings.ts). */
+  locale?: Locale;
   // Optional: the full distributor directory (same data /network's map
   // uses). When present, it drives which states get a pin/highlight on the
   // map itself — the curated `states` legend below stays editorial (a
@@ -179,7 +184,7 @@ export default function DistributionMap({
 
         {/* Map card */}
         <div className="relative bg-indian-red/[0.04] border border-indian-red/10 rounded-2xl p-6 lg:p-10 shadow-sm">
-          <span className="sr-only">Map of Ankur's distribution across India</span>
+          <span className="sr-only">{t(locale, 'Map of Ankur\'s distribution across India')}</span>
           <div className="relative w-full max-w-[320px] mx-auto">
             <svg viewBox={indiaMap.viewBox} className="w-full h-auto" aria-hidden="true">
               {/* One flat fill for every state — with coverage now spanning

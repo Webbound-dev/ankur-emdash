@@ -2,6 +2,8 @@ import { useLayoutEffect, useRef, useState, type MouseEvent } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import worldMapRaw from '@svg-maps/world';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 
 // Browser only: GSAP starts a timer on registration, which Cloudflare Workers forbid at module scope (SSR).
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
@@ -70,7 +72,7 @@ const FLAG_BY_COUNTRY: Record<string, string> = {
 const PIN_PATH = 'M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z';
 const PIN_SCALE = 0.9;
 
-export default function WorldMarketsMap({ countries }: { countries: MarketCountry[] }) {
+export default function WorldMarketsMap({ countries, locale = 'en' }: { countries: MarketCountry[]; locale?: Locale }) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const pathRefs = useRef<Map<string, SVGPathElement>>(new Map());
   const [centers, setCenters] = useState<Map<string, { x: number; y: number }>>(new Map());
@@ -155,7 +157,7 @@ export default function WorldMarketsMap({ countries }: { countries: MarketCountr
       ref={sectionRef}
       className="pre-anim-hidden relative overflow-visible rounded-2xl bg-indian-red/[0.04] p-4 sm:p-6 lg:p-8 ring-1 ring-indian-red/10"
     >
-      <span className="sr-only">Map of countries Ankur Salt exports to</span>
+      <span className="sr-only">{t(locale, 'Map of countries Ankur Salt exports to')}</span>
       <svg viewBox={worldMap.viewBox} className="w-full h-auto max-h-[420px] overflow-visible" aria-hidden="true">
         {worldMap.locations.map((loc) => (
           <path
@@ -202,7 +204,7 @@ export default function WorldMarketsMap({ countries }: { countries: MarketCountr
               {FLAG_BY_COUNTRY[hover.country.name] ?? '🌍'}
             </span>
             <div className="text-left">
-              <p className="text-sm font-semibold leading-tight text-indian-red">{hover.country.name}</p>
+              <p className="text-sm font-semibold leading-tight text-indian-red">{t(locale, hover.country.name)}</p>
               <p className="mt-0.5 text-[10px] font-semibold uppercase leading-tight tracking-wider text-indian-red/45">
                 {hover.country.region}
               </p>

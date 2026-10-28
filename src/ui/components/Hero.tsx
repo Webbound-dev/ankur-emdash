@@ -1,5 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 
 export interface HeroSlide {
   eyebrow: string;
@@ -16,7 +18,7 @@ export interface HeroContent {
 
 const AUTOPLAY_MS = 6500;
 
-export default function Hero({ content }: { content: HeroContent }) {
+export default function Hero({ content, locale = 'en' }: { content: HeroContent; locale?: Locale }) {
   const { slides, badge } = content;
   const [active, setActive] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
@@ -283,7 +285,7 @@ export default function Hero({ content }: { content: HeroContent }) {
             <button
               key={i}
               onClick={() => setActive(i)}
-              aria-label={`Show slide ${i + 1}`}
+              aria-label={t(locale, 'Show slide {n}', { n: i + 1 })}
               className={`w-2.5 h-2.5 rounded-full border border-silent-white/50 transition-colors ${
                 i === active ? 'bg-silent-white' : 'bg-transparent hover:bg-silent-white/20'
               }`}

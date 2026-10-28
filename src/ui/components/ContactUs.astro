@@ -1,4 +1,6 @@
 ---
+import { toLocale } from '../../lib/i18n';
+import { t } from '../../lib/ui-strings';
 import CustomSelect from './CustomSelect';
 import BecomeDistributorForm from './BecomeDistributorForm';
 import type { BecomeDistributorContent } from './BecomeDistributorForm';
@@ -6,6 +8,7 @@ import ConnectWithDistributorForm from './ConnectWithDistributorForm';
 import type { ConnectWithDistributorContent } from './ConnectWithDistributorForm';
 import ExportInquiryForm from './ExportInquiryForm';
 import type { ExportInquiryContent } from './ExportInquiryForm';
+const locale = toLocale(Astro.currentLocale);
 
 interface InfoItem { label: string; value: string; description: string; href?: string }
 interface NavItem { id: string; label: string }
@@ -226,7 +229,7 @@ const roleIcons: Record<string, string> = {
               <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="general.fields.name">{general.fields.name}</span>
               <div class="relative mt-1.5">
                 <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                <input type="text" name="name" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="Your name" />
+                <input type="text" name="name" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder={t(locale, 'Your name')} />
               </div>
             </label>
             <label class="block">
@@ -253,12 +256,12 @@ const roleIcons: Record<string, string> = {
             <label class="block sm:col-span-2">
               <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="general.fields.subject">{general.fields.subject}</span>
               <div class="relative mt-1.5">
-                <CustomSelect client:visible name="subject" placeholder="Select a reason" options={general.subjectOptions} icon={ICONS.subject} listPath="general.subjectOptions" required />
+                <CustomSelect client:visible name="subject" placeholder={t(locale, 'Select a reason')} options={general.subjectOptions} icon={ICONS.subject} listPath="general.subjectOptions" required />
               </div>
             </label>
             <label class="block sm:col-span-2">
               <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="general.fields.message">{general.fields.message}</span>
-              <textarea name="message" required rows="4" class="mt-1.5 w-full rounded-lg border border-indian-red/15 bg-white px-3.5 py-2.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="Tell us what's on your mind"></textarea>
+              <textarea name="message" required rows="4" class="mt-1.5 w-full rounded-lg border border-indian-red/15 bg-white px-3.5 py-2.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder={t(locale, 'Tell us what\'s on your mind')}></textarea>
             </label>
           </div>
 
@@ -315,17 +318,17 @@ const roleIcons: Record<string, string> = {
               <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="industrial.fields.company">{industrial.fields.company}</span>
               <div class="relative mt-1.5">
                 <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16M13 21h7V11a1 1 0 0 0-1-1h-6M8 8h1M8 12h1M8 16h1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                <input type="text" name="company" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="Your company" />
+                <input type="text" name="company" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder={t(locale, 'Your company')} />
               </div>
             </label>
             <label class="block">
               <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="industrial.fields.industry">{industrial.fields.industry}</span>
               <div class="relative mt-1.5">
-                <CustomSelect client:visible name="industry" placeholder="Select industry" options={[...productOptions.industries, 'Other']} icon={ICONS.industry} listPath="productOptions.industries" required />
+                <CustomSelect client:visible name="industry" placeholder={t(locale, 'Select industry')} options={[...productOptions.industries, 'Other']} icon={ICONS.industry} listPath="productOptions.industries" required />
               </div>
             </label>
             <label id="contact-industrial-other-wrap" class="hidden sm:col-span-2">
-              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">Please specify your industry</span>
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">{t(locale, 'Please specify your industry')}</span>
               <div class="relative mt-1.5">
                 <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M3 21V10l5 3V10l5 3V6l7 4v11H3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
                 <input type="text" id="contact-industrial-other" name="industryOther" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="e.g. Cosmetics manufacturing" />
@@ -334,11 +337,11 @@ const roleIcons: Record<string, string> = {
             <label class="block">
               <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="industrial.fields.grade">{industrial.fields.grade}</span>
               <div class="relative mt-1.5">
-                <CustomSelect client:visible name="grade" placeholder="Select grade" options={[...productOptions.grades, 'Other']} icon={ICONS.grade} iconFilled listPath="productOptions.grades" required />
+                <CustomSelect client:visible name="grade" placeholder={t(locale, 'Select grade')} options={[...productOptions.grades, 'Other']} icon={ICONS.grade} iconFilled listPath="productOptions.grades" required />
               </div>
             </label>
             <label id="contact-grade-other-wrap" class="hidden sm:col-span-2">
-              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">Please specify your grade</span>
+              <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50">{t(locale, 'Please specify your grade')}</span>
               <div class="relative mt-1.5">
                 <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M12 1.5 21 12 12 22.5 3 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
                 <input type="text" id="contact-grade-other" name="gradeOther" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="e.g. Custom 90 PPM" />
@@ -355,7 +358,7 @@ const roleIcons: Record<string, string> = {
               <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="industrial.fields.location">{industrial.fields.location}</span>
               <div class="relative mt-1.5">
                 <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-indian-red/35"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /><circle cx="12" cy="9" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8" /></svg>
-                <input type="text" name="location" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="City, state / country" />
+                <input type="text" name="location" required class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder={t(locale, 'City, state / country')} />
               </div>
             </label>
             <label class="block sm:col-span-2">
@@ -382,7 +385,7 @@ const roleIcons: Record<string, string> = {
               <span class="text-xs font-semibold uppercase tracking-wide text-indian-red/50" data-cms-field="industrial.fields.message">{industrial.fields.message}</span>
               <div class="relative mt-1.5">
                 <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3.5 top-3 h-4 w-4 text-indian-red/35"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H8l-5 4V6a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
-                <textarea name="message" rows="3" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder="Any additional details about your requirement"></textarea>
+                <textarea name="message" rows="3" class="w-full rounded-lg border border-indian-red/15 bg-white py-2.5 pl-10 pr-3.5 text-sm text-indian-red placeholder:text-indian-red/30 transition-colors duration-150 hover:border-indian-red/30 focus:outline-none focus:ring-2 focus:ring-indian-red/30" placeholder={t(locale, 'Any additional details about your requirement')}></textarea>
               </div>
             </label>
           </div>
@@ -401,16 +404,16 @@ const roleIcons: Record<string, string> = {
 
   <!-- Distributor Inquiry — a short quick-capture form, then straight through to the full application -->
   <section id="panel-distributor" role="tabpanel" aria-labelledby="tab-distributor" data-panel="distributor" class="contact-panel">
-    <BecomeDistributorForm client:load content={becomeDistributor} skipEntranceAnimation />
+    <BecomeDistributorForm locale={locale} client:load content={becomeDistributor} skipEntranceAnimation />
   </section>
 
   <section id="panel-connect-distributor" role="tabpanel" aria-labelledby="tab-connect-distributor" data-panel="connect-distributor" class="contact-panel">
-    <ConnectWithDistributorForm client:load content={connectWithDistributor} skipEntranceAnimation />
+    <ConnectWithDistributorForm locale={locale} client:load content={connectWithDistributor} skipEntranceAnimation />
   </section>
 
   <!-- Export Inquiry -->
   <section id="panel-export" role="tabpanel" aria-labelledby="tab-export" data-panel="export" class="contact-panel">
-    <ExportInquiryForm client:load content={exportInquiry} cmsPath="exportInquiry" skipEntranceAnimation />
+    <ExportInquiryForm locale={locale} client:load content={exportInquiry} cmsPath="exportInquiry" skipEntranceAnimation />
   </section>
 
   <!-- Find Us — sits between two other red bands (Export's form above and
@@ -431,7 +434,7 @@ const roleIcons: Record<string, string> = {
     <div class="relative max-w-[640px] mx-auto px-6">
       <div class="est-badge mx-auto flex h-20 w-20 rotate-[8deg] items-center justify-center rounded-full border-[1.5px] border-dashed border-indian-red/40 bg-indian-red/[0.04] shadow-sm">
         <div class="text-center">
-          <p class="font-display text-[9px] font-semibold uppercase tracking-[0.15em] text-indian-red">Est.</p>
+          <p class="font-display text-[9px] font-semibold uppercase tracking-[0.15em] text-indian-red">{t(locale, 'Est.')}</p>
           <p class="font-display text-lg font-semibold text-indian-red" data-cms-field="visit.since">{visit.since}</p>
         </div>
       </div>
@@ -480,6 +483,7 @@ const roleIcons: Record<string, string> = {
 </style>
 
 <script>
+  import { pageLocale, t } from '../../lib/ui-strings';
   import gsap from 'gsap';
   import { getRecaptchaToken } from '../lib/recaptcha';
 
@@ -688,7 +692,7 @@ const roleIcons: Record<string, string> = {
         if (submitBtn?.disabled) return;
         errorEl?.classList.add('hidden');
         if (submitBtn) submitBtn.disabled = true;
-        if (labelEl) labelEl.textContent = 'Submitting…';
+        if (labelEl) labelEl.textContent = t(pageLocale(), 'Submitting…');
         try {
           const recaptchaToken = await getRecaptchaToken(action);
           // The industrial form carries an optional file attachment, so it's
@@ -708,7 +712,7 @@ const roleIcons: Record<string, string> = {
             });
           }
           const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
-          if (!res.ok || !data.ok) throw new Error(data.error || 'Failed to submit');
+          if (!res.ok || !data.ok) throw new Error(data.error || t(pageLocale(), 'Failed to submit'));
           if (success) {
             success.classList.remove('hidden');
             gsap.fromTo(success, { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
@@ -727,7 +731,7 @@ const roleIcons: Record<string, string> = {
           }
         } catch (err) {
           if (errorEl) {
-            errorEl.textContent = err instanceof Error ? err.message : 'Failed to submit';
+            errorEl.textContent = err instanceof Error ? err.message : t(pageLocale(), 'Failed to submit');
             errorEl.classList.remove('hidden');
           }
         } finally {

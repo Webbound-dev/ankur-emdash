@@ -1,8 +1,10 @@
 ---
+import { toLocale } from '../../lib/i18n';
 import BecomeDistributorForm from './BecomeDistributorForm';
 import ConnectWithDistributorForm from './ConnectWithDistributorForm';
 import type { BecomeDistributorContent } from './BecomeDistributorForm';
 import type { ConnectWithDistributorContent } from './ConnectWithDistributorForm';
+const locale = toLocale(Astro.currentLocale);
 
 interface Props {
   content: {
@@ -69,10 +71,10 @@ const TAB_ICONS = {
   </div>
 
   <div id="dft-panel-become" role="tabpanel" aria-labelledby="dft-tab-become" data-dft-panel="become" class="dft-panel active">
-    <BecomeDistributorForm client:load content={becomeDistributor} skipEntranceAnimation />
+    <BecomeDistributorForm locale={locale} client:load content={becomeDistributor} skipEntranceAnimation />
   </div>
   <div id="dft-panel-connect" role="tabpanel" aria-labelledby="dft-tab-connect" data-dft-panel="connect" class="dft-panel">
-    <ConnectWithDistributorForm client:load content={connectWithDistributor} skipEntranceAnimation />
+    <ConnectWithDistributorForm locale={locale} client:load content={connectWithDistributor} skipEntranceAnimation />
   </div>
 </div>
 
