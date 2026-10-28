@@ -22,6 +22,17 @@ export interface NavbarContent {
 const LOCALE_SHORT: Record<Locale, string> = { en: 'EN', hi: 'हिंदी' };
 const LOCALES: Locale[] = ['en', 'hi'];
 
+const TOGGLE_THUMB = (right: boolean) => ({
+  top: 4,
+  bottom: 4,
+  left: 4,
+  width: 'calc(50% - 4px)',
+  background: 'linear-gradient(to bottom, #c13030, #8e1a1a)',
+  boxShadow: '0 3px 10px rgba(168,33,33,0.35), inset 0 1px 0 rgba(255,255,255,0.25)',
+  transform: right ? 'translateX(100%)' : 'translateX(0)',
+  transition: 'transform 300ms cubic-bezier(.34,1.3,.64,1)',
+});
+
 /**
  * Both languages side by side as a sliding switch: a red thumb sits under the
  * current one; clicking the other slides it across while that page loads.
@@ -32,10 +43,10 @@ function LanguageToggle({ locale, alternateHref, className = '' }: { locale: Loc
   return (
     <div role="group" aria-label={t(locale, 'Language')} className={`items-center ${className}`}>
       <div className="relative grid grid-cols-2 rounded-full bg-white/70 p-1 ring-1 ring-inset ring-indian-red/15 shadow-[0_1px_2px_rgba(168,33,33,0.06),inset_0_1px_2px_rgba(168,33,33,0.06)] backdrop-blur-sm transition-shadow duration-300 hover:shadow-[0_4px_14px_rgba(168,33,33,0.12),inset_0_1px_2px_rgba(168,33,33,0.06)]">
-        <span
-          aria-hidden="true"
-          className={`absolute inset-y-1 left-1 w-[calc(50%-4px)] rounded-full bg-gradient-to-b from-[#c13030] to-[#8e1a1a] shadow-[0_3px_10px_rgba(168,33,33,0.35),inset_0_1px_0_rgba(255,255,255,0.25)] transition-transform duration-300 ease-[cubic-bezier(.34,1.3,.64,1)] ${shown === 'hi' ? 'translate-x-full' : 'translate-x-0'}`}
-        />
+        {/* The thumb's look is inline rather than utility classes: page swaps
+            by the client router must never leave it unstyled (white text on
+            a white track). */}
+        <span aria-hidden="true" className="absolute rounded-full" style={TOGGLE_THUMB(shown === 'hi')} />
         {LOCALES.map((l) => {
           const label = (
             <span className={`relative z-10 flex h-8 w-14 items-center justify-center font-sans text-[13px] font-semibold leading-none tracking-normal transition-colors duration-300 ${shown === l ? 'text-silent-white' : 'text-indian-red/65 group-hover:text-indian-red'}`}>
