@@ -173,6 +173,10 @@ async function getLocaleEntries(collection: string, locale: string) {
 
 // Marks an English entry standing in for a missing translation.
 const FALLBACK = Symbol("fallback");
+// The English slug a translation is served under, so /hi/ URLs match the
+// English ones even when the translation's own slug differs (EmDash makes a
+// new translation's slug from its title).
+const URL_SLUG = Symbol("url-slug");
 
 async function getAllEntries(collection: string) {
 	// Lists don't follow the locale fallback that single entries do (EmDash
@@ -181,11 +185,15 @@ async function getAllEntries(collection: string) {
 	const locale = requestLocale();
 	let all = await getLocaleEntries(collection, DEFAULT_LOCALE);
 	if (locale !== DEFAULT_LOCALE) {
-		// Matched by slug: a translation's entry id carries its locale ("hi/ankur-salt").
-		const slugOf = (e: any) => String(e.data?.slug ?? e.id);
-		const translated = new Map((await getLocaleEntries(collection, locale)).map((e) => [slugOf(e), e]));
-		// A marked copy: the entry itself may be EmDash's cached object.
-		all = all.map((e) => translated.get(slugOf(e)) ?? { ...e, [FALLBACK]: true });
+		// Matched by translation group: a translation's id carries its locale
+		// ("hi/ankur-salt") and its slug may differ.
+		const groupOf = (e: any) => e.data?.translationGroup ?? e.data?.id;
+		const translated = new Map((await getLocaleEntries(collection, locale)).map((e) => [groupOf(e), e]));
+		// Marked copies: the entries themselves may be EmDash's cached objects.
+		all = all.map((e) => {
+			const hit = translated.get(groupOf(e));
+			return hit ? { ...hit, [URL_SLUG]: e.data?.slug ?? e.id } : { ...e, [FALLBACK]: true };
+		});
 	}
 	// A preview link (`?_preview=…`) for an entry of this collection: the list
 	// above already carries the draft of a published entry, but leaves out one
@@ -219,7 +227,7 @@ async function getList<T = any>(collection: string): Promise<T[]> {
 	const spec = collectionSpecs[collection];
 	const entries = await getAllEntries(collection);
 	return entries.map((e) =>
-		withRef(localizeLinks(keepRichTextEditing(decodeEntry(spec, { slug: (e.data as any).slug ?? e.id, data: e.data }), e.data as any)), {
+		withRef(localizeLinks(keepRichTextEditing(decodeEntry(spec, { slug: e[URL_SLUG] ?? (e.data as any).slug ?? e.id, data: e.data }), e.data as any)), {
 			scope: { kind: "entry", collection, id: (e.data as any).id, slug: (e.data as any).slug ?? e.id },
 			edit: e.edit,
 			seo: (e.data as any).seo,
