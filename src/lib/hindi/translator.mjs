@@ -49,7 +49,15 @@ export function createTextRules(specs) {
 			if (node.children.some((s) => isText("text", s.text ?? ""))) out.push([[...path, "#rich"], richToTagged(node)]);
 			return out;
 		}
-		if (Array.isArray(node)) node.forEach((v, i) => extract(v, [...path, i], out));
+		if (Array.isArray(node)) {
+			// A list of strings (paragraphs, bullet points, dropdown options)
+			// follows the rules of the key it's stored under.
+			const key = path.findLast((p) => typeof p === "string") ?? "";
+			node.forEach((v, i) => {
+				if (typeof v === "string") { if (isText(key, v)) out.push([[...path, i], v]); }
+				else extract(v, [...path, i], out);
+			});
+		}
 		else if (node && typeof node === "object") for (const [k, v] of Object.entries(node)) {
 			if (typeof v === "string") { if (isText(k, v)) out.push([[...path, k], v]); }
 			else extract(v, [...path, k], out);

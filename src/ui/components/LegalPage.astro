@@ -40,7 +40,7 @@ const sections = content.sections.map((section) => ({
     <!-- Header -->
     <div class="max-w-[720px]">
       <p class="text-[10px] font-semibold uppercase tracking-widest text-indian-red/50">
-        Last updated: <span data-cms-field="lastUpdated">{content.lastUpdated}</span>
+        {t(locale, 'Last updated:')} <span data-cms-field="lastUpdated">{content.lastUpdated}</span>
       </p>
       <h1 class="mt-3 font-display font-medium text-3xl lg:text-5xl text-indian-red leading-tight" data-cms-field="title">
         {content.title}

@@ -79,7 +79,7 @@ const valueClass = (value: string) => {
         <thead>
           <tr class="border-b border-indian-red/10">
             <th class="px-6 py-6 text-[11px] font-semibold uppercase tracking-wide text-indian-red/45">
-              Product
+              {t(locale, 'Product')}
             </th>
             {(['iodine', 'sodium', 'iron', 'bestFor', 'packFormats'] as const).map((key) => (
               <th class="px-4 py-6 text-[11px] font-semibold uppercase tracking-wide text-indian-red/45" data-cms-field={`comparisonTable.columns.${key}`}>

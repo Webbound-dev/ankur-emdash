@@ -196,7 +196,7 @@ export default function BlogTeaser({ content, locale = 'en' }: { content: BlogTe
                   {post.excerpt}
                 </p>
                 <span className="mt-3 inline-flex items-center gap-1.5 font-sans text-sm font-medium text-indian-red">
-                  Read more
+                  {t(locale, 'Read more')}
                   <span aria-hidden="true" className="group-hover:translate-x-1 transition-transform">
                     &rarr;
                   </span>

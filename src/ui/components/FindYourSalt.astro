@@ -1,4 +1,7 @@
 ---
+import { toLocale } from '../../lib/i18n';
+import { t } from '../../lib/ui-strings';
+const locale = toLocale(Astro.currentLocale);
 interface Prompt { label: string; href: string; icon: string }
 interface Props {
   heading: string;
@@ -68,7 +71,7 @@ const WAVE_PATH = 'M0,20 C180,90 360,0 540,50 C720,100 900,10 1080,55 C1260,100 
               {prompt.label}
             </p>
             <span class="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-indian-red/70 group-hover:text-indian-red">
-              See the match
+              {t(locale, 'See the match')}
               <span aria-hidden="true" class="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
             </span>
           </div>

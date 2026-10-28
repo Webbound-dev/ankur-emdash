@@ -369,7 +369,7 @@ function youtubeThumb(url: string): string {
               rel="noopener noreferrer"
               class={`reveal group relative -mx-3 sm:-mx-4 mb-6 shrink-0 rounded-md bg-silent-white p-2 pb-5 shadow-xl ring-1 ring-indian-red/10 transition-all duration-300 ease-out hover:z-20 hover:-translate-y-2 hover:scale-110 hover:rotate-0 hover:shadow-2xl ${rotate}`}
               style={`transition-delay: ${100 + pi * 60}ms; z-index: ${pi + 1}`}
-              aria-label={`${post.alt} — view on Instagram`}
+              aria-label={t(locale, '{name} — view on Instagram', { name: post.alt })}
             >
               <span class="relative block h-28 w-28 sm:h-32 sm:w-32 lg:h-36 lg:w-36 overflow-hidden rounded-sm">
                 <img

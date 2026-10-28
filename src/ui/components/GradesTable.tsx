@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Plus, X } from 'lucide-react';
 import { isEditModeActive, onEditModeChange } from '../lib/editMode';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 
 // Browser only: GSAP starts a timer on registration, which Cloudflare Workers forbid at module scope (SSR).
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
@@ -28,7 +30,7 @@ function hardnessPpm(hardness: string) {
   return hardness.toLowerCase().includes('ppm') ? parseNumber(hardness) : null;
 }
 
-export default function GradesTable({ content }: { content: GradesTableContent }) {
+export default function GradesTable({ content, locale = 'en' }: { content: GradesTableContent; locale?: Locale }) {
   const { heading, subheading } = content;
   const [items, setItems] = useState<GradeSpec[]>(content.items);
   const [listDirty, setListDirty] = useState(false);
@@ -164,7 +166,7 @@ export default function GradesTable({ content }: { content: GradesTableContent }
                 {group.tier}
               </p>
               <span className="shrink-0 text-[10px] font-semibold uppercase tracking-wide text-indian-red/30">
-                {group.entries.length} grade{group.entries.length === 1 ? '' : 's'}
+                {t(locale, group.entries.length === 1 ? '{n} grade' : '{n} grades', { n: group.entries.length })}
               </span>
             </div>
 
@@ -190,7 +192,7 @@ export default function GradesTable({ content }: { content: GradesTableContent }
                   </span>
                   {grade === lowestPpmGrade && (
                     <span className="shrink-0 rounded-full bg-indian-red px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-silent-white">
-                      Highest Purity
+                      {t(locale, 'Highest Purity')}
                     </span>
                   )}
                   {editing && (

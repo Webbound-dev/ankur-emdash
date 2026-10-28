@@ -9,11 +9,13 @@
 //   node migration/apply-seed-d1.mjs --remote --dry-run  # deployed database, rolled back: counts only
 //   node migration/apply-seed-d1.mjs --remote            # deployed database
 //   node migration/apply-seed-d1.mjs --remote --hindi-only   # only add the Hindi translations and menus
+//   node migration/apply-seed-d1.mjs --remote --hindi-only --update   # also update existing Hindi entries
 //
 // --hindi-only leaves every English entry, menu and setting as it is (they
 // may have been edited in the admin since the seed was made): it adds the
 // seed's Hindi entries for English entries that exist, and the Hindi menus,
-// and skips anything that already exists.
+// and skips anything that already exists. With --update it also updates the
+// Hindi entries that exist (replacing edits made to them in the admin).
 //
 // Stop `astro dev` before running it locally. Before --remote, record a D1
 // Time Travel bookmark (`wrangler d1 time-travel info ankur`) to restore from.
@@ -33,6 +35,7 @@ const { values } = parseArgs({ options: {
 	remote: { type: "boolean", default: false },
 	"dry-run": { type: "boolean", default: false },
 	"hindi-only": { type: "boolean", default: false },
+	update: { type: "boolean", default: false },
 	"database-id": { type: "string", default: "378500c7-e695-4705-b96a-61f616c0ea7b" },
 } });
 
@@ -79,17 +82,23 @@ if (values["hindi-only"]) {
 		const sources = new Map(entries.filter((e) => !e.locale && english.has(e.slug)).map((e) => [e.id, e]));
 		const hindi = entries.filter((e) => e.locale === "hi" && sources.has(e.translationOf));
 		if (!hindi.length) continue;
-		hindiSeed.content[collection] = hindi.flatMap((h) => [sources.get(h.translationOf), h]);
-		const there = hindi.filter((h) => hindiThere.has(h.slug)).length;
-		console.log(`  ${collection}: ${hindi.length - there} Hindi entries to add${there ? `, ${there} already there (left as is)` : ""}`);
+		const there = hindi.filter((h) => hindiThere.has(h.slug));
+		// Updating: only the Hindi entries that exist go in, so no English entry
+		// is part of the update (they're already linked to their English entry).
+		hindiSeed.content[collection] = values.update
+			? there.map(({ translationOf, ...entry }) => entry)
+			: hindi.flatMap((h) => [sources.get(h.translationOf), h]);
+		console.log(values.update
+			? `  ${collection}: ${there.length} Hindi entries to update`
+			: `  ${collection}: ${hindi.length - there.length} Hindi entries to add${there.length ? `, ${there.length} already there (left as is)` : ""}`);
 	}
 	// English menus stay out (applying a menu replaces its items), so the
 	// Hindi menus aren't linked to them as translations; pages find them by
 	// name and locale.
-	hindiSeed.menus = seed.menus.filter((m) => m.locale === "hi").map(({ translationOf, ...menu }) => menu);
-	console.log(`  menus: ${hindiSeed.menus.map((m) => m.name).join(", ")} (Hindi; items replaced if they exist)`);
+	hindiSeed.menus = values.update ? [] : seed.menus.filter((m) => m.locale === "hi").map(({ translationOf, ...menu }) => menu);
+	if (hindiSeed.menus.length) console.log(`  menus: ${hindiSeed.menus.map((m) => m.name).join(", ")} (Hindi; items replaced if they exist)`);
 	if (!values["dry-run"]) {
-		const result = await applySeed(db, hindiSeed, { includeContent: true, onConflict: "skip" });
+		const result = await applySeed(db, hindiSeed, { includeContent: true, onConflict: values.update ? "update" : "skip" });
 		console.log("Applied:", JSON.stringify({ menus: result.menus, content: result.content }));
 	}
 	await db.destroy();

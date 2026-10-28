@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Plus, X } from 'lucide-react';
 import { isEditModeActive, onEditModeChange } from '../lib/editMode';
+import { t } from '../../lib/ui-strings';
+import type { Locale } from '../../lib/i18n';
 
 export interface RoleItem {
   title: string;
@@ -36,7 +38,7 @@ const ICON_LOCATION = 'M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z M12 11.
 const ICON_CLOCK = 'M12 7v5l3 2 M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z';
 const ICON_DEPARTMENT = 'M3 21V10l5 3V10l5 3V6l7 4v11H3Z';
 
-export default function OpenRoles({ content }: { content: OpenRolesContent }) {
+export default function OpenRoles({ content, locale = 'en' }: { content: OpenRolesContent; locale?: Locale }) {
   const { heading, subheading } = content;
   const [items, setItems] = useState<RoleItem[]>(content.items);
   const [listDirty, setListDirty] = useState(false);
@@ -101,7 +103,7 @@ export default function OpenRoles({ content }: { content: OpenRolesContent }) {
                   onClick={() => applyFor(role)}
                   className="inline-flex items-center gap-1.5 rounded-full bg-silent-white px-4 py-2 text-sm font-medium text-indian-red whitespace-nowrap transition-transform duration-200 hover:scale-[1.04]"
                 >
-                  Apply
+                  {t(locale, 'Apply')}
                   <svg viewBox="0 0 24 24" className="h-3.5 w-3.5">
                     <path d="M5 12h14m0 0-5-5m5 5-5 5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                   </svg>

@@ -1,0 +1,43 @@
+---
+// File picker for the lead forms. The browser draws the native control's
+// "Choose file / No file chosen" in its own language, so the native input is
+// hidden and this shows the same thing in the page's language. Place it
+// inside the field's <label>, which opens the picker on click.
+import { toLocale } from '../../lib/i18n';
+import { t } from '../../lib/ui-strings';
+
+interface Props {
+  name: string;
+  accept: string;
+}
+
+const { name, accept } = Astro.props;
+const locale = toLocale(Astro.currentLocale);
+const empty = t(locale, 'No file chosen');
+---
+
+<div class="relative mt-1.5" data-file-input>
+  <input type="file" name={name} accept={accept} class="peer sr-only" />
+  <div class="flex w-full cursor-pointer items-center gap-3 rounded-lg border border-indian-red/15 bg-white py-2 pl-3.5 pr-3.5 text-sm text-indian-red/70 transition-colors duration-150 hover:border-indian-red/30 peer-focus-visible:ring-2 peer-focus-visible:ring-indian-red/30">
+    <svg viewBox="0 0 24 24" class="pointer-events-none h-4 w-4 shrink-0 text-indian-red/35"><path d="M17.5 6.5 9 15a3 3 0 0 0 4.24 4.24l8-8a5 5 0 0 0-7.07-7.07l-8 8a7 7 0 0 0 9.9 9.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+    <span class="shrink-0 rounded-md bg-indian-red/[0.08] px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-indian-red transition-colors duration-150 hover:bg-indian-red/[0.14]">{t(locale, 'Choose file')}</span>
+    <span class="min-w-0 truncate" data-file-name data-empty={empty}>{empty}</span>
+  </div>
+</div>
+
+<script>
+  // One listener for every picker on the page; modules run once per visit.
+  const show = (input: HTMLInputElement) => {
+    const label = input.closest('[data-file-input]')?.querySelector<HTMLElement>('[data-file-name]');
+    if (label) label.textContent = input.files?.[0]?.name ?? label.dataset.empty ?? '';
+  };
+  document.addEventListener('change', (e) => {
+    if (e.target instanceof HTMLInputElement && e.target.type === 'file') show(e.target);
+  });
+  // form.reset() after a submission clears the input without a change event.
+  document.addEventListener('reset', (e) => {
+    if (!(e.target instanceof HTMLFormElement)) return;
+    const form = e.target;
+    setTimeout(() => form.querySelectorAll<HTMLInputElement>('[data-file-input] input[type=file]').forEach(show));
+  }, true);
+</script>

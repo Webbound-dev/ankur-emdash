@@ -232,7 +232,7 @@ const [featured, ...rest] = posts;
           id="blog-prev"
           class="inline-flex items-center gap-1.5 rounded-full bg-indian-red/[0.06] px-4 py-2 text-sm font-medium text-indian-red transition-colors duration-150 hover:bg-indian-red/[0.12] disabled:opacity-30 disabled:hover:bg-indian-red/[0.06] disabled:cursor-not-allowed"
         >
-          <span aria-hidden="true">&larr;</span> Prev
+          <span aria-hidden="true">&larr;</span> {t(locale, 'Prev')}
         </button>
         <span id="blog-page-indicator" class="text-sm text-indian-red/50 tabular-nums">{t(locale, 'Page {current} of {total}', { current: 1, total: 1 })}</span>
         <button
@@ -240,7 +240,7 @@ const [featured, ...rest] = posts;
           id="blog-next"
           class="inline-flex items-center gap-1.5 rounded-full bg-indian-red/[0.06] px-4 py-2 text-sm font-medium text-indian-red transition-colors duration-150 hover:bg-indian-red/[0.12] disabled:opacity-30 disabled:hover:bg-indian-red/[0.06] disabled:cursor-not-allowed"
         >
-          Next <span aria-hidden="true">&rarr;</span>
+          {t(locale, 'Next')} <span aria-hidden="true">&rarr;</span>
         </button>
       </nav>
     </div>

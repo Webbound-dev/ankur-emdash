@@ -1,10 +1,13 @@
 ---
 import { cmsScope, getPage } from '../lib/content';
+import { localeOfPath } from '../lib/i18n';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NotFound from '../ui/components/NotFound.astro';
 const content = await getPage('404');
 Astro.response.status = 404;
+// Missing pages are rewritten here, so the language comes from the path asked for.
+const locale = localeOfPath(Astro.originPathname);
 ---
-<BaseLayout title={content.seo.title} description={content.seo.description} seoFrom={content} cms={cmsScope(content)} noindex>
+<BaseLayout title={content.seo.title} description={content.seo.description} seoFrom={content} cms={cmsScope(content)} noindex locale={locale}>
   <NotFound content={content} />
 </BaseLayout>

@@ -108,7 +108,7 @@ export default function CertificationsStrip({ content, locale = 'en' }: { conten
                 rel="noopener noreferrer"
                 data-cms-link={`certificationsStrip.certifications[${i}].certificateUrl`}
                 className={badgeClass}
-                title={`${cert.name} — view certificate`}
+                title={t(locale, '{name} — view certificate', { name: cert.name })}
               >
                 {logo}
               </a>

@@ -1,4 +1,7 @@
 ---
+import { toLocale } from '../../lib/i18n';
+import { t } from '../../lib/ui-strings';
+const locale = toLocale(Astro.currentLocale);
 interface ProcessStep { title: string; description: string }
 interface CertItem {
   name: string;
@@ -133,7 +136,7 @@ const petals = Array.from({ length: 12 }, (_, i) => {
                   data-cms-link={`certifications.items[${ci}].certificateUrl`}
                   class="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-indian-red hover:opacity-75 transition-opacity"
                 >
-                  View Certificate
+                  {t(locale, 'View Certificate')}
                   <span aria-hidden="true">↗</span>
                 </a>
               )}

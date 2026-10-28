@@ -7,7 +7,7 @@ import { buildFaqSchema, buildProductSchema, toJsonLd } from '../../../lib/struc
 
 const { slug } = Astro.params;
 const product = slug ? await getProduct<Product>(slug) : undefined;
-if (!product) return Astro.rewrite('/404');
+if (!product) return Astro.rewrite('/404/');
 
 const productSchema = buildProductSchema(product, Astro.site);
 const faqSection = product.detail.sections.find(

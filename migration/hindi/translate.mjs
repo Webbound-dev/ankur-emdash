@@ -146,8 +146,9 @@ for (const unit of units.filter((u) => u.entry)) {
 		const hi = termHi(en);
 		if (hi === undefined) complete = false; else applyText(json, path, hi);
 	}
+	// Not fully translated yet (a failed run): keep the Hindi entry the seed has.
+	if (!complete) { untranslated++; continue; }
 	const entries = seed.content[unit.collection].filter((e) => !(e.locale === LOCALE && e.translationOf === unit.entry.id));
-	if (!complete) { untranslated++; seed.content[unit.collection] = entries; continue; }
 	const translation = {
 		id: `${unit.entry.id}-${LOCALE}`,
 		slug: unit.entry.slug,
@@ -184,4 +185,4 @@ for (const menu of menusComplete ? menuSource : []) {
 }
 
 writeFileSync(seedPath, `${JSON.stringify(seed, null, "\t")}\n`);
-console.log(`seed: ${written} Hindi entries (${args.status}), ${menusComplete ? menuSource.length : 0} Hindi menus${untranslated ? `, ${untranslated} entries not fully translated yet (left out)` : ""}`);
+console.log(`seed: ${written} Hindi entries (${args.status}), ${menusComplete ? menuSource.length : 0} Hindi menus${untranslated ? `, ${untranslated} not fully translated yet (their previous Hindi kept)` : ""}`);

@@ -1,6 +1,6 @@
 import { defineMiddleware } from "astro:middleware";
 import { getRequestContext, runWithContext } from "emdash";
-import { LANG_PARAMS } from "./lib/i18n";
+import { LANG_PARAMS, localeOfPath } from "./lib/i18n";
 
 // Fixes for the EmDash admin's layout, added to its pages below:
 // - The wrappers around the content editor hide their overflow, but the
@@ -52,10 +52,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
 	if (pathname.startsWith("/_emdash")) return next();
 	// EmDash only records the page's language for editors and previews; give
 	// it to every request, so content, collection and menu queries on a /hi/
-	// page read the Hindi translations (falling back to English).
+	// page read the Hindi translations (falling back to English). A missing
+	// page is rewritten to the 404 page: it takes the language of the path
+	// that was asked for (/hi/... -> Hindi).
+	const locale = context.routePattern === "/404" ? localeOfPath(context.originPathname) : context.currentLocale;
 	const ctx = getRequestContext();
-	if (context.currentLocale && ctx?.locale !== context.currentLocale) {
-		return runWithContext({ ...ctx, editMode: ctx?.editMode ?? false, locale: context.currentLocale }, () => next());
+	if (locale && ctx?.locale !== locale) {
+		return runWithContext({ ...ctx, editMode: ctx?.editMode ?? false, locale }, () => next());
 	}
 	return next();
 });

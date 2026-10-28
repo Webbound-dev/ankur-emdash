@@ -142,7 +142,7 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
                     <div className="min-w-[250px] overflow-hidden rounded-xl bg-white border border-indian-red/10 shadow-lg shadow-black/[0.08]">
                       <div className="px-4 pt-3.5 pb-2">
                         <span className="text-[10px] font-semibold uppercase tracking-widest text-indian-red/40">
-                          Our Products
+                          {t(locale ?? 'en', 'Our Products')}
                         </span>
                       </div>
 

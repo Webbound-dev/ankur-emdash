@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { corsHeaders, escapeHtml, sendFormSubmissionEmail } from '../../lib/sendFormSubmissionEmail';
 import { verifyRecaptcha } from '../../lib/recaptcha';
 import { getEnv } from '../../lib/env';
+import { isOtherOption } from '../../lib/ui-strings';
 
 export const prerender = false;
 
@@ -46,8 +47,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const email = field(form, 'email');
   const message = field(form, 'message');
 
-  const resolvedIndustry = industry === 'Other' ? industryOther : industry;
-  const resolvedGrade = grade === 'Other' ? gradeOther : grade;
+  const resolvedIndustry = isOtherOption(industry) ? industryOther : industry;
+  const resolvedGrade = isOtherOption(grade) ? gradeOther : grade;
 
   if (!company || !resolvedIndustry || !resolvedGrade || !quantity || !location || !email) {
     return new Response(JSON.stringify({ error: 'Please fill in all required fields' }), { status: 400, headers });

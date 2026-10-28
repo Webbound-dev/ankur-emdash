@@ -943,6 +943,26 @@
 		"[\"@title\"]": {
 			"en": "About",
 			"hi": "हमारे बारे में"
+		},
+		"[\"story\",\"paragraphs\",0]": {
+			"en": "In 1994, in Gandhidham, Kutch, the Champalal Group saw an opportunity hiding in plain sight.",
+			"hi": "1994 में, गांधीधाम, कच्छ में, चंपालाल ग्रुप को एक ऐसा मौका दिखा जो सामने होते हुए भी किसी की नज़र में नहीं आ रहा था।"
+		},
+		"[\"story\",\"paragraphs\",1]": {
+			"en": "India had one of the richest natural salt belts in the world. But the salt reaching Indian homes was far from what families deserved in terms of purity, nutrition, and quality. Ankur Chemfood Limited was started to fix exactly that.",
+			"hi": "भारत के पास दुनिया के सबसे समृद्ध प्राकृतिक नमक भंडारों में से एक था। लेकिन भारतीय घरों तक पहुँचने वाला नमक शुद्धता, पोषण और क्वालिटी के मामले में उससे कहीं कम था, जितना परिवारों को मिलना चाहिए था। अंकुर केमफूड लिमिटेड की शुरुआत इसी कमी को दूर करने के लिए हुई।"
+		},
+		"[\"story\",\"paragraphs\",2]": {
+			"en": "We set up on the coast of Gujarat, steps away from India's most productive marine salt region and within reach of two of the country's biggest ports. From day one, we chose to do things properly. Swiss technology. Automated machinery. Triple refinement. No shortcuts.",
+			"hi": "हमने गुजरात के तट पर अपना काम शुरू किया, भारत के सबसे उत्पादक समुद्री नमक क्षेत्र से कुछ ही कदम दूर, और देश के दो सबसे बड़े बंदरगाहों की पहुँच में। पहले दिन से ही हमने काम सही तरीके से करने का फ़ैसला किया। स्विस टेक्नोलॉजी। ऑटोमेटिक मशीनरी। ट्रिपल रिफ़ाइनिंग। कोई शॉर्टकट नहीं।"
+		},
+		"[\"group\",\"paragraphs\",0]": {
+			"en": "Ankur Salt is the flagship brand of Ankur Chemfood Limited, a company that is part of the Champalal Group of Companies.",
+			"hi": "अंकुर साल्ट, अंकुर केमफूड लिमिटेड का फ़्लैगशिप ब्रांड है। अंकुर केमफूड लिमिटेड चंपालाल ग्रुप ऑफ़ कंपनीज़ की एक कंपनी है।"
+		},
+		"[\"group\",\"paragraphs\",1]": {
+			"en": "The Champalal Group is a diversified business group with a combined annual turnover exceeding Rs. 1,000 Crore (US$ 200 Million). The Group's values of quality, integrity and long term thinking run through everything Ankur Salt does.",
+			"hi": "चंपालाल ग्रुप एक विविध व्यापारिक समूह है, जिसका सालाना संयुक्त टर्नओवर Rs. 1,000 करोड़ (US$ 200 मिलियन) से भी ज़्यादा है। ग्रुप के क्वालिटी, ईमानदारी और लंबी सोच के मूल्य अंकुर साल्ट के हर काम में झलकते हैं।"
 		}
 	},
 	"pages/career": {
@@ -1213,6 +1233,30 @@
 		"[\"@title\"]": {
 			"en": "Career",
 			"hi": "करियर"
+		},
+		"[\"form\",\"teamOptions\",0]": {
+			"en": "Plant Operations & Production",
+			"hi": "प्लांट ऑपरेशंस और प्रोडक्शन"
+		},
+		"[\"form\",\"teamOptions\",1]": {
+			"en": "Quality Assurance & Food Safety",
+			"hi": "क्वालिटी एश्योरेंस और फ़ूड सेफ़्टी"
+		},
+		"[\"form\",\"teamOptions\",2]": {
+			"en": "Sales & Distribution",
+			"hi": "सेल्स और डिस्ट्रीब्यूशन"
+		},
+		"[\"form\",\"teamOptions\",3]": {
+			"en": "Export & Logistics",
+			"hi": "एक्सपोर्ट और लॉजिस्टिक्स"
+		},
+		"[\"form\",\"teamOptions\",4]": {
+			"en": "Corporate & Administration",
+			"hi": "कॉर्पोरेट और प्रशासन"
+		},
+		"[\"form\",\"teamOptions\",5]": {
+			"en": "Other",
+			"hi": "अन्य"
 		}
 	},
 	"pages/champalal-group": {
@@ -1339,6 +1383,62 @@
 		"[\"@title\"]": {
 			"en": "Champalal Group",
 			"hi": "चंपालाल ग्रुप"
+		},
+		"[\"story\",\"paragraphs\",0]": {
+			"en": "The Champalal Group was founded on a simple belief: build things that last, and build them properly. That belief carried through into Ankur Chemfood Limited in 1994, and continues across every business the Group runs today.",
+			"hi": "चंपालाल ग्रुप की शुरुआत एक सीधी सोच के साथ हुई थी: ऐसी चीज़ें बनाओ जो टिकाऊ हों, और उन्हें सही तरीके से बनाओ। यही सोच 1994 में अंकुर केमफूड लिमिटेड तक पहुँची, और आज भी ग्रुप के हर कारोबार में यही सोच कायम है।"
+		},
+		"[\"story\",\"paragraphs\",1]": {
+			"en": "The Champalal Group is a diversified business group with a combined annual turnover exceeding Rs. 1,000 Crore (US$ 200 Million). The Group's values of quality, integrity and long term thinking run through everything each of its companies does.",
+			"hi": "चंपालाल ग्रुप एक विविधीकृत बिज़नेस ग्रुप है, जिसकी सभी कंपनियों को मिलाकर सालाना कुल टर्नओवर Rs. 1,000 करोड़ (US$ 200 मिलियन) से ज़्यादा है। ग्रुप के मूल्य, यानी क्वालिटी, ईमानदारी और लंबी सोच, उसकी हर कंपनी के काम में दिखते हैं।"
+		},
+		"[\"companies\",\"items\",0,\"highlights\",0]": {
+			"en": "Core veneer, sawn timber and round logs sourced globally",
+			"hi": "कोर वीनियर, सॉन टिम्बर और राउंड लॉग्स, जो दुनिया भर से खरीदे जाते हैं"
+		},
+		"[\"companies\",\"items\",0,\"highlights\",1]": {
+			"en": "Imports from New Zealand, Australia, South Africa and more; exports to UAE, Saudi Arabia, Oman and Qatar",
+			"hi": "न्यूज़ीलैंड, ऑस्ट्रेलिया, दक्षिण अफ़्रीका और अन्य देशों से आयात; यूएई, सऊदी अरब, ओमान और क़तर को निर्यात"
+		},
+		"[\"companies\",\"items\",0,\"highlights\",2]": {
+			"en": "Trusted supplier to major plywood manufacturers including Century Ply and Greenpanel Industries",
+			"hi": "सेंचुरी प्लाई और ग्रीनपैनल इंडस्ट्रीज़ जैसी बड़ी प्लाईवुड निर्माता कंपनियों के भरोसेमंद सप्लायर"
+		},
+		"[\"companies\",\"items\",1,\"highlights\",0]": {
+			"en": "PP woven sacks, tarpaulins and BOPP woven bags",
+			"hi": "पीपी वोवन सैक, टार्पोलिन और बीओपीपी वोवन बैग"
+		},
+		"[\"companies\",\"items\",1,\"highlights\",1]": {
+			"en": "Exports to the USA, UK, South Africa, Australia and more",
+			"hi": "यूएसए, यूके, दक्षिण अफ़्रीका, ऑस्ट्रेलिया और अन्य देशों को निर्यात"
+		},
+		"[\"companies\",\"items\",1,\"highlights\",2]": {
+			"en": "In-house film lamination up to 10 colours and printing",
+			"hi": "इन-हाउस फ़िल्म लैमिनेशन और 10 रंगों तक की प्रिंटिंग"
+		},
+		"[\"companies\",\"items\",2,\"highlights\",0]": {
+			"en": "Abhinav Liquid Fuel: a diesel alternative meeting stringent EU specifications for sulphur and PAH content",
+			"hi": "अभिनव लिक्विड फ्यूल: डीज़ल का विकल्प, जो सल्फर और PAH की मात्रा के लिए सख्त EU विशिष्टताओं पर खरा उतरता है"
+		},
+		"[\"companies\",\"items\",2,\"highlights\",1]": {
+			"en": "Abhinav Gaseous Fuel: an LPG alternative made from agro-industrial waste",
+			"hi": "अभिनव गैसियस फ्यूल: कृषि-औद्योगिक कचरे से बना एलपीजी का विकल्प"
+		},
+		"[\"companies\",\"items\",2,\"highlights\",2]": {
+			"en": "Abhinav Biochars: a soil amendment byproduct of the fuel process",
+			"hi": "अभिनव बायोचार: ईंधन बनाने की प्रक्रिया से बना, मिट्टी में सुधार करने वाला उप-उत्पाद"
+		},
+		"[\"companies\",\"items\",3,\"highlights\",0]": {
+			"en": "Around 1 million FIBCs produced a month, serving 100+ customers across 50+ countries",
+			"hi": "हर महीने लगभग 1 मिलियन FIBC बनाए जाते हैं, जो 50+ देशों के 100+ ग्राहकों को सेवा देते हैं"
+		},
+		"[\"companies\",\"items\",3,\"highlights\",1]": {
+			"en": "8 manufacturing locations across Gujarat plus one in Uruguay; ~95% of sales from international customers",
+			"hi": "गुजरात में 8 उत्पादन केंद्र और उरुग्वे में एक; बिक्री का ~95% अंतरराष्ट्रीय ग्राहकों से आता है"
+		},
+		"[\"companies\",\"items\",3,\"highlights\",2]": {
+			"en": "Certified ISO 9001:2015, ISO 14001:2015 and BRCGS (food grade); member of FIBCA and IFIBCA",
+			"hi": "ISO 9001:2015, ISO 14001:2015 और BRCGS (फ़ूड ग्रेड) प्रमाणित; FIBCA और IFIBCA के सदस्य"
 		}
 	},
 	"pages/contact": {
@@ -1745,6 +1845,122 @@
 		"[\"@title\"]": {
 			"en": "Contact",
 			"hi": "संपर्क"
+		},
+		"[\"productOptions\",\"industries\",0]": {
+			"en": "Pulp and Paper",
+			"hi": "पल्प और पेपर"
+		},
+		"[\"productOptions\",\"industries\",1]": {
+			"en": "Textiles",
+			"hi": "टेक्सटाइल्स"
+		},
+		"[\"productOptions\",\"industries\",2]": {
+			"en": "Water Treatment",
+			"hi": "वॉटर ट्रीटमेंट"
+		},
+		"[\"productOptions\",\"industries\",3]": {
+			"en": "Petroleum Additives",
+			"hi": "पेट्रोलियम एडिटिव्स"
+		},
+		"[\"productOptions\",\"industries\",4]": {
+			"en": "Dyes and Intermediates",
+			"hi": "डाई और इंटरमीडिएट्स"
+		},
+		"[\"productOptions\",\"industries\",5]": {
+			"en": "Pharmaceuticals",
+			"hi": "फार्मास्यूटिकल्स"
+		},
+		"[\"productOptions\",\"grades\",0]": {
+			"en": "Free Flow",
+			"hi": "फ्री फ्लो"
+		},
+		"[\"productOptions\",\"grades\",1]": {
+			"en": "Medium Grade",
+			"hi": "मीडियम ग्रेड"
+		},
+		"[\"productOptions\",\"grades\",2]": {
+			"en": "Low Hardness 200 PPM",
+			"hi": "लो हार्डनेस 200 PPM"
+		},
+		"[\"productOptions\",\"grades\",3]": {
+			"en": "Low Hardness 150 PPM",
+			"hi": "लो हार्डनेस 150 PPM"
+		},
+		"[\"productOptions\",\"grades\",4]": {
+			"en": "Low Hardness 120 PPM",
+			"hi": "लो हार्डनेस 120 PPM"
+		},
+		"[\"productOptions\",\"grades\",5]": {
+			"en": "Low Hardness 80 PPM",
+			"hi": "लो हार्डनेस 80 PPM"
+		},
+		"[\"productOptions\",\"grades\",6]": {
+			"en": "Low Hardness 50 PPM",
+			"hi": "लो हार्डनेस 50 PPM"
+		},
+		"[\"productOptions\",\"grades\",7]": {
+			"en": "Super Fine Powder",
+			"hi": "सुपर फाइन पाउडर"
+		},
+		"[\"general\",\"subjectOptions\",0]": {
+			"en": "Product Availability",
+			"hi": "प्रोडक्ट की उपलब्धता"
+		},
+		"[\"general\",\"subjectOptions\",1]": {
+			"en": "Product Question",
+			"hi": "प्रोडक्ट से जुड़ा सवाल"
+		},
+		"[\"general\",\"subjectOptions\",2]": {
+			"en": "Complaint",
+			"hi": "शिकायत"
+		},
+		"[\"general\",\"subjectOptions\",3]": {
+			"en": "Careers",
+			"hi": "करियर"
+		},
+		"[\"general\",\"subjectOptions\",4]": {
+			"en": "Press & Media",
+			"hi": "प्रेस और मीडिया"
+		},
+		"[\"general\",\"subjectOptions\",5]": {
+			"en": "Other",
+			"hi": "अन्य"
+		},
+		"[\"becomeDistributor\",\"benefits\",0]": {
+			"en": "A brand trusted in Indian kitchens since 1994",
+			"hi": "1994 से भारतीय रसोइयों में भरोसे का ब्रांड"
+		},
+		"[\"becomeDistributor\",\"benefits\",1]": {
+			"en": "Dedicated logistics & marketing support",
+			"hi": "समर्पित लॉजिस्टिक्स और मार्केटिंग सपोर्ट"
+		},
+		"[\"becomeDistributor\",\"benefits\",2]": {
+			"en": "Fast onboarding with straightforward terms",
+			"hi": "सीधी और साफ़ शर्तों के साथ जल्दी जुड़ने की प्रक्रिया"
+		},
+		"[\"connectWithDistributor\",\"benefits\",0]": {
+			"en": "A real person reads every message that comes through here",
+			"hi": "यहां आने वाला हर संदेश एक असली इंसान पढ़ता है"
+		},
+		"[\"connectWithDistributor\",\"benefits\",1]": {
+			"en": "Connected with the right distributor for your city",
+			"hi": "आपके शहर के सही डिस्ट्रीब्यूटर से जोड़ा जाता है"
+		},
+		"[\"connectWithDistributor\",\"benefits\",2]": {
+			"en": "Quick response, usually within 1 to 2 business days",
+			"hi": "जल्दी जवाब, आमतौर पर 1 से 2 कार्य दिवस के भीतर"
+		},
+		"[\"exportInquiry\",\"benefits\",0]": {
+			"en": "Triple refined salt manufactured on Gujarat's marine salt belt",
+			"hi": "गुजरात की समुद्री नमक पट्टी पर बना ट्रिपल रिफाइंड नमक"
+		},
+		"[\"exportInquiry\",\"benefits\",1]": {
+			"en": "FSSAI, Halal, FSSC 22000 and ISO 9001:2015 certified",
+			"hi": "FSSAI, Halal, FSSC 22000 और ISO 9001:2015 प्रमाणित"
+		},
+		"[\"exportInquiry\",\"benefits\",2]": {
+			"en": "Direct access to Kandla and Mundra ports for FCL and LCL shipments",
+			"hi": "FCL और LCL शिपमेंट के लिए कांडला और मुंद्रा बंदरगाहों तक सीधी पहुंच"
 		}
 	},
 	"pages/gallery": {
@@ -2429,6 +2645,18 @@
 		"[\"@title\"]": {
 			"en": "Export",
 			"hi": "एक्सपोर्ट"
+		},
+		"[\"inquiry\",\"benefits\",0]": {
+			"en": "Vacuum evaporated, FSSAI and FSSC 22000 certified salt manufactured on Gujarat's marine salt belt",
+			"hi": "वैक्यूम इवैपोरेटेड, FSSAI और FSSC 22000 प्रमाणित नमक, जो गुजरात की समुद्री नमक पट्टी पर बनाया जाता है"
+		},
+		"[\"inquiry\",\"benefits\",1]": {
+			"en": "FSSAI, Halal, FSSC 22000 and ISO 9001:2015 certified",
+			"hi": "FSSAI, हलाल, FSSC 22000 और ISO 9001:2015 प्रमाणित"
+		},
+		"[\"inquiry\",\"benefits\",2]": {
+			"en": "Direct access to Kandla and Mundra ports for FCL and LCL shipments",
+			"hi": "FCL और LCL शिपमेंट के लिए कांडला और मुंद्रा बंदरगाहों तक सीधी पहुँच"
 		}
 	},
 	"business_pages/industrial-salt": {
@@ -2977,6 +3205,30 @@
 		"[\"@title\"]": {
 			"en": "Network",
 			"hi": "नेटवर्क"
+		},
+		"[\"becomeDistributor\",\"benefits\",0]": {
+			"en": "A brand trusted in Indian kitchens since 1994",
+			"hi": "1994 से भारतीय रसोइयों में भरोसे का ब्रांड"
+		},
+		"[\"becomeDistributor\",\"benefits\",1]": {
+			"en": "Dedicated logistics & marketing support",
+			"hi": "समर्पित लॉजिस्टिक्स और मार्केटिंग सहायता"
+		},
+		"[\"becomeDistributor\",\"benefits\",2]": {
+			"en": "Fast onboarding with straightforward terms",
+			"hi": "सीधी और साफ़ शर्तों के साथ जल्दी जुड़ने की सुविधा"
+		},
+		"[\"connectWithDistributor\",\"benefits\",0]": {
+			"en": "A real person reads every message that comes through here",
+			"hi": "यहां आने वाला हर संदेश एक असली इंसान पढ़ता है"
+		},
+		"[\"connectWithDistributor\",\"benefits\",1]": {
+			"en": "Connected with the right distributor for your city",
+			"hi": "आपके शहर के सही डिस्ट्रीब्यूटर से जुड़ाव"
+		},
+		"[\"connectWithDistributor\",\"benefits\",2]": {
+			"en": "Quick response, usually within 1 to 2 business days",
+			"hi": "जल्दी जवाब, आम तौर पर 1 से 2 कारोबारी दिनों के भीतर"
 		}
 	},
 	"business_pages/products": {
@@ -3874,7 +4126,7 @@
 		},
 		"[\"detail\",\"sections\",1,\"stats\",0,\"value\"]": {
 			"en": "1 in 2",
-			"hi": "1 में से 2"
+			"hi": "हर 2 में से 1"
 		},
 		"[\"detail\",\"sections\",1,\"stats\",0,\"label\"]": {
 			"en": "Indian women are affected by anaemia, as per NFHS-5 national data",
@@ -3926,7 +4178,7 @@
 		},
 		"[\"detail\",\"sections\",3,\"items\",1,\"answer\"]": {
 			"en": "Iron deficiency is common in India, according to NFHS-5 national data, around 1 in 2 Indian women are affected by anaemia. Iron fortified salt is an easy way to add this nutrient to daily meals without changing eating habits.",
-			"hi": "NFHS-5 के राष्ट्रीय आंकड़ों के अनुसार, भारत में आयरन की कमी आम है; लगभग 1 में से 2 भारतीय महिलाएं एनीमिया से प्रभावित हैं। आयरन वाला फोर्टिफाइड नमक खाने की आदतें बदले बिना रोज़ के खाने में यह पोषक तत्व जोड़ने का आसान तरीका है।"
+			"hi": "NFHS-5 के राष्ट्रीय आंकड़ों के अनुसार, भारत में आयरन की कमी आम है; लगभग हर 2 में से 1 भारतीय महिला एनीमिया से प्रभावित है। आयरन वाला फोर्टिफाइड नमक खाने की आदतें बदले बिना रोज़ के खाने में यह पोषक तत्व जोड़ने का आसान तरीका है।"
 		},
 		"[\"detail\",\"sections\",3,\"items\",2,\"question\"]": {
 			"en": "Is twin fortified salt safe for daily use?",

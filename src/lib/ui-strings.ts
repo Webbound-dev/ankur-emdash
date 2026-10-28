@@ -120,7 +120,57 @@ const hi: Record<string, string> = {
   'Failed to submit application': 'आवेदन भेजा नहीं जा सका। कृपया फिर से कोशिश करें।',
   'Failed to submit your application': 'आपका आवेदन भेजा नहीं जा सका। कृपया फिर से कोशिश करें।',
   'Failed to send verification code': 'वेरिफ़िकेशन कोड नहीं भेजा जा सका',
+  'Verify your email address to submit.': 'भेजने से पहले अपना ईमेल पता वेरिफ़ाई करें।',
+  "We've emailed a 6-digit code.": 'हमने आपके ईमेल पर 6 अंकों का कोड भेजा है।',
+  "We've emailed a 6-digit code to {email}.": 'हमने {email} पर 6 अंकों का कोड भेजा है।',
+  '6-digit code': '6 अंकों का कोड',
+  'Verified': 'वेरिफ़ाइड',
+  'Other': 'अन्य',
+  'Apply': 'आवेदन करें',
+  'Ref. RFQ': 'संदर्भ: RFQ',
+  'Tell us your grade, quantity and delivery location, and our team will follow up directly with a quote.': 'अपना ग्रेड, मात्रा और डिलीवरी की जगह बताइए, हमारी टीम कोटेशन के साथ सीधे आपसे संपर्क करेगी।',
+  'We typically respond within 1 to 2 business days.': 'हम आमतौर पर 1 से 2 कामकाजी दिनों में जवाब देते हैं।',
+  '01 · Company Name': '01 · कंपनी का नाम',
+  '02 · Industry': '02 · इंडस्ट्री',
+  '03 · Grade Required': '03 · ज़रूरी ग्रेड',
+  '04 · Quantity': '04 · मात्रा',
+  '05 · Delivery Location': '05 · डिलीवरी की जगह',
+  '06 · Email': '06 · ईमेल',
+  '07 · Attachment (optional)': '07 · अटैचमेंट (ज़रूरी नहीं)',
+  '07 · Attachment (Optional)': '07 · अटैचमेंट (ज़रूरी नहीं)',
+  '08 · Message (Optional)': '08 · संदेश (ज़रूरी नहीं)',
+  'PDF, Word doc, or image, up to 10MB — spec sheet, drawing, or purchase order.': 'PDF, Word फ़ाइल या फ़ोटो, 10MB तक: स्पेक शीट, ड्रॉइंग या परचेज़ ऑर्डर।',
+  'Thanks, your request has been recorded. Our team will get back to you shortly.': 'धन्यवाद, आपका अनुरोध दर्ज हो गया है। हमारी टीम जल्द ही आपसे संपर्क करेगी।',
+  'e.g. Cosmetics manufacturing': 'जैसे: कॉस्मेटिक्स बनाना',
+  'e.g. 20 MT / month': 'जैसे: 20 MT / महीना',
+  'e.g. Food grade, custom PPM': 'जैसे: फ़ूड ग्रेड, कस्टम PPM',
+  'e.g. Ahmedabad': 'जैसे: अहमदाबाद',
+  'e.g. Gujarat': 'जैसे: गुजरात',
+  'e.g. Custom 90 PPM': 'जैसे: कस्टम 90 PPM',
+  'Choose file': 'फ़ाइल चुनें',
+  'No file chosen': 'कोई फ़ाइल नहीं चुनी',
+
+  // Product pages, grades, certificates, blog
+  'See the match': 'सही नमक देखें',
+  'Product': 'प्रोडक्ट',
+  'Our Products': 'हमारे प्रोडक्ट',
+  'View Certificate': 'सर्टिफ़िकेट देखें',
+  '{name} — view certificate': '{name}: सर्टिफ़िकेट देखें',
+  '{name} — view on Instagram': '{name}: इंस्टाग्राम पर देखें',
+  '{label} sound': '{label}: आवाज़',
+  "Couldn't play sound": 'आवाज़ नहीं चल सकी',
+  'Highest Purity': 'सबसे ज़्यादा शुद्धता',
+  '{n} grade': '{n} ग्रेड',
+  '{n} grades': '{n} ग्रेड',
+  'Prev': 'पिछला',
+  'Next': 'अगला',
+  'Last updated:': 'आख़िरी अपडेट:',
 };
+
+/** The "Other" choice in the forms' dropdowns, in any language (it reveals a free-text field). */
+export function isOtherOption(value: unknown): boolean {
+  return value === 'Other' || value === hi['Other'];
+}
 
 export function t(locale: Locale, english: string, vars?: Record<string, string | number>): string {
   let text = locale === 'hi' ? (hi[english] ?? english) : english;

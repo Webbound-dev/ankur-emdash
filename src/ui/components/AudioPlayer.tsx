@@ -79,7 +79,7 @@ export default function AudioPlayer() {
           setMuted(false);
           showToast(t(pageLocale(), 'Sound on'));
         },
-        () => showToast("Couldn't play sound")
+        () => showToast(t(pageLocale(), "Couldn't play sound"))
       );
     }
     function onGoto(e: Event) {
@@ -132,7 +132,7 @@ export default function AudioPlayer() {
       })
     );
     if (!muted) {
-      audio.play().catch(() => showToast("Couldn't play sound"));
+      audio.play().catch(() => showToast(t(pageLocale(), "Couldn't play sound")));
     }
     // muted intentionally excluded — this effect should only re-run on a
     // track change, not every time mute is toggled independently.
@@ -164,7 +164,7 @@ export default function AudioPlayer() {
           setMuted(false);
           showToast(t(pageLocale(), 'Sound on'));
         },
-        () => showToast("Couldn't play sound")
+        () => showToast(t(pageLocale(), "Couldn't play sound"))
       );
     } else {
       audio.pause();

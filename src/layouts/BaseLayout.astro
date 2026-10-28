@@ -44,6 +44,8 @@ interface Props {
   /** Trail shown under the navbar (blog, products, Champalal Group), starting
    * with Home; the last item is the current page. Also its BreadcrumbList. */
   breadcrumbs?: BreadcrumbItem[];
+  /** The page's language, for pages served at another URL (the 404 page). */
+  locale?: 'en' | 'hi';
   /** The page's largest above-the-fold image, preloaded so the browser fetches
    * it first; its "-mobile.webp" copy is preloaded instead below 1024px. */
   preloadImage?: string;
@@ -51,7 +53,7 @@ interface Props {
 
 const { type = 'website', cms = {}, seoFrom, noindex = false, preloadImage } = Astro.props;
 // /hi/… pages render Hindi content (EmDash reads the locale from the URL).
-const locale = toLocale(Astro.currentLocale);
+const locale = Astro.props.locale ?? toLocale(Astro.currentLocale);
 const otherLocale = alternateLocale(locale);
 // Pages pass breadcrumbs in English with English paths; show them in the
 // page's language.
@@ -124,7 +126,7 @@ const breadcrumbSchema = breadcrumbs?.length ? buildBreadcrumbSchema(breadcrumbs
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+      href={`https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Inter:wght@300;400;500${locale === 'hi' ? '&family=Noto+Sans+Devanagari:wght@400;500;600;700' : ''}&display=swap`}
     />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
     <ClientRouter />

@@ -300,7 +300,7 @@ export default function ConnectWithDistributorForm({
                     />
                     {emailOtp.verified ? (
                       <span className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center gap-1 font-sans text-xs font-semibold text-emerald-700">
-                        <BadgeCheck size={14} /> Verified
+                        <BadgeCheck size={14} /> {t(locale, 'Verified')}
                       </span>
                     ) : (
                       /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) && (
@@ -323,7 +323,7 @@ export default function ConnectWithDistributorForm({
                           type="text"
                           inputMode="numeric"
                           maxLength={6}
-                          placeholder="6-digit code"
+                          placeholder={t(locale, '6-digit code')}
                           value={emailOtp.otpInput}
                           onChange={(e) => emailOtp.setOtpInput(e.target.value.replace(/\D/g, ''))}
                           className="w-28 rounded-lg border border-indian-red/18 bg-white px-3 py-1.5 font-sans text-sm text-indian-red outline-none focus:border-indian-red/45 focus:ring-4 focus:ring-indian-red/[0.08]"
@@ -337,7 +337,7 @@ export default function ConnectWithDistributorForm({
                           {emailOtp.verifying ? t(locale, 'Verifying…') : t(locale, 'Verify')}
                         </button>
                       </div>
-                      <p className="mt-1 font-sans text-[11px] text-indian-red/40">We've emailed a 6-digit code to {form.email}.</p>
+                      <p className="mt-1 font-sans text-[11px] text-indian-red/40">{t(locale, "We've emailed a 6-digit code to {email}.", { email: form.email })}</p>
                     </div>
                   )}
                   {/* Not nested inside the `otpSent` block above — a failed
@@ -404,7 +404,7 @@ export default function ConnectWithDistributorForm({
                 </button>
                 {!emailOtp.verified && (
                   <p className="sm:col-span-2 -mt-3 text-center font-sans text-xs text-indian-red/45">
-                    Verify your email address to submit.
+                    {t(locale, 'Verify your email address to submit.')}
                   </p>
                 )}
                 {submitError && (

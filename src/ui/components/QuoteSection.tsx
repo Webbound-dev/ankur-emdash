@@ -271,7 +271,7 @@ export default function QuoteSection({ content, locale = 'en' }: { content: Quot
               type="button"
               onClick={launch}
               disabled={flying}
-              aria-label={`${ctaLabel} sound`}
+              aria-label={t(locale, '{label} sound', { label: ctaLabel })}
               className="relative flex h-16 w-16 items-center justify-center rounded-full bg-indian-red text-silent-white shadow-lg shadow-indian-red/25 transition-all duration-300 ease-out hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-indian-red/50 focus-visible:ring-offset-2 focus-visible:ring-offset-silent-white"
             >
               <Play size={22} strokeWidth={2} fill="currentColor" className="translate-x-0.5" />

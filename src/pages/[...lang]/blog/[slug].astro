@@ -10,7 +10,7 @@ const posts = (await getBlogs()) as BlogPost[];
 
 const { slug } = Astro.params;
 const post = posts.find((p) => p.slug === slug);
-if (!post) return Astro.rewrite('/404');
+if (!post) return Astro.rewrite('/404/');
 
 // seoTitle/metaDescription are optional per-post overrides for posts whose
 // on-page title or excerpt is too long for a search result (~60/~155 chars).

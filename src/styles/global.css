@@ -14,8 +14,10 @@
    values directly). Full brand notes live in /CLAUDE.md at the ankur project
    root. */
 @theme {
-  --font-display: "Nunito", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Noto Sans Devanagari draws the Hindi letters (Nunito and Inter have none);
+     it is only loaded on Hindi pages (BaseLayout). */
+  --font-display: "Nunito", "Noto Sans Devanagari", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", "Noto Sans Devanagari", ui-sans-serif, system-ui, sans-serif;
 
   --color-silent-white: #FFF6EB;
   --color-indian-red: #A82121;
@@ -30,6 +32,16 @@
     font-family: var(--font-display);
     font-weight: 500; /* Nunito Medium */
   }
+}
+
+/* Hindi pages. Devanagari letters join up, so the wide letter-spacing used for
+   small English capitals pulls words apart; and labels set at 9-11px are too
+   small to read in Devanagari. Unlayered, so it wins over the utilities. */
+html[lang="hi"] [class*="tracking-"] {
+  letter-spacing: normal;
+}
+html[lang="hi"] :is(.text-\[9px\], .text-\[10px\], .text-\[11px\]) {
+  font-size: 12px;
 }
 
 /* ─── GSAP entrance pre-hide ──────────────────────────────────────────────────
