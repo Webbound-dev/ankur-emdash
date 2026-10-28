@@ -3,7 +3,7 @@
 // after each publish (src/plugins/hindi-translate.mjs).
 //
 // An entry is decoded back to its original JSON (../content/codec.mjs) and
-// only its visible text is sent to Claude through OpenRouter, a page at a
+// only its visible text is sent to an LLM through OpenRouter, a page at a
 // time, with style-guide.md. URLs, images, ids and structure never leave
 // this module, so a Hindi entry is the English one with its text swapped. A
 // second pass re-reads the Hindi against the English and fixes meaning,
@@ -14,7 +14,7 @@
 import { decodeEntry, decodePage, encodeEntry, encodePage } from "../content/codec.mjs";
 
 export const LOCALE = "hi";
-export const DEFAULT_MODEL = "anthropic/claude-haiku-5.5";
+export const DEFAULT_MODEL = "deepseek/deepseek-v4.1-flash";
 /** Collections translated; distributors (names, addresses) stay English. */
 export const COLLECTIONS = new Set(["pages", "business_pages", "legal_pages", "site_chrome", "products", "blogs"]);
 
@@ -161,7 +161,7 @@ export function decodeLike(unit, specs, entry) {
 }
 
 // ---------------------------------------------------------------------------
-// Claude, through OpenRouter
+// The model, through OpenRouter
 
 const ITEMS_SCHEMA = {
 	type: "object",

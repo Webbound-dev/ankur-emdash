@@ -4,7 +4,7 @@
 //   node migration/hindi/translate.mjs --only home,about   # just these pages/entries (slugs), "menus" and/or "terms"
 //   node migration/hindi/translate.mjs --seed-only         # rebuild the seed from translations.json, no API calls
 //   node migration/hindi/translate.mjs --retranslate       # ignore earlier translations and do everything again
-//   node migration/hindi/translate.mjs --model anthropic/claude-sonnet-5.5   # another OpenRouter model for this run
+//   node migration/hindi/translate.mjs --model deepseek/deepseek-v4-pro   # another OpenRouter model for this run
 //
 // The translation itself lives in src/lib/hindi/translator.mjs, shared with
 // the plugin that keeps Hindi up to date after each publish in the admin
@@ -35,7 +35,7 @@ const { values: args } = parseArgs({ options: {
 	concurrency: { type: "string", default: "4" },
 	model: { type: "string", default: DEFAULT_MODEL },
 	// For testing the pipeline: --fake marks text "हिं:" instead of calling
-	// Claude; --seed-file/--cache-file point at copies.
+	// the model; --seed-file/--cache-file point at copies.
 	fake: { type: "boolean", default: false },
 	"seed-file": { type: "string" },
 	"cache-file": { type: "string" },

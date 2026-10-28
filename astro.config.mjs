@@ -56,10 +56,11 @@ export default defineConfig({
 				entrypoint: fileURLToPath(new URL("./src/plugins/hindi-translate.mjs", import.meta.url)),
 				capabilities: ["content:write", "content:publish", "content:revisions:read", "network:request"],
 				allowedHosts: ["openrouter.ai"],
+				adminPages: [{ path: "/hindi", label: "Hindi translation", icon: "globe" }],
 				settingsSchema: {
 					enabled: { type: "boolean", label: "Translate and publish Hindi when English content is published", default: true },
 					openrouterApiKey: { type: "secret", label: "OpenRouter API key", description: "From openrouter.ai/keys. Stored encrypted." },
-					model: { type: "string", label: "Model", description: "OpenRouter model id", default: "anthropic/claude-haiku-5.5" },
+					model: { type: "string", label: "Model", description: "OpenRouter model id", default: "deepseek/deepseek-v4.1-flash" },
 				},
 			}],
 		}),

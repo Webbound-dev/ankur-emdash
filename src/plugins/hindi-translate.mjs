@@ -1,5 +1,5 @@
 // Keeps the Hindi version of the site up to date: when an English page,
-// product or blog post is published, its changed text is translated (Claude
+// product or blog post is published, its changed text is translated (an LLM
 // through OpenRouter, src/lib/hindi/translator.mjs) and published to the
 // entry's Hindi translation; editors correct the Hindi directly in the admin.
 // A new English entry gets a new Hindi translation.
@@ -8,9 +8,12 @@
 // minute, outside the editor's save request. Text whose English hasn't
 // changed keeps its current Hindi, including edits made in the admin.
 //
-// The OpenRouter API key is set in the admin under Plugins → Hindi
-// translation (stored encrypted). Menus are not covered: translate them with
-// migration/hindi/translate.mjs or in the admin's menu translations.
+// The OpenRouter API key and model are set in the plugin's settings in the
+// admin (the key stored encrypted). Its "Hindi translation" admin page shows
+// the queue and can queue every English entry at once, e.g. after the bulk
+// translations (translations.json) are updated. Menus are not covered:
+// translate them with migration/hindi/translate.mjs or in the admin's menu
+// translations.
 import { definePlugin } from "emdash";
 import specs from "../content/specs.json";
 import styleGuide from "../lib/hindi/style-guide.md?raw";
@@ -29,6 +32,8 @@ const LOCK = "lock";
 // run) expires after this.
 const LOCK_MS = 10 * 60 * 1000;
 const MAX_ATTEMPTS = 3;
+const ADMIN_PAGE = { path: "/hindi", label: "Hindi translation", icon: "globe" };
+const RECENT = "recent";
 
 export const HINDI_SETTINGS_SCHEMA = {
 	enabled: { type: "boolean", label: "Translate and publish Hindi when English content is published", default: true },
@@ -40,11 +45,11 @@ const rules = createTextRules(specs);
 
 /**
  * What the current Hindi of an entry was translated from, per field: { [path]: { en, hi } }.
- * Starts from the bulk translation (translations.json) and is updated with
- * every draft this plugin writes.
+ * The bulk translation (translations.json, as deployed) overlaid with what
+ * this plugin has written since.
  */
 async function getState(ctx, unit, group) {
-	return (await ctx.kv.get(`state:${unit.collection}:${group}`)) ?? initialTranslations[unit.key] ?? {};
+	return { ...(initialTranslations[unit.key] ?? {}), ...((await ctx.kv.get(`state:${unit.collection}:${group}`)) ?? {}) };
 }
 
 async function getTerms(ctx) {
@@ -82,8 +87,10 @@ async function translateEntry(ctx, collection, id) {
 		const pk = pathKey(path);
 		const current = path[0] === "@title" ? hindi?.data.title : hindiJson && textAt(hindiJson, path);
 		// Unchanged English keeps the Hindi as it is now (it may have been
-		// edited in the admin); changed or new English is translated.
-		if (state[pk]?.en === en) result.set(pk, typeof current === "string" && current ? current : state[pk].hi);
+		// edited in the admin), unless that is still the English text while a
+		// translation exists; changed or new English is translated.
+		const untranslated = !current || (current === en && state[pk]?.hi !== en);
+		if (state[pk]?.en === en) result.set(pk, untranslated ? state[pk].hi : current);
 		else if (known.has(en)) result.set(pk, known.get(en));
 		else todo.push({ id: `t${todo.length + 1}`, path, en, pk });
 	}
@@ -144,10 +151,12 @@ async function runQueue(ctx) {
 		try {
 			const outcome = await translateEntry(ctx, collection, id);
 			ctx.log.info(`${collection}/${id}: ${outcome}`);
+			await remember(ctx, collection, id, outcome);
 			await ctx.kv.delete(key);
 		} catch (error) {
 			const attempts = (value?.attempts ?? 0) + 1;
 			ctx.log.error(`${collection}/${id}: Hindi translation failed (attempt ${attempts}): ${error.message}`);
+			await remember(ctx, collection, id, `failed (attempt ${attempts} of ${MAX_ATTEMPTS}): ${error.message}`);
 			if (attempts >= MAX_ATTEMPTS) await ctx.kv.delete(key);
 			else await ctx.kv.set(key, { ...value, attempts });
 		}
@@ -156,13 +165,76 @@ async function runQueue(ctx) {
 	}
 }
 
+/** The last few outcomes, for the admin page. */
+async function remember(ctx, collection, id, outcome) {
+	const entry = await ctx.content.get(collection, id).catch(() => null);
+	const recent = (await ctx.kv.get(RECENT)) ?? [];
+	recent.unshift({ at: new Date().toISOString(), page: `${collection}/${entry?.slug ?? id}`, outcome });
+	await ctx.kv.set(RECENT, recent.slice(0, 15));
+}
+
+/** Queue every English entry: re-checks all Hindi, e.g. after the bulk translations change. */
+async function queueAll(ctx) {
+	const at = new Date().toISOString();
+	let n = 0;
+	for (const collection of COLLECTIONS) {
+		let cursor;
+		do {
+			const page = await ctx.content.list(collection, { limit: 100, cursor });
+			for (const item of page.items) {
+				if ((item.locale ?? "en") !== "en") continue;
+				await ctx.kv.set(`${QUEUE}${collection}:${item.id}`, { at });
+				n++;
+			}
+			cursor = page.hasMore ? page.cursor : undefined;
+		} while (cursor);
+	}
+	await ctx.cron.schedule(CRON, { schedule: "* * * * *" });
+	return n;
+}
+
+async function handleAdmin(ctx) {
+	let toast;
+	if (ctx.input?.type === "block_action" && ctx.input.action_id === "queue_all") {
+		const n = await queueAll(ctx);
+		toast = { type: "success", message: `${n} English pages queued. Their Hindi is checked one a minute.` };
+	}
+	const queued = (await ctx.kv.list(QUEUE)).length;
+	const recent = (await ctx.kv.get(RECENT)) ?? [];
+	const hasKey = Boolean(await ctx.settings.get("openrouterApiKey"));
+	const model = (await ctx.settings.get("model")) || DEFAULT_MODEL;
+	return {
+		blocks: [
+			{ type: "header", text: "Hindi translation" },
+			{ type: "section", text: "When an English page, product or blog post is published, its changed text is translated and published to its Hindi version within a minute or two. Text that hasn't changed keeps its Hindi, including edits made here in the admin." },
+			...(hasKey ? [] : [{ type: "banner", variant: "error", title: "No OpenRouter API key", description: "Add the key in this plugin's settings; nothing is translated until then." }]),
+			{ type: "stats", items: [
+				{ label: "Pages waiting", value: String(queued), description: queued ? `about ${queued} minute${queued === 1 ? "" : "s"} to go` : "nothing queued" },
+				{ label: "Model", value: model },
+			] },
+			{ type: "actions", elements: [{
+				type: "button", label: "Update all Hindi pages", action_id: "queue_all", style: "primary",
+				confirm: { title: "Update all Hindi pages?", text: "Every English page, product and blog post is queued, and its Hindi is brought up to date one page a minute. Only text that is missing or whose English changed is translated; Hindi edited in the admin is kept.", confirm: "Queue all", deny: "Cancel" },
+			}] },
+			...(recent.length ? [{
+				type: "table",
+				page_action_id: "recent",
+				columns: [{ key: "at", label: "When" }, { key: "page", label: "Page" }, { key: "outcome", label: "Result" }],
+				rows: recent.map((r) => ({ at: new Date(r.at).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }), page: r.page, outcome: r.outcome })),
+			}] : []),
+		],
+		...(toast ? { toast } : {}),
+	};
+}
+
 export function createPlugin() {
 	return definePlugin({
 		id: HINDI_PLUGIN_ID,
 		version: HINDI_PLUGIN_VERSION,
 		capabilities: ["content:write", "content:publish", "content:revisions:read", "network:request"],
 		allowedHosts: ["openrouter.ai"],
-		admin: { settingsSchema: HINDI_SETTINGS_SCHEMA },
+		admin: { settingsSchema: HINDI_SETTINGS_SCHEMA, pages: [ADMIN_PAGE] },
+		routes: { admin: { handler: handleAdmin } },
 		hooks: {
 			"plugin:activate": async (_event, ctx) => {
 				await ctx.cron.schedule(CRON, { schedule: "* * * * *" });
