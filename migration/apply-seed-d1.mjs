@@ -8,6 +8,12 @@
 //   node migration/apply-seed-d1.mjs                     # local dev database (.wrangler/state)
 //   node migration/apply-seed-d1.mjs --remote --dry-run  # deployed database, rolled back: counts only
 //   node migration/apply-seed-d1.mjs --remote            # deployed database
+//   node migration/apply-seed-d1.mjs --remote --hindi-only   # only add the Hindi translations and menus
+//
+// --hindi-only leaves every English entry, menu and setting as it is (they
+// may have been edited in the admin since the seed was made): it adds the
+// seed's Hindi entries for English entries that exist, and the Hindi menus,
+// and skips anything that already exists.
 //
 // Stop `astro dev` before running it locally. Before --remote, record a D1
 // Time Travel bookmark (`wrangler d1 time-travel info ankur`) to restore from.
@@ -26,6 +32,7 @@ import { n as claimExplicitSeedOwnership } from "../node_modules/emdash/dist/own
 const { values } = parseArgs({ options: {
 	remote: { type: "boolean", default: false },
 	"dry-run": { type: "boolean", default: false },
+	"hindi-only": { type: "boolean", default: false },
 	"database-id": { type: "string", default: "378500c7-e695-4705-b96a-61f616c0ea7b" },
 } });
 
@@ -59,6 +66,36 @@ const where = values.remote ? "REMOTE (deployed) database" : "local database";
 const count = async (sql) => (await binding.prepare(sql).first()).n;
 console.log(`Target: ${where}`);
 console.log(`blogs before: ${await count("SELECT count(*) AS n FROM ec_blogs WHERE deleted_at IS NULL")}`);
+
+if (values["hindi-only"]) {
+	// Each Hindi entry with its English source (which is skipped: the seed
+	// needs it to link the translation), for English entries that exist.
+	const hindiSeed = { ...seed, settings: undefined, content: {}, menus: [] };
+	console.log(`Hindi only${values["dry-run"] ? " (dry run: nothing is written)" : ""}:`);
+	for (const [collection, entries] of Object.entries(seed.content ?? {})) {
+		const rows = (await binding.prepare(`SELECT slug, locale FROM ec_${collection} WHERE deleted_at IS NULL`).all()).results;
+		const english = new Set(rows.filter((r) => (r.locale ?? "en") === "en").map((r) => r.slug));
+		const hindiThere = new Set(rows.filter((r) => r.locale === "hi").map((r) => r.slug));
+		const sources = new Map(entries.filter((e) => !e.locale && english.has(e.slug)).map((e) => [e.id, e]));
+		const hindi = entries.filter((e) => e.locale === "hi" && sources.has(e.translationOf));
+		if (!hindi.length) continue;
+		hindiSeed.content[collection] = hindi.flatMap((h) => [sources.get(h.translationOf), h]);
+		const there = hindi.filter((h) => hindiThere.has(h.slug)).length;
+		console.log(`  ${collection}: ${hindi.length - there} Hindi entries to add${there ? `, ${there} already there (left as is)` : ""}`);
+	}
+	// English menus stay out (applying a menu replaces its items), so the
+	// Hindi menus aren't linked to them as translations; pages find them by
+	// name and locale.
+	hindiSeed.menus = seed.menus.filter((m) => m.locale === "hi").map(({ translationOf, ...menu }) => menu);
+	console.log(`  menus: ${hindiSeed.menus.map((m) => m.name).join(", ")} (Hindi; items replaced if they exist)`);
+	if (!values["dry-run"]) {
+		const result = await applySeed(db, hindiSeed, { includeContent: true, onConflict: "skip" });
+		console.log("Applied:", JSON.stringify({ menus: result.menus, content: result.content }));
+	}
+	await db.destroy();
+	await proxy.dispose();
+	process.exit(0);
+}
 
 if (values["dry-run"]) {
 	console.log("Dry run: nothing is written. Entries the seed would create or update:");
