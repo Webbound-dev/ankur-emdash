@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Globe, Menu, X } from 'lucide-react';
 import MenuLabel from './MenuLabel';
 import { t } from '../../lib/ui-strings';
 import type { Locale } from '../../lib/i18n';
@@ -18,7 +18,8 @@ export interface NavbarContent {
   products: ProductItem[];
 }
 
-const LOCALE_LABEL: Record<Locale, string> = { en: 'EN', hi: 'हिं' };
+// Each language named in itself, as the switcher shows the one to switch to.
+const LOCALE_LABEL: Record<Locale, string> = { en: 'English', hi: 'हिंदी' };
 
 interface NavbarProps {
   pathname: string;
@@ -238,9 +239,12 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
         {locale && alternateLocale && alternateHref && (
           <a
             href={alternateHref}
-            className="hidden lg:inline-block shrink-0 rounded-full border border-indian-red/20 px-3 py-1 font-sans text-xs font-semibold text-indian-red/70 transition-colors duration-150 hover:border-indian-red/40 hover:text-indian-red"
+            hrefLang={alternateLocale}
+            lang={alternateLocale}
+            className={`hidden lg:inline-flex shrink-0 items-center gap-1.5 font-sans text-sm ${linkClass(alternateHref)}`}
             aria-label={t(locale ?? 'en', alternateLocale === 'hi' ? 'Switch to Hindi' : 'Switch to English')}
           >
+            <Globe size={15} strokeWidth={1.75} aria-hidden="true" />
             {LOCALE_LABEL[alternateLocale]}
           </a>
         )}
@@ -270,9 +274,12 @@ export default function NavbarIsland({ pathname, content, locale, alternateLocal
             {locale && alternateLocale && alternateHref && (
               <a
                 href={alternateHref}
-                className="rounded-full border border-indian-red/20 px-2.5 py-1 font-sans text-xs font-semibold text-indian-red/70"
+                hrefLang={alternateLocale}
+                lang={alternateLocale}
+                className="inline-flex items-center gap-1.5 font-sans text-sm font-medium text-indian-red"
                 aria-label={t(locale ?? 'en', alternateLocale === 'hi' ? 'Switch to Hindi' : 'Switch to English')}
               >
+                <Globe size={15} strokeWidth={1.75} aria-hidden="true" />
                 {LOCALE_LABEL[alternateLocale]}
               </a>
             )}
