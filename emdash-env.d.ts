@@ -11,14 +11,11 @@ export interface Blog {
   status: string;
   title: string;
   excerpt?: string;
-  meta_description?: string;
   category?: string;
   read_time?: number;
   published_at_field?: string;
   image?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } };
-  image_uncropped?: boolean;
   content?: PortableTextBlock[];
-  seo_title?: string;
   position?: number;
   createdAt: Date;
   updatedAt: Date;
@@ -36,16 +33,7 @@ export interface BusinessPageSectionsBlogSeoV1Block {
   "description"?: string | null;
 }
 
-export interface BusinessPageSectionsBlogSeoV2Block {
-  _type: "blog_seo";
-  _version: 2;
-  _key: string;
-  "title"?: string | null;
-  "description"?: string | null;
-  "image"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null;
-}
-
-export type BusinessPageSectionsBlogSeoBlock = BusinessPageSectionsBlogSeoV1Block | BusinessPageSectionsBlogSeoV2Block;
+export type BusinessPageSectionsBlogSeoBlock = BusinessPageSectionsBlogSeoV1Block;
 
 export interface BusinessPageSectionsBlogHeroV1Block {
   _type: "blog_hero";
@@ -75,21 +63,7 @@ export interface BusinessPageSectionsBlogLabelsV1Block {
   "min_read_suffix"?: string | null;
 }
 
-export interface BusinessPageSectionsBlogLabelsV2Block {
-  _type: "blog_labels";
-  _version: 2;
-  _key: string;
-  "all_category"?: string | null;
-  "featured"?: string | null;
-  "latest_articles"?: string | null;
-  "read_article"?: string | null;
-  "more_articles"?: string | null;
-  "back_to_all_articles"?: string | null;
-  "blog_href"?: string | null;
-  "min_read_suffix"?: string | null;
-}
-
-export type BusinessPageSectionsBlogLabelsBlock = BusinessPageSectionsBlogLabelsV1Block | BusinessPageSectionsBlogLabelsV2Block;
+export type BusinessPageSectionsBlogLabelsBlock = BusinessPageSectionsBlogLabelsV1Block;
 
 export interface BusinessPageSectionsBlogCategoryColorsV1Block {
   _type: "blog_category_colors";
@@ -121,16 +95,7 @@ export interface BusinessPageSectionsExportSeoV1Block {
   "description"?: string | null;
 }
 
-export interface BusinessPageSectionsExportSeoV2Block {
-  _type: "export_seo";
-  _version: 2;
-  _key: string;
-  "title"?: string | null;
-  "description"?: string | null;
-  "image"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null;
-}
-
-export type BusinessPageSectionsExportSeoBlock = BusinessPageSectionsExportSeoV1Block | BusinessPageSectionsExportSeoV2Block;
+export type BusinessPageSectionsExportSeoBlock = BusinessPageSectionsExportSeoV1Block;
 
 export interface BusinessPageSectionsExportHeroV1Block {
   _type: "export_hero";
@@ -196,17 +161,6 @@ export interface BusinessPageSectionsExportLogisticsV1Block {
 
 export type BusinessPageSectionsExportLogisticsBlock = BusinessPageSectionsExportLogisticsV1Block;
 
-export interface BusinessPageSectionsExportFaqV1Block {
-  _type: "export_faq";
-  _version: 1;
-  _key: string;
-  "heading"?: string | null;
-  "subheading"?: string | null;
-  "items"?: { "question"?: string | null; "answer"?: string | null }[] | null;
-}
-
-export type BusinessPageSectionsExportFaqBlock = BusinessPageSectionsExportFaqV1Block;
-
 export interface BusinessPageSectionsExportInquiryV1Block {
   _type: "export_inquiry";
   _version: 1;
@@ -232,32 +186,7 @@ export interface BusinessPageSectionsExportInquiryV1Block {
   "success_message"?: string | null;
 }
 
-export interface BusinessPageSectionsExportInquiryV2Block {
-  _type: "export_inquiry";
-  _version: 2;
-  _key: string;
-  "eyebrow"?: string | null;
-  "heading"?: string | null;
-  "intro"?: string | null;
-  "benefits"?: { "value"?: string | null }[] | null;
-  "fields_company_name"?: string | null;
-  "fields_contact_name"?: string | null;
-  "fields_country"?: string | null;
-  "fields_phone"?: string | null;
-  "fields_email"?: string | null;
-  "fields_message"?: string | null;
-  "placeholders_company_name"?: string | null;
-  "placeholders_contact_name"?: string | null;
-  "placeholders_country"?: string | null;
-  "placeholders_phone"?: string | null;
-  "placeholders_email"?: string | null;
-  "placeholders_message"?: string | null;
-  "submit_label"?: string | null;
-  "success_heading"?: string | null;
-  "success_message"?: string | null;
-}
-
-export type BusinessPageSectionsExportInquiryBlock = BusinessPageSectionsExportInquiryV1Block | BusinessPageSectionsExportInquiryV2Block;
+export type BusinessPageSectionsExportInquiryBlock = BusinessPageSectionsExportInquiryV1Block;
 
 export interface BusinessPageSectionsIndustrialSaltSeoV1Block {
   _type: "industrial_salt_seo";
@@ -267,16 +196,7 @@ export interface BusinessPageSectionsIndustrialSaltSeoV1Block {
   "description"?: string | null;
 }
 
-export interface BusinessPageSectionsIndustrialSaltSeoV2Block {
-  _type: "industrial_salt_seo";
-  _version: 2;
-  _key: string;
-  "title"?: string | null;
-  "description"?: string | null;
-  "image"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null;
-}
-
-export type BusinessPageSectionsIndustrialSaltSeoBlock = BusinessPageSectionsIndustrialSaltSeoV1Block | BusinessPageSectionsIndustrialSaltSeoV2Block;
+export type BusinessPageSectionsIndustrialSaltSeoBlock = BusinessPageSectionsIndustrialSaltSeoV1Block;
 
 export interface BusinessPageSectionsIndustrialSaltHeroV1Block {
   _type: "industrial_salt_hero";
@@ -287,40 +207,6 @@ export interface BusinessPageSectionsIndustrialSaltHeroV1Block {
 }
 
 export type BusinessPageSectionsIndustrialSaltHeroBlock = BusinessPageSectionsIndustrialSaltHeroV1Block;
-
-export interface BusinessPageSectionsIndustrialSaltTrustedByV1Block {
-  _type: "industrial_salt_trusted_by";
-  _version: 1;
-  _key: string;
-  "heading"?: string | null;
-  "items"?: { "name"?: string | null; "logo"?: string | null }[] | null;
-}
-
-export interface BusinessPageSectionsIndustrialSaltTrustedByV2Block {
-  _type: "industrial_salt_trusted_by";
-  _version: 2;
-  _key: string;
-  "heading"?: string | null;
-  "items"?: { "name"?: string | null; "logo"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null }[] | null;
-}
-
-export interface BusinessPageSectionsIndustrialSaltTrustedByV3Block {
-  _type: "industrial_salt_trusted_by";
-  _version: 3;
-  _key: string;
-  "heading"?: string | null;
-  "items"?: { "name"?: string | null; "logo"?: string | null }[] | null;
-}
-
-export interface BusinessPageSectionsIndustrialSaltTrustedByV4Block {
-  _type: "industrial_salt_trusted_by";
-  _version: 4;
-  _key: string;
-  "heading"?: string | null;
-  "items"?: { "name"?: string | null; "logo"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null }[] | null;
-}
-
-export type BusinessPageSectionsIndustrialSaltTrustedByBlock = BusinessPageSectionsIndustrialSaltTrustedByV1Block | BusinessPageSectionsIndustrialSaltTrustedByV2Block | BusinessPageSectionsIndustrialSaltTrustedByV3Block | BusinessPageSectionsIndustrialSaltTrustedByV4Block;
 
 export interface BusinessPageSectionsIndustrialSaltGradesV1Block {
   _type: "industrial_salt_grades";
@@ -344,20 +230,7 @@ export interface BusinessPageSectionsIndustrialSaltGradesV2Block {
   "items"?: { "tier"?: string | null; "name"?: string | null; "hardness"?: string | null }[] | null;
 }
 
-export interface BusinessPageSectionsIndustrialSaltGradesV3Block {
-  _type: "industrial_salt_grades";
-  _version: 3;
-  _key: string;
-  "heading"?: string | null;
-  "subheading"?: string | null;
-  "columns_grade"?: string | null;
-  "columns_nacl"?: string | null;
-  "columns_hardness"?: string | null;
-  "columns_moisture"?: string | null;
-  "items"?: { "tier"?: string | null; "name"?: string | null; "nacl"?: string | null; "hardness"?: string | null; "moisture"?: string | null }[] | null;
-}
-
-export type BusinessPageSectionsIndustrialSaltGradesBlock = BusinessPageSectionsIndustrialSaltGradesV1Block | BusinessPageSectionsIndustrialSaltGradesV2Block | BusinessPageSectionsIndustrialSaltGradesV3Block;
+export type BusinessPageSectionsIndustrialSaltGradesBlock = BusinessPageSectionsIndustrialSaltGradesV1Block | BusinessPageSectionsIndustrialSaltGradesV2Block;
 
 export interface BusinessPageSectionsIndustrialSaltIndustriesV1Block {
   _type: "industrial_salt_industries";
@@ -453,43 +326,7 @@ export interface BusinessPageSectionsIndustrialSaltDataSheetsV3Block {
   "gate_success_message"?: string | null;
 }
 
-export interface BusinessPageSectionsIndustrialSaltDataSheetsV4Block {
-  _type: "industrial_salt_data_sheets";
-  _version: 4;
-  _key: string;
-  "heading"?: string | null;
-  "subheading"?: string | null;
-  "title"?: string | null;
-  "description"?: string | null;
-  "file"?: { id: string; url?: string; src?: string; filename?: string; mimeType?: string; size?: number; provider?: string; meta?: Record<string, unknown> } | null;
-  "cta_label"?: string | null;
-  "gate_heading"?: string | null;
-  "gate_subheading"?: string | null;
-  "gate_fields_name"?: string | null;
-  "gate_fields_company"?: string | null;
-  "gate_fields_email"?: string | null;
-  "gate_placeholders_name"?: string | null;
-  "gate_placeholders_company"?: string | null;
-  "gate_placeholders_email"?: string | null;
-  "gate_send_otp_label"?: string | null;
-  "gate_resend_label"?: string | null;
-  "gate_verify_label"?: string | null;
-  "gate_submit_label"?: string | null;
-  "gate_success_message"?: string | null;
-}
-
-export type BusinessPageSectionsIndustrialSaltDataSheetsBlock = BusinessPageSectionsIndustrialSaltDataSheetsV1Block | BusinessPageSectionsIndustrialSaltDataSheetsV2Block | BusinessPageSectionsIndustrialSaltDataSheetsV3Block | BusinessPageSectionsIndustrialSaltDataSheetsV4Block;
-
-export interface BusinessPageSectionsIndustrialSaltFaqV1Block {
-  _type: "industrial_salt_faq";
-  _version: 1;
-  _key: string;
-  "heading"?: string | null;
-  "subheading"?: string | null;
-  "items"?: { "question"?: string | null; "answer"?: string | null }[] | null;
-}
-
-export type BusinessPageSectionsIndustrialSaltFaqBlock = BusinessPageSectionsIndustrialSaltFaqV1Block;
+export type BusinessPageSectionsIndustrialSaltDataSheetsBlock = BusinessPageSectionsIndustrialSaltDataSheetsV1Block | BusinessPageSectionsIndustrialSaltDataSheetsV2Block | BusinessPageSectionsIndustrialSaltDataSheetsV3Block;
 
 export interface BusinessPageSectionsIndustrialSaltQuoteV1Block {
   _type: "industrial_salt_quote";
@@ -509,16 +346,7 @@ export interface BusinessPageSectionsNetworkSeoV1Block {
   "description"?: string | null;
 }
 
-export interface BusinessPageSectionsNetworkSeoV2Block {
-  _type: "network_seo";
-  _version: 2;
-  _key: string;
-  "title"?: string | null;
-  "description"?: string | null;
-  "image"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null;
-}
-
-export type BusinessPageSectionsNetworkSeoBlock = BusinessPageSectionsNetworkSeoV1Block | BusinessPageSectionsNetworkSeoV2Block;
+export type BusinessPageSectionsNetworkSeoBlock = BusinessPageSectionsNetworkSeoV1Block;
 
 export interface BusinessPageSectionsNetworkHeroV1Block {
   _type: "network_hero";
@@ -540,31 +368,7 @@ export interface BusinessPageSectionsNetworkHeroV2Block {
   "intro"?: string | null;
 }
 
-export interface BusinessPageSectionsNetworkHeroV3Block {
-  _type: "network_hero";
-  _version: 3;
-  _key: string;
-  "eyebrow"?: string | null;
-  "heading"?: string | null;
-  "intro"?: string | null;
-  "search_placeholder"?: string | null;
-  "search_button_label"?: string | null;
-}
-
-export type BusinessPageSectionsNetworkHeroBlock = BusinessPageSectionsNetworkHeroV1Block | BusinessPageSectionsNetworkHeroV2Block | BusinessPageSectionsNetworkHeroV3Block;
-
-export interface BusinessPageSectionsNetworkDirectoryV1Block {
-  _type: "network_directory";
-  _version: 1;
-  _key: string;
-  "eyebrow"?: string | null;
-  "heading"?: string | null;
-  "all_label"?: string | null;
-  "result_label"?: string | null;
-  "empty_state"?: string | null;
-}
-
-export type BusinessPageSectionsNetworkDirectoryBlock = BusinessPageSectionsNetworkDirectoryV1Block;
+export type BusinessPageSectionsNetworkHeroBlock = BusinessPageSectionsNetworkHeroV1Block | BusinessPageSectionsNetworkHeroV2Block;
 
 export interface BusinessPageSectionsNetworkBecomeDistributorV1Block {
   _type: "network_become_distributor";
@@ -701,7 +505,18 @@ export interface BusinessPageSectionsProductsProductGridV1Block {
 
 export type BusinessPageSectionsProductsProductGridBlock = BusinessPageSectionsProductsProductGridV1Block;
 
-export type BusinessPageSectionsBlock = BusinessPageSectionsBlogSeoBlock | BusinessPageSectionsBlogHeroBlock | BusinessPageSectionsBlogLabelsBlock | BusinessPageSectionsBlogCategoryColorsBlock | BusinessPageSectionsBlogPageBlock | BusinessPageSectionsExportSeoBlock | BusinessPageSectionsExportHeroBlock | BusinessPageSectionsExportGlobalMarketsBlock | BusinessPageSectionsExportCertificationsBlock | BusinessPageSectionsExportLogisticsBlock | BusinessPageSectionsExportFaqBlock | BusinessPageSectionsExportInquiryBlock | BusinessPageSectionsIndustrialSaltSeoBlock | BusinessPageSectionsIndustrialSaltHeroBlock | BusinessPageSectionsIndustrialSaltTrustedByBlock | BusinessPageSectionsIndustrialSaltGradesBlock | BusinessPageSectionsIndustrialSaltIndustriesBlock | BusinessPageSectionsIndustrialSaltRfqBlock | BusinessPageSectionsIndustrialSaltDataSheetsBlock | BusinessPageSectionsIndustrialSaltFaqBlock | BusinessPageSectionsIndustrialSaltQuoteBlock | BusinessPageSectionsNetworkSeoBlock | BusinessPageSectionsNetworkHeroBlock | BusinessPageSectionsNetworkDirectoryBlock | BusinessPageSectionsNetworkBecomeDistributorBlock | BusinessPageSectionsNetworkConnectWithDistributorBlock | BusinessPageSectionsNetworkDistributorFormsTabsBlock | BusinessPageSectionsProductsSeoBlock | BusinessPageSectionsProductsHeroBlock | BusinessPageSectionsProductsComparisonTableBlock | BusinessPageSectionsProductsFindYourSaltBlock | BusinessPageSectionsProductsProductGridBlock;
+export interface BusinessPageSectionsIndustrialSaltFaqV1Block {
+  _type: "industrial_salt_faq";
+  _version: 1;
+  _key: string;
+  "heading"?: string | null;
+  "subheading"?: string | null;
+  "items"?: { "question"?: string | null; "answer"?: string | null }[] | null;
+}
+
+export type BusinessPageSectionsIndustrialSaltFaqBlock = BusinessPageSectionsIndustrialSaltFaqV1Block;
+
+export type BusinessPageSectionsBlock = BusinessPageSectionsBlogSeoBlock | BusinessPageSectionsBlogHeroBlock | BusinessPageSectionsBlogLabelsBlock | BusinessPageSectionsBlogCategoryColorsBlock | BusinessPageSectionsBlogPageBlock | BusinessPageSectionsExportSeoBlock | BusinessPageSectionsExportHeroBlock | BusinessPageSectionsExportGlobalMarketsBlock | BusinessPageSectionsExportCertificationsBlock | BusinessPageSectionsExportLogisticsBlock | BusinessPageSectionsExportInquiryBlock | BusinessPageSectionsIndustrialSaltSeoBlock | BusinessPageSectionsIndustrialSaltHeroBlock | BusinessPageSectionsIndustrialSaltGradesBlock | BusinessPageSectionsIndustrialSaltIndustriesBlock | BusinessPageSectionsIndustrialSaltRfqBlock | BusinessPageSectionsIndustrialSaltDataSheetsBlock | BusinessPageSectionsIndustrialSaltQuoteBlock | BusinessPageSectionsNetworkSeoBlock | BusinessPageSectionsNetworkHeroBlock | BusinessPageSectionsNetworkBecomeDistributorBlock | BusinessPageSectionsNetworkConnectWithDistributorBlock | BusinessPageSectionsNetworkDistributorFormsTabsBlock | BusinessPageSectionsProductsSeoBlock | BusinessPageSectionsProductsHeroBlock | BusinessPageSectionsProductsComparisonTableBlock | BusinessPageSectionsProductsFindYourSaltBlock | BusinessPageSectionsProductsProductGridBlock | BusinessPageSectionsIndustrialSaltFaqBlock;
 
 export interface BusinessPage {
   id: string;
@@ -722,11 +537,6 @@ export interface Distributor {
   slug: string | null;
   status: string;
   title: string;
-  name?: string;
-  region?: string;
-  city?: string;
-  address?: string;
-  phone?: string;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date | null;
@@ -870,16 +680,7 @@ export interface PageSectionsAboutSeoV2Block {
   "image"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null;
 }
 
-export interface PageSectionsAboutSeoV3Block {
-  _type: "about_seo";
-  _version: 3;
-  _key: string;
-  "title"?: string | null;
-  "description"?: string | null;
-  "image"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null;
-}
-
-export type PageSectionsAboutSeoBlock = PageSectionsAboutSeoV1Block | PageSectionsAboutSeoV2Block | PageSectionsAboutSeoV3Block;
+export type PageSectionsAboutSeoBlock = PageSectionsAboutSeoV1Block | PageSectionsAboutSeoV2Block;
 
 export interface PageSectionsAboutHeroV1Block {
   _type: "about_hero";
@@ -1060,15 +861,7 @@ export interface PageSectionsAboutLeadershipV3Block {
   "people"?: { "name"?: string | null; "title"?: string | null; "bio"?: string | null }[] | null;
 }
 
-export interface PageSectionsAboutLeadershipV4Block {
-  _type: "about_leadership";
-  _version: 4;
-  _key: string;
-  "heading"?: string | null;
-  "people"?: { "name"?: string | null; "title"?: string | null; "bio"?: string | null; "photo_src"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null }[] | null;
-}
-
-export type PageSectionsAboutLeadershipBlock = PageSectionsAboutLeadershipV1Block | PageSectionsAboutLeadershipV2Block | PageSectionsAboutLeadershipV3Block | PageSectionsAboutLeadershipV4Block;
+export type PageSectionsAboutLeadershipBlock = PageSectionsAboutLeadershipV1Block | PageSectionsAboutLeadershipV2Block | PageSectionsAboutLeadershipV3Block;
 
 export interface PageSectionsCareerSeoV1Block {
   _type: "career_seo";
@@ -1240,16 +1033,7 @@ export interface PageSectionsContactSeoV1Block {
   "description"?: string | null;
 }
 
-export interface PageSectionsContactSeoV2Block {
-  _type: "contact_seo";
-  _version: 2;
-  _key: string;
-  "title"?: string | null;
-  "description"?: string | null;
-  "image"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null;
-}
-
-export type PageSectionsContactSeoBlock = PageSectionsContactSeoV1Block | PageSectionsContactSeoV2Block;
+export type PageSectionsContactSeoBlock = PageSectionsContactSeoV1Block;
 
 export interface PageSectionsContactHeroV1Block {
   _type: "contact_hero";
@@ -1574,22 +1358,7 @@ export interface PageSectionsHomeHeroSlidesItemV1Block {
   "media_poster"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null;
 }
 
-export interface PageSectionsHomeHeroSlidesItemV2Block {
-  _type: "home_hero_slides_item";
-  _version: 2;
-  _key: string;
-  "eyebrow"?: string | null;
-  "title"?: string | null;
-  "body"?: string | null;
-  "cta_label"?: string | null;
-  "cta_href"?: string | null;
-  "media_type"?: string | null;
-  "media_src"?: { id: string; url?: string; src?: string; filename?: string; mimeType?: string; size?: number; provider?: string; meta?: Record<string, unknown> } | null;
-  "media_poster"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null;
-  "media_alt"?: string | null;
-}
-
-export type PageSectionsHomeHeroSlidesItemBlock = PageSectionsHomeHeroSlidesItemV1Block | PageSectionsHomeHeroSlidesItemV2Block;
+export type PageSectionsHomeHeroSlidesItemBlock = PageSectionsHomeHeroSlidesItemV1Block;
 
 export interface PageSectionsHomeHeroV1Block {
   _type: "home_hero";
@@ -1641,17 +1410,7 @@ export interface PageSectionsHomeQuoteV3Block {
   "cta_label"?: string | null;
 }
 
-export interface PageSectionsHomeQuoteV4Block {
-  _type: "home_quote";
-  _version: 4;
-  _key: string;
-  "eyebrow"?: string | null;
-  "slides"?: { "line"?: string | null; "translation"?: string | null; "attribution"?: string | null }[] | null;
-  "cta_label"?: string | null;
-  "image_src"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null;
-}
-
-export type PageSectionsHomeQuoteBlock = PageSectionsHomeQuoteV1Block | PageSectionsHomeQuoteV2Block | PageSectionsHomeQuoteV3Block | PageSectionsHomeQuoteV4Block;
+export type PageSectionsHomeQuoteBlock = PageSectionsHomeQuoteV1Block | PageSectionsHomeQuoteV2Block | PageSectionsHomeQuoteV3Block;
 
 export interface PageSectionsHomeProductsTeaserV1Block {
   _type: "home_products_teaser";
@@ -1746,18 +1505,7 @@ export interface PageSectionsHomeDistributionMapV2Block {
   "states"?: { "name"?: string | null }[] | null;
 }
 
-export interface PageSectionsHomeDistributionMapV3Block {
-  _type: "home_distribution_map";
-  _version: 3;
-  _key: string;
-  "eyebrow"?: string | null;
-  "title"?: string | null;
-  "view_all_label"?: string | null;
-  "view_all_href"?: string | null;
-  "states"?: { "name"?: string | null; "value"?: number | null }[] | null;
-}
-
-export type PageSectionsHomeDistributionMapBlock = PageSectionsHomeDistributionMapV1Block | PageSectionsHomeDistributionMapV2Block | PageSectionsHomeDistributionMapV3Block;
+export type PageSectionsHomeDistributionMapBlock = PageSectionsHomeDistributionMapV1Block | PageSectionsHomeDistributionMapV2Block;
 
 export interface PageSectionsHomeFactoryVideoItemsItemV1Block {
   _type: "home_factory_video_items_item";
@@ -1768,17 +1516,7 @@ export interface PageSectionsHomeFactoryVideoItemsItemV1Block {
   "poster"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null;
 }
 
-export interface PageSectionsHomeFactoryVideoItemsItemV2Block {
-  _type: "home_factory_video_items_item";
-  _version: 2;
-  _key: string;
-  "title"?: string | null;
-  "src"?: { id: string; url?: string; src?: string; filename?: string; mimeType?: string; size?: number; provider?: string; meta?: Record<string, unknown> } | null;
-  "poster"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null;
-  "alt"?: string | null;
-}
-
-export type PageSectionsHomeFactoryVideoItemsItemBlock = PageSectionsHomeFactoryVideoItemsItemV1Block | PageSectionsHomeFactoryVideoItemsItemV2Block;
+export type PageSectionsHomeFactoryVideoItemsItemBlock = PageSectionsHomeFactoryVideoItemsItemV1Block;
 
 export interface PageSectionsHomeFactoryVideoV1Block {
   _type: "home_factory_video";
@@ -1842,16 +1580,7 @@ export interface PageSectionsQualityCertificatesSeoV1Block {
   "description"?: string | null;
 }
 
-export interface PageSectionsQualityCertificatesSeoV2Block {
-  _type: "quality_certificates_seo";
-  _version: 2;
-  _key: string;
-  "title"?: string | null;
-  "description"?: string | null;
-  "image"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null;
-}
-
-export type PageSectionsQualityCertificatesSeoBlock = PageSectionsQualityCertificatesSeoV1Block | PageSectionsQualityCertificatesSeoV2Block;
+export type PageSectionsQualityCertificatesSeoBlock = PageSectionsQualityCertificatesSeoV1Block;
 
 export interface PageSectionsQualityCertificatesHeroV1Block {
   _type: "quality_certificates_hero";
@@ -1982,17 +1711,6 @@ export interface ProductDetailSectionsProductSpecTableV1Block {
 
 export type ProductDetailSectionsProductSpecTableBlock = ProductDetailSectionsProductSpecTableV1Block;
 
-export interface ProductDetailSectionsProductFaqV1Block {
-  _type: "product_faq";
-  _version: 1;
-  _key: string;
-  "item_id"?: string | null;
-  "heading"?: string | null;
-  "items"?: { "question"?: string | null; "answer"?: string | null }[] | null;
-}
-
-export type ProductDetailSectionsProductFaqBlock = ProductDetailSectionsProductFaqV1Block;
-
 export interface ProductDetailSectionsProductWhereToBuyV1Block {
   _type: "product_where_to_buy";
   _version: 1;
@@ -2004,18 +1722,7 @@ export interface ProductDetailSectionsProductWhereToBuyV1Block {
   "cta_href"?: string | null;
 }
 
-export interface ProductDetailSectionsProductWhereToBuyV2Block {
-  _type: "product_where_to_buy";
-  _version: 2;
-  _key: string;
-  "item_id"?: string | null;
-  "heading"?: string | null;
-  "body"?: string | null;
-  "cta_label"?: string | null;
-  "cta_href"?: string | null;
-}
-
-export type ProductDetailSectionsProductWhereToBuyBlock = ProductDetailSectionsProductWhereToBuyV1Block | ProductDetailSectionsProductWhereToBuyV2Block;
+export type ProductDetailSectionsProductWhereToBuyBlock = ProductDetailSectionsProductWhereToBuyV1Block;
 
 export interface ProductDetailSectionsProductNarrativeV1Block {
   _type: "product_narrative";
@@ -2040,7 +1747,7 @@ export interface ProductDetailSectionsProductUseCasesGroupedV1Block {
 
 export type ProductDetailSectionsProductUseCasesGroupedBlock = ProductDetailSectionsProductUseCasesGroupedV1Block;
 
-export type ProductDetailSectionsBlock = ProductDetailSectionsProductChecklistBlock | ProductDetailSectionsProductSpecTableBlock | ProductDetailSectionsProductFaqBlock | ProductDetailSectionsProductWhereToBuyBlock | ProductDetailSectionsProductNarrativeBlock | ProductDetailSectionsProductUseCasesGroupedBlock;
+export type ProductDetailSectionsBlock = ProductDetailSectionsProductChecklistBlock | ProductDetailSectionsProductSpecTableBlock | ProductDetailSectionsProductWhereToBuyBlock | ProductDetailSectionsProductNarrativeBlock | ProductDetailSectionsProductUseCasesGroupedBlock;
 
 export interface Product {
   id: string;
@@ -2084,17 +1791,7 @@ export interface SiteChromeSectionsFooterCtaV1Block {
   "button_label"?: string | null;
 }
 
-export interface SiteChromeSectionsFooterCtaV2Block {
-  _type: "footer_cta";
-  _version: 2;
-  _key: string;
-  "title"?: string | null;
-  "body"?: string | null;
-  "placeholder"?: string | null;
-  "button_label"?: string | null;
-}
-
-export type SiteChromeSectionsFooterCtaBlock = SiteChromeSectionsFooterCtaV1Block | SiteChromeSectionsFooterCtaV2Block;
+export type SiteChromeSectionsFooterCtaBlock = SiteChromeSectionsFooterCtaV1Block;
 
 export interface SiteChromeSectionsFooterBrandV1Block {
   _type: "footer_brand";
